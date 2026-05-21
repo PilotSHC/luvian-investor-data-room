@@ -22,8 +22,10 @@ const next = url.searchParams.get('next') ?? '/';
       <div class="card">
         <h2 class="mb-1 text-xl font-semibold text-ink-50">Restricted Access</h2>
         <p class="mb-6 text-sm text-ink-200">
-          This data room is shared under NDA with prospective investors only.
-          Enter the access code provided by Stephan Claxton.
+          This data room is shared with prospective investors only. Enter the
+          access code provided by Stephan Claxton. After signing in you'll be
+          asked to acknowledge a short confidentiality and privacy notice
+          before the materials are shown.
         </p>
 
         {error && (
@@ -55,12 +57,17 @@ const next = url.searchParams.get('next') ?? '/';
         </form>
 
         <p class="mt-6 text-xs text-ink-400">
-          By proceeding you agree to keep all materials confidential and to use them solely for evaluating a potential investment in Luvian Labs LLC.
+          By submitting the access code you confirm that you will keep these
+          materials confidential and use them solely for evaluating a potential
+          investment in Luvian Labs LLC. See our
+          <a class="underline" href="/privacy">privacy notice</a>.
         </p>
       </div>
 
       <div class="mt-6 text-center text-xs text-ink-400">
-        © {new Date().getFullYear()} Luvian Labs LLC · stephan@luvian.info
+        © {new Date().getFullYear()} Luvian Labs LLC ·
+        <a class="underline" href="/privacy">Privacy</a>
+        · stephan@luvian.info
       </div>
     </div>
   </main>

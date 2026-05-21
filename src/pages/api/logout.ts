@@ -1,18 +1,15 @@
 import type { APIRoute } from 'astro';
 import { AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS } from '@/lib/auth';
+import { AGREEMENT_COOKIE_NAME, AGREEMENT_COOKIE_OPTIONS } from '@/lib/agreement';
 
-function clearedCookie(): string {
-  const parts = [
-    `${AUTH_COOKIE_NAME}=`,
-    'Max-Age=0',
-    `Path=${AUTH_COOKIE_OPTIONS.path}`,
-  ];
-  if (AUTH_COOKIE_OPTIONS.httpOnly) parts.push('HttpOnly');
-  if (AUTH_COOKIE_OPTIONS.secure) parts.push('Secure');
-  if (AUTH_COOKIE_OPTIONS.sameSite) {
-    const s = AUTH_COOKIE_OPTIONS.sameSite;
-    parts.push(`SameSite=${s[0].toUpperCase()}${s.slice(1)}`);
-  }
+function clearedCookie(
+  name: string,
+  options: { httpOnly: boolean; secure: boolean; sameSite: 'lax' | 'strict' | 'none'; path: string },
+): string {
+  const parts = [`${name}=`, 'Max-Age=0', `Path=${options.path}`];
+  if (options.httpOnly) parts.push('HttpOnly');
+  if (options.secure) parts.push('Secure');
+  parts.push(`SameSite=${options.sameSite[0].toUpperCase()}${options.sameSite.slice(1)}`);
   return parts.join('; ');
 }
 
@@ -21,7 +18,8 @@ function logoutResponse(): Response {
     Location: '/login',
     'Cache-Control': 'no-store, no-cache, must-revalidate, private',
   });
-  headers.append('Set-Cookie', clearedCookie());
+  headers.append('Set-Cookie', clearedCookie(AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS));
+  headers.append('Set-Cookie', clearedCookie(AGREEMENT_COOKIE_NAME, AGREEMENT_COOKIE_OPTIONS));
   return new Response(null, { status: 303, headers });
 }
 

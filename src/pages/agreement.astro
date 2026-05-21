@@ -1,0 +1,250 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const url = new URL(Astro.request.url);
+const next = url.searchParams.get('next') ?? '/';
+const error = url.searchParams.get('error');
+const fields = {
+  name: url.searchParams.get('name') ?? '',
+  firm: url.searchParams.get('firm') ?? '',
+  email: url.searchParams.get('email') ?? '',
+};
+const fieldErrors = {
+  name: url.searchParams.get('e_name') ?? '',
+  firm: url.searchParams.get('e_firm') ?? '',
+  email: url.searchParams.get('e_email') ?? '',
+  consent: url.searchParams.get('e_consent') ?? '',
+};
+const today = new Date().toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Confidentiality Acknowledgment · Luvian Data Room"
+  description="Please acknowledge the confidentiality and privacy terms before accessing the data room."
+  showChrome={false}
+>
+  <main class="min-h-screen bg-ink-900 px-4 py-10 sm:py-16">
+    <div class="mx-auto w-full max-w-3xl">
+      <div class="mb-8 flex items-center gap-3">
+        <div class="grid h-10 w-10 place-items-center rounded-lg bg-accent text-lg font-bold text-white">
+          L
+        </div>
+        <div>
+          <h1 class="text-lg font-semibold text-ink-50">Luvian Labs LLC</h1>
+          <p class="text-xs text-ink-300">
+            One more step before you see the materials.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="mb-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+          <h2 class="text-2xl font-semibold text-ink-50">
+            Confidentiality &amp; Privacy Acknowledgment
+          </h2>
+          <span class="badge-warn self-start sm:self-auto">Required</span>
+        </div>
+
+        <p class="mb-6 text-sm leading-6 text-ink-200">
+          The materials in this data room (the <em>"Confidential Materials"</em>) are the
+          proprietary, non-public information of <strong>Luvian Labs LLC</strong>
+          (Delaware single-member LLC, sole member Stephan Claxton). They are
+          shared with you in your capacity as a prospective investor, partner, or
+          advisor for the limited purpose of evaluating a potential investment in,
+          or commercial relationship with, Luvian Labs LLC (the <em>"Permitted Purpose"</em>).
+        </p>
+
+        <div class="rounded-md bg-ink-800/60 p-4 ring-1 ring-ink-700">
+          <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-ink-100">
+            By continuing, you agree that you will:
+          </h3>
+          <ul class="list-disc space-y-2 pl-5 text-sm text-ink-200">
+            <li>
+              Use the Confidential Materials <strong>solely for the Permitted Purpose</strong>,
+              and not for any competitive, commercial, or personal advantage.
+            </li>
+            <li>
+              Keep the Confidential Materials <strong>strictly confidential</strong> and not
+              disclose, forward, post, or otherwise share them with anyone outside
+              your organization, except to your direct legal, tax, or financial
+              advisors who have a need-to-know and who are bound by professional or
+              contractual obligations of confidentiality at least as restrictive as
+              these.
+            </li>
+            <li>
+              Not <strong>copy, screenshot, screen-record, scrape, or redistribute</strong>
+              the Confidential Materials, and not use them to train any AI/ML
+              system, embedding index, or knowledge base.
+            </li>
+            <li>
+              Treat all forward-looking statements (financial projections, roadmap,
+              valuation cap, customer pipeline) as <strong>illustrative only</strong> — they
+              are not guarantees, and Luvian Labs LLC makes no representation or
+              warranty as to their accuracy or completeness.
+            </li>
+            <li>
+              Promptly notify Stephan Claxton at
+              <a class="underline" href="mailto:stephan@luvian.info">stephan@luvian.info</a>
+              if you become aware of any actual or threatened breach of these terms,
+              and either destroy or return the Confidential Materials when you no
+              longer need them for the Permitted Purpose.
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-4 rounded-md bg-ink-800/60 p-4 ring-1 ring-ink-700">
+          <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-ink-100">
+            Privacy notice
+          </h3>
+          <p class="text-sm text-ink-200">
+            When you accept these terms and access the data room, Luvian Labs LLC
+            records your <strong>name, firm/organization, email address,
+            acknowledgment timestamp, source IP address, and user-agent string</strong>
+            in our server logs. We use that information solely to maintain an
+            audit trail of who accessed the materials, to comply with applicable
+            law, and to enforce these terms. We do not sell or share this data
+            with third parties. See the
+            <a class="underline" href="/privacy">privacy notice</a>
+            for full details.
+          </p>
+        </div>
+
+        <p class="mt-4 text-xs text-ink-400">
+          Today's date: {today} · This acknowledgment is binding on you and on the
+          firm or other organization on whose behalf you are acting.
+        </p>
+
+        {error && (
+          <div class="mt-6 rounded-md bg-red-500/10 p-3 text-sm text-red-300 ring-1 ring-red-500/30">
+            We couldn't accept that. Please correct the highlighted fields below
+            and try again.
+          </div>
+        )}
+
+        <form method="POST" action="/api/accept-agreement" class="mt-8 space-y-5">
+          <input type="hidden" name="next" value={next} />
+
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label
+                for="name"
+                class="block text-xs font-medium uppercase tracking-wide text-ink-300"
+              >
+                Full legal name <span class="text-red-400">*</span>
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                value={fields.name}
+                autocomplete="name"
+                maxlength="120"
+                class="mt-1 block w-full rounded-md border-0 bg-ink-700 px-3 py-2 text-ink-50 ring-1 ring-inset ring-ink-600 placeholder:text-ink-400 focus:ring-2 focus:ring-inset focus:ring-accent"
+                placeholder="Jane Q. Investor"
+              />
+              {fieldErrors.name && (
+                <p class="mt-1 text-xs text-red-400">{fieldErrors.name}</p>
+              )}
+            </div>
+
+            <div>
+              <label
+                for="firm"
+                class="block text-xs font-medium uppercase tracking-wide text-ink-300"
+              >
+                Firm / organization
+              </label>
+              <input
+                id="firm"
+                name="firm"
+                type="text"
+                value={fields.firm}
+                autocomplete="organization"
+                maxlength="120"
+                class="mt-1 block w-full rounded-md border-0 bg-ink-700 px-3 py-2 text-ink-50 ring-1 ring-inset ring-ink-600 placeholder:text-ink-400 focus:ring-2 focus:ring-inset focus:ring-accent"
+                placeholder="Acme Ventures (optional)"
+              />
+              {fieldErrors.firm && (
+                <p class="mt-1 text-xs text-red-400">{fieldErrors.firm}</p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="email"
+              class="block text-xs font-medium uppercase tracking-wide text-ink-300"
+            >
+              Email <span class="text-red-400">*</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={fields.email}
+              autocomplete="email"
+              maxlength="200"
+              class="mt-1 block w-full rounded-md border-0 bg-ink-700 px-3 py-2 text-ink-50 ring-1 ring-inset ring-ink-600 placeholder:text-ink-400 focus:ring-2 focus:ring-inset focus:ring-accent"
+              placeholder="jane@acme.vc"
+            />
+            {fieldErrors.email && (
+              <p class="mt-1 text-xs text-red-400">{fieldErrors.email}</p>
+            )}
+          </div>
+
+          <div class="rounded-md bg-ink-800/40 p-4 ring-1 ring-ink-700">
+            <label class="flex items-start gap-3 text-sm text-ink-100">
+              <input
+                type="checkbox"
+                name="consent"
+                value="yes"
+                required
+                class="mt-1 h-4 w-4 shrink-0 rounded border-ink-600 bg-ink-700 text-accent focus:ring-2 focus:ring-accent"
+              />
+              <span>
+                I have read and agree to the confidentiality and privacy terms
+                above. I confirm that I am acting either personally or on behalf
+                of the firm I named above, and that I have authority to bind that
+                firm to these terms.
+              </span>
+            </label>
+            {fieldErrors.consent && (
+              <p class="mt-2 pl-7 text-xs text-red-400">{fieldErrors.consent}</p>
+            )}
+          </div>
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-xs text-ink-400">
+              You can revoke acknowledgment at any time by emailing
+              <a class="underline" href="mailto:stephan@luvian.info">stephan@luvian.info</a>.
+            </p>
+            <button type="submit" class="btn-primary">
+              I agree — continue to the data room
+            </button>
+          </div>
+        </form>
+
+        <form method="POST" action="/api/logout" class="mt-6 border-t border-ink-700 pt-4">
+          <button
+            type="submit"
+            class="text-xs text-ink-400 underline hover:text-ink-200"
+          >
+            I do not agree — sign out
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-6 text-center text-xs text-ink-400">
+        © {new Date().getFullYear()} Luvian Labs LLC ·
+        <a class="underline" href="/privacy">Privacy</a>
+        · stephan@luvian.info
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -62,7 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : '/';
-  return redirectWithCookie(safeNext, buildSetCookie(AUTH_COOKIE_NAME, token.value, token.maxAge));
+  const agreementUrl = `/agreement?next=${encodeURIComponent(safeNext)}`;
+  return redirectWithCookie(agreementUrl, buildSetCookie(AUTH_COOKIE_NAME, token.value, token.maxAge));
 };
 
 export const prerender = false;

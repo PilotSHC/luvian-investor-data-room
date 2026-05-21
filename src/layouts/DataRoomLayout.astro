@@ -10,6 +10,12 @@ interface Props {
 }
 
 const { title, description, currentSection, currentSlug } = Astro.props;
+const profile = Astro.locals.investorProfile;
+const profileLabel = profile
+  ? profile.firm
+    ? `${profile.name} · ${profile.firm}`
+    : profile.name
+  : null;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -21,11 +27,17 @@ const { title, description, currentSection, currentSlug } = Astro.props;
         </div>
         <div>
           <div class="text-sm font-semibold text-ink-50">Luvian Labs LLC</div>
-          <div class="text-xs text-ink-300">Investor Data Room · v0.2 (LLC pivot, 2026-05)</div>
+          <div class="text-xs text-ink-300">Investor Data Room · v0.3 (LLC stage, 2026-05)</div>
         </div>
       </a>
       <div class="flex items-center gap-3 text-xs text-ink-300">
-        <span class="badge-warn">CONFIDENTIAL · NDA</span>
+        {profileLabel && (
+          <span class="hidden sm:inline-flex items-center gap-1 rounded-md bg-ink-800/60 px-2 py-1 ring-1 ring-ink-700">
+            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+            <span class="text-ink-100">{profileLabel}</span>
+          </span>
+        )}
+        <span class="badge-warn">CONFIDENTIAL</span>
         <span class="badge-info">Pre-Seed · Convertible Note</span>
       </div>
     </div>
