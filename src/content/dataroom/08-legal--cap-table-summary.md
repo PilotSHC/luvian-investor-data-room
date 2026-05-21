@@ -44,7 +44,7 @@ Standard note terms (negotiated with the Lead):
 - **Pro-rata participation rights:** offered to $250K and larger checks via a side letter.
 - **No voting and no membership rights at the LLC level.**
 
-## Post-Flip Pro Forma (illustrative, $1.75M total, $14M cap, cap-only conversion, no interest)
+## Post-Flip Pro Forma
 
 The Delaware Flip is a structured action: LLC to Delaware C-corp via tax-free reorganization (IRC section 351). On flip:
 
@@ -55,9 +55,4 @@ The Delaware Flip is a structured action: LLC to Delaware C-corp via tax-free re
 | ESOP top-up | Established at 12.5% post-money (standard pre-money pool) |
 | Cap table | Repapers in Carta as a Delaware C-corp |
 
-| Post-Flip Holder | Approximate % |
-|---|---:|
-| Stephan (founder common, post-RSPA) | ~76.6% |
-| ESOP / Equity Incentive Plan | ~12.5% |
-| Note holders, Series Seed Preferred | ~10.9% |
-| **Total** | **100%** |
+Specific post-flip ownership percentages depend on the **negotiated valuation cap**. The cap is locked with the Lead investor; angels follow at the same terms. Modelled dilution at the agreed cap is shared with the Lead at term-sheet stage and can be supplied to subsequent investors on request.

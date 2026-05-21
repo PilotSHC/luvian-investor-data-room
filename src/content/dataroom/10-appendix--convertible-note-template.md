@@ -132,7 +132,7 @@ Date: ____________________
 ## Drafting Notes (delete before signing)
 
 - **The Reorganization (Delaware Flip) is part of the use-of-funds and is contractually anticipated by the conversion mechanics in Section 3(b).** This is what makes the note investable, investors know the LLC structure is temporary.
-- **Valuation Cap.** Standard pre-seed range for a software company is **$8M to $20M**. Lock with the Lead investor first; angels follow at the same cap.
+- **Valuation Cap.** The cap is negotiated with the Lead. Angels follow at the same cap. Specific number is intentionally not committed in any pre-term-sheet document.
 - **No interest, no discount.** Cap-only conversion. Founder-friendly economics that the Lead has already accepted; angels take the same terms.
 - **Confirm the LLC's state of formation.** This drives governing-law choice and any state-securities filings.
 - **Form D filing.** Reg D Rule 506(b) is the typical exemption, file Form D within 15 days of the first sale. Confirm with counsel; § 4(a)(2) is also available for small friends-and-family rounds.
