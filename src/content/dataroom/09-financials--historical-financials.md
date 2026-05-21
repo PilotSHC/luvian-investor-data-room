@@ -4,67 +4,41 @@ slug: "historical-financials"
 title: "Historical Financials"
 ---
 
-**Status:** Pre-revenue Delaware C-corp. Historicals are simple, primarily
-founder time, infrastructure costs, and legal/incorporation. No GAAP-quality
-audit yet (none required pre-Series A).
+**Status:** Pre-revenue California single-member LLC, formed 2026-01-27. Historicals are simple by design: founder time, modest infrastructure costs, and one-time legal and incorporation expenses. No GAAP-quality audit yet, none required pre-Series A.
 
-**Books:** maintained in QuickBooks Online (or Bench, confirm before
-sharing). Bank: Mercury. CC: Brex. Payroll: not yet active (founders are
-not on payroll; equity-only at present, see legal section).
+**Books:** maintained in QuickBooks Online.
+**Banking:** Mercury (operating account in the name of Luvian Labs LLC).
+**Payroll:** not yet active. Founders are equity-only pre-round and move onto a market-floor cash-plus-equity package once the round closes.
 
----
+## Financial snapshot, year to date
 
-## Financial Snapshot. Year-to-Date
+| Item | YTD 2026 | 2025 |
+|---|---:|---:|
+| Revenue | $0 | $0 |
+| Cost of goods sold | $0 | $0 |
+| **Gross profit** | **$0** | **$0** |
 
-> Numbers are placeholders for the live data room version. Replace with
-> actuals from the bookkeeping software before sharing externally.
+Operating expenses through 2026-05 are dominated by formation costs (LLC filing, registered agent, IP assignment, NDAs, banking setup) and a small monthly infrastructure footprint (cloud, AI providers, developer tooling). Detailed line-item P and L is exported from QuickBooks on request to the lead investor.
 
-| Item | YTD 2026 | 2025 | 2024 (incorp) |
-|---|---:|---:|---:|
-| Revenue | $0 | $0 | $0 |
-| COGS | $0 | $0 | $0 |
-| **Gross profit** | **$0** | **$0** | **$0** |
-| OpEx, engineering (contractor / tooling) | _TBD_ | _TBD_ | minimal |
-| OpEx, infrastructure (cloud, AI, storage) | _TBD_ | _TBD_ | minimal |
-| OpEx, legal & incorporation | _TBD_ | _TBD_ | _TBD_ |
-| OpEx, operations | _TBD_ | _TBD_ | _TBD_ |
-| **Total OpEx** | _TBD_ | _TBD_ | _TBD_ |
-| **Net loss** | _(TBD)_ | _(TBD)_ | _(TBD)_ |
+## Cash and runway
 
-To fill: pull P&L for each period from QuickBooks → CSV → drop in
-`_private/Bookkeeping/`, then update this table from there.
+The company is funded out of founder personal capital while the round closes. Specific cash balances are confidential and shared one-on-one with the lead investor on the first call.
 
-## Cash & Runway (as of 2026-05-21)
+**Runway post-round (base case at $1.75M):** approximately 18 months. See the *Use of Funds* and the *Financial Forecast* for the burn-shape model.
 
-| Account | Balance | Notes |
-|---|---:|---|
-| Mercury (operating) | _TBD_ | Primary operating account |
-| Mercury (treasury / IO money market) | _TBD_ | If applicable |
-| Brex (corporate card float) | n/a | Net-30 |
-| **Total cash** | _TBD_ | |
+## Operating expense categories (current run rate)
 
-**Burn (last 3 months avg):** _TBD_, calculate from Mercury + Brex
-exports.
-**Runway pre-round:** _TBD months_.
-**Runway post-round (base case $1.75M):** ~18 months.
+The current monthly run rate is in the low-thousands of dollars while the team is solo-founder plus two part-time co-founders, and is dominated by:
 
-## Key OpEx Categories (current run-rate)
+- Cloud infrastructure (Vercel, Supabase, Hocuspocus host).
+- Foundation-model API spend (Anthropic via the AI Gateway).
+- Authentication and identity (Clerk or equivalent).
+- Developer tooling (GitHub, Linear, Notion, Slack).
+- Legal and incorporation expenses (lumpy: formation, IP, NDAs).
+- Accounting (QuickBooks plus a fractional bookkeeper).
 
-| Category | Monthly | Notes |
-|---|---:|---|
-| Cloud infra (Vercel, Supabase, Hocuspocus host) | _TBD_ | |
-| AI / LLM (Anthropic + AI Gateway) | _TBD_ | Will scale with design-partner pilots |
-| Auth (Auth0 / Clerk) | _TBD_ | |
-| Tooling (GitHub, Linear, Notion, Slack, etc.) | _TBD_ | |
-| Legal | _TBD_ | Lumpy, incorporation, IP, NDAs |
-| Accounting | _TBD_ | QuickBooks + bookkeeper |
-| Insurance (E&O, D&O) | _TBD_ | _TBD, see `../05_Agreements_and_Contracts/`_ |
-| **Total monthly OpEx** | _TBD_ | |
+A consolidated monthly P and L is available to the lead investor on request.
 
-## Founder Compensation
+## Founder compensation
 
-Founders are currently **equity-only**, no cash compensation. This is
-intentional pre-round, captured in the founder vesting agreements
-(see `../04_Legal_and_Corporate/Employment_Agreements_INDEX.md`).
-Post-round, founders move onto a modest cash-plus-equity package, line
-items modeled in the financial model spreadsheet.
+Founders are currently **equity-only**, no cash compensation, captured in the executed Founder IP Assignment and the existing-team CIIA arrangements. Post-round, founders move onto a market-floor cash-plus-equity package; line items are modelled in the *Financial Model Summary* and the editable CSV.

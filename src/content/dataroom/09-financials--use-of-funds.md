@@ -21,8 +21,8 @@ title: "Use of Funds. Pre-Seed Round"
 | Runway | **18 months** at planned spend; **~22 months** at lean spend |
 | Spend rate at planned (peak team) | ~$110K/month |
 | Spend rate at lean (current solo) | ~$15K/month |
-| Largest line item | Co-founder + early-team cash + equity (~55% of raise) |
-| Smallest line item | Compute / model spend (~5% of raise) |
+| Largest line item | Founding-hire cash and equity, plus existing-team payroll (about 55% of raise) |
+| Smallest line item | Compute and model spend (about 5% of raise) |
 
 We will close on $1.5M minimum; we will accept up to $2.0M if the right
 lead wants more allocation. We will not raise more than $2.0M at this
@@ -40,9 +40,9 @@ Three principles drove the line-item decisions below:
 2. **Milestones drive spend.** Spend ramps as milestones land, not as
    the calendar progresses.
 3. **Optionality is preserved.** We deliberately under-budget GTM
-   buildout (founder-led + co-founder-led GTM in the wedge is enough at
-   this stage) to preserve runway for a longer architecture cycle if
-   needed.
+   buildout (founder-led GTM, with the GTM Lead scaling the motion, is
+   enough at this stage) to preserve runway for a longer architecture
+   cycle if needed.
 
 ---
 
@@ -53,7 +53,7 @@ midpoint (**$1.75M**); the percentages hold across the range.
 
 | Bucket | % | $ at $1.75M | What it buys |
 |---|---:|---:|---|
-| **1. Team, co-founders + early hires** | 55% | $963K | 2 co-founders (eng + GTM) + 2–3 senior engineers + founding designer over 18 months. Mix of cash + equity, weighted to cash for senior engineers and to equity for co-founders. |
+| **1. Team. Founding hires + payroll** | 55% | $963K | GTM Lead, Founding ML and AI Engineer, second Software Engineer, plus market-floor cash for the existing founding team across 18 months. Mix of cash and equity, weighted to cash for the IC engineer and to equity for the founding hires. |
 | **2. Ingestion + ontology infrastructure** | 20% | $350K | Connector engineering (PLM, ALM, simulation, code, requirements), ontology authoring + governance tooling, hybrid retrieval pipeline, eval infrastructure. Includes both internal engineering time *and* paid external dependencies (graph DB, vector DB, ontology authoring). |
 | **3. Design-partner deployment + on-prem packaging** | 15% | $263K | Customer-success engineering, regulated-industry deployment posture (FIPS, ITAR, customer-managed-keys, FedRAMP-prep), reference architecture documentation, deployment-tooling, SOC 2 Type 1 lite. |
 | **4. Compute, infra, model spend** | 5% | $88K | Foundation-model API spend (multi-provider via Vercel AI Gateway or equivalent), vector + graph infrastructure hosting, eval pipeline compute. |
@@ -66,13 +66,13 @@ midpoint (**$1.75M**); the percentages hold across the range.
 ## Spend ramp, quarterly
 
 Spend ramps with milestones. The first quarter is intentionally low
-(close + co-founder hire negotiations); peak burn is months 9–18 once
-the team is fully assembled.
+(close plus founding-hire negotiations). Peak burn is months 9 to 18
+once the team is fully assembled.
 
 | Quarter | Burn | Triggers |
 |---|---:|---|
-| Q1 (months 1–3) | ~$60K/mo | Round close, co-founder hire #1 (eng), legal flip kickoff |
-| Q2 (months 4–6) | ~$95K/mo | Co-founder hire #2 (GTM), 2 senior engineers, ingestion ramp |
+| Q1 (months 1–3) | ~$60K/mo | Round close, GTM Lead hire, Delaware Flip kickoff |
+| Q2 (months 4–6) | ~$95K/mo | Founding ML and AI Engineer + Software Engineer hire, ingestion ramp |
 | Q3 (months 7–9) | ~$115K/mo | First design partner in production; founding designer; on-prem packaging |
 | Q4 (months 10–12) | ~$120K/mo | Second design partner; Delaware Flip complete |
 | Q5 (months 13–15) | ~$120K/mo | Third design partner; Series-A-credible architecture story |
@@ -88,15 +88,17 @@ plan (within the $1.5–$2.0M range).
 Honest pre-seed answer:
 
 - **Founder (Stephan)**: minimal cash salary while the substrate is
-  pre-revenue, ramping to a market-floor founder salary (~`[FILL IN]`)
-  once the round closes.
-- **Co-founders**: market-floor cash + meaningful founder-equivalent
-  equity grants (subject to standard 4-year vesting with 1-year cliff,
-  set up properly post-flip to allow 83(b) elections).
-- **Senior engineers**: market-rate cash + early-stage equity grants
-  (target: ~0.5–1.0% per senior hire, vesting 4-year / 1-year cliff,
-  pre-Series-A).
-- **Founding designer**: similar to senior engineer grant.
+  pre-revenue, ramping to a market-floor founder salary once the round
+  closes.
+- **Existing founding team (Jarred, Colin)**: market-floor cash plus
+  founder-style equity already vesting under the LLC's IP assignment
+  framework. Standard 4-year vesting with 1-year cliff is restated under
+  post-flip RSPAs with timely 83(b) elections.
+- **GTM Lead and Founding ML and AI Engineer**: market-floor cash plus
+  founding-hire equity grants (1.5% to 3.0% range, 4-year vest with
+  1-year cliff, post-flip RSPA).
+- **Software Engineer (graph and ontology)**: market-rate senior IC
+  cash plus early-stage equity (0.75% to 1.5%, same vesting structure).
 
 Total cash compensation across the team is sized so that 18 months of
 runway is realistic at the **midpoint** of the raise, not the upper
@@ -110,8 +112,8 @@ To keep the principles concrete, here is what we are explicitly *not*
 spending pre-seed capital on:
 
 - **A traditional sales team.** No SDRs, no AEs, no enterprise sales
-  director. The wedge customers are sold founder-to-founder and
-  co-founder-to-engineering-leader at this stage.
+  director. The wedge customers are sold founder-to-founder and by the
+  GTM Lead engineering-leader-to-engineering-leader at this stage.
 - **Heavy marketing spend.** No paid acquisition. Demand-generation in
   this category is reputation-led + thought-leadership-led, both of
   which the architecture memo + technical writing produce.

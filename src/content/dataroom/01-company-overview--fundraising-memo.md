@@ -90,9 +90,10 @@ In priority order:
 
 1. **Conviction in the architecture thesis.** The single thing that
    matters. Read the architecture memo, push back on it, decide.
-2. **Active partnership.** Recruiting (especially the co-founder
-   hires), introductions to 2–3 design-partner engineering leaders,
-   board-equivalent role pre-flip.
+2. **Active partnership.** Recruiting (especially the GTM Lead and
+   the Founding ML and AI Engineer), introductions to two or three
+   design-partner engineering leaders, and a board-equivalent role
+   pre-flip.
 3. **Follow-on capital capacity.** Plan to participate at the next
    round on pro-rata or super-pro-rata.
 4. **Domain or operator depth.** Either AI infra / dev tools / regulated

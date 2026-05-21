@@ -47,8 +47,8 @@ build of $20–80M ARR over the three years post pre-seed close.
 
 | Quarter | Months | Avg burn | Cum. burn | Triggers |
 |---|---|---:|---:|---|
-| Q1 | 1–3 | ~$60K/mo | ~$180K | Round close, co-founder hire #1 (eng), legal flip kickoff |
-| Q2 | 4–6 | ~$95K/mo | ~$465K | Co-founder hire #2 (GTM), 2 senior engineers, ingestion ramp |
+| Q1 | 1–3 | ~$60K/mo | ~$180K | Round close, GTM Lead hire, Delaware Flip kickoff |
+| Q2 | 4–6 | ~$95K/mo | ~$465K | Founding ML and AI Engineer + Software Engineer hire, ingestion ramp |
 | Q3 | 7–9 | ~$115K/mo | ~$810K | First design partner in production; founding designer; on-prem packaging |
 | Q4 | 10–12 | ~$120K/mo | ~$1,170K | Second design partner; Delaware Flip complete |
 | Q5 | 13–15 | ~$120K/mo | ~$1,530K | Third design partner; Series-A-credible architecture story |
@@ -79,20 +79,21 @@ End of Q6 cumulative: **~$1.86M**, within the $1.5–$2.0M range
 
 ## 4. Sensitivity, what changes the picture
 
-### Faster co-founder hires (months 1–2)
+### Faster founding hires (months 1–2)
 
-If both co-founders close in the first 60 days, Q2 burn picks up
-earlier, but milestone ramp also accelerates by ~1 quarter. Series A
-prep starts in month 14 rather than month 16. Net runway impact:
-neutral; net Series A timing: positive.
+If the GTM Lead and the Founding ML and AI Engineer both close in the
+first 60 days, Q2 burn picks up earlier, but milestone ramp also
+accelerates by about one quarter. Series A prep starts in month 14
+rather than month 16. Net runway impact: neutral; net Series A timing:
+positive.
 
-### Slower co-founder hires (months 4–6)
+### Slower founding hires (months 4–6)
 
-If co-founder hires slip by 2–3 months, Q2 burn is lower than planned
-(extending runway by ~1.5 months) but **milestone risk increases**.
-the architecture-doc and design-partner-deployment milestones depend
-on the co-founder team. Net runway impact: positive; net milestone
-risk: meaningful.
+If founding hires slip by two to three months, Q2 burn is lower than
+planned (extending runway by about 1.5 months) but **milestone risk
+increases**. The architecture-document and design-partner-deployment
+milestones depend on the founding team being in place. Net runway
+impact: positive; net milestone risk: meaningful.
 
 This is the highest-leverage sensitivity. The lead investor's
 recruiting help directly de-risks it.

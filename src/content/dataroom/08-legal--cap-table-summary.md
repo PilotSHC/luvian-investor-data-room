@@ -1,17 +1,16 @@
 ---
 section: "08-legal"
 slug: "cap-table-summary"
-title: "Cap Table. Summary"
+title: "Cap Table Summary"
 ---
 
-**Entity:** Luvian Labs LLC (single-member LLC; jurisdiction TBD-confirm)
-**Sole member:** Stephan Claxton, 100% membership interest
-**Round in progress:** Convertible Promissory Note(s); auto-convert at LLC → Inc Flip (the "Delaware Flip") or on a Qualified Financing.
+**Entity:** Luvian Labs LLC (California single-member LLC, formed 2026-01-27).
+**Sole member:** Stephan Claxton, 100% membership interest.
+**Round in progress:** Convertible Promissory Note(s); auto-convert at the Delaware Flip (LLC to C-corp Reorganization) or on a Qualified Financing.
 
-> **Why a convertible note (and not a SAFE)?** SAFEs are designed to convert into preferred stock, which LLCs do not have. Most institutional investors will not invest into an LLC via SAFE. The standard pre-seed instrument for an LLC is a **Convertible Promissory Note** with an automatic conversion trigger on the planned LLC → Inc reorganization. Once Luvian Labs LLC reorganizes as **Luvian, Inc.** (Delaware C-corp), all future investors will use the YC Post-Money Cap SAFE (already templated in `../05_Agreements_and_Contracts/SAFE_Post_Money_Cap_TEMPLATE.md`).
+> **Why a convertible note and not a SAFE?** SAFEs are designed to convert into preferred stock, which LLCs do not have. Most institutional investors will not invest into an LLC via a SAFE. The standard pre-seed instrument for an LLC is a Convertible Promissory Note with an automatic conversion trigger on the planned LLC to Inc Reorganization. Once Luvian Labs LLC reorganises as Luvian, Inc. (Delaware C-corp), all future investors will use the YC Post-Money Cap SAFE.
 
-**Editable structured data:** `Capitalization_Table_2026_05.csv`.
-**Carta record:** _N/A pre-flip._ Pulley supports LLC cap tables; consider standing one up before the first note close.
+**Editable structured data:** *Capitalization Table 2026 05* (CSV available via the section page).
 
 ---
 
@@ -22,19 +21,20 @@ title: "Cap Table. Summary"
 | Stephan Claxton | Membership Interest | **100.0%** |
 | **Total** | | **100.0%** |
 
-No outside money. No convertible notes outstanding. No issued profits-interest grants.
-No Operating Agreement signed yet (default state-law rules apply until the Operating Agreement is executed). Operating Agreement template is at `Operating_Agreement_TEMPLATE.md`.
+No outside money. No Convertible Notes outstanding. No profits-interest grants issued. The single-member Operating Agreement is executed and on file (see *LLC Operating Agreement* in this section).
 
-## Round In Progress. Convertible Notes (Base Case $1.75M)
+## Round in progress. Convertible Notes (Base Case $1.75M)
 
-| Holder | Instrument | Amount | Valuation Cap | Status |
-|---|---|---:|---:|---|
-| _Lead Investor_ | Convertible Note | $750K – $1.0M | $[CAP] | TBD |
-| _Angel #1_ | Convertible Note | $50K – $250K | $[CAP] | TBD |
-| _Angel #2_ | Convertible Note | $50K – $250K | $[CAP] | TBD |
-| _Strategic Angel_ | Convertible Note | $50K – $250K | $[CAP] | TBD |
+The round is structured around a single Lead and two to three Strategic Angels. Allocations and valuation cap are negotiated with the Lead.
 
-Standard note terms (negotiable with lead):
+| Allocation | Instrument | Target check size |
+|---|---|---:|
+| Lead investor | Convertible Note | $750K to $1.0M |
+| Strategic angel | Convertible Note | $50K to $250K |
+| Strategic angel | Convertible Note | $50K to $250K |
+| Strategic angel | Convertible Note | $50K to $250K |
+
+Standard note terms (negotiable with the Lead):
 - **Interest:** 5% simple, accruing
 - **Maturity:** 24 months (auto-extends to next financing or LLC→Inc conversion if not yet triggered)
 - **Conversion trigger:** Qualified Financing of ≥ $2M, OR LLC-to-C-corp reorganization, whichever first

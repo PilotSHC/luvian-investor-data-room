@@ -1,160 +1,77 @@
 ---
 section: "06-team"
 slug: "hiring-plan"
-title: "Hiring Plan, 18-month Pre-Seed Cycle"
+title: "Hiring Plan, 18-Month Pre-Seed Cycle"
 ---
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
-> The hiring plan that the round funds. Five hires over 18 months. Each
-> hire is justified against a specific architectural or commercial
-> de-risk. Ramp is intentionally slow at the start (co-founder hires
-> require months to land well) and steady through the middle.
+> The round funds three priority hires across the 18-month cycle. Each hire is justified against a specific architectural or commercial de-risk in the milestone plan. Ramp is intentionally measured at the start (founding hires require months to land well) and steady through the middle.
 
----
-
-## 1. The team at end of pre-seed
+## 1. Three priority hires for the round
 
 | Role | Hire by | Profile | Equity band (post-flip C-corp) | Cash level |
 |---|---|---|---|---|
-| **Co-founder, Engineering** | Month 1–3 | Graphs / ontology / regulated-industry deployment depth. Has shipped a graph-substrate or a typed-AI-pipeline at production scale. | 8–15% (4-yr / 1-yr cliff, post-flip RSPA) | Market-floor founder |
-| **Co-founder, GTM** | Month 2–4 | Sold infra into autonomy / aerospace / defence before. Engineering-leader-credible. Comfortable founder-led GTM. | 5–10% (4-yr / 1-yr cliff, post-flip RSPA) | Market-floor founder |
-| **Senior Engineer, Ingestion** | Month 3–6 | PLM / ALM / SysML v2 / ReqIF / parser depth. Has shipped at least one production-grade tool integration into an engineering tool stack. | 0.75–1.25% | Market-rate senior IC |
-| **Senior Engineer, AI Reasoning** | Month 4–8 | Hybrid retrieval, constraint solving, eval discipline. Has shipped a structured-output AI pipeline with an evaluation harness. | 0.75–1.25% | Market-rate senior IC |
-| **Founding Designer** | Month 6–9 | Information-dense technical-user UX. Has designed for engineering or developer audiences. Comfortable in early-stage ambiguity. | 0.5–1.0% | Market-rate senior IC |
+| **GTM Lead** | Month 1 to 4 | Sold infrastructure software into autonomy, aerospace, or defense before. Engineering-leader-credible, comfortable in a founder-led sales motion. | 1.5% to 3.0% (4-yr vest, 1-yr cliff, post-flip RSPA) | Market-floor base |
+| **Founding ML and AI Engineer** | Month 2 to 5 | Hybrid retrieval, constraint solving, evaluation discipline. Has shipped a structured-output AI pipeline with a real eval harness in production. | 1.5% to 3.0% (4-yr vest, 1-yr cliff, post-flip RSPA) | Market-floor base |
+| **Software Engineer (graph and ontology)** | Month 3 to 6 | Production-graph or typed-substrate experience. Comfortable with regulated-industry deployment posture (on-premises, air-gapped, audit-ready). Pairs with Colin on the platform foundation. | 0.75% to 1.5% | Market-rate senior IC |
 
-End-of-pre-seed team size: **6 people** (founder + 2 co-founders + 2
-senior engineers + 1 founding designer).
+End-of-pre-seed team size: **6 people** (Stephan, Jarred, Colin plus the three hires above).
 
-The architecture is *deliberately* documented and shared across the
-team rather than concentrated in any one head, that is the load-bearing
-mitigation for solo-founder risk during the round (see Investor Q&A,
-Q11).
+The architecture is *deliberately* documented and shared across the team rather than concentrated in any one head. That is the load-bearing mitigation for solo-founder risk during the round (see *Investor Q and A*, Q11).
 
----
+## 2. Why these three and not others
 
-## 2. Why these five and not others
+Each role is justified against a specific de-risk in the round's milestone plan.
 
-Each role is justified against a specific de-risk in the round's
-milestone plan.
+### GTM Lead, *de-risks the wedge customer conversion*
 
-### Co-founder, Engineering, *de-risks the architecture*
+The wedge customers are **bought**, not sold. Conversion requires a leader with the engineering-leader credibility to walk into an autonomy or aerospace engineering leader's office and have the architecture conversation, not the procurement conversation.
 
-The Architecture Vision Memo commits the substrate to a specific
-shape. Executing that commitment requires a co-founder who has
-**built at scale**, graphs, typed substrates, ontology-grounded
-reasoning, regulated deployment posture. The co-founder is not an "early
-employee." They are an architectural co-author.
+This is a **GTM Lead**, not a Co-founder of Sales and not a hired-gun salesperson. The pre-seed motion is founder-led; the GTM Lead's role is to scale that motion across more accounts, codify the design-partner playbook, and recruit the first sales engineer ahead of Series A. Senior IC equity, market-floor base, with founder-style milestone bonuses tied to the first two paid pilots.
 
-**Why a co-founder, not a senior engineer:** the architecture decisions
-in the first 12 months are foundational. They need to be made by someone
-with founder-level skin in the game.
+### Founding ML and AI Engineer, *de-risks the reasoning pipeline*
 
-### Co-founder, GTM, *de-risks the wedge customer conversion*
+Hybrid retrieval, constraint solving, and grounded reasoning with a real evaluation harness is a senior-IC project, not a "drop in an LLM call" project. The role exists because the reasoning pipeline is what distinguishes the substrate from a generic context platform, and because evaluation discipline becomes the customer-trust currency once we move into IL5 and IL6 environments.
 
-The wedge customers are **bought**, not sold. Conversion requires a
-co-founder who has the engineering-leader credibility to walk into an
-autonomy or aerospace eng-leader's office and have the architecture
-conversation, not the procurement conversation.
+This is a **Founding Engineer**, not a Co-founder. They own the AI reasoning surface end-to-end, work alongside Stephan on the ontology and provenance primitives, and are the architectural co-author for everything reasoning-shaped.
 
-**Why a co-founder, not a sales hire:** because the GTM motion at
-pre-seed is founder-led, the GTM lead has to be a founder. A
-hired-gun salesperson cannot run this motion at this stage.
+### Software Engineer (graph and ontology), *de-risks the ingestion surface and platform foundation*
 
-### Senior Engineer, Ingestion, *de-risks the connector surface*
-
-Reading PLM / ALM / SysML v2 artefacts at high fidelity (without
-losing the source semantics) is the single most-effortful surface in
-the substrate. The role is to ship the first 3–4 connectors to
-production, *and* establish the connector pattern that the rest of the
-team can extend.
-
-### Senior Engineer, AI Reasoning, *de-risks the reasoning pipeline*
-
-Hybrid retrieval + constraint solving + grounded LLM with a real eval
-harness is a senior-IC project, not a "drop in an LLM call" project.
-The role exists specifically because the reasoning pipeline is what
-distinguishes the substrate from a generic context platform.
-
-### Founding Designer, *de-risks the consumption surface*
-
-The substrate's value is mostly consumed by tools and agents. But the
-*human consumption*, the engineering-leader UI for browsing
-provenance, walking lineages, reviewing AI suggestions, is the surface
-investors and design partners experience first. A specialist designer
-in month 6–9 turns the alpha UI into something a Series-A partner
-can demo to their LPs.
-
----
+Reading PLM, ALM, SysML v2, and ReqIF artifacts at high fidelity, while preserving source semantics, is the single most effortful surface in the substrate. This engineer ships the first three to four connectors to production *and* establishes the connector pattern the rest of the team will extend. They pair tightly with Colin on the cross-platform deployment posture so that the same code path serves cloud and on-premises customers.
 
 ## 3. What we are *not* hiring
 
 To stay precise:
 
-- **Not a sales team.** No SDRs, no AEs, no enterprise sales lead. The
-  GTM motion is founder + co-founder until Series A.
-- **Not a marketing team.** Demand-generation is reputation-led
-  through architecture writing, conference presence, and the
-  data room itself.
-- **Not a product manager.** The architecture and customer-conversation
-  load is small enough at this stage that the founders are the PMs.
-  We will hire a head of product post-Series A.
-- **Not a CFO / head of operations.** Outsourced accounting +
-  fractional ops support cover the gap until Series A.
-- **Not full-stack mid-level engineers.** At pre-seed every
-  engineering hire is a senior IC who can lead a substrate area.
+- **Not a sales team.** No SDRs, no AEs, no enterprise sales lead. The GTM motion is founder-led plus the GTM Lead until Series A.
+- **Not a marketing team.** Demand generation is reputation-led, through architecture writing, conference presence, and the data room itself.
+- **Not a product manager.** The architecture and customer-conversation load is small enough at this stage that Stephan and Jarred are the PMs. A head of product comes post-Series A.
+- **Not a CFO or head of operations.** Outsourced accounting and fractional ops support cover the gap until Series A.
+- **Not full-stack mid-level engineers.** At pre-seed every engineering hire is a senior IC who can lead a substrate area.
 
-These are the budget temptations that fail pre-seed companies. Saying
-*no* to them is part of the plan.
+These are the budget temptations that fail pre-seed companies. Saying *no* to them is part of the plan.
 
----
+## 4. Recruiting pipeline
 
-## 4. Recruiting pipeline (current state)
+Each of the three priority roles is in active sourcing today through Stephan's and Jarred's networks across autonomy, defense, and the broader systems-engineering community. References to specific candidates are deliberately not listed in this room and are shared one-on-one with the lead investor on request.
 
-> **`[FILL IN: Stephan to confirm, placeholders intentional]`**
-
-| Role | Pipeline state | Notes |
-|---|---|---|
-| Co-founder, Engineering | `[FILL IN: 2 named candidates in late-stage discussions]` | LOI conversations live; targeting Month 1–3 hire |
-| Co-founder, GTM | `[FILL IN: 1 named candidate in early-stage discussions, 2 referrals open]` | Targeting Month 2–4 hire |
-| Senior Engineer, Ingestion | Open | Network referrals; targeting Month 3–6 |
-| Senior Engineer, AI Reasoning | Open | Network referrals; targeting Month 4–8 |
-| Founding Designer | Open | Targeting Month 6–9 |
-
-Hiring is one of the lead investor's expected contributions, see
-**Q15** in the Investor Q&A.
-
----
+Hiring is one of the lead investor's expected contributions. See **Q15** in the *Investor Q and A*.
 
 ## 5. Compensation philosophy
 
-- **Cash floors are market** for the level we are hiring. We do not
-  win by underpaying.
-- **Equity is meaningful**, weighted to the co-founders and to early
-  hires who are taking architectural risk with us.
-- **Vesting is standard**, 4-year vesting with 1-year cliff. Set up
-  *post-flip* with proper RSPA + 83(b) elections so the founder team's
-  tax posture is clean.
-- **Refresh grants** at Series A and at major milestones; documented
-  in the equity incentive plan post-flip.
-
----
+- **Cash floors are market** for the level we are hiring. We do not win by underpaying.
+- **Equity is meaningful**, weighted to the founding hires who are taking architectural risk with us, and structured around the standard 4-year vesting with a 1-year cliff under a post-flip RSPA with timely 83(b) elections.
+- **Refresh grants** at Series A and at major milestones, documented in the post-flip equity incentive plan.
 
 ## 6. What success looks like by end of pre-seed
 
 A team where:
 
-- Every engineer can articulate the architecture thesis without
-  Stephan in the room.
-- The substrate code, ontology, and reasoning pipeline are owned by
-  *named* engineers, with on-call rotations and review responsibility.
-- The first design partner has a *named* customer-success contact who
-  is not Stephan.
-- The reference architecture document is co-authored by at least two
-  members of the team.
-- The team is the *kind* of team a Series-A lead writes a check
-  to without re-underwriting the founder's solo-founder risk.
-
----
+- Every engineer can articulate the architecture thesis without Stephan in the room.
+- The substrate code, ontology, and reasoning pipeline are owned by *named* engineers with on-call rotations and review responsibility.
+- The first design partner has a *named* customer-success contact who is not Stephan.
+- The reference architecture document is co-authored by at least two members of the team.
+- The team is the kind of team a Series A lead writes a check to without re-underwriting the founder's solo-founder risk.
 
 *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
