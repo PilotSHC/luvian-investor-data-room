@@ -11,6 +11,12 @@ title: "Financial Forecast — 24-Month Lean View"
 > projection model with fake precision — at pre-seed it is theatre.
 > Investors evaluate *capital awareness*, not *spreadsheet artistry*.
 
+> **Category framing:** Luvian is sized as the **context layer for engineering
+> intelligence**, not as another MBSE tool. The TAM / SAM / SOM, ACV
+> ladder, and comparable cohort are anchored to *Market Eval v2*
+> (`internal-comms/market-eval-v2/`). See
+> `Financial_Model_Summary_2026_05.md` for the full pivot.
+
 The companion document is `Use_of_Funds_2026_05.md` (the round-shape
 view). This document is the *runway* view.
 
@@ -30,7 +36,10 @@ view). This document is the *runway* view.
 We do not budget revenue from design partners as runway. Design-partner
 revenue is treated as bonus runway, not as a planned line in the
 forecast — pre-seed customers convert irregularly and tying runway to
-that conversion produces planning errors.
+that conversion produces planning errors. The Series A premise (below)
+*does* assume conversion of 2–3 strategic accounts into paid deployments
+in the $750K–$1.5M ACV band, anchored to the Market Eval v2 SOM
+build of $20–80M ARR over the three years post pre-seed close.
 
 ---
 
@@ -90,11 +99,11 @@ recruiting help directly de-risks it.
 
 ### One design partner converts to paid before Series A
 
-At pre-seed it is plausible that one of the 2–3 design partners signs
-a paid pilot ($25K–$150K range) before the Series A closes. We do
-**not** budget this. If it lands, it is bonus runway and stronger
-Series-A material — neither the round size nor the milestone plan
-depend on it.
+At pre-seed it is plausible that one of the 2–3 design partners signs a
+paid deployment ($500K–$1.5M range — strategic-account ACV under the
+new category framing) before the Series A closes. We do **not** budget
+this. If it lands, it is bonus runway and stronger Series-A material —
+neither the round size nor the milestone plan depend on it.
 
 ### Faster compute/model price decline
 
@@ -123,13 +132,16 @@ over the round, contributing 1–2 months of additional runway.
 The Series A is contemplated **12–18 months** from pre-seed close,
 priced into the post-Flip Delaware C-corp. Target round size: $8M–$15M.
 
-The key Series-A trigger is **architecture + reference customers**, not
-revenue:
+The key Series-A trigger is **typed-context-graph reference deployments
++ category proof**, not revenue scale:
 
-- 2–3 design partners in production with provenance + suspect-link
-  propagation visible.
-- Reference architecture publicly documented and battle-tested at the
-  partners.
+- 2–3 strategic accounts in production with provenance, suspect-link
+  propagation, and air-gap-deployment visible end-to-end.
+- Reference architecture publicly documented and battle-tested in at
+  least one IL5/IL6-adjacent customer environment.
+- Cross-artifact unification across requirements, models, simulation,
+  and test data demonstrated at one partner — the moat under the new
+  category.
 - 6-person team operating without the founder as the bottleneck on any
   workstream.
 - Clean post-Flip cap table.

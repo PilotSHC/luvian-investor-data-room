@@ -131,3 +131,26 @@ for (const [rel, meta] of Object.entries(MAP)) {
 }
 
 console.log(`[sync-content] wrote ${written} files, ${missing} missing into ${path.relative(projectRoot, targetRoot)}/`);
+
+// Static-asset mirror: keep public/csv/ and public/pdf/ in lockstep with
+// the source data room so download links never serve stale numbers.
+const STATIC_MIRROR = [
+  { src: '09_Financials/Financial_Model_2026_05.csv', dst: 'public/csv/Financial_Model_2026_05.csv' },
+  { src: '08_Legal/Capitalization_Table_2026_05.csv', dst: 'public/csv/Capitalization_Table_2026_05.csv' },
+];
+
+let mirrored = 0;
+for (const { src, dst } of STATIC_MIRROR) {
+  const from = path.join(sourceRoot, src);
+  const to = path.resolve(projectRoot, dst);
+  if (!fs.existsSync(from)) {
+    console.warn(`[sync-content] static mirror missing source: ${src}`);
+    continue;
+  }
+  fs.mkdirSync(path.dirname(to), { recursive: true });
+  fs.copyFileSync(from, to);
+  mirrored += 1;
+}
+if (mirrored > 0) {
+  console.log(`[sync-content] mirrored ${mirrored} static asset(s) into public/`);
+}
