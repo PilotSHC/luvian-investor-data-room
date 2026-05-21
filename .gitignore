@@ -29,3 +29,9 @@ _private/
 *Tax_Return*
 *EXECUTED_*
 *Signed_*
+
+# Confidential demo video — served via the gated /api/asset/demo
+# endpoint backed by Vercel Blob (private). The 90+ MB MP4 must
+# never be committed to this repo's history.
+public/private-assets/
+*.mp4
