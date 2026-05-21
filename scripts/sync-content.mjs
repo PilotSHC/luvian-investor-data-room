@@ -154,3 +154,38 @@ for (const { src, dst } of STATIC_MIRROR) {
 if (mirrored > 0) {
   console.log(`[sync-content] mirrored ${mirrored} static asset(s) into public/`);
 }
+
+// PDF mirror: every PDF that the export-to-pdf.sh script regenerates in
+// _pdf_exports/ should land in public/pdf/. Without this, a regen in the
+// source repo never reaches data-room.luvian.info — investors download
+// the previous version of the deck while the markdown summary already
+// reflects the new one. The directory mirror is folder-level so adding a
+// new deck to the export script auto-surfaces it on the next sync.
+const pdfSrcDir = path.join(sourceRoot, '_pdf_exports');
+const pdfDstDir = path.resolve(projectRoot, 'public', 'pdf');
+let pdfsMirrored = 0;
+let pdfsSkipped = 0;
+if (fs.existsSync(pdfSrcDir)) {
+  fs.mkdirSync(pdfDstDir, { recursive: true });
+  for (const file of fs.readdirSync(pdfSrcDir)) {
+    if (!file.toLowerCase().endsWith('.pdf')) continue;
+    const from = path.join(pdfSrcDir, file);
+    const to = path.join(pdfDstDir, file);
+    // Skip identical bytes so git doesn't show a touch-only diff.
+    if (fs.existsSync(to) && fs.statSync(from).size === fs.statSync(to).size) {
+      const a = fs.readFileSync(from);
+      const b = fs.readFileSync(to);
+      if (a.equals(b)) {
+        pdfsSkipped += 1;
+        continue;
+      }
+    }
+    fs.copyFileSync(from, to);
+    pdfsMirrored += 1;
+  }
+  if (pdfsMirrored > 0 || pdfsSkipped > 0) {
+    console.log(`[sync-content] mirrored ${pdfsMirrored} PDF(s) into public/pdf/ (${pdfsSkipped} unchanged)`);
+  }
+} else {
+  console.warn(`[sync-content] no _pdf_exports/ directory at ${pdfSrcDir} — skipping PDF mirror`);
+}
