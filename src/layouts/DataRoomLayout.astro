@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import SidebarNav from '@/components/SidebarNav.astro';
+import LuvianMark from '@/components/LuvianMark.astro';
 
 interface Props {
   title: string;
@@ -21,12 +22,10 @@ const profileLabel = profile
 <BaseLayout title={title} description={description}>
   <header class="border-b border-ink-700 bg-ink-800/40">
     <div class="container-tight flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="grid h-8 w-8 place-items-center rounded-md bg-accent text-sm font-bold text-white">
-          L
-        </div>
+      <a href="/" class="flex items-center gap-3 group">
+        <LuvianMark size="sm" />
         <div>
-          <div class="text-sm font-semibold text-ink-50">Luvian Labs LLC</div>
+          <div class="text-sm font-semibold text-ink-50 group-hover:text-white">Luvian Labs LLC</div>
           <div class="text-xs text-ink-300">Investor Data Room · v0.3 (LLC stage, 2026-05)</div>
         </div>
       </a>

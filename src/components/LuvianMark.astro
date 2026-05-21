@@ -1,0 +1,34 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  /** href makes the mark a clickable link to the destination. */
+  href?: string;
+  className?: string;
+}
+
+const { size = 'md', href, className = '' } = Astro.props;
+
+const sizeClasses: Record<NonNullable<Props['size']>, string> = {
+  sm: 'h-8 w-8 p-1',
+  md: 'h-10 w-10 p-1.5',
+  lg: 'h-14 w-14 p-2.5',
+};
+
+const imgSizes: Record<NonNullable<Props['size']>, string> = {
+  sm: 'h-full w-full',
+  md: 'h-full w-full',
+  lg: 'h-full w-full',
+};
+
+const tile = `inline-grid place-items-center rounded-lg bg-white shadow-sm ring-1 ring-ink-700/40 ${sizeClasses[size]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={tile} aria-label="Luvian Labs — home">
+    <img src="/luvian-icon.png" alt="Luvian" class={imgSizes[size]} loading="eager" decoding="async" />
+  </a>
+) : (
+  <span class={tile} aria-hidden="true">
+    <img src="/luvian-icon.png" alt="" class={imgSizes[size]} loading="eager" decoding="async" />
+  </span>
+)}
