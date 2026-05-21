@@ -100,8 +100,8 @@ Three contestants meaningfully affect the SOM build:
 ### Slide 14. The Ask
 
 * **$1.5M to $2.0M Convertible Note** at the LLC stage, pre-Delaware-Flip.
-* Valuation cap: TBD with lead. See *Convertible Note TEMPLATE*.
-* 5% simple interest. 24-month maturity. Auto-converts on Qualified Financing or on the LLC to Delaware C-corp conversion, whichever is first.
+* Valuation cap: negotiated with the Lead.
+* No interest. No discount. Cap-only conversion. 24-month maturity. Auto-converts on a Qualified Financing or on the LLC to Delaware C-corp conversion, whichever is first.
 * Use of funds explicitly includes the Delaware Flip, the recruitment of a GTM lead, a founding ML/AI engineer, and a second software engineer.
 * 18-month runway to a Series A milestone bundle:
   * Delaware Flip complete (Luvian, Inc.)

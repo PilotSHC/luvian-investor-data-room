@@ -249,10 +249,10 @@ is in `08_Legal/LLC_to_Ccorp_Conversion_Plan.md`.
 
 ### Q14. What's the round size and structure?
 
-**Target: $1.5M – $2.0M** on a Convertible Promissory Note. Valuation cap
-to be confirmed with the lead. Discount: standard 20%. Term: 24 months.
-Auto-converts on Qualified Financing (≥ $4M priced round) or on the
-Delaware Flip.
+**Target: $1.5M to $2.0M** on a Convertible Promissory Note. Valuation
+cap negotiated with the Lead. **No interest, no discount, cap-only
+conversion.** Term: 24 months. Auto-converts on a Qualified Financing
+of $2M or more, or on the Delaware Flip, whichever first.
 
 We are open to a priced round if the right lead prefers it.
 

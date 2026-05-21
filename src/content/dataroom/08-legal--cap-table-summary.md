@@ -34,29 +34,30 @@ The round is structured around a single Lead and two to three Strategic Angels. 
 | Strategic angel | Convertible Note | $50K to $250K |
 | Strategic angel | Convertible Note | $50K to $250K |
 
-Standard note terms (negotiable with the Lead):
-- **Interest:** 5% simple, accruing
-- **Maturity:** 24 months (auto-extends to next financing or LLC→Inc conversion if not yet triggered)
-- **Conversion trigger:** Qualified Financing of ≥ $2M, OR LLC-to-C-corp reorganization, whichever first
-- **Conversion price:** lower of (i) Valuation Cap, (ii) Qualified Financing price × (1 - discount)
-- **Discount:** 0–20% (default 0% if cap is set)
-- **Pro-rata participation rights:** offered to ≥ $250K checks via separate side letter
-- **No voting / no membership rights at LLC level**
+Standard note terms (negotiated with the Lead):
 
-## Post-Flip Pro Forma (illustrative, $1.75M total, $14M cap)
+- **Interest:** none.
+- **Discount:** none. Cap-only conversion.
+- **Maturity:** 24 months (auto-extends to next financing or LLC to C-corp conversion if not yet triggered).
+- **Conversion trigger:** Qualified Financing of $2M or more, OR LLC to C-corp Reorganization, whichever first.
+- **Conversion price:** the Valuation Cap divided by fully diluted capitalization at conversion.
+- **Pro-rata participation rights:** offered to $250K and larger checks via a side letter.
+- **No voting and no membership rights at the LLC level.**
 
-The Delaware Flip is a structured action: LLC → Delaware C-corp via tax-free reorganization (IRC § 351). On flip:
+## Post-Flip Pro Forma (illustrative, $1.75M total, $14M cap, cap-only conversion, no interest)
+
+The Delaware Flip is a structured action: LLC to Delaware C-corp via tax-free reorganization (IRC section 351). On flip:
 
 | Action | Outcome |
 |---|---|
-| Stephan's 100% LLC membership | → Founder Common Stock in Luvian, Inc. (subject to RSPA with 4yr/1yr-cliff vesting; credit for time-served) |
-| Outstanding Convertible Notes | Auto-convert to Series Seed Preferred Stock at the cap |
+| Stephan's 100% LLC membership | becomes Founder Common Stock in Luvian, Inc. (subject to RSPA with 4-yr / 1-yr cliff vesting; credit for time served) |
+| Outstanding Convertible Notes | Auto-convert to Series Seed Preferred Stock at the Cap (no interest, no discount) |
 | ESOP top-up | Established at 12.5% post-money (standard pre-money pool) |
-| Cap table | Re-papers in Carta as a Delaware C-corp |
+| Cap table | Repapers in Carta as a Delaware C-corp |
 
 | Post-Flip Holder | Approximate % |
 |---|---:|
-| Stephan (founder common, post-RSPA) | ~75.4% |
+| Stephan (founder common, post-RSPA) | ~76.6% |
 | ESOP / Equity Incentive Plan | ~12.5% |
-| Note holders → Series Seed Preferred | ~12.1% |
+| Note holders, Series Seed Preferred | ~10.9% |
 | **Total** | **100%** |

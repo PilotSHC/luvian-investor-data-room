@@ -20,41 +20,37 @@ title: "Convertible Promissory Note. Luvian Labs LLC"
 **Holder:** **[INVESTOR_LEGAL_NAME]** ("**Holder**")
 **Principal Amount:** **$[PURCHASE_AMOUNT]**
 
-For value received, the Company promises to pay to Holder the Principal Amount, together with accrued and unpaid interest, on the terms below.
+For value received, the Company promises to pay to Holder the Principal Amount on the terms below. **This Note bears no interest.**
 
 ---
 
 ### 1. Interest
 
-The Note bears **simple interest** at the rate of **5% per annum**, computed on a 365-day year basis, from the Issue Date until paid or converted. Interest is payable upon conversion or maturity, not on a current basis.
+This Note bears **no interest**. The Principal Amount accrues no interest from the Issue Date through conversion, repayment, or maturity.
 
 ### 2. Maturity
 
-If not earlier converted or repaid, the outstanding Principal Amount and accrued interest will be due and payable on **the earlier of (a) the 24-month anniversary of the Issue Date** (the "**Maturity Date**") or (b) immediately upon a Liquidity Event (as defined below).
+If not earlier converted or repaid, the outstanding Principal Amount will be due and payable on **the earlier of (a) the 24-month anniversary of the Issue Date** (the "**Maturity Date**") or (b) immediately upon a Liquidity Event (as defined below).
 
 ### 3. Conversion
 
 (a) **Automatic Conversion on Qualified Financing.**
-If, prior to the Maturity Date, the Company (or its successor by reason of the Reorganization described in Section 3(b)) issues and sells preferred equity securities in a transaction or series of related transactions for aggregate gross proceeds of at least **$2,000,000** (excluding the conversion of this Note and any other convertible securities) (a "**Qualified Financing**"), then on the closing of such Qualified Financing the outstanding Principal Amount and accrued interest under this Note will **automatically convert** into the same series and class of preferred equity issued in such Qualified Financing.
+If, prior to the Maturity Date, the Company (or its successor by reason of the Reorganization described in Section 3(b)) issues and sells preferred equity securities in a transaction or series of related transactions for aggregate gross proceeds of at least **$2,000,000** (excluding the conversion of this Note and any other convertible securities) (a "**Qualified Financing**"), then on the closing of such Qualified Financing the outstanding Principal Amount of this Note will **automatically convert** into the same series and class of preferred equity issued in such Qualified Financing.
 
 The number of shares (or units, if pre-Reorganization) issued upon conversion is calculated as follows:
 
-> Outstanding Principal + accrued interest **÷** Conversion Price
+> Outstanding Principal **÷** Conversion Price
 
-The "**Conversion Price**" is the **lesser** of:
-(i) the per-share price paid by other investors in the Qualified Financing **multiplied by (1 − Discount)** (the "**Discount Conversion Price**"); and
-(ii) **$[VALUATION_CAP] divided by the Company's fully-diluted capitalization** (on a pre-money basis, including all reserved option pool and all convertible securities, but excluding the Notes themselves) (the "**Cap Conversion Price**").
-
-For this Note: Discount = **0%** (i.e. only the Cap applies) **OR** Discount = **20%** (negotiable with lead). If the Discount is 0%, the Conversion Price equals the Cap Conversion Price.
+The "**Conversion Price**" is the **Cap Conversion Price**, defined as **$[VALUATION_CAP] divided by the Company's fully-diluted capitalization** (on a pre-money basis, including all reserved option pool and all convertible securities, but excluding the Notes themselves). **No discount applies.** This Note converts at the Valuation Cap regardless of the Qualified Financing price.
 
 (b) **Automatic Conversion on Reorganization (Delaware Flip).**
 The Company intends to reorganize as a **Delaware corporation** ("**Luvian, Inc.**" or the "**Successor**") prior to the Maturity Date (the "**Reorganization**"). Upon the closing of the Reorganization, this Note will automatically remain outstanding as an obligation of the Successor. If the Reorganization closes **before** a Qualified Financing, the Note will automatically convert into shares of **Series Seed Preferred Stock** of the Successor at the **Cap Conversion Price**, on terms substantially equivalent to a YC Series Seed Preferred Stock document set (or other documents agreed by Holder and Successor).
 
 (c) **Optional Conversion on Liquidity Event.**
-If, prior to the Maturity Date and prior to a Qualified Financing, a **Liquidity Event** (defined as a Change of Control or an Initial Public Offering) occurs, then at Holder's option (exercisable on no less than 5 business days' notice) Holder may elect to (i) receive a cash payment equal to **2× the outstanding Principal plus accrued interest**, or (ii) convert this Note into Common Stock (or, pre-Reorganization, into Common Units) at the **Cap Conversion Price** immediately prior to the Liquidity Event.
+If, prior to the Maturity Date and prior to a Qualified Financing, a **Liquidity Event** (defined as a Change of Control or an Initial Public Offering) occurs, then at Holder's option (exercisable on no less than 5 business days' notice) Holder may elect to (i) receive a cash payment equal to **2x the outstanding Principal**, or (ii) convert this Note into Common Stock (or, pre-Reorganization, into Common Units) at the **Cap Conversion Price** immediately prior to the Liquidity Event.
 
 (d) **Optional Conversion at Maturity.**
-If, on the Maturity Date, this Note has not been converted or repaid, then at Holder's option Holder may either (i) demand repayment of the outstanding Principal plus accrued interest, or (ii) convert the outstanding Principal plus accrued interest into Common Stock (or, pre-Reorganization, into Common Units) of the Company at the **Cap Conversion Price**.
+If, on the Maturity Date, this Note has not been converted or repaid, then at Holder's option Holder may either (i) demand repayment of the outstanding Principal, or (ii) convert the outstanding Principal into Common Stock (or, pre-Reorganization, into Common Units) of the Company at the **Cap Conversion Price**.
 
 (e) **Mechanics.** Holder will execute any reasonable documents (including investor-rights, voting, and right-of-first-refusal/co-sale agreements) entered into in connection with a Qualified Financing or Reorganization, on the same terms applicable to other purchasers in such transaction.
 
@@ -136,8 +132,8 @@ Date: ____________________
 ## Drafting Notes (delete before signing)
 
 - **The Reorganization (Delaware Flip) is part of the use-of-funds and is contractually anticipated by the conversion mechanics in Section 3(b).** This is what makes the note investable, investors know the LLC structure is temporary.
-- **Valuation Cap.** Standard pre-seed range for a software company is **$8M–$20M**. Lock with the lead investor first; angels follow at the same cap.
-- **Discount.** If the cap is set, most lead investors are willing to drop the discount to 0% (the cap does the work). Alternative: a 20% discount with a higher cap.
+- **Valuation Cap.** Standard pre-seed range for a software company is **$8M to $20M**. Lock with the Lead investor first; angels follow at the same cap.
+- **No interest, no discount.** Cap-only conversion. Founder-friendly economics that the Lead has already accepted; angels take the same terms.
 - **Confirm the LLC's state of formation.** This drives governing-law choice and any state-securities filings.
 - **Form D filing.** Reg D Rule 506(b) is the typical exemption, file Form D within 15 days of the first sale. Confirm with counsel; § 4(a)(2) is also available for small friends-and-family rounds.
 - **Maintenance during the LLC stage:** issue an Operating Agreement before the first close (`../04_Legal_and_Corporate/Operating_Agreement_TEMPLATE.md`).

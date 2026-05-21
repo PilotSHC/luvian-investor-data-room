@@ -84,7 +84,7 @@ This round funds the Delaware Flip and three additional hires: GTM lead, foundin
 
 * Convertible Promissory Note at the LLC stage, pre-Delaware-Flip.
 * Valuation cap: TBD with lead.
-* 5% simple interest. 24-month maturity.
+* No interest. No discount. Cap-only conversion. 24-month maturity.
 * Auto-converts on a Qualified Financing ($2M+ priced equity) or on the planned LLC to Delaware C-corp conversion, whichever is first, at the cap or the financing price, whichever is more favorable to the holder.
 * No board seat at this stage. Pro-rata side letter offered for checks of $250K or more.
 * 18 months runway to a Series A milestone bundle: 2–3 strategic accounts in production, reference architecture publicly documented, cross-artifact unification demonstrated at one partner, IL5/IL6-adjacent customer environment battle-tested, Delaware Flip complete, six-person team.

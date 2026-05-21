@@ -95,7 +95,7 @@ See *Product Demo Links* for live walkthroughs and [04_Technical_Architecture/](
 ## The Round
 
 * **Stage:** Pre-seed.
-* **Instrument:** Convertible Promissory Note (LLC-stage; auto-converts on Qualified Financing or on conversion of Luvian Labs LLC to Delaware C-corp, whichever is first; valuation cap TBD with lead; 5% simple interest; 24-month maturity).
+* **Instrument:** Convertible Promissory Note (LLC stage; auto-converts on a Qualified Financing or on conversion of Luvian Labs LLC to Delaware C-corp, whichever is first; valuation cap negotiated with the Lead; **no interest, no discount**; 24-month maturity).
 * **Target:** $1.5M – $2.0M.
 * **Use of funds:**
   * **Delaware Flip**, counsel, filings, re-papering of equity. Roughly $5K all-in.
