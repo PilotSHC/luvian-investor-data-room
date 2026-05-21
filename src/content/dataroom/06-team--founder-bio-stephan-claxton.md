@@ -6,7 +6,7 @@ title: "Team"
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
-Three co-founders with complementary depth across product, enterprise infrastructure, and systems engineering. Each owns a clear surface of the company, and the round funds the next three hires beyond the founding team.
+Two co-founders plus our first software engineer. Each owns a clear surface of the company, and the round funds the next three hires beyond the current team.
 
 ## Stephan Claxton — Founder & CEO
 
@@ -34,7 +34,7 @@ Product leader translating Luvian's thesis into a coherent, investor-legible pro
 
 The product thesis Luvian is built on, that the next generation of MBSE tooling must be AI-native, browser-first, and collaborative by default, is Jarred's. That conviction shapes every prioritization call inside the company.
 
-## Colin Zhang — Founding Engineer
+## Colin Zhang — Software Engineer
 
 Enterprise-infrastructure engineer responsible for the platform's deployment posture in the customer environments Luvian sells into.
 
@@ -52,6 +52,6 @@ Top three roles for the round, in priority order.
 
 1. **GTM lead.** Pre-sales and design-partner engagement in defense, aerospace, and AV.
 2. **Founding ML / AI engineer.** Owns retrieval, evaluation, and the local-first reasoning stack.
-3. **Second platform engineer.** Owns the context graph, ontology, and provenance primitives alongside Colin.
+3. **Second software engineer.** Owns the context graph, ontology, and provenance primitives alongside Colin.
 
 Detail on scope, comp, and equity is in [Hiring_Plan_2026_05.md](./Hiring_Plan_2026_05.md). References available on request after first call.

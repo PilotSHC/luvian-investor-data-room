@@ -23,7 +23,7 @@ A faithful summary of the live deck for investor pre-reads and async review. The
 | 9 | Competition | Cameo, Rhapsody, Capella versus Luvian, framed by 7 Powers. |
 | 10 | Go-to-Market | Automotive ASIL first, then aerospace and defense, then industrial. |
 | 11 | Traction | Internal architecture and design-partner pipeline; no production customers yet (pre-seed honest). |
-| 12 | Team | Three co-founders: Stephan Claxton (CEO, ex-Applied Intuition), Jarred Gou (CPO), Colin Zhang (Founding Engineer, ex-VMware). |
+| 12 | Team | Two co-founders plus first software engineer: Stephan Claxton (CEO, ex-Applied Intuition), Jarred Gou (CPO), Colin Zhang (SW Engineer, ex-VMware). |
 | 13 | Financials | 5-year P&L, $1.5M to $2M raise, 3 to 11 headcount in 12 months. |
 | 14 | The Ask | $1.5M to $2M Convertible Note, lead investor plus 2 to 3 strategic angels. |
 | 15 | Contact and Q&A | stephan@luvian.info, NDA-gated data room link. |

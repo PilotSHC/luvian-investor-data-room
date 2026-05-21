@@ -51,13 +51,13 @@ Three forces are converging for the first time in 30 years.
 
 ## Team
 
-Three co-founders with complementary depth across product, enterprise infrastructure, and systems engineering.
+Two co-founders plus our first software engineer.
 
 * **Stephan Claxton, Founder & CEO.** Systems engineer and autonomy architect. Previously worked on advanced autonomy and engineering infrastructure initiatives at Applied Intuition. Owns operational context, ontology, and the safety methods (HARA, TARA, STPA, SOTIF, FMEA) that the platform depends on.
 * **Jarred Gou, Chief Product Officer.** Product strategy, roadmap, and engineering architecture. Owns the AI integration roadmap and the SysML v2 conformance plan. The conviction that next-generation MBSE must be AI-native, browser-first, and collaborative by default is his.
-* **Colin Zhang, Founding Engineer.** Previously at VMware, where he worked on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and authentication architecture (OIDC, SAML, LDAP) for the regulated-industry customer profile Luvian targets.
+* **Colin Zhang, Software Engineer.** Previously at VMware, where he worked on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and authentication architecture (OIDC, SAML, LDAP) for the regulated-industry customer profile Luvian targets.
 
-This round funds the conversion to a Delaware C-corp and the recruitment of three additional founding hires (GTM lead, founding ML/AI engineer, second platform engineer).
+This round funds the conversion to a Delaware C-corp and the recruitment of three additional hires (GTM lead, founding ML/AI engineer, second software engineer).
 
 ## Traction
 
