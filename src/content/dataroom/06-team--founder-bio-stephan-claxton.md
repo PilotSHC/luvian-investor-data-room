@@ -20,7 +20,7 @@ Systems engineer and autonomy architect focused on operational context, traceabi
 
 The combination of MBSE depth, defense-program delivery experience, and AV verification work places this founder at the intersection of three regulated industries that almost no one else has lived inside. That cross-domain fluency is the founder–market fit thesis.
 
-[stephanclaxton.com](https://www.stephanclaxton.com/) · [stephan@luvian.info](mailto:stephan@luvian.info) · Sunnyvale, CA
+[stephanclaxton.com](https://www.stephanclaxton.com/) · [luvsupport@luvian.io](mailto:luvsupport@luvian.io) · Sunnyvale, CA
 
 ## Jarred Gou — Chief Product Officer
 

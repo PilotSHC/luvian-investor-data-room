@@ -127,5 +127,5 @@ Summary:
 ## Contact
 
 **Stephan Claxton** — Founder & Sole Member, Luvian Labs LLC ·
-[stephan@luvian.info](mailto:stephan@luvian.info) ·
+[luvsupport@luvian.io](mailto:luvsupport@luvian.io) ·
 [data-room.luvian.info](https://data-room.luvian.info) · 2026-05-21

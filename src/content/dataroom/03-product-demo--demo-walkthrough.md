@@ -25,7 +25,7 @@ confidentiality and privacy acknowledgment you accepted at sign-in.
   without written permission.
 
 If you'd prefer a private live walkthrough instead of the recorded
-asset, email [stephan@luvian.info](mailto:stephan@luvian.info) and we
+asset, email [luvsupport@luvian.io](mailto:luvsupport@luvian.io) and we
 will schedule a 30-minute Zoom.
 
 ---
@@ -44,14 +44,14 @@ will schedule a 30-minute Zoom.
   >
     Your browser does not support inline video. The video is served from a
     private store and only available to authenticated, agreement-accepted
-    investors — email <a href="mailto:stephan@luvian.info">stephan@luvian.info</a>
+    investors — email <a href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
     if you need an alternative format.
   </video>
 </div>
 
 > **Trouble playing?** Some restrictive corporate networks block
 > non-standard MP4 hosts. Try a personal device, or email
-> [stephan@luvian.info](mailto:stephan@luvian.info) for a private live
+> [luvsupport@luvian.io](mailto:luvsupport@luvian.io) for a private live
 > walkthrough.
 
 ---
@@ -132,7 +132,7 @@ round funds completing the rest. The map is in
 2. Read `05_Market_Thesis/Why_Now_Memo.md` — the macro narrative.
 3. Read `10_Appendix/Investor_QA_2026_05.md` — answers to the questions
    you're already drafting.
-4. Email [stephan@luvian.info](mailto:stephan@luvian.info) for the
+4. Email [luvsupport@luvian.io](mailto:luvsupport@luvian.io) for the
    technical deep-dive.
 
 ---

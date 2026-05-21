@@ -55,10 +55,13 @@ const lastUpdated = '2026-05-21';
           <li>
             <strong>Authentication cookies</strong>: two HttpOnly, SameSite=Lax,
             HMAC-signed cookies — one proves you entered the correct access code,
-            the other records that you accepted these terms. Both expire after
-            the period set by the
-            <code>INVESTOR_ROOM_COOKIE_TTL</code> environment variable (default
-            seven days). The cookies do not contain any of your information in
+            the other records that you accepted these terms. The access-code
+            cookie expires after the period set by
+            <code>INVESTOR_ROOM_COOKIE_TTL</code> (default seven days); the
+            acknowledgment cookie expires after
+            <code>INVESTOR_ROOM_AGREEMENT_TTL</code> (default one year) so you
+            do not have to re-fill the form on every visit. The cookies do not
+            contain any of your information in
             plaintext other than the values you provided to us.
           </li>
         </ul>
@@ -129,7 +132,7 @@ const lastUpdated = '2026-05-21';
           You can request that we delete your acknowledgment record, or that we
           provide you a copy of the personal information we hold about you, by
           emailing
-          <a class="underline" href="mailto:stephan@luvian.info">stephan@luvian.info</a>.
+          <a class="underline" href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>.
           You can also clear your cookies or sign out at any time using the
           "Lock data room" button in the footer.
         </p>
@@ -150,7 +153,7 @@ const lastUpdated = '2026-05-21';
         <h2 class="mt-6 text-lg font-semibold text-ink-900">8. Contact</h2>
         <p class="mt-2 text-sm text-ink-700">
           Stephan Claxton, Sole Member, Luvian Labs LLC ·
-          <a class="underline" href="mailto:stephan@luvian.info">stephan@luvian.info</a>
+          <a class="underline" href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
         </p>
       </article>
 

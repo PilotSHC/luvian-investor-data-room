@@ -26,7 +26,7 @@ A faithful summary of the live deck for investor pre-reads and async review. The
 | 12 | Team | Two co-founders plus first software engineer: Stephan Claxton (CEO, ex-Applied Intuition), Jarred Gou (CPO), Colin Zhang (SW Engineer, ex-VMware). |
 | 13 | Financials | 5-year P&L, $1.5M to $2M raise, 3 to 11 headcount in 12 months. |
 | 14 | The Ask | $1.5M to $2M Convertible Note, lead investor plus 2 to 3 strategic angels. |
-| 15 | Contact and Q&A | stephan@luvian.info, NDA-gated data room link. |
+| 15 | Contact and Q&A | luvsupport@luvian.io, NDA-gated data room link. |
 
 ## Speaker Notes (selected)
 

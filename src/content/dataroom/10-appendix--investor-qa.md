@@ -392,4 +392,4 @@ for the *right* lead, not the *first* lead.
 ---
 
 — *Stephan Claxton, Founder, Luvian Labs LLC* ·
-[stephan@luvian.info](mailto:stephan@luvian.info) · 2026-05-21
+[luvsupport@luvian.io](mailto:luvsupport@luvian.io) · 2026-05-21

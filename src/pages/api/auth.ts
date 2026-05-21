@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
     passwordOk = verifyPassword(password);
   } catch (err) {
     console.error('[api/auth] verifyPassword threw — env vars likely missing:', err);
-    return new Response('Server is missing authentication configuration. Contact stephan@luvian.info.', {
+    return new Response('Server is missing authentication configuration. Contact luvsupport@luvian.io.', {
       status: 500,
       headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
     });
@@ -55,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
     token = issueAuthToken();
   } catch (err) {
     console.error('[api/auth] issueAuthToken threw — INVESTOR_ROOM_COOKIE_SECRET missing:', err);
-    return new Response('Server is missing cookie-signing configuration. Contact stephan@luvian.info.', {
+    return new Response('Server is missing cookie-signing configuration. Contact luvsupport@luvian.io.', {
       status: 500,
       headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
     });

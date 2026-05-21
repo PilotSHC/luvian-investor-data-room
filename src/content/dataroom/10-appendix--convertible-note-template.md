@@ -119,7 +119,7 @@ By: _______________________________
 Name: Stephan Claxton
 Title: Founder & Sole Member
 Address: [COMPANY_ADDRESS]
-Email: stephan@luvian.info
+Email: luvsupport@luvian.io
 Date: ____________________
 
 **Holder:**

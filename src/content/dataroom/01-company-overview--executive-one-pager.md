@@ -79,6 +79,6 @@ This round funds the conversion to a Delaware C-corp and the recruitment of thre
 
 **Use of funds.** Approximately 5% Delaware Flip and counsel, 60% engineering and GTM hires (3 founding employees), 15% design-partner conversion, 10% AI and cloud, 8% on-prem hardening, 2% buffer.
 
-**Contact.** Stephan Claxton, stephan@luvian.info.
+**Contact.** Stephan Claxton, luvsupport@luvian.io.
 
 **Data room access.** NDA-gated. Full diligence room at data-room.luvian.info (password on NDA execution).

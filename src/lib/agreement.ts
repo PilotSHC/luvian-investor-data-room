@@ -22,9 +22,16 @@ function getSecret(): string {
 }
 
 function getTtlSeconds(): number {
-  const raw = readEnv('INVESTOR_ROOM_COOKIE_TTL');
-  const n = Number(raw ?? 60 * 60 * 24 * 7);
-  return Number.isFinite(n) && n > 0 ? n : 60 * 60 * 24 * 7;
+  // The acknowledgment is meant to be persistent — investors should not
+  // re-fill the form on every visit. Prefer a dedicated env var; fall
+  // back to the legacy shared `INVESTOR_ROOM_COOKIE_TTL`; and default to
+  // 365 days so a one-time accept holds for a year.
+  const ONE_YEAR = 60 * 60 * 24 * 365;
+  const dedicated = readEnv('INVESTOR_ROOM_AGREEMENT_TTL');
+  const legacy = readEnv('INVESTOR_ROOM_COOKIE_TTL');
+  const raw = dedicated ?? legacy;
+  const n = Number(raw ?? ONE_YEAR);
+  return Number.isFinite(n) && n > 0 ? n : ONE_YEAR;
 }
 
 function hmac(input: string): string {

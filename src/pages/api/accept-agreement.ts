@@ -106,7 +106,7 @@ export const POST: APIRoute = async ({ request }) => {
       err,
     );
     return new Response(
-      'Server is missing cookie-signing configuration. Contact stephan@luvian.info.',
+      'Server is missing cookie-signing configuration. Contact luvsupport@luvian.io.',
       {
         status: 500,
         headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
