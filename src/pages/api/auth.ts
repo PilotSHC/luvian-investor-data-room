@@ -6,25 +6,63 @@ import {
   verifyPassword,
 } from '@/lib/auth';
 
-export const POST: APIRoute = async ({ request, cookies, redirect }) => {
-  const form = await request.formData();
-  const password = String(form.get('password') ?? '');
-  const next = String(form.get('next') ?? '/');
+function buildSetCookie(name: string, value: string, maxAge: number): string {
+  const parts = [`${name}=${value}`, `Max-Age=${maxAge}`, `Path=${AUTH_COOKIE_OPTIONS.path}`];
+  if (AUTH_COOKIE_OPTIONS.httpOnly) parts.push('HttpOnly');
+  if (AUTH_COOKIE_OPTIONS.secure) parts.push('Secure');
+  if (AUTH_COOKIE_OPTIONS.sameSite) parts.push(`SameSite=${AUTH_COOKIE_OPTIONS.sameSite[0].toUpperCase()}${AUTH_COOKIE_OPTIONS.sameSite.slice(1)}`);
+  return parts.join('; ');
+}
 
-  if (!verifyPassword(password)) {
-    const safeNext = next.startsWith('/') ? next : '/';
-    const url = `/login?error=1&next=${encodeURIComponent(safeNext)}`;
-    return redirect(url, 303);
+function redirectWithCookie(location: string, setCookie?: string): Response {
+  const headers = new Headers({
+    Location: location,
+    'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+  });
+  if (setCookie) headers.append('Set-Cookie', setCookie);
+  return new Response(null, { status: 303, headers });
+}
+
+export const POST: APIRoute = async ({ request }) => {
+  let password = '';
+  let next = '/';
+  try {
+    const form = await request.formData();
+    password = String(form.get('password') ?? '');
+    next = String(form.get('next') ?? '/');
+  } catch {
+    // not a form body — fall through with empty password (will fail check)
   }
 
-  const token = issueAuthToken();
-  cookies.set(AUTH_COOKIE_NAME, token.value, {
-    ...AUTH_COOKIE_OPTIONS,
-    maxAge: token.maxAge,
-  });
+  let passwordOk = false;
+  try {
+    passwordOk = verifyPassword(password);
+  } catch (err) {
+    console.error('[api/auth] verifyPassword threw — env vars likely missing:', err);
+    return new Response('Server is missing authentication configuration. Contact stephan@luvian.info.', {
+      status: 500,
+      headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
+    });
+  }
+
+  if (!passwordOk) {
+    const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : '/';
+    return redirectWithCookie(`/login?error=1&next=${encodeURIComponent(safeNext)}`);
+  }
+
+  let token: { value: string; maxAge: number };
+  try {
+    token = issueAuthToken();
+  } catch (err) {
+    console.error('[api/auth] issueAuthToken threw — INVESTOR_ROOM_COOKIE_SECRET missing:', err);
+    return new Response('Server is missing cookie-signing configuration. Contact stephan@luvian.info.', {
+      status: 500,
+      headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
+    });
+  }
 
   const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : '/';
-  return redirect(safeNext, 303);
+  return redirectWithCookie(safeNext, buildSetCookie(AUTH_COOKIE_NAME, token.value, token.maxAge));
 };
 
 export const prerender = false;

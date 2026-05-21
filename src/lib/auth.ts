@@ -13,6 +13,17 @@ function readEnv(name: string): string | undefined {
   return undefined;
 }
 
+// Log presence (not value) of required env vars at module-load time so it
+// shows up in Vercel runtime logs and we can diagnose deploy misconfig.
+const _envProbe = {
+  hasPassword: Boolean(readEnv('INVESTOR_ROOM_PASSWORD')),
+  hasSecret: Boolean(readEnv('INVESTOR_ROOM_COOKIE_SECRET')),
+  passwordLen: (readEnv('INVESTOR_ROOM_PASSWORD') ?? '').length,
+  secretLen: (readEnv('INVESTOR_ROOM_COOKIE_SECRET') ?? '').length,
+};
+// eslint-disable-next-line no-console
+console.log('[lib/auth] env probe:', JSON.stringify(_envProbe));
+
 function getSecret(): string {
   const s = readEnv('INVESTOR_ROOM_COOKIE_SECRET');
   if (!s || s.length < 16) {
