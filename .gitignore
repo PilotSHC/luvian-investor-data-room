@@ -1,0 +1,31 @@
+# Astro
+.astro/
+dist/
+node_modules/
+
+# Vercel
+.vercel/
+
+# Env / secrets — NEVER commit
+.env
+.env.*
+!.env.example
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Confidential investor mirror — never commit recipient-watermarked or
+# private documents into this repo. Originals belong in the main repo's
+# investor-data-room/_private/ (which is itself gitignored).
+_private/
+*Bank_Statement*
+*Tax_Return*
+*EXECUTED_*
+*Signed_*

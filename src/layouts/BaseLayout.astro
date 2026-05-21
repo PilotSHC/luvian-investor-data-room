@@ -1,0 +1,55 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  showChrome?: boolean;
+}
+
+const { title, description, showChrome = true } = Astro.props;
+const fullTitle = title.includes('Luvian') ? title : `${title} · Luvian Data Room`;
+const desc = description ?? 'Confidential investor data room for Luvian Labs LLC.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <slot />
+    {showChrome && (
+      <footer class="mt-24 border-t border-ink-700 bg-ink-800/40 py-8">
+        <div class="container-tight flex flex-col gap-2 text-xs text-ink-300 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <strong class="text-ink-100">Confidential.</strong> Shared under NDA.
+            Do not redistribute. Watermarked exports only.
+          </div>
+          <div class="flex items-center gap-4">
+            <span>Luvian Labs LLC · Pre-seed · {new Date().getFullYear()}</span>
+            <form method="POST" action="/api/logout">
+              <button class="text-ink-200 underline hover:text-white" type="submit">
+                Lock data room
+              </button>
+            </form>
+          </div>
+        </div>
+      </footer>
+    )}
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+</style>

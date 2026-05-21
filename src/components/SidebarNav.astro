@@ -1,0 +1,52 @@
+---
+import { SECTIONS } from '@/data/sections';
+
+interface Props {
+  currentSection?: string;
+  currentSlug?: string;
+}
+
+const { currentSection, currentSlug } = Astro.props;
+---
+
+<nav class="space-y-6 text-sm">
+  <a
+    href="/"
+    class={`block rounded-md px-3 py-2 ring-1 ring-ink-700 transition hover:bg-ink-700 ${
+      !currentSection ? 'bg-ink-700 text-white ring-ink-500' : 'text-ink-100'
+    }`}
+  >
+    <div class="text-xs uppercase tracking-wide text-ink-300">Home</div>
+    <div class="mt-1 font-medium">Data Room Index</div>
+  </a>
+
+  {SECTIONS.map((section) => (
+    <div>
+      <a
+        href={section.href}
+        class={`flex items-baseline gap-2 rounded-md px-3 py-1 transition hover:text-white ${
+          currentSection === section.id ? 'text-white font-semibold' : 'text-ink-100'
+        }`}
+      >
+        <span class="text-xs font-mono text-ink-400">{section.number}</span>
+        <span>{section.title}</span>
+      </a>
+      <ul class="mt-1 space-y-0.5">
+        {section.files.map((file) => (
+          <li>
+            <a
+              href={`${section.href}/${file.slug}`}
+              class={`block rounded-md px-5 py-1 text-ink-200 transition hover:bg-ink-700 hover:text-white ${
+                currentSection === section.id && currentSlug === file.slug
+                  ? 'bg-ink-700 text-white ring-1 ring-ink-500'
+                  : ''
+              }`}
+            >
+              {file.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</nav>

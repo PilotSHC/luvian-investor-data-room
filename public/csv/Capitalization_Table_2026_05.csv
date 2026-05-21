@@ -1,0 +1,31 @@
+Holder Type,Name,Security Type,Issue Date,Membership Units / Interest %,% of Total,Vested,Notes
+Founder Member,Stephan Claxton,Membership Interest,[FORMATION_DATE],100%,100%,Fully vested,Sole member of Luvian Labs LLC at formation
+Total — pre-round,,,,,100%,,
+,,,,,,,
+ROUND IN PROGRESS — CONVERTIBLE NOTES,,,,,,,
+Convertible Note Holder,[Lead Investor Name],Convertible Promissory Note,[CLOSE_DATE],n/a — convertible,n/a,n/a,$1000K @ $14M valuation cap (illustrative); converts on Qualified Financing or LLC→Inc conversion
+Convertible Note Holder,[Angel #1 Name],Convertible Promissory Note,[CLOSE_DATE],n/a — convertible,n/a,n/a,$200K @ $14M valuation cap
+Convertible Note Holder,[Angel #2 Name],Convertible Promissory Note,[CLOSE_DATE],n/a — convertible,n/a,n/a,$200K @ $14M valuation cap
+Convertible Note Holder,[Strategic Angel Name],Convertible Promissory Note,[CLOSE_DATE],n/a — convertible,n/a,n/a,$350K @ $14M valuation cap
+Total — Convertible Notes outstanding,,,,,,,$1.75M base case
+,,,,,,,
+POST-FLIP / POST-CONVERSION PRO FORMA (illustrative — base case $1.75M @ $14M cap),,,,,,,
+,,,,,,,On flip from LLC to Delaware C-corp:
+,,,,,,,1. LLC membership interest converts to founder common stock (Stephan)
+,,,,,,,2. Convertible Notes auto-convert into Series Seed Preferred Stock at the cap
+,,,,,,,3. ESOP top-up to 12.5% post-money is established
+,,,,,,,4. Cap table re-papers in the Inc.
+,,,,,,,
+Stephan Claxton (founder),Common Stock,~75.4%,At conversion,,,,Approximate dilution from notes + ESOP top-up
+ESOP / Equity Incentive Plan,Reserved,~12.5%,At conversion,,,,Top-up at flip; standard pre-money
+Convertible Note holders (this round),Series Seed Preferred,~12.1%,At conversion,,,,Approximate
+Total post-flip,,,,,~100%,,
+,,,,,,,
+NOTES,,,,,,,
+,Pre-flip: Luvian Labs LLC is a single-member LLC; sole member is Stephan Claxton at 100% membership interest,,,,,,
+,Convertible Notes do NOT confer voting or membership rights at the LLC level,,,,,,
+,Pro-rata side letters offered to investors with $250K+ note size,,,,,,
+,The Delaware Flip (LLC→Inc) is part of the use-of-funds and a milestone for Series A,,,,,,
+,Source of truth post-flip: Carta — replace illustrative numbers with Carta export at conversion,,,,,,
+,Vesting (post-flip): founder common stock for Stephan will be subject to a 4-year/1-yr cliff RSPA (with credit for time-served as Founder of LLC),,,,,,
+,Acceleration (post-flip): double-trigger (CoC + termination without cause); 100% of unvested,,,,,,

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SidebarNav from '@/components/SidebarNav.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentSection?: string;
+  currentSlug?: string;
+}
+
+const { title, description, currentSection, currentSlug } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="border-b border-ink-700 bg-ink-800/40">
+    <div class="container-tight flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="grid h-8 w-8 place-items-center rounded-md bg-accent text-sm font-bold text-white">
+          L
+        </div>
+        <div>
+          <div class="text-sm font-semibold text-ink-50">Luvian Labs LLC</div>
+          <div class="text-xs text-ink-300">Investor Data Room · v0.2 (LLC pivot, 2026-05)</div>
+        </div>
+      </a>
+      <div class="flex items-center gap-3 text-xs text-ink-300">
+        <span class="badge-warn">CONFIDENTIAL · NDA</span>
+        <span class="badge-info">Pre-Seed · Convertible Note</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-tight grid gap-8 py-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+    <aside class="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto lg:pr-4">
+      <SidebarNav currentSection={currentSection} currentSlug={currentSlug} />
+    </aside>
+    <main>
+      <slot />
+    </main>
+  </div>
+</BaseLayout>

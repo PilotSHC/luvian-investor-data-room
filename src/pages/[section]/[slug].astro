@@ -1,0 +1,49 @@
+---
+import { getEntry, render } from 'astro:content';
+import DataRoomLayout from '@/layouts/DataRoomLayout.astro';
+import { findFile } from '@/data/sections';
+
+export const prerender = false;
+
+const { section: sectionId, slug } = Astro.params;
+const found = findFile(sectionId ?? '', slug ?? '');
+if (!found) {
+  return Astro.redirect('/', 302);
+}
+const { section, file } = found;
+const entryId = `${section.id}--${file.slug}`;
+const entry = await getEntry('dataroom', entryId);
+let Content: any = null;
+let fallback: string | null = null;
+if (entry) {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+} else {
+  fallback = `<p><em>Content not yet synced — run <code>node scripts/sync-content.mjs</code> from the project root.</em></p>`;
+}
+---
+
+<DataRoomLayout
+  title={`${section.number} · ${file.title}`}
+  description={file.blurb}
+  currentSection={section.id}
+  currentSlug={file.slug}
+>
+  <nav class="mb-6 text-xs text-ink-300">
+    <a href="/" class="hover:text-white">Data Room</a>
+    <span class="mx-2 text-ink-500">/</span>
+    <a href={section.href} class="hover:text-white">{section.number} · {section.short}</a>
+  </nav>
+
+  {file.download && file.download.length > 0 && (
+    <div class="mb-6 flex flex-wrap gap-2">
+      {file.download.map((dl) => (
+        <a class="btn-ghost" href={dl.href}>↓ {dl.label}</a>
+      ))}
+    </div>
+  )}
+
+  <article class="prose prose-invert max-w-none">
+    {Content ? <Content /> : <Fragment set:html={fallback ?? ''} />}
+  </article>
+</DataRoomLayout>

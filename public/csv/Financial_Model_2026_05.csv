@@ -1,0 +1,69 @@
+Section,Line Item,Unit,2026,2027,2028,2029,2030,Notes
+ASSUMPTIONS — REVENUE,Paid design partners (count),#,0,3,8,16,30,Design partner = paid pilot converted to annual subscription
+ASSUMPTIONS — REVENUE,Average ACV,USD,0,100000,150000,200000,250000,Grows with multi-persona depth + on-prem premium
+ASSUMPTIONS — REVENUE,New logo additions per year,#,0,3,5,8,14,Net of churn
+ASSUMPTIONS — REVENUE,Logo gross retention,%,,95%,95%,95%,95%,Pre-revenue assumption
+ASSUMPTIONS — REVENUE,Net revenue retention (NRR),%,,100%,110%,115%,120%,Expansion via seats + persona modules
+ASSUMPTIONS — REVENUE,Gross margin,%,,70%,75%,78%,80%,SaaS economics; on-prem deployments slightly lower
+,,,,,,,,
+P&L — REVENUE,New ARR,USD,0,300000,750000,1600000,3500000,= new logos × ACV
+P&L — REVENUE,Expansion ARR,USD,0,0,75000,240000,675000,= NRR uplift on prior year ARR
+P&L — REVENUE,Churned ARR,USD,0,0,-15000,-37500,-80000,= (1 - logo retention) × prior year ARR
+P&L — REVENUE,Ending ARR,USD,0,300000,1110000,2912500,7007500,Cumulative
+P&L — REVENUE,Recognized revenue,USD,0,150000,705000,2011250,4960000,Approx midpoint of new + carryover
+,,,,,,,,
+P&L — COGS,Cloud infrastructure,USD,18000,60000,180000,360000,750000,Vercel + Supabase + AI gateway scaling with usage
+P&L — COGS,AI / LLM costs,USD,12000,45000,150000,420000,1100000,Anthropic + embeddings; sensitivity headline (P10/P50/P90)
+P&L — COGS,Customer success / support headcount,USD,0,90000,200000,400000,800000,1 CSM in 2027 → ramps with logos
+P&L — COGS,Total COGS,USD,30000,195000,530000,1180000,2650000,Sum
+P&L — COGS,Gross profit,USD,-30000,-45000,175000,831250,2310000,Revenue - COGS
+P&L — COGS,Gross margin,%,n/a,-30%,25%,41%,47%,Trends to 80% only at scale; pre-rev pilots are CS-heavy
+,,,,,,,,
+P&L — OPEX,R&D headcount cost,USD,180000,1080000,2400000,4400000,7200000,Founders below market in 2026; market rates from 2027
+P&L — OPEX,R&D — tools and infra (CI / GH / etc.),USD,12000,30000,60000,120000,200000,
+P&L — OPEX,Sales & marketing — headcount,USD,0,180000,540000,1200000,2400000,Founding sales engineer in Q1 2027
+P&L — OPEX,Sales & marketing — programs,USD,15000,75000,200000,500000,1200000,Conferences + content + paid acquisition (later)
+P&L — OPEX,G&A — accounting / legal / insurance,USD,30000,90000,180000,300000,500000,Lumpy at round close
+P&L — OPEX,G&A — operations / tooling,USD,18000,42000,84000,150000,250000,Notion / Linear / Slack / etc.
+P&L — OPEX,Total OpEx,USD,255000,1497000,3464000,6670000,11750000,Sum
+P&L — OPEX,Operating loss / income,USD,-285000,-1542000,-3289000,-5838750,-9440000,Gross profit - OpEx
+,,,,,,,,
+HEADCOUNT,Engineering,#,3,7,14,24,38,Includes founders
+HEADCOUNT,Design,#,0,1,2,3,4,
+HEADCOUNT,Sales / GTM,#,0,1,2,4,8,Founding sales engineer Q1 2027
+HEADCOUNT,Customer success,#,0,1,2,4,7,
+HEADCOUNT,Operations / Finance,#,0,1,2,3,3,Includes fractional CFO
+HEADCOUNT,Total EOY,#,3,11,22,38,60,
+HEADCOUNT,Average loaded cost per FTE,USD,60000,180000,200000,210000,220000,Pre-round equity-only for founders
+,,,,,,,,
+CASH,Beginning cash,USD,0,1465000,623000,-2666000,-8504750,Year-start
+CASH,Round proceeds (this round — base $1.75M),USD,1750000,0,0,0,0,Closes Q3 2026; modeled as Q3 inflow
+CASH,Series A proceeds (assumed),USD,0,700000,0,0,0,Bridge or rolling close in 2027
+CASH,Operating cash flow,USD,-285000,-1542000,-3289000,-5838750,-9440000,= operating loss (rough proxy)
+CASH,Capex,USD,0,0,0,0,0,SaaS — minimal capex
+CASH,Ending cash,USD,1465000,623000,-2666000,-8504750,-17944750,Run out without further financing
+CASH,Months of runway at year-end,months,18,3,n/a,n/a,n/a,Series A required mid-2027
+,,,,,,,,
+UNIT ECONOMICS,Avg ACV (USD),USD,n/a,100000,150000,200000,250000,
+UNIT ECONOMICS,CAC (founder-led + sales engineer),USD,n/a,25000,40000,50000,60000,Excludes founder time
+UNIT ECONOMICS,LTV (5-yr horizon @ 5% churn),USD,n/a,420000,700000,1000000,1200000,
+UNIT ECONOMICS,LTV/CAC,ratio,n/a,16.8,17.5,20.0,20.0,
+UNIT ECONOMICS,Payback period,months,n/a,4,4,3,3,
+,,,,,,,,
+SENSITIVITY — DOWN (P10),Time to first paid pilot,months,+6 months,,,,,Worst case
+SENSITIVITY — DOWN (P10),Average ACV in 2028,USD,,,100000,,,Worst case
+SENSITIVITY — DOWN (P10),AI infra cost / active user / month,USD,,250,,,,Worst case — model fees explode
+SENSITIVITY — BASE (P50),Time to first paid pilot,months,as planned,,,,,
+SENSITIVITY — BASE (P50),Average ACV in 2028,USD,,,150000,,,
+SENSITIVITY — BASE (P50),AI infra cost / active user / month,USD,,80,,,,
+SENSITIVITY — UP (P90),Time to first paid pilot,months,-3 months,,,,,Best case
+SENSITIVITY — UP (P90),Average ACV in 2028,USD,,,250000,,,Best case
+SENSITIVITY — UP (P90),AI infra cost / active user / month,USD,,30,,,,Best case — model deflation continues
+,,,,,,,,
+USE OF FUNDS — THIS ROUND,Engineering hires (5 senior hires + bench),% of round,55%,,,,,~$960K of $1.75M
+USE OF FUNDS — THIS ROUND,Design partner conversion (travel + paid pilots subsidy),% of round,15%,,,,,~$260K
+USE OF FUNDS — THIS ROUND,AI / cloud cost runway,% of round,10%,,,,,~$175K
+USE OF FUNDS — THIS ROUND,On-prem packaging hardening,% of round,8%,,,,,~$140K
+USE OF FUNDS — THIS ROUND,Legal & compliance,% of round,5%,,,,,~$87K
+USE OF FUNDS — THIS ROUND,Operations & buffer,% of round,7%,,,,,~$123K
+USE OF FUNDS — THIS ROUND,Total,% of round,100%,,,,,$1.75M base case
