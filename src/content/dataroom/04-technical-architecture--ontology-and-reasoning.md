@@ -13,13 +13,13 @@ title: "Ontology & AI Reasoning"
 
 ---
 
-## 1. Why ontology — restated briefly
+## 1. Why ontology, restated briefly
 
 (Full argument in the Architecture Vision Memo, §4.)
 
 Untyped substrates (pure text + vectors) produce **plausible
 nonsense**. Typed substrates with an explicit ontology can *reject*
-nonsense at substrate level — at the place a regulated-industry
+nonsense at substrate level, at the place a regulated-industry
 deployment can defend it.
 
 The ontology is therefore not a decoration. It is the load-bearing
@@ -37,7 +37,7 @@ The choice of **KerML + SysML v2** as the foundation is deliberate:
   ontology layer.
 - **It already encodes the relationships engineering organisations
   care about.** Allocations, satisfactions, refinements, derivations,
-  conformances, dependencies — these are first-class in SysML v2. A
+  conformances, dependencies, these are first-class in SysML v2. A
   generic knowledge-graph foundation would have to re-invent all of
   them.
 - **It's the direction of travel.** Cameo, Capella, Polarion, IBM ELM
@@ -48,7 +48,7 @@ The choice of **KerML + SysML v2** as the foundation is deliberate:
   syntax that diffs, reviews, and feeds into an LLM context far more
   cleanly than the graphical-only previous generation.
 
-We extend KerML's metamodel — we do not replace it. Our extensions
+We extend KerML's metamodel, we do not replace it. Our extensions
 are additive bundles, not metamodel rewrites.
 
 ---
@@ -67,11 +67,11 @@ actually run:
 | **Verification** | Test cases, runs, coverage, defects | DO-178C, GAMP-5 |
 | **Provenance** | Source, evidence, derivation | PROV-O (W3C) |
 | **Configuration management** | Baselines, branches, change | EIA-649, ISO 10007 |
-| **Deployment / on-prem** | Site, environment, customer-managed-keys | (internal — regulated-industry deployment posture) |
+| **Deployment / on-prem** | Site, environment, customer-managed-keys | (internal, regulated-industry deployment posture) |
 
 These bundles are **versioned**, can be installed independently, and
 can be authored by customers (with governance). The bundle interface is
-the **only stable API** the substrate exposes for ontology extension —
+the **only stable API** the substrate exposes for ontology extension.
 it is intentionally narrow.
 
 ---
@@ -84,7 +84,7 @@ within that pipeline.)
 
 The reasoning pipeline runs in five stages:
 
-### Stage A — Question grounding
+### Stage A. Question grounding
 
 The user (or upstream agent) submits a question. Before any LLM call,
 the substrate:
@@ -99,7 +99,7 @@ the substrate:
 A question that fails authority checks is rejected here, **before
 retrieval**, and never reaches the LLM.
 
-### Stage B — Hybrid retrieval
+### Stage B. Hybrid retrieval
 
 Multiple retrieval strategies fire in parallel against the substrate:
 
@@ -113,26 +113,26 @@ Multiple retrieval strategies fire in parallel against the substrate:
 Results are tagged with their retrieval source. Nothing is collapsed
 into a single relevance score until the next stage.
 
-### Stage C — Fusion & re-ranking
+### Stage C. Fusion & re-ranking
 
 A fusion step merges the parallel retrievals with a **confidence-weighted
 combiner**, deduplicates by lineage-coherent grouping, and produces a
-ranked **context bundle** — typed nodes, edges, and provenance records
+ranked **context bundle**, typed nodes, edges, and provenance records
 relevant to the question.
 
 The fusion is *explainable*: at any point we can produce the per-source
 contribution to a ranked item's score.
 
-### Stage D — Grounded LLM call
+### Stage D. Grounded LLM call
 
 Only now does the LLM see anything. The prompt is:
 
-- **Schema-constrained output** — the substrate tells the LLM what
+- **Schema-constrained output**, the substrate tells the LLM what
   shape its answer must take (structured JSON conforming to a domain
   schema).
-- **Type-aware context** — the context bundle is presented with
+- **Type-aware context**, the context bundle is presented with
   type-tags and provenance pointers, not as flat text.
-- **Refusal-friendly** — if the LLM cannot satisfy the schema with
+- **Refusal-friendly**, if the LLM cannot satisfy the schema with
   high confidence, the schema admits a *"insufficient evidence"*
   branch, and the substrate uses it.
 
@@ -140,23 +140,23 @@ The LLM is **the last step**, not the first. Most of the work is done
 by retrieval and constraint. The model is interchangeable; the
 substrate is not.
 
-### Stage E — Post-validation & provenance attachment
+### Stage E. Post-validation & provenance attachment
 
 The LLM's response is run through:
 
 - **Schema validation** (rejected if structurally invalid).
 - **Ontology validation** (rejected if it implies relationships the
-  ontology forbids — e.g., a `Verification` claiming to verify a
+  ontology forbids, e.g., a `Verification` claiming to verify a
   `SafetyConcern` directly without going through a `Requirement`).
-- **Provenance attachment** — every claim in the response is bound to
+- **Provenance attachment**, every claim in the response is bound to
   the substrate evidence that supports it, with confidence scores.
 
 The user (or upstream agent) sees the final response *with* the
-provenance and the confidence — not as a flat answer string.
+provenance and the confidence, not as a flat answer string.
 
 ---
 
-## 5. Confidence — propagated, not invented
+## 5. Confidence, propagated, not invented
 
 A central design opinion: **confidence is not invented at the LLM
 boundary**. It is propagated through the substrate, and the LLM stage
@@ -202,7 +202,7 @@ open-weights model, or to deterministic reasoning depending on the
 risk classification of the workflow.
 
 This is the architectural commitment that protects the substrate
-against the **model commoditisation** trend — see the Why Now memo,
+against the **model commoditisation** trend, see the Why Now memo,
 §1.1.
 
 ---
@@ -215,11 +215,11 @@ substrate ships with a first-class **eval harness**:
 - **Curated regression suites** per ontology bundle (correctness on
   ARP4754A-shaped traceability questions, ISO 26262-shaped
   hazard-derivation questions, etc.).
-- **Plausible-nonsense red-team set** — questions designed to elicit
+- **Plausible-nonsense red-team set**, questions designed to elicit
   the failure mode the substrate exists to prevent.
-- **Provenance-integrity tests** — every regression run validates that
+- **Provenance-integrity tests**, every regression run validates that
   every derived claim has a complete provenance chain.
-- **Confidence calibration tests** — claims marked high-confidence
+- **Confidence calibration tests**, claims marked high-confidence
   must be correct at a rate consistent with the confidence; claims
   marked low-confidence must be flagged for review.
 
@@ -245,4 +245,4 @@ dollars include investment in expanding the regression suite.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

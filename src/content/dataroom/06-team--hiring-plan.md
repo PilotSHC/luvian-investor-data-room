@@ -1,7 +1,7 @@
 ---
 section: "06-team"
 slug: "hiring-plan"
-title: "Hiring Plan — 18-month Pre-Seed Cycle"
+title: "Hiring Plan, 18-month Pre-Seed Cycle"
 ---
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
@@ -27,7 +27,7 @@ End-of-pre-seed team size: **6 people** (founder + 2 co-founders + 2
 senior engineers + 1 founding designer).
 
 The architecture is *deliberately* documented and shared across the
-team rather than concentrated in any one head — that is the load-bearing
+team rather than concentrated in any one head, that is the load-bearing
 mitigation for solo-founder risk during the round (see Investor Q&A,
 Q11).
 
@@ -38,11 +38,11 @@ Q11).
 Each role is justified against a specific de-risk in the round's
 milestone plan.
 
-### Co-founder, Engineering — *de-risks the architecture*
+### Co-founder, Engineering, *de-risks the architecture*
 
 The Architecture Vision Memo commits the substrate to a specific
 shape. Executing that commitment requires a co-founder who has
-**built at scale** — graphs, typed substrates, ontology-grounded
+**built at scale**, graphs, typed substrates, ontology-grounded
 reasoning, regulated deployment posture. The co-founder is not an "early
 employee." They are an architectural co-author.
 
@@ -50,7 +50,7 @@ employee." They are an architectural co-author.
 in the first 12 months are foundational. They need to be made by someone
 with founder-level skin in the game.
 
-### Co-founder, GTM — *de-risks the wedge customer conversion*
+### Co-founder, GTM, *de-risks the wedge customer conversion*
 
 The wedge customers are **bought**, not sold. Conversion requires a
 co-founder who has the engineering-leader credibility to walk into an
@@ -61,7 +61,7 @@ conversation, not the procurement conversation.
 pre-seed is founder-led, the GTM lead has to be a founder. A
 hired-gun salesperson cannot run this motion at this stage.
 
-### Senior Engineer, Ingestion — *de-risks the connector surface*
+### Senior Engineer, Ingestion, *de-risks the connector surface*
 
 Reading PLM / ALM / SysML v2 artefacts at high fidelity (without
 losing the source semantics) is the single most-effortful surface in
@@ -69,18 +69,18 @@ the substrate. The role is to ship the first 3–4 connectors to
 production, *and* establish the connector pattern that the rest of the
 team can extend.
 
-### Senior Engineer, AI Reasoning — *de-risks the reasoning pipeline*
+### Senior Engineer, AI Reasoning, *de-risks the reasoning pipeline*
 
 Hybrid retrieval + constraint solving + grounded LLM with a real eval
 harness is a senior-IC project, not a "drop in an LLM call" project.
 The role exists specifically because the reasoning pipeline is what
 distinguishes the substrate from a generic context platform.
 
-### Founding Designer — *de-risks the consumption surface*
+### Founding Designer, *de-risks the consumption surface*
 
 The substrate's value is mostly consumed by tools and agents. But the
-*human consumption* — the engineering-leader UI for browsing
-provenance, walking lineages, reviewing AI suggestions — is the surface
+*human consumption*, the engineering-leader UI for browsing
+provenance, walking lineages, reviewing AI suggestions, is the surface
 investors and design partners experience first. A specialist designer
 in month 6–9 turns the alpha UI into something a Series-A partner
 can demo to their LPs.
@@ -111,7 +111,7 @@ These are the budget temptations that fail pre-seed companies. Saying
 
 ## 4. Recruiting pipeline (current state)
 
-> **`[FILL IN: Stephan to confirm — placeholders intentional]`**
+> **`[FILL IN: Stephan to confirm, placeholders intentional]`**
 
 | Role | Pipeline state | Notes |
 |---|---|---|
@@ -121,7 +121,7 @@ These are the budget temptations that fail pre-seed companies. Saying
 | Senior Engineer, AI Reasoning | Open | Network referrals; targeting Month 4–8 |
 | Founding Designer | Open | Targeting Month 6–9 |
 
-Hiring is one of the lead investor's expected contributions — see
+Hiring is one of the lead investor's expected contributions, see
 **Q15** in the Investor Q&A.
 
 ---
@@ -132,7 +132,7 @@ Hiring is one of the lead investor's expected contributions — see
   win by underpaying.
 - **Equity is meaningful**, weighted to the co-founders and to early
   hires who are taking architectural risk with us.
-- **Vesting is standard** — 4-year vesting with 1-year cliff. Set up
+- **Vesting is standard**, 4-year vesting with 1-year cliff. Set up
   *post-flip* with proper RSPA + 83(b) elections so the founder team's
   tax posture is clean.
 - **Refresh grants** at Series A and at major milestones; documented
@@ -157,4 +157,4 @@ A team where:
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

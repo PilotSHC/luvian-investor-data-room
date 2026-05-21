@@ -6,9 +6,9 @@ title: "Pitch Deck Summary"
 
 **2026-05 · Confidential · Luvian Labs LLC · Pre-Seed**
 
-A faithful summary of the live deck for investor pre-reads and async review. The watermarked PDF lives at [Pitch_Deck_2026_05.pdf](../_pdf_exports/Pitch_Deck_2026_05.pdf). The category framing in this deck mirrors *Market Eval v2* and the long-form deck in `internal-comms/pitch-deck/`.
+A faithful summary of the live deck for investor pre-reads and async review. The deck is embedded above; the watermarked PDF is also available via the download button.
 
-> **Stage note.** This data room represents Luvian Labs LLC at the pre-seed stage, raising $1.5M–$2.0M on a Convertible Note ahead of the Delaware Flip. The forward-looking $7M–$10M Seed and $20M–$30M Series A figures referenced in this summary come straight from the live deck and describe the *next two rounds* on the roadmap, not the round currently open.
+> **Stage note.** This data room represents Luvian Labs LLC at the pre-seed stage, raising $1.5M to $2.0M on a Convertible Note ahead of the Delaware Flip. The forward-looking $7M to $10M Seed and $20M to $30M Series A figures referenced in this summary come straight from the live deck and describe the *next two rounds* on the roadmap, not the round currently open.
 
 ## Slide Outline
 
@@ -35,7 +35,7 @@ A faithful summary of the live deck for investor pre-reads and async review. The
 ### Slide 2. The Problem
 
 > *"95% of enterprise GenAI pilots produce zero measurable ROI despite $30–40B invested. The failure mode is not that models are bad. It is that engineering context is fragmented, stale, and permission-locked across files, repos, and teams."*
-> — paraphrased from MIT NANDA, *State of AI in Business 2025*
+> paraphrased from MIT NANDA, *State of AI in Business 2025*
 
 Gartner's forward look agrees: 40%+ of agentic AI projects will be cancelled by end of 2027 for the same root cause. The category Luvian is building solves the upstream problem.
 
@@ -75,10 +75,10 @@ Luvian's structural advantages, mapped to the patentable innovations the round f
 
 We do not ask buyers to commit to a four-quadrant replacement on day one. The four-phase wedge lands light, expands deep:
 
-1. **Phase 1 — Evidence Layer.** Import from Cameo and DOORS, visualise the traceability graph, produce gap-analysis reports. Low switching cost. Days to value.
-2. **Phase 2 — Requirements.** Author requirements directly with INCOSE A–F grading. Replaces DOORS. Medium switching cost.
-3. **Phase 3 — Modeling.** SysML v2 visual modeling plus real-time collaboration. Replaces Cameo. High switching cost.
-4. **Phase 4 — Safety and V&V.** Full decision graph with HARA / TARA / STPA / SOTIF / FMEA plus verification evidence attached. Replaces spreadsheets and Visio. Very high switching cost.
+1. **Phase 1. Evidence Layer.** Import from Cameo and DOORS, visualise the traceability graph, produce gap-analysis reports. Low switching cost. Days to value.
+2. **Phase 2. Requirements.** Author requirements directly with INCOSE A–F grading. Replaces DOORS. Medium switching cost.
+3. **Phase 3. Modeling.** SysML v2 visual modeling plus real-time collaboration. Replaces Cameo. High switching cost.
+4. **Phase 4. Safety and V&V.** Full decision graph with HARA / TARA / STPA / SOTIF / FMEA plus verification evidence attached. Replaces spreadsheets and Visio. Very high switching cost.
 
 ### Slide 9. Competition
 
@@ -94,13 +94,13 @@ The peer set under the new framing is not the legacy MBSE incumbents. It is the 
 Three contestants meaningfully affect the SOM build:
 
 - **Flow Engineering** ($23M Sequoia Series A, October 2025). Same buyer persona. Will compress sales cycles for the wedge if it scales.
-- **Trace.Space** (verbatim positioning match — agentic requirements + central knowledge graph). Differentiation collapses to depth of typed ontology + air-gap + safety coverage.
+- **Trace.Space** (verbatim positioning match, agentic requirements + central knowledge graph). Differentiation collapses to depth of typed ontology + air-gap + safety coverage.
 - **Aras Innovator + InnovatorEdge AI**. Graph-based PLM with enterprise distribution and AI overlay; missing SysML v2 + safety methods. Displacement target rather than head-to-head competitor.
 
 ### Slide 14. The Ask
 
 * **$1.5M to $2.0M Convertible Note** at the LLC stage, pre-Delaware-Flip.
-* Valuation cap: TBD with lead. See [Convertible_Note_TEMPLATE.md](../10_Appendix/Convertible_Note_TEMPLATE.md).
+* Valuation cap: TBD with lead. See *Convertible Note TEMPLATE*.
 * 5% simple interest. 24-month maturity. Auto-converts on Qualified Financing or on the LLC to Delaware C-corp conversion, whichever is first.
 * Use of funds explicitly includes the Delaware Flip, the recruitment of a GTM lead, a founding ML/AI engineer, and a second software engineer.
 * 18-month runway to a Series A milestone bundle:
@@ -122,13 +122,4 @@ Forward-looking funding ladder, included so the lead understands the multi-round
 | Series A | $20–30M | 18–24 months from Seed | $1M+ ARR, 120%+ NRR; reference architecture public |
 | Series B | $50–80M | 18–24 months from Series A | $5M+ ARR; defense contract awarded |
 
-Pre-seed investors' pro-rata participation in the Seed and Series A rounds is a contemplated and capital-planned outcome. See [Investor_QA_2026_05.md](../10_Appendix/Investor_QA_2026_05.md), Q15.
-
-## Versioning
-
-| Version | Date | Notes |
-|---|---|---|
-| 2026_05 v1 | 2026-05-21 | Initial external version (legacy MBSE-tool category framing). |
-| 2026_05 v2 | 2026-05-21 | **Pivoted to Engineering Intelligence Layer framing per Market Eval v2 + internal-comms/pitch-deck.** Replaced market sizing, comp set, wedge phasing, and four-pillar solution model. Round size and team composition unchanged ($1.5–2.0M Convertible Note, three-person team, three-priority hiring plan). |
-
-When the deck materially changes, copy this file to a new dated version (Pitch_Deck_2026_06.md, etc.) and add a row above. Do not edit prior versions in place.
+Pre-seed investors' pro-rata participation in the Seed and Series A rounds is a contemplated and capital-planned outcome. See *Investor QA*, Q15.

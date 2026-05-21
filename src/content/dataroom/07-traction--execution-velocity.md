@@ -21,8 +21,8 @@ We are a single-founder company with no outside capital, no signed
 revenue, and no design partners in production. By the YC / a16z
 late-stage-template definition of traction, we have **none**.
 
-By the pre-seed-infrastructure-thesis definition of traction — *velocity,
-insight, sophistication, and market pull* — we have a coherent answer in
+By the pre-seed-infrastructure-thesis definition of traction, *velocity,
+insight, sophistication, and market pull*, we have a coherent answer in
 each dimension. This document presents that answer.
 
 ---
@@ -58,13 +58,13 @@ pre-seed.
 The most credible signal of an infrastructure-stage founder's velocity is
 how much of the **architecture** is *committed* (not just thought about):
 
-- **Architecture Vision Memo** — opinionated, in this room.
-- **Context graph design** — `04_Technical_Architecture/Context_Graph_Design.md`.
-- **Ontology + reasoning approach** —
+- **Architecture Vision Memo**, opinionated, in this room.
+- **Context graph design**, `04_Technical_Architecture/Context_Graph_Design.md`.
+- **Ontology + reasoning approach**.
   `04_Technical_Architecture/Ontology_and_Reasoning.md`.
-- **Provenance + trust model** —
+- **Provenance + trust model**.
   `04_Technical_Architecture/Provenance_and_Trust.md`.
-- **Working alpha** — see demo video in `03_Product_Demo/`.
+- **Working alpha**, see demo video in `03_Product_Demo/`.
 
 By the time of the first investor call, the architecture is committed
 in writing and demonstrable in product. The founder is not asking
@@ -80,7 +80,7 @@ of a clearly-articulated plan.
 > available on request after first call, with the conversation
 > participants' consent.
 
-**`[FILL IN: Stephan — please confirm and fill in. Below is the
+**`[FILL IN: Stephan, please confirm and fill in. Below is the
 template; placeholders are intentional. Replace `Lvl-N` with the actual
 seniority signal you want to surface.]`**
 
@@ -104,7 +104,7 @@ that did not get architecture-specific.
 
 - Pre-seed funds engaged in serious conversations: `[FILL IN: N]`
 - Operator-led pre-seed angels engaged: `[FILL IN: N]`
-- Pre-seed funds passed: `[FILL IN: N]` (most common reason: "team —
+- Pre-seed funds passed: `[FILL IN: N]` (most common reason: "team.
   needs co-founder before we underwrite")
 - Pre-seed funds in active diligence (this room): you are reading the
   output of that
@@ -132,13 +132,13 @@ why we exist as a company.
 > Anonymised quotes from engineering leaders who have seen the
 > confidential demo. `[FILL IN: real quotes Stephan has captured.
 > Placeholders below are illustrative only of the *kind* of quote we
-> would surface here — not made-up.]`
+> would surface here, not made-up.]`
 
 - *`[FILL IN: e.g., "This is what I was hoping someone would build
-  three years ago." — VP Eng, AV company]`*
+  three years ago.". VP Eng, AV company]`*
 - *`[FILL IN: e.g., "The provenance model is the part nobody else has
-  right yet." — Director, aerospace]`*
-- *`[FILL IN: e.g., "I want my team to see this." — Engineering lead,
+  right yet.". Director, aerospace]`*
+- *`[FILL IN: e.g., "I want my team to see this.". Engineering lead,
   defence integrator]`*
 
 If we have not collected enough genuine quotes for this section yet,
@@ -181,4 +181,4 @@ plan for that is in `01_Company_Overview/Fundraising_Memo_2026_05.md` and
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

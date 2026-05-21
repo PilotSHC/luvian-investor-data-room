@@ -1,10 +1,10 @@
 ---
 section: "03-product-demo"
 slug: "demo-walkthrough"
-title: "Demo Walkthrough — Luvian Alpha"
+title: "Demo Walkthrough. Luvian Alpha"
 ---
 
-**Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential — Watermarked**
+**Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential. Watermarked**
 
 > *"If you have 10 minutes, watch the video. If you have 30, watch it
 > twice and then read the Architecture Vision Memo. The demo is the
@@ -12,14 +12,14 @@ title: "Demo Walkthrough — Luvian Alpha"
 
 ---
 
-## Confidential — please read before playing
+## Confidential, please read before playing
 
 The video below is **confidential** and watermarked with this data room's
 identifier. By playing or downloading it you continue to be bound by the
 confidentiality and privacy acknowledgment you accepted at sign-in.
 
 - Do not screen-share the video on a recorded call.
-- Do not redistribute the URL — the URL is non-guessable but is shared
+- Do not redistribute the URL, the URL is non-guessable but is shared
   with you on the assumption you will not forward it.
 - Do not extract clips for use in your firm's internal materials
   without written permission.
@@ -40,11 +40,11 @@ will schedule a 30-minute Zoom.
     preload="metadata"
     style="width:100%;height:auto;display:block;"
     src="/api/asset/demo"
-    aria-label="Luvian alpha — confidential investor demo, watermarked"
+    aria-label="Luvian alpha, confidential investor demo, watermarked"
   >
     Your browser does not support inline video. The video is served from a
     private store and only available to authenticated, agreement-accepted
-    investors — email <a href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
+    investors, email <a href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
     if you need an alternative format.
   </video>
 </div>
@@ -67,7 +67,7 @@ Requirements, models, code, verifications appear as **typed nodes in
 one substrate**, not as a federation of separate tools. Watch for:
 
 - Hovering or clicking any artefact reveals its **type** (`Requirement`,
-  `Allocation`, `Verification`, `SafetyConcern`, etc.) — not just a
+  `Allocation`, `Verification`, `SafetyConcern`, etc.), not just a
   document title.
 - Cross-tool relationships (a Polarion-shaped requirement connected to a
   SysML allocation connected to a Capella functional chain) are first-class
@@ -75,8 +75,8 @@ one substrate**, not as a federation of separate tools. Watch for:
 
 ### 2. AI reasoning that walks the graph
 
-When the system suggests something — say, that a particular requirement
-is satisfied by a specific subsystem allocation — you should see:
+When the system suggests something, say, that a particular requirement
+is satisfied by a specific subsystem allocation, you should see:
 
 - The **path** of evidence the suggestion walked, not just the
   suggestion text.
@@ -92,7 +92,7 @@ Every AI-derived statement carries provenance. Watch for:
 - A "where did this come from?" affordance on every AI-generated card.
 - Source artefacts named, with the version and timestamp at which they
   were authoritative.
-- The **suspect-link** indicator — when an upstream artefact changes,
+- The **suspect-link** indicator, when an upstream artefact changes,
   downstream AI-generated claims are marked stale automatically.
 
 ### 4. Workflow orchestration that respects engineering constraints
@@ -127,14 +127,14 @@ round funds completing the rest. The map is in
 
 ## After the demo
 
-1. Read `04_Technical_Architecture/Architecture_Vision_Memo.md` — the
+1. Read `04_Technical_Architecture/Architecture_Vision_Memo.md`, the
    centrepiece thesis document.
-2. Read `05_Market_Thesis/Why_Now_Memo.md` — the macro narrative.
-3. Read `10_Appendix/Investor_QA_2026_05.md` — answers to the questions
+2. Read `05_Market_Thesis/Why_Now_Memo.md`, the macro narrative.
+3. Read `10_Appendix/Investor_QA_2026_05.md`, answers to the questions
    you're already drafting.
 4. Email [luvsupport@luvian.io](mailto:luvsupport@luvian.io) for the
    technical deep-dive.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

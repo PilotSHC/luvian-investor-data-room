@@ -1,10 +1,10 @@
 ---
 section: "10-appendix"
 slug: "customer-pilot-msa-template"
-title: "Customer Pilot — Master Services Agreement"
+title: "Customer Pilot. Master Services Agreement"
 ---
 
-> **DRAFT TEMPLATE.** Standard-form MSA for converting a signed LOI (`../02_Traction_and_Customers/Design_Partner_LOI_TEMPLATE.md`) into a binding paid pilot or commercial subscription. Based on CommonPaper standard MSA + Cooley GO. **Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
+> **DRAFT.**Standard-form MSA for converting a signed LOI (`../02_Traction_and_Customers/Design_Partner_LOI_TEMPLATE.md`) into a binding paid pilot or commercial subscription. Based on CommonPaper standard MSA + Cooley GO.**Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
 
 ---
 
@@ -21,7 +21,7 @@ This **Master Services Agreement** ("**MSA**") is entered into as of **[YYYY-MM-
 
 (b) **Order Forms.** Each Order Form will set forth: subscription tier, number of users, deployment model (cloud / VPC / on-premises), term, fees, and any custom terms.
 
-(c) **Pilot Order Form.** A pilot Order Form will follow the structure set forth in **Exhibit A — Pilot Form**.
+(c) **Pilot Order Form.** A pilot Order Form will follow the structure set forth in **Exhibit A. Pilot Form**.
 
 ### 2. Access and Use
 
@@ -115,10 +115,10 @@ Service-level commitments and support obligations are set forth in **Exhibit D**
 
 ## Exhibits
 
-- **Exhibit A — Pilot Order Form**
-- **Exhibit B — Data Processing Addendum**
-- **Exhibit C — Confidentiality Terms** *(if no separate Mutual NDA)*
-- **Exhibit D — Service Levels and Support**
+- **Exhibit A. Pilot Order Form**
+- **Exhibit B. Data Processing Addendum**
+- **Exhibit C. Confidentiality Terms** *(if no separate Mutual NDA)*
+- **Exhibit D. Service Levels and Support**
 
 ---
 
@@ -140,7 +140,7 @@ Date: ____________________
 
 ---
 
-## Exhibit A — Pilot Order Form (template)
+## Exhibit A. Pilot Order Form (template)
 
 | Field | Value |
 |---|---|
@@ -160,6 +160,6 @@ Date: ____________________
 - For automotive / aerospace / defense customers, expect ASIL / DO-178C / MIL-STD compliance language in their procurement attachments. Do not accept any open-ended indemnification.
 - For EU customers: GDPR DPA and SCCs are required (Exhibit B).
 - For US federal customers: requires FAR / DFARS clauses; do not sign without counsel review.
-- Cap on liability at "12 months of fees" is standard at SaaS scale; some enterprise customers demand higher caps for security incidents — negotiate carefully.
-- Confirm publicity rights with Stephan / GTM before signing — design-partner logos drive fundraising.
+- Cap on liability at "12 months of fees" is standard at SaaS scale; some enterprise customers demand higher caps for security incidents, negotiate carefully.
+- Confirm publicity rights with Stephan / GTM before signing, design-partner logos drive fundraising.
 - Executed copies → `_private/Contracts/Customers/MSA_<customer>_<YYYY_MM_DD>_EXECUTED.pdf`. Update `Material_Contracts_INDEX.md`.

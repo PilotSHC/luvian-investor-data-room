@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luvian — Investor Pitch Deck</title>
+<link rel="icon" type="image/png" href="/assets/icon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        luvian: { 50:'#f0f4ff', 100:'#dbe4ff', 200:'#bac8ff', 300:'#91a7ff', 400:'#748ffc', 500:'#5c7cfa', 600:'#4c6ef5', 700:'#4263eb', 800:'#3b5bdb', 900:'#364fc7' },
+        surface: { 0:'#ffffff', 1:'#f8f9fa', 2:'#f1f3f5', 3:'#e9ecef' },
+        ink: { 0:'#212529', 1:'#495057', 2:'#868e96', 3:'#adb5bd' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+  .slide { display: none; height: 100vh; overflow-y: auto; padding-bottom: 80px; justify-content: flex-start !important; }
+  .slide.active { display: flex; }
+  .slide::before, .slide::after { content: ''; flex: 1 0 0px; }
+  .slide-number { font-variant-numeric: tabular-nums; }
+  .progress-bar { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .fade-in { animation: fadeIn 0.5s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .stagger-1 { animation-delay: 0.1s; animation-fill-mode: backwards; }
+  .stagger-2 { animation-delay: 0.2s; animation-fill-mode: backwards; }
+  .stagger-3 { animation-delay: 0.3s; animation-fill-mode: backwards; }
+  .stagger-4 { animation-delay: 0.4s; animation-fill-mode: backwards; }
+  .chart-container { position: relative; }
+  .gradient-text { background: linear-gradient(135deg, #4c6ef5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .nda-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; padding: 8px 24px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+  .nda-footer .nda-logo { position: absolute; right: 24px; height: 18px; transition: filter 0.3s; }
+  @media print {
+    body { overflow: auto; }
+    .slide { display: flex !important; page-break-after: always; }
+    .controls, .progress-bar-container { display: none !important; }
+    .nda-footer { position: fixed; bottom: 0; }
+    /* Disable entrance animations during print export. */
+    .fade-in,
+    [class*="stagger-"] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body class="bg-ink-0">
+
+<!-- Progress Bar -->
+<div class="progress-bar-container fixed top-0 left-0 right-0 z-50 h-1 bg-ink-0/20">
+  <div id="progress" class="progress-bar h-full bg-luvian-500"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls fixed bottom-6 right-6 z-50 flex items-center gap-3">
+  <span id="slide-counter" class="slide-number text-xs text-white/40 font-medium"></span>
+  <button onclick="prevSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button onclick="nextSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<!-- v1/v2 Framing Toggle -->
+<div id="framing-toggle" class="controls fixed top-4 right-6 z-50 flex items-center gap-1 bg-black/30 backdrop-blur rounded-full p-1 text-xs">
+  <button onclick="setFraming('v1')" id="frame-v1-btn" class="frame-btn px-3 py-1 rounded-full text-white/50 hover:text-white/80 transition font-medium" title="MBSE practitioner anchor view ($4.5B MBSE TAM)">v1 &middot; MBSE anchor</button>
+  <button onclick="setFraming('v2')" id="frame-v2-btn" class="frame-btn px-3 py-1 rounded-full bg-luvian-500 text-white transition font-medium" title="Engineering intelligence layer view (~$70B TAM)">v2 &middot; Engineering intelligence</button>
+</div>
+
+<!-- Slide Navigation (bottom left) -->
+<div class="controls fixed bottom-6 left-6 z-50 flex items-center gap-4">
+  <a href="/" class="flex items-center gap-1 text-xs text-white/30 hover:text-white/60 transition group">
+    <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Library
+  </a>
+  <button onclick="toggleNav()" class="text-xs text-white/30 hover:text-white/60 transition font-medium">Menu</button>
+  <div id="slide-nav" class="hidden absolute bottom-8 left-0 bg-gray-900/95 backdrop-blur border border-white/10 rounded-xl p-3 w-56 max-h-[70vh] overflow-y-auto">
+    <div id="nav-list" class="space-y-0.5 text-xs"></div>
+  </div>
+</div>
+
+<!-- NDA Footer -->
+<div id="nda-footer" class="nda-footer"><span>Confidential &nbsp;/&nbsp; Shared under NDA &nbsp;/&nbsp; No Screenshots &nbsp;/&nbsp; No Recordings</span><img id="nda-logo" class="nda-logo" src="/assets/logo.png" alt="Luvian"></div>
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<section class="slide active flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Cover">
+  <div class="text-center max-w-3xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-20 h-20 rounded-2xl mx-auto mb-8 shadow-lg shadow-luvian-600/30 bg-white p-3">
+    <img src="/assets/logo.png" alt="Luvian" class="h-12 mx-auto mb-4 invert brightness-0 contrast-200" style="filter: brightness(0) invert(1);">
+    <p class="text-2xl font-light text-luvian-300 mb-3">The Context Layer for Engineering Intelligence</p>
+    <p class="text-lg text-white/50 max-w-xl mx-auto">Built for an autonomous future.</p>
+    <div class="mt-12 flex items-center justify-center gap-6 text-sm text-white/30">
+      <span>Seed Round</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>Confidential</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>April 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 2: PROBLEM ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Problem">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">The Problem</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1 leading-tight">Enterprise AI keeps failing.<br>The model isn't the reason.</h2>
+    <p class="text-base text-ink-2 max-w-3xl mb-6 fade-in stagger-1">Your AI already has access to the data it needs. The problem is the data itself: disconnected, conflicting, stale, permission-fragmented, and semantically weak. That isn't a model problem. It's a context problem.</p>
+    <div class="mb-10 fade-in stagger-1 flex flex-wrap gap-3 text-xs">
+      <span class="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-3 py-1.5"><span class="font-bold text-red-700">95%</span><span class="text-ink-1">of enterprise GenAI pilots produce zero ROI</span><span class="text-ink-3">— MIT NANDA, Jul 2025</span></span>
+      <span class="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-3 py-1.5"><span class="font-bold text-amber-700">$30–40B</span><span class="text-ink-1">already invested</span></span>
+      <span class="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 rounded-full px-3 py-1.5"><span class="font-bold text-purple-700">40%+</span><span class="text-ink-1">of agentic AI projects will be cancelled by 2027</span><span class="text-ink-3">— Gartner, Jun 2025</span></span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in stagger-2">
+      <div class="bg-red-50 border border-red-100 rounded-xl p-6">
+        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM4 15a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Fragmented Context</h3>
+        <p class="text-sm text-ink-1">Requirements live in one tool, decisions in chat, code in another, tests in a third, telemetry in a data lake. None of it speaks the same language.</p>
+      </div>
+      <div class="bg-amber-50 border border-amber-100 rounded-xl p-6">
+        <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2">No System Semantics</h3>
+        <p class="text-sm text-ink-1">LLMs see strings of text. They don't see joints, sensors, control loops, interfaces, or safety constraints. Without typed engineering meaning, reasoning hallucinates.</p>
+      </div>
+      <div class="bg-purple-50 border border-purple-100 rounded-xl p-6">
+        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2">No Persistent Memory</h3>
+        <p class="text-sm text-ink-1">When an engineer leaves, the rationale walks out with them. The same decisions get re-litigated. Tribal knowledge quietly evaporates from one release to the next.</p>
+      </div>
+    </div>
+    <div class="mt-8 bg-gray-50 rounded-xl p-6 border border-gray-100 fade-in stagger-3">
+      <p class="text-sm text-ink-1 text-center italic">"The moat in enterprise AI isn't the model. It's the context." <span class="text-ink-3 not-italic">— Luvian thesis</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 3: MARKET ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Market">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Market Opportunity</p>
+
+    <!-- v2: Engineering intelligence layer (default) -->
+    <div class="view-v2">
+      <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1">~$70B market.<br>Growing 11&ndash;14% CAGR (mid-case).</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 fade-in stagger-2">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">TAM (2025)</p>
+          <p class="text-4xl font-black text-luvian-400">$58&ndash;95B</p>
+          <p class="text-xs text-white/40 mt-2">Engineering intelligence ceiling: PLM + ALM + MBSE + industrial AI + KG + A&amp;D digital engineering</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">SAM (2027)</p>
+          <p class="text-4xl font-black text-luvian-300">$6&ndash;12B</p>
+          <p class="text-xs text-white/40 mt-2">Addressable to a typed, versioned, permission-aware engineering graph</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">SOM (Year 3)</p>
+          <p class="text-4xl font-black text-luvian-200">$20&ndash;80M ARR</p>
+          <p class="text-xs text-white/40 mt-2">15&ndash;40 strategic accounts in A&amp;D primes, defense tech, tier-1 auto/robotics</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 fade-in stagger-3">
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$26&ndash;37B</p>
+          <p class="text-[10px] text-white/40">PLM (6.6&ndash;8.7% CAGR)</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$6&ndash;25B</p>
+          <p class="text-[10px] text-white/40">Industrial AI (17.9&ndash;19.5%)</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$6.3B</p>
+          <p class="text-[10px] text-white/40">A&amp;D Digital Engineering (11.6%)</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$3.5&ndash;5.6B</p>
+          <p class="text-[10px] text-white/40">ALM / Requirements (7.4&ndash;10.7%)</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$2.9B</p>
+          <p class="text-[10px] text-white/40">Enterprise KG (21.3% CAGR)</p>
+        </div>
+      </div>
+      <div class="mt-6 flex items-center gap-4 text-xs text-white/30 fade-in stagger-4">
+        <span>Why now: <strong class="text-white/60">DoD MOSA mandate (Dec 2024)</strong> forces model-based engineering</span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span><strong class="text-white/60">Robotics raised $13.8B in 2025</strong>, up from $7.8B</span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span><strong class="text-white/60">SysML v2 ratified</strong> &mdash; typed engineering data is now standard</span>
+      </div>
+      <p class="mt-3 text-[10px] text-white/30 fade-in stagger-4">Sources: Research and Markets, Mordor, DataIntelo, MarketGenics, 360iResearch, Grand View, DoD Comptroller. Full segment buildup in <a href="/market-eval-v2/" class="text-luvian-400 hover:underline">/market-eval-v2/</a>.</p>
+    </div>
+
+    <!-- v1: MBSE practitioner anchor (hidden by default) -->
+    <div class="view-v1" style="display:none;">
+      <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1">$12B+ market.<br>Growing 18&ndash;22% CAGR.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 fade-in stagger-2">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">TAM</p>
+          <p class="text-4xl font-black text-luvian-400">$12B+</p>
+          <p class="text-xs text-white/40 mt-2">Engineering intelligence: AI + ontology + lifecycle tools</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">SAM</p>
+          <p class="text-4xl font-black text-luvian-300">$3.5B</p>
+          <p class="text-xs text-white/40 mt-2">Robotics, mechatronics, autonomous systems</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+          <p class="text-xs text-white/40 uppercase tracking-wider mb-2">SOM (Year 5)</p>
+          <p class="text-4xl font-black text-luvian-200">$50&ndash;150M</p>
+          <p class="text-xs text-white/40 mt-2">Category leadership, platform revenue</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 fade-in stagger-3">
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$4.0B</p>
+          <p class="text-[10px] text-white/40">AI for Engineering</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$2.5B</p>
+          <p class="text-[10px] text-white/40">Knowledge Graphs / PLM Adjacency</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$2.0B</p>
+          <p class="text-[10px] text-white/40">Requirements &amp; ALM</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$1.8B</p>
+          <p class="text-[10px] text-white/40">MBSE Tools</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-lg font-bold text-white/80">$0.8B</p>
+          <p class="text-[10px] text-white/40">Safety &amp; V&amp;V</p>
+        </div>
+      </div>
+      <div class="mt-6 flex items-center gap-4 text-xs text-white/30 fade-in stagger-4">
+        <span>Why now: AI agents need trustworthy engineering context</span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span>Autonomous robotics demands traceable reasoning</span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span>SysML v2 makes structured engineering data standard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 4: SOLUTION ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Solution">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">The Solution</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1 leading-tight">The <span class="gradient-text">context layer</span> for<br>engineering intelligence.</h2>
+    <p class="text-lg text-ink-2 max-w-2xl mb-10 fade-in stagger-2">Luvian connects requirements, designs, code, tests, telemetry, and decisions into one continuously evolving knowledge graph — so AI reasoning, traceability, and engineering automation can finally be trusted.</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 fade-in stagger-3">
+      <div class="border border-gray-200 rounded-xl p-5 hover:border-luvian-300 transition">
+        <div class="text-2xl mb-3">🔌</div>
+        <h3 class="font-bold text-sm mb-1">Context Acquisition</h3>
+        <p class="text-xs text-ink-2">Connectors into every system where engineering knowledge already lives — modelers, trackers, source, CI, PLM, test, simulation, telemetry.</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 hover:border-luvian-300 transition">
+        <div class="text-2xl mb-3">🧠</div>
+        <h3 class="font-bold text-sm mb-1">Semantic Normalization</h3>
+        <p class="text-xs text-ink-2">A canonical engineering ontology with stable identity, lineage, ownership, and temporal state. Typed system meaning, not strings.</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 hover:border-luvian-300 transition">
+        <div class="text-2xl mb-3">🕸️</div>
+        <h3 class="font-bold text-sm mb-1">Context Orchestration</h3>
+        <p class="text-xs text-ink-2">Beyond RAG. Permission-aware retrieval, graph traversal, temporal reasoning, contradiction detection, and confidence scoring.</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 hover:border-luvian-300 transition">
+        <div class="text-2xl mb-3">🤖</div>
+        <h3 class="font-bold text-sm mb-1">AI Reasoning</h3>
+        <p class="text-xs text-ink-2">Copilots, reviewers, and domain agents that earn trust because the substrate underneath them does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 5: PRODUCT ==================== -->
+<section class="slide flex-col justify-center bg-surface-1 text-ink-0 px-8 lg:px-20" data-title="Product">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Product</p>
+    <h2 class="text-4xl font-extrabold mb-3 fade-in stagger-1">Shipping today. Building the stack.</h2>
+    <p class="text-base text-ink-2 max-w-3xl mb-8 fade-in stagger-1">We started with the structured-artifact layer: a SysML v2-native modeler. It's the seed of the broader knowledge graph — a typed, collaborative, AI-assisted source of truth that the rest of the platform federates around.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-in stagger-2">
+      <div class="bg-white rounded-xl border border-emerald-200 p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-[10px] font-semibold uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Available Now</span>
+        </div>
+        <ul class="space-y-3 text-sm text-ink-1">
+          <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">&#10003;</span><div><strong class="text-ink-0">SysML v2 Structured Artifact Layer</strong> — blocks, ports, interfaces, connections. Every element feeds the graph as a typed semantic entity.</div></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">&#10003;</span><div><strong class="text-ink-0">Real-time Collaborative Modeling</strong> — Yjs/CRDT multi-user editing with presence, awareness, and operation-level undo.</div></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">&#10003;</span><div><strong class="text-ink-0">Requirements & Safety Workflows</strong> — INCOSE quality, traceability, HARA/TARA/STPA/SOTIF/FMEA, V&V with evidence attachment.</div></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">&#10003;</span><div><strong class="text-ink-0">AI-assisted Editing</strong> — block, port, and requirement suggestions grounded in the graph.</div></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">&#10003;</span><div><strong class="text-ink-0">Open Export</strong> — SysML v2 JSON, ReqIF, ontology-aware. Your data, your format, no lock-in.</div></li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl border border-luvian-200 p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-[10px] font-semibold uppercase tracking-wider bg-luvian-100 text-luvian-700 px-2 py-1 rounded-full">Coming Soon</span>
+        </div>
+        <ul class="space-y-3 text-sm text-ink-1">
+          <li class="flex items-start gap-2"><span class="text-luvian-500 mt-0.5">▸</span><div><strong class="text-ink-0">Engineering Connectors</strong> — issue trackers, requirements platforms, source control, CI/CD, PLM, test mgmt, simulation, telemetry, all pulled into one canonical graph.</div></li>
+          <li class="flex items-start gap-2"><span class="text-luvian-500 mt-0.5">▸</span><div><strong class="text-ink-0">Engineering Ontology</strong> — canonical types with stable identity, lineage, temporal state, and ownership across every artifact.</div></li>
+          <li class="flex items-start gap-2"><span class="text-luvian-500 mt-0.5">▸</span><div><strong class="text-ink-0">Context Orchestration Layer</strong> — permission-aware retrieval, graph reasoning, contradiction detection, and confidence scoring beyond RAG.</div></li>
+          <li class="flex items-start gap-2"><span class="text-luvian-500 mt-0.5">▸</span><div><strong class="text-ink-0">Domain Reasoning Agents</strong> — safety review, requirement quality, impact analysis, test synthesis, and compliance agents grounded in your context.</div></li>
+          <li class="flex items-start gap-2"><span class="text-luvian-500 mt-0.5">▸</span><div><strong class="text-ink-0">Governance & Trust</strong> — provenance, confidence scoring, audit trail, and contradiction surfacing so AI output is reviewable, not just persuasive.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 6: DIFFERENTIATORS ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Differentiators">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Why Luvian Wins</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1">Technical moat.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg text-luvian-300 mb-3">Semantic Engineering Graph</h3>
+        <p class="text-sm text-white/60 mb-4">A typed, versioned, permission-aware graph of every artifact, link, and decision across the product lifecycle. The substrate enterprise AI needs to be trustworthy in engineering.</p>
+        <span class="text-xs text-luvian-400 font-medium bg-luvian-400/10 px-2 py-1 rounded-full">Patent-pending</span>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg text-luvian-300 mb-3">Beyond-RAG Context Orchestration</h3>
+        <p class="text-sm text-white/60 mb-4">Permission-aware retrieval, graph traversal, temporal reasoning, contradiction detection, and confidence scoring. Reasoning over connected context, not just chunked retrieval.</p>
+        <span class="text-xs text-luvian-400 font-medium bg-luvian-400/10 px-2 py-1 rounded-full">Patent-pending</span>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg text-luvian-300 mb-3">Persistent Organizational Memory</h3>
+        <p class="text-sm text-white/60 mb-4">Decisions, rationale, and trade-offs become machine-readable and continuously evolving. People leave; the memory stays. Tribal knowledge becomes operational graph.</p>
+        <span class="text-xs text-amber-400 font-medium bg-amber-400/10 px-2 py-1 rounded-full">Audit-ready provenance</span>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg text-luvian-300 mb-3">Air-Gap Ready Local Reasoning</h3>
+        <p class="text-sm text-white/60 mb-4">Commercial (cloud LLM) and government (local-only) profiles from a single codebase. The context graph and reasoning agents can run entirely behind your firewall — your engineering data never leaves.</p>
+        <span class="text-xs text-emerald-400 font-medium bg-emerald-400/10 px-2 py-1 rounded-full">Single codebase, dual profiles</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 7: BUSINESS MODEL ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Business Model">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Business Model</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">SaaS + on-prem. 4 tiers.</h2>
+    <div class="overflow-x-auto fade-in stagger-2">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b-2 border-gray-200">
+            <th class="py-3 pr-4 text-left font-bold text-ink-0">Tier</th>
+            <th class="py-3 px-4 text-left font-bold text-ink-0">Target</th>
+            <th class="py-3 px-4 text-right font-bold text-ink-0">Price / seat / yr</th>
+            <th class="py-3 pl-4 text-left font-bold text-ink-0">Key Includes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100">
+            <td class="py-3 pr-4"><span class="font-semibold text-luvian-700">Team</span></td>
+            <td class="py-3 px-4 text-ink-1">Small teams (5–20)</td>
+            <td class="py-3 px-4 text-right font-bold">$1,200 <span class="font-normal text-ink-2">($100/mo)</span></td>
+            <td class="py-3 pl-4 text-ink-2">Modeling, requirements, real-time collab — your foundation in the graph</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="py-3 pr-4"><span class="font-semibold text-luvian-700">Professional</span></td>
+            <td class="py-3 px-4 text-ink-1">Mid-market (20–100)</td>
+            <td class="py-3 px-4 text-right font-bold">$2,400 <span class="font-normal text-ink-2">($200/mo)</span></td>
+            <td class="py-3 pl-4 text-ink-2">+ Safety analysis, requirement quality, AI copilots, public API</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="py-3 pr-4"><span class="font-semibold text-emerald-700">Enterprise</span></td>
+            <td class="py-3 px-4 text-ink-1">Large programs (100+)</td>
+            <td class="py-3 px-4 text-right font-bold">$3,600 <span class="font-normal text-ink-2">($300/mo)</span></td>
+            <td class="py-3 pl-4 text-ink-2">+ Connectors, on-prem, SSO/SAML, audit logs, SLA, dedicated support</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4"><span class="font-semibold text-amber-700">Defense/Gov</span></td>
+            <td class="py-3 px-4 text-ink-1">DoD, air-gap (50+)</td>
+            <td class="py-3 px-4 text-right font-bold">$5,400 <span class="font-normal text-ink-2">($450/mo)</span></td>
+            <td class="py-3 pl-4 text-ink-2">+ Air-gap reasoning, IL4/IL5 docs, FedRAMP artifacts, dedicated CSM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 fade-in stagger-3">
+      <div class="text-center p-4 bg-surface-1 rounded-xl">
+        <p class="text-2xl font-black text-luvian-600">70–75%</p>
+        <p class="text-xs text-ink-2 mt-1">Subscription Revenue</p>
+      </div>
+      <div class="text-center p-4 bg-surface-1 rounded-xl">
+        <p class="text-2xl font-black text-luvian-600">15–20%</p>
+        <p class="text-xs text-ink-2 mt-1">Professional Services</p>
+      </div>
+      <div class="text-center p-4 bg-surface-1 rounded-xl">
+        <p class="text-2xl font-black text-luvian-600">5–8%</p>
+        <p class="text-xs text-ink-2 mt-1">AI Compute Add-On</p>
+      </div>
+      <div class="text-center p-4 bg-surface-1 rounded-xl">
+        <p class="text-2xl font-black text-luvian-600">2–5%</p>
+        <p class="text-xs text-ink-2 mt-1">Platform / API</p>
+      </div>
+    </div>
+    <p class="mt-6 text-xs text-ink-2 text-center fade-in stagger-4">3–10x cheaper than incumbent MBSE suites (Cameo, DOORS, Jama). Premium positioning vs. point-tool AI plays — differentiation is the connected engineering context graph underneath.</p>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 8: GO-TO-MARKET ==================== -->
+<section class="slide flex-col justify-center bg-surface-1 text-ink-0 px-8 lg:px-20" data-title="Go-to-Market">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Go-to-Market</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Land in robotics. Expand across the lifecycle.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 fade-in stagger-2">
+      <div class="bg-white rounded-xl border border-gray-200 p-5 text-center">
+        <div class="w-10 h-10 bg-luvian-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <span class="text-luvian-700 font-bold text-sm">Y1</span>
+        </div>
+        <h3 class="font-bold text-sm mb-2">Design Partners</h3>
+        <p class="text-xs text-ink-2">Founder-led sales. 5 partners. Subsidized pricing for feedback + case studies.</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-5 text-center">
+        <div class="w-10 h-10 bg-luvian-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <span class="text-luvian-700 font-bold text-sm">Y2</span>
+        </div>
+        <h3 class="font-bold text-sm mb-2">Early Revenue</h3>
+        <p class="text-xs text-ink-2">First AE. Inbound from content + community. 19 customers. SOC 2.</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-5 text-center">
+        <div class="w-10 h-10 bg-luvian-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <span class="text-luvian-700 font-bold text-sm">Y3</span>
+        </div>
+        <h3 class="font-bold text-sm mb-2">Growth</h3>
+        <p class="text-xs text-ink-2">Sales team. Channel partners (Booz Allen, SAIC). FedRAMP. 46 customers.</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-5 text-center">
+        <div class="w-10 h-10 bg-luvian-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <span class="text-luvian-700 font-bold text-sm">Y4-5</span>
+        </div>
+        <h3 class="font-bold text-sm mb-2">Scale</h3>
+        <p class="text-xs text-ink-2">Full sales org. Defense enterprise. International. 131 customers.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 fade-in stagger-3">
+      <h3 class="font-bold text-sm mb-4">Target Verticals — Built for the people building robots</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Industrial Robotics</div>
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> Mobile Robotics & AMRs</div>
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-violet-500"></span> Cobots</div>
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Drones & UAS (defense + commercial)</div>
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Warehouse Automation</div>
+        <div class="flex items-center gap-2 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Mechatronics & SDV stacks</div>
+      </div>
+      <p class="text-xs text-ink-2 mt-4">Anywhere firmware, mechanical, perception, control, and safety have to integrate cleanly — and anywhere AI without trustworthy context is dangerous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 9: COMPETITION ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Competition">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Competitive Landscape</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Connected graph + local-first reasoning.</h2>
+
+    <!-- v2: Engineering intelligence layer (default) -->
+    <div class="view-v2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-2">
+        <!-- Positioning Chart -->
+        <div class="bg-surface-1 rounded-xl border border-gray-200 p-6">
+          <h3 class="font-bold text-sm mb-4">Horizontal Reach &times; Vertical Depth</h3>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="competitorChartV2"></canvas>
+          </div>
+        </div>
+
+        <!-- Feature Matrix -->
+        <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 overflow-x-auto">
+          <h3 class="font-bold text-sm mb-4">Capability Coverage</h3>
+          <table class="text-xs w-full">
+            <thead>
+              <tr class="border-b border-gray-200 text-ink-2">
+                <th class="py-2 pr-3 text-left">Capability</th>
+                <th class="py-2 px-2 text-center">Luvian</th>
+                <th class="py-2 px-2 text-center">Flow</th>
+                <th class="py-2 px-2 text-center">Trace</th>
+                <th class="py-2 px-2 text-center">Aras</th>
+                <th class="py-2 px-2 text-center">Cameo</th>
+                <th class="py-2 px-2 text-center">Glean</th>
+                <th class="py-2 px-2 text-center">Palantir</th>
+              </tr>
+            </thead>
+            <tbody class="text-ink-1">
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Typed Engineering Ontology</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">SysML v2 (post-Dec 2025)</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Requirements + Trace</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Safety Methods (HARA/TARA/STPA)</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">V&amp;V / Verification Evidence</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Beyond-RAG Reasoning</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td></tr>
+              <tr><td class="py-1.5 pr-3">True Air-Gap (IL5/IL6)</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td></tr>
+            </tbody>
+          </table>
+          <p class="mt-3 text-[10px] text-ink-3">Glean shipped on-prem via Dell (May 2025); Cameo shipped SysML v2 in 2026x (Dec 2025) &mdash; both partially close historical Luvian gaps. The remaining wedge: typed engineering ontology + safety methods + true offline air-gap, in one graph.</p>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-ink-2 text-center fade-in stagger-3">Only Luvian unifies SysML v2 modeling, safety methodology engines, requirements/V&amp;V traceability, and beyond-RAG reasoning in one typed engineering graph &mdash; deployable on-prem and air-gapped. Detailed competitor profiles in <a href="/market-eval-v2/" class="text-luvian-600 hover:underline">market-eval-v2</a>.</p>
+    </div>
+
+    <!-- v1: MBSE practitioner anchor (hidden by default) -->
+    <div class="view-v1" style="display:none;">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-2">
+        <!-- v1 Chart -->
+        <div class="bg-surface-1 rounded-xl border border-gray-200 p-6">
+          <h3 class="font-bold text-sm mb-4">Context Connectivity vs. Reasoning Depth</h3>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="competitorChartV1"></canvas>
+          </div>
+        </div>
+        <!-- v1 Feature Matrix -->
+        <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 overflow-x-auto">
+          <h3 class="font-bold text-sm mb-4">Capability Coverage</h3>
+          <table class="text-xs w-full">
+            <thead>
+              <tr class="border-b border-gray-200 text-ink-2">
+                <th class="py-2 pr-3 text-left">Capability</th>
+                <th class="py-2 px-2 text-center">Luvian</th>
+                <th class="py-2 px-2 text-center">Flow</th>
+                <th class="py-2 px-2 text-center">Cameo</th>
+                <th class="py-2 px-2 text-center">Trace</th>
+                <th class="py-2 px-2 text-center">Dalus</th>
+              </tr>
+            </thead>
+            <tbody class="text-ink-1">
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">SysML v2 Modeling</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Requirements &amp; Traceability</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Safety Analysis</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">V&amp;V / Test Mgmt</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Engineering Context Graph</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Beyond-RAG Reasoning</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-1.5 pr-3">Real-Time Collab</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td></tr>
+              <tr><td class="py-1.5 pr-3">Air-Gap / On-Prem</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-red-400">&#10007;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-emerald-600 font-bold">&#10003;</td><td class="py-1.5 px-2 text-center text-amber-500">~</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-ink-2 text-center fade-in stagger-3">Only Luvian unifies structured artifacts, an engineering ontology, and beyond-RAG reasoning in one continuously evolving graph &mdash; deployable in your environment, including air-gapped.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 10: DEFENSE ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Defense & Gov">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Defense & Government</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-8 fade-in stagger-1">Built for classified.<br>Deployable anywhere.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg mb-3">Air-Gap Ready Reasoning</h3>
+        <p class="text-sm text-white/60 mb-3">Single <code class="bg-white/10 px-1.5 py-0.5 rounded text-xs">docker compose up</code> deploys the full context layer. Local-only embeddings (MiniLM, 80MB) and local LLM-backed reasoning. Zero data egress.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">Docker</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">ONNX Runtime</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">Local LLM</span>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg mb-3">Engineering Standards Literacy</h3>
+        <p class="text-sm text-white/60 mb-3">DO-178C, DO-254, ARP4754A/4761, ISO 26262, ISO 21434 wired into the ontology, safety analysis, and V&V workflows.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">Avionics</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">Automotive</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">Defense</span>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-lg mb-3">Compliance & Provenance</h3>
+        <p class="text-sm text-white/60 mb-3">SOC 2 Type 1 post-seed. FedRAMP Li-SaaS Y3. IL4/IL5 path Y4. Classification-aware permissions, provenance, and audit trail on every graph edge.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">SOC 2</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">FedRAMP</span>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full">IL4/IL5</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 bg-white/5 border border-white/10 rounded-xl p-6 fade-in stagger-3">
+      <div class="grid grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="text-2xl font-black text-luvian-300">$270K+</p>
+          <p class="text-xs text-white/40 mt-1">Min defense ACV (50 seats)</p>
+        </div>
+        <div>
+          <p class="text-2xl font-black text-luvian-300">$5M+</p>
+          <p class="text-xs text-white/40 mt-1">Enterprise-wide deal potential</p>
+        </div>
+        <div>
+          <p class="text-2xl font-black text-luvian-300">$15M+</p>
+          <p class="text-xs text-white/40 mt-1">Max defense ACV (500+ seats)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 11: TEAM ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Team">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Team</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Built by engineers<br>who live in the domain.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 fade-in stagger-2">
+      <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 text-center">
+        <div class="w-16 h-16 bg-luvian-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-luvian-700 font-bold text-xl">F</span>
+        </div>
+        <h3 class="font-bold text-lg">Founder & CEO</h3>
+        <p class="text-sm text-ink-2 mt-2">Full-stack architect. Built the 3-layer rendering pipeline, ambient ML engine, and defense deployment architecture. Domain expertise in systems engineering tooling.</p>
+      </div>
+      <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 text-center">
+        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-emerald-700 font-bold text-xl">SW</span>
+        </div>
+        <h3 class="font-bold text-lg">SW Engineer</h3>
+        <p class="text-sm text-ink-2 mt-2">20-year veteran. Production hardening: CI/CD, security, observability, performance. Enterprise infrastructure at scale.</p>
+      </div>
+      <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 text-center">
+        <div class="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-violet-700 font-bold text-xl">PM</span>
+        </div>
+        <h3 class="font-bold text-lg">Product Manager</h3>
+        <p class="text-sm text-ink-2 mt-2">Product launch and market fit. Personas, GTM strategy, analytics, onboarding, and beta program execution.</p>
+      </div>
+    </div>
+    <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 fade-in stagger-3">
+      <h3 class="font-bold text-sm mb-4">Post-Funding Hiring Plan (Y1)</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-luvian-500"></span> Head of Sales</div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-luvian-400"></span> Solutions Engineer</div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Senior Frontend</div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Backend / ML Engineer</div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-violet-500"></span> Ops / G&A</div>
+      </div>
+      <p class="text-xs text-ink-2 mt-3">3 today → 8 by end of Y1 · 17 by end of Y2</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 12: FINANCIALS ==================== -->
+<section class="slide flex-col justify-center bg-surface-1 text-ink-0 px-8 lg:px-20" data-title="Financials">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Financial Projections</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Path to $21M revenue by Year 5.</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl border border-gray-200 p-6 fade-in stagger-2">
+        <h3 class="font-bold text-sm mb-4">Revenue & Costs (Base Case)</h3>
+        <div class="chart-container" style="height: 250px;">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-6 fade-in stagger-3">
+        <h3 class="font-bold text-sm mb-4">Revenue Scenarios</h3>
+        <div class="chart-container" style="height: 250px;">
+          <canvas id="scenarioChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 overflow-x-auto fade-in stagger-4">
+      <table class="w-full text-sm bg-white rounded-xl border border-gray-200">
+        <thead>
+          <tr class="border-b border-gray-200 bg-surface-1">
+            <th class="py-3 px-4 text-left font-bold">Base Case</th>
+            <th class="py-3 px-4 text-right font-bold">Y1</th>
+            <th class="py-3 px-4 text-right font-bold">Y2</th>
+            <th class="py-3 px-4 text-right font-bold">Y3</th>
+            <th class="py-3 px-4 text-right font-bold">Y4</th>
+            <th class="py-3 px-4 text-right font-bold">Y5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100"><td class="py-2 px-4 text-ink-1">Revenue</td><td class="py-2 px-4 text-right">$165K</td><td class="py-2 px-4 text-right">$846K</td><td class="py-2 px-4 text-right">$3.3M</td><td class="py-2 px-4 text-right">$9.9M</td><td class="py-2 px-4 text-right font-bold text-luvian-700">$21.2M</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 px-4 text-ink-1">Costs</td><td class="py-2 px-4 text-right">$1.7M</td><td class="py-2 px-4 text-right">$3.7M</td><td class="py-2 px-4 text-right">$7.2M</td><td class="py-2 px-4 text-right">$11.8M</td><td class="py-2 px-4 text-right">$16.8M</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 px-4 text-ink-1">Net Income</td><td class="py-2 px-4 text-right text-red-600">($1.6M)</td><td class="py-2 px-4 text-right text-red-600">($2.9M)</td><td class="py-2 px-4 text-right text-red-600">($3.9M)</td><td class="py-2 px-4 text-right text-red-600">($1.9M)</td><td class="py-2 px-4 text-right text-emerald-600 font-bold">$4.4M</td></tr>
+          <tr><td class="py-2 px-4 text-ink-1">Customers</td><td class="py-2 px-4 text-right">5</td><td class="py-2 px-4 text-right">19</td><td class="py-2 px-4 text-right">46</td><td class="py-2 px-4 text-right">85</td><td class="py-2 px-4 text-right font-bold">131</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 13: UNIT ECONOMICS ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Unit Economics">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Unit Economics</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Best-in-class LTV:CAC.</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-surface-1 rounded-xl border border-gray-200 p-6 fade-in stagger-2">
+        <h3 class="font-bold text-sm mb-4">LTV:CAC Ratio by Segment (target: >3x)</h3>
+        <div class="chart-container" style="height: 250px;">
+          <canvas id="ltvCacChart"></canvas>
+        </div>
+      </div>
+      <div class="fade-in stagger-3">
+        <div class="space-y-4">
+          <div class="bg-surface-1 rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium">Gross Margin (blended)</span>
+              <span class="text-xl font-black text-luvian-700">75–80%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-luvian-500 rounded-full h-2" style="width:78%"></div></div>
+          </div>
+          <div class="bg-surface-1 rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium">NRR (Y5 target)</span>
+              <span class="text-xl font-black text-emerald-700">130%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-emerald-500 rounded-full h-2" style="width:85%"></div></div>
+          </div>
+          <div class="bg-surface-1 rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium">CAC Payback</span>
+              <span class="text-xl font-black text-amber-700">3–5 mo</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-amber-500 rounded-full h-2" style="width:30%"></div></div>
+          </div>
+          <div class="bg-surface-1 rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium">Rev / Employee (Y5)</span>
+              <span class="text-xl font-black text-violet-700">$299K</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-violet-500 rounded-full h-2" style="width:75%"></div></div>
+            <p class="text-[10px] text-ink-2 mt-1">Benchmark: $300–500K for best-in-class SaaS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 14: THE ASK ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="The Ask">
+  <div class="max-w-4xl mx-auto w-full text-center">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">The Ask</p>
+    <h2 class="text-5xl lg:text-6xl font-black mb-4 fade-in stagger-1">Raising $7–10M Seed</h2>
+    <p class="text-xl text-white/50 mb-12 fade-in stagger-2">24+ months runway to context layer GA and first $1M ARR.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in stagger-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-luvian-300 mb-3">Build the Team</h3>
+        <p class="text-sm text-white/50">4 eng (graph + ontology + connectors), 1 product, 1 SE, 1 sales, 1 ops. Hire the team that scales past the founder.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-luvian-300 mb-3">Close First Revenue</h3>
+        <p class="text-sm text-white/50">5 design partners in robotics & mechatronics. SOC 2 Type 1. First enterprise contracts. $100K+ ARR by month 12.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-bold text-luvian-300 mb-3">Establish the Category</h3>
+        <p class="text-sm text-white/50">Define "engineering intelligence" before incumbents respond. File patents on context orchestration and semantic engineering graph. Build advisory board.</p>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-xl p-6 fade-in stagger-4 text-left">
+      <h3 class="font-bold text-sm text-center mb-4">Funding Milestones</h3>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="text-center">
+          <p class="text-xs text-white/40 mb-1">Seed (now)</p>
+          <p class="text-xl font-black text-luvian-300">$7–10M</p>
+          <p class="text-[10px] text-white/30 mt-1">PMF signal: 3+ paying, NPS > 40</p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs text-white/40 mb-1">Series A (Y2)</p>
+          <p class="text-xl font-black text-white/60">$20–30M</p>
+          <p class="text-[10px] text-white/30 mt-1">$1M+ ARR, 120%+ NRR</p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs text-white/40 mb-1">Series B (Y3–4)</p>
+          <p class="text-xl font-black text-white/40">$50–80M</p>
+          <p class="text-[10px] text-white/30 mt-1">$5M+ ARR, defense contracts</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 15: CLOSING ==================== -->
+<section class="slide flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Thank You">
+  <div class="text-center max-w-3xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-20 h-20 rounded-2xl mx-auto mb-8 shadow-lg shadow-luvian-600/30 bg-white p-3">
+    <img src="/assets/logo.png" alt="Luvian" class="h-10 mx-auto mb-4" style="filter: brightness(0) invert(1);">
+    <p class="text-xl text-luvian-300 mb-2">The context layer for engineering intelligence.</p>
+    <p class="text-lg text-white/40 mb-10">Built for an autonomous future.</p>
+
+    <div class="bg-white/5 border border-white/10 rounded-xl p-6 inline-block text-left">
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-16">Market</span>
+          <span class="text-white/80 font-medium view-v2">~$70B TAM ($58&ndash;95B range), $6&ndash;12B SAM</span>
+          <span class="text-white/80 font-medium view-v1" style="display:none;">$12B+ TAM, 18&ndash;22% CAGR</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-16">Model</span>
+          <span class="text-white/80 font-medium">$100–$450/seat/mo SaaS + on-prem</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-16">Raise</span>
+          <span class="text-white/80 font-medium">$7–10M seed, 24+ months runway</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-16">Moat</span>
+          <span class="text-white/80 font-medium">Semantic engineering graph + beyond-RAG reasoning, air-gap ready</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-sm text-white/30">
+      <p>Luvian Confidential — NDA Restrictions</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, total - 1));
+  slides[current].classList.add('active');
+  updateUI();
+  initChartsIfNeeded();
+}
+
+function nextSlide() { showSlide(current + 1); }
+function prevSlide() { showSlide(current - 1); }
+
+function updateUI() {
+  document.getElementById('slide-counter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progress').style.width = `${((current + 1) / total) * 100}%`;
+  const isDark = slides[current].classList.contains('text-white');
+  document.getElementById('nda-footer').style.color = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.3)';
+  document.getElementById('nda-logo').style.filter = isDark ? 'brightness(0) invert(1)' : 'none';
+  document.getElementById('nda-logo').style.opacity = isDark ? '0.4' : '0.6';
+
+  const navList = document.getElementById('nav-list');
+  navList.innerHTML = slides.length ? Array.from(slides).map((s, i) =>
+    `<a href="#" onclick="showSlide(${i});toggleNav();return false;" class="block px-2 py-1.5 rounded transition ${i === current ? 'bg-luvian-600/20 text-luvian-400 font-medium' : 'text-white/50 hover:text-white/80 hover:bg-white/5'}">${i + 1}. ${s.dataset.title}</a>`
+  ).join('') : '';
+}
+
+function toggleNav() {
+  document.getElementById('slide-nav').classList.toggle('hidden');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  if (e.key === 'Escape') { document.getElementById('slide-nav').classList.add('hidden'); }
+});
+
+let chartsInitialized = {};
+
+const chartConfigs = {
+  v1: {
+    canvasId: 'competitorChartV1',
+    data: [
+      { x: 85, y: 85, label: 'Luvian' },
+      { x: 50, y: 55, label: 'Flow' },
+      { x: 45, y: 65, label: 'Trace' },
+      { x: 75, y: 70, label: 'Dalus' },
+      { x: 55, y: 45, label: 'SysGit' },
+      { x: 70, y: 25, label: 'Cameo' },
+      { x: 35, y: 10, label: 'DOORS' },
+      { x: 70, y: 40, label: 'Ansys' },
+      { x: 60, y: 10, label: 'Capella' },
+    ],
+    xTitle: 'Context Connectivity →',
+    yTitle: 'Reasoning Depth →'
+  },
+  v2: {
+    canvasId: 'competitorChartV2',
+    data: [
+      { x: 80, y: 85, label: 'Luvian' },
+      { x: 60, y: 60, label: 'Flow' },
+      { x: 55, y: 65, label: 'Trace' },
+      { x: 90, y: 65, label: 'Aras' },
+      { x: 50, y: 85, label: 'Cameo' },
+      { x: 90, y: 25, label: 'Glean' },
+      { x: 85, y: 35, label: 'Palantir' },
+      { x: 75, y: 50, label: 'Cognite' },
+      { x: 40, y: 75, label: 'Capella' },
+      { x: 30, y: 20, label: 'DOORS' },
+    ],
+    xTitle: 'Horizontal Reach (artifacts unified) →',
+    yTitle: 'Vertical Depth (engineering semantics) →'
+  }
+};
+
+function buildCompetitorChart(variant) {
+  const cfg = chartConfigs[variant];
+  const canvas = document.getElementById(cfg.canvasId);
+  if (!canvas || chartsInitialized[variant]) return;
+  chartsInitialized[variant] = true;
+  new Chart(canvas, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Competitors',
+        data: cfg.data,
+        pointRadius: (ctx) => ctx.raw.label === 'Luvian' ? 10 : 6,
+        pointBackgroundColor: (ctx) => ctx.raw.label === 'Luvian' ? '#4c6ef5' : ctx.raw.y > 50 ? '#f59e0b' : '#868e96',
+        pointBorderColor: (ctx) => ctx.raw.label === 'Luvian' ? '#3b5bdb' : 'transparent',
+        pointBorderWidth: (ctx) => ctx.raw.label === 'Luvian' ? 3 : 0,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: cfg.xTitle, font: { size: 10 } }, min: 20, max: 100, grid: { color: '#f1f3f5' } },
+        y: { title: { display: true, text: cfg.yTitle, font: { size: 10 } }, min: 0, max: 100, grid: { color: '#f1f3f5' } }
+      },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (ctx) => ctx.raw.label }
+          }
+        }
+      },
+      plugins: [{
+        afterDraw(chart) {
+          const ctx = chart.ctx;
+          ctx.font = '10px Inter, sans-serif';
+          chart.data.datasets[0].data.forEach((point, i) => {
+            const meta = chart.getDatasetMeta(0).data[i];
+            ctx.fillStyle = point.label === 'Luvian' ? '#4c6ef5' : '#868e96';
+            ctx.textAlign = 'center';
+            ctx.fillText(point.label, meta.x, meta.y - 12);
+          });
+        }
+      }]
+    });
+}
+
+let currentFraming = 'v2';
+
+function setFraming(variant) {
+  currentFraming = variant;
+  document.querySelectorAll('.view-v1').forEach(el => {
+    el.style.display = variant === 'v1' ? '' : 'none';
+  });
+  document.querySelectorAll('.view-v2').forEach(el => {
+    el.style.display = variant === 'v2' ? '' : 'none';
+  });
+  const v1Btn = document.getElementById('frame-v1-btn');
+  const v2Btn = document.getElementById('frame-v2-btn');
+  if (v1Btn && v2Btn) {
+    [v1Btn, v2Btn].forEach(b => {
+      b.classList.remove('bg-luvian-500', 'text-white');
+      b.classList.add('text-white/50');
+    });
+    const activeBtn = variant === 'v1' ? v1Btn : v2Btn;
+    activeBtn.classList.remove('text-white/50');
+    activeBtn.classList.add('bg-luvian-500', 'text-white');
+  }
+  const slideTitle = slides[current] && slides[current].dataset.title;
+  if (slideTitle === 'Competition') {
+    buildCompetitorChart(variant);
+  }
+}
+
+function initChartsIfNeeded() {
+  const slideTitle = slides[current].dataset.title;
+
+  if (slideTitle === 'Competition') {
+    buildCompetitorChart(currentFraming);
+  }
+
+  if (slideTitle === 'Financials' && !chartsInitialized.revenue) {
+    chartsInitialized.revenue = true;
+    const chartColors = { luvian: '#4c6ef5', red: '#e03131', emerald: '#2f9e44', amber: '#f59e0b' };
+
+    new Chart(document.getElementById('revenueChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+        datasets: [
+          { label: 'Revenue', data: [0.165, 0.846, 3.33, 9.94, 21.21], backgroundColor: chartColors.luvian + '80', borderColor: chartColors.luvian, borderWidth: 1 },
+          { label: 'Costs', data: [1.72, 3.71, 7.21, 11.84, 16.77], backgroundColor: chartColors.red + '30', borderColor: chartColors.red, borderWidth: 1 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { title: { display: true, text: '$M', font: { size: 10 } }, grid: { color: '#f1f3f5' } }, x: { grid: { display: false } } },
+        plugins: { legend: { labels: { font: { size: 10 } } } }
+      }
+    });
+
+    new Chart(document.getElementById('scenarioChart'), {
+      type: 'line',
+      data: {
+        labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+        datasets: [
+          { label: 'Bull', data: [0.37, 1.92, 7.44, 21.2, 46.6], borderColor: chartColors.emerald, backgroundColor: chartColors.emerald + '10', fill: true, tension: 0.3 },
+          { label: 'Base', data: [0.17, 0.85, 3.33, 9.94, 21.21], borderColor: chartColors.luvian, backgroundColor: chartColors.luvian + '10', fill: true, tension: 0.3 },
+          { label: 'Bear', data: [0.05, 0.31, 1.21, 3.94, 8.74], borderColor: chartColors.amber, backgroundColor: chartColors.amber + '10', fill: true, tension: 0.3 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { title: { display: true, text: '$M', font: { size: 10 } }, grid: { color: '#f1f3f5' } }, x: { grid: { display: false } } },
+        plugins: { legend: { labels: { font: { size: 10 } } } }
+      }
+    });
+  }
+
+  if (slideTitle === 'Unit Economics' && !chartsInitialized.ltv) {
+    chartsInitialized.ltv = true;
+    new Chart(document.getElementById('ltvCacChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Startup', 'Mid-Market', 'Enterprise', 'Gov/Defense'],
+        datasets: [
+          { label: 'LTV:CAC', data: [9.6, 15.6, 28.8, 18.2], backgroundColor: ['#4c6ef5', '#4c6ef5', '#4c6ef5', '#4c6ef5'], borderRadius: 4 },
+          { label: '3x Target', data: [3, 3, 3, 3], type: 'line', borderColor: '#e03131', borderDash: [5, 5], pointRadius: 0, borderWidth: 2 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { title: { display: true, text: 'Ratio', font: { size: 10 } }, grid: { color: '#f1f3f5' } }, x: { grid: { display: false } } },
+        plugins: { legend: { labels: { font: { size: 10 } } } }
+      }
+    });
+  }
+}
+
+updateUI();
+setFraming('v2');
+</script>
+
+</body>
+</html>

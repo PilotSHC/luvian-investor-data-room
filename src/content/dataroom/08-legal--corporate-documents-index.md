@@ -1,49 +1,46 @@
 ---
 section: "08-legal"
 slug: "corporate-documents-index"
-title: "Corporate Documents — Index"
+title: "Corporate Documents Index"
 ---
 
-> **Pointer file only.** Originals live in `../_private/Legal/` (gitignored).
-> Confirm each item exists before sharing the data room with an investor.
+A single inventory of the executed corporate documents that govern Luvian Labs LLC today, plus the post-flip set that will replace them when we execute the Delaware Flip.
 
----
+## Executed corporate documents (LLC stage)
 
-## Standard Pre-Seed Corporate Document Set
+| # | Document | Status | Where to find it |
+|---|---|---|---|
+| 1 | Articles of Organization (California) | Filed 2026-01-27 (B20260127642) | *Articles of Organization* in this section |
+| 2 | Single-Member Operating Agreement | Executed at formation | *LLC Operating Agreement* in this section |
+| 3 | Initial Written Consent of the Sole Member | Executed at formation | *Initial Written Consent* in this section |
+| 4 | Founder IP Assignment Agreement | Executed at formation | *IP Assignment Agreement* in this section |
+| 5 | EIN (Federal Employer Identification Number) | Issued by IRS to Luvian Labs LLC | Download via the button above |
+| 6 | California Statement of Information | Filed | Retained in the private legal archive |
+| 7 | Welcome Letter (CA Secretary of State) | Received | Retained in the private legal archive |
 
-| # | Document | Status | Filename (in `_private/Legal/`) | Notes |
-|---|---|---|---|---|
-| 1 | Certificate of Incorporation (Delaware) | _TBD_ | `Cert_of_Incorporation_<date>.pdf` | DE filed-stamped copy |
-| 2 | Bylaws | _TBD_ | `Bylaws_<date>.pdf` | Standard YC SAFE-friendly bylaws |
-| 3 | Founder shares purchase agreements (× 3) | _TBD_ | `RSPA_<founder>_<date>.pdf` | One per founder, with vesting schedule |
-| 4 | 83(b) elections (× 3) | **CRITICAL** | `83b_<founder>_<date>.pdf` | Must have been filed within 30 days of grant |
-| 5 | Initial board consent | _TBD_ | `Board_Consent_Initial_<date>.pdf` | Approves bylaws, share issuance, officers |
-| 6 | EIN (CP-575 letter) | _TBD_ | `EIN_CP575.pdf` | Do **not** publish the EIN itself in the data room |
-| 7 | DE annual report + franchise tax receipts | _TBD_ | `DE_Franchise_<year>.pdf` | One per year |
-| 8 | ESOP / Equity Incentive Plan | _TBD_ | `EIP_<date>.pdf` | Typical reservation: 10–15% of fully diluted |
-| 9 | Form D filing (if any prior raise) | n/a | — | Required only if Reg D 506(b)/(c) financing closed |
-| 10 | Foreign qualifications (CA, NY, etc.) | _TBD_ | `Foreign_Qualif_<state>.pdf` | Only if there's nexus |
+The four executed agreements (1, 2, 3, 4) and the EIN (5) cover the standard pre-seed corporate document set that any institutional investor or counsel will ask to see at the LLC stage. They are sufficient for opening business banking, executing the Convertible Note round, and demonstrating that the LLC is properly formed.
 
-## Critical Items to Confirm Before Sharing
+## Banking and treasury
 
-- ✅ All three founders have **filed 83(b) elections** within 30 days of
-  grant. This is the most common pre-seed catastrophe — confirm copies
-  with USPS certified-mail receipts in `_private/Legal/83b/`.
-- ✅ Founder shares have a **standard 4-year vesting schedule with 1-year
-  cliff** (see Cap Table Summary).
-- ✅ Bylaws permit SAFE issuance.
-- ✅ EIN exists.
-- ✅ DE franchise tax current.
+| Item | Status |
+|---|---|
+| Operating account | Open at Mercury, in the name of Luvian Labs LLC, signed by the sole member |
+| Treasury / money market | To be activated as runway grows |
+| Brex / corporate card | To be activated alongside the first non-founder hire |
 
-## Open Items
+## Post-flip corporate documents (Delaware C-corp)
 
-- [ ] Confirm full set of corporate documents in `../_private/Legal/`.
-- [ ] Verify all 83(b) elections — 2026-05-31. Owner Jarred.
-- [ ] Capture EIN in `_private/` only, never in shared docs.
-- [ ] Engage outside counsel of record (Cooley, Gunderson, Stripe Atlas
-      legal, etc.) — confirm and document — 2026-06-15.
+These documents only become operative after the LLC → Delaware C-corp Reorganization. They are listed for completeness so incoming investors and counsel see the full path.
 
-## Sharing Protocol
+| Document | Trigger to adopt |
+|---|---|
+| Certificate of Incorporation (Delaware) | Filed at the Reorganization |
+| Bylaws | Adopted at the Reorganization |
+| Initial Board Consent (post-flip) | Approved at the first board meeting of the successor corporation |
+| Founder Restricted Stock Purchase Agreement | Executed at the Reorganization, with full vesting schedule |
+| 83(b) Election | Filed within 30 days of any restricted-stock issuance, calendar reminder is set |
+| Equity Incentive Plan | Adopted at the Reorganization to enable ISO grants |
 
-Same as bank statements — view-only via Drive, watermark, log access.
-Never commit originals to git.
+## Sharing protocol
+
+The executed PDFs in this section are confidential. They are made available to investors under the click-through confidentiality acknowledgment that gates this data room. Do not redistribute. The original signed copies and the EIN CP-575 letter are also retained in our private legal archive for cap-table-of-record purposes.

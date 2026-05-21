@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luvian - Fundraising</title>
+<link rel="icon" type="image/png" href="/assets/icon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: { colors: { luvian: { 50:'#f0f4ff', 100:'#dbe4ff', 200:'#bac8ff', 300:'#91a7ff', 400:'#748ffc', 500:'#5c7cfa', 600:'#4c6ef5', 700:'#4263eb', 800:'#3b5bdb', 900:'#364fc7' } } } }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .nda-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; padding: 8px 24px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.25); background: linear-gradient(transparent, rgba(249,250,251,0.9)); }
+  .nda-footer .nda-logo { position: absolute; right: 24px; height: 18px; opacity: 0.6; }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="nda-footer"><span>Confidential &nbsp;/&nbsp; Shared under NDA &nbsp;/&nbsp; No Screenshots &nbsp;/&nbsp; No Recordings</span><img class="nda-logo" src="/assets/logo.png" alt="Luvian"></div>
+<div class="max-w-4xl mx-auto px-6 py-16">
+  <header class="mb-10">
+    <a href="/" class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-luvian-600 transition mb-6 group">
+      <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Library
+    </a>
+    <div class="flex items-center gap-3 mb-2">
+      <img src="/assets/icon.png" alt="Luvian" class="w-10 h-10 rounded-lg">
+      <div>
+        <div class="flex items-center gap-2">
+          <img src="/assets/logo.png" alt="Luvian" class="h-5">
+          <span class="text-gray-300 font-light">|</span>
+          <span class="text-sm text-gray-500 font-medium">Fundraising</span>
+        </div>
+      </div>
+    </div>
+    <h1 class="text-2xl font-bold text-gray-900 mt-3">Fundraising</h1>
+    <p class="text-gray-500 mt-1">Financial projections, equity management, fundraising mechanics, and investor relationship tools.</p>
+    <p class="text-xs text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 mt-4 inline-block font-medium">Confidential - NDA Restrictions</p>
+  </header>
+  <section>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <a href="/financial-model/" class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-luvian-400 hover:shadow-md transition-all">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs bg-luvian-100 text-luvian-700 px-2 py-0.5 rounded-full font-medium">Finance</span>
+            <h3 class="text-lg font-bold text-gray-900 mt-2 group-hover:text-luvian-700 transition-colors">Financial Model</h3>
+            <p class="text-sm text-gray-500 mt-1">5-year P&amp;L projections, competitive landscape, unit economics, funding scenarios, and sensitivity analysis.</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-300 group-hover:text-luvian-500 transition-colors mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+        <div class="flex gap-2 mt-3 flex-wrap">
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">15 charts</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">12 tables</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Competitor links</span>
+        </div>
+      </a>
+
+      <a href="/cap-table/" class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-luvian-400 hover:shadow-md transition-all">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">Equity</span>
+            <h3 class="text-lg font-bold text-gray-900 mt-2 group-hover:text-luvian-700 transition-colors">Cap Table</h3>
+            <p class="text-sm text-gray-500 mt-1">Equity ownership, dilution waterfall, ESOP grants, exit scenarios, and an interactive dilution simulator.</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-300 group-hover:text-luvian-500 transition-colors mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+        <div class="flex gap-2 mt-3 flex-wrap">
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">9 charts</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Interactive simulator</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Exit waterfall</span>
+        </div>
+      </a>
+
+      <a href="/safe-notes/" class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-luvian-400 hover:shadow-md transition-all">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">Legal</span>
+            <h3 class="text-lg font-bold text-gray-900 mt-2 group-hover:text-luvian-700 transition-colors">SAFE Setup Guide</h3>
+            <p class="text-sm text-gray-500 mt-1">Pre-seed SAFE playbook, conversion math, burn/runway analysis, investor targets, and legal checklist.</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-300 group-hover:text-luvian-500 transition-colors mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+        <div class="flex gap-2 mt-3 flex-wrap">
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">6 charts</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Conversion simulator</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">YC template links</span>
+        </div>
+      </a>
+
+      <a href="/investor-pipeline/" class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-luvian-400 hover:shadow-md transition-all">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full font-medium">Pipeline</span>
+            <h3 class="text-lg font-bold text-gray-900 mt-2 group-hover:text-luvian-700 transition-colors">Investor Pipeline CRM</h3>
+            <p class="text-sm text-gray-500 mt-1">Pipeline stages, warm leads, target list, relationship map, competitive funding landscape, outreach sequence.</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-300 group-hover:text-luvian-500 transition-colors mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+        <div class="flex gap-2 mt-3 flex-wrap">
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">12 slides</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">2 warm leads</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">15 investors</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Relationship map</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+  <footer class="mt-10 pt-6 border-t border-gray-200 text-xs text-gray-400">
+    <p>Luvian Confidential - NDA Restrictions</p>
+  </footer>
+</div>
+</body>
+</html>

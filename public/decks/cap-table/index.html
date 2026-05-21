@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luvian - Cap Table</title>
+<link rel="icon" type="image/png" href="/assets/icon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        luvian: { 50:'#f0f4ff', 100:'#dbe4ff', 200:'#bac8ff', 300:'#91a7ff', 400:'#748ffc', 500:'#5c7cfa', 600:'#4c6ef5', 700:'#4263eb', 800:'#3b5bdb', 900:'#364fc7' },
+        surface: { 0:'#ffffff', 1:'#f8f9fa', 2:'#f1f3f5', 3:'#e9ecef' },
+        ink: { 0:'#212529', 1:'#495057', 2:'#868e96' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .chart-container { position: relative; width: 100%; }
+  nav a.active { color: #4c6ef5; border-left-color: #4c6ef5; }
+  table { border-collapse: collapse; }
+  th, td { text-align: left; }
+  .fade-in { animation: fadeIn 0.3s ease-in; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @media print { nav, .no-print { display: none !important; } main { margin-left: 0 !important; } }
+  @media print {
+    .fade-in,
+    [class*="stagger-"] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+  .slider-label { min-width: 80px; display: inline-block; text-align: right; }
+  nav { transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
+  nav.collapsed { transform: translateX(-100%); }
+  main { transition: margin-left 0.25s cubic-bezier(0.4,0,0.2,1); }
+  main.full-width { margin-left: 0; }
+  .nda-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; padding: 8px 24px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.25); background: linear-gradient(transparent, rgba(248,249,250,0.9)); }
+  .nda-footer .nda-logo { position: absolute; right: 24px; height: 18px; opacity: 0.6; }
+</style>
+</head>
+<body class="bg-surface-1 text-ink-0">
+<div class="nda-footer"><span>Confidential &nbsp;/&nbsp; Shared under NDA &nbsp;/&nbsp; No Screenshots &nbsp;/&nbsp; No Recordings</span><img class="nda-logo" src="/assets/logo.png" alt="Luvian"></div>
+
+<!-- Sidebar Nav -->
+<button id="nav-toggle" onclick="toggleSidebar()" class="fixed top-4 left-4 z-[60] w-8 h-8 rounded-lg bg-white border border-surface-3 flex items-center justify-center hover:bg-surface-2 transition no-print shadow-sm" title="Toggle sidebar">
+  <svg id="toggle-open" class="w-4 h-4 text-ink-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  <svg id="toggle-close" class="w-4 h-4 text-ink-1 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+</button>
+<nav id="sidebar" class="fixed top-0 left-0 h-full w-56 bg-white border-r border-surface-3 overflow-y-auto z-50 py-6 px-3 no-print">
+  <a href="/" class="flex items-center gap-1.5 px-2 mb-4 text-xs text-ink-2 hover:text-luvian-600 transition group">
+    <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Library
+  </a>
+  <div class="mb-6 px-2">
+    <img src="/assets/logo.png" alt="Luvian" class="h-5 mb-1">
+    <p class="text-xs text-ink-2 mt-0.5">Cap Table</p>
+    <p class="text-[10px] text-ink-2 mt-1 bg-surface-2 rounded px-1.5 py-0.5 inline-block">Confidential</p>
+  </div>
+  <ul class="space-y-0.5 text-sm" id="nav-links">
+    <li><a href="#summary" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">1. Summary</a></li>
+    <li><a href="#founding" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">2. Founding Equity</a></li>
+    <li><a href="#seed" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">3. Seed Round</a></li>
+    <li><a href="#series-a" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">4. Series A</a></li>
+    <li><a href="#series-b" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">5. Series B</a></li>
+    <li><a href="#esop" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">6. ESOP</a></li>
+    <li><a href="#advisors" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">7. Advisors</a></li>
+    <li><a href="#waterfall" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">8. Dilution Waterfall</a></li>
+    <li><a href="#scenarios" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">9. Exit Scenarios</a></li>
+    <li><a href="#simulator" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">10. Simulator</a></li>
+    <li><a href="#vesting" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">11. Vesting Schedule</a></li>
+    <li><a href="#checklist" class="block px-2 py-1.5 rounded border-l-2 border-transparent hover:bg-surface-2 transition">12. Cleanup Checklist</a></li>
+  </ul>
+  <div class="mt-6 px-2 pt-4 border-t border-surface-3">
+    <p class="text-[10px] text-ink-2">Last updated: 2026-04-08</p>
+    <p class="text-[10px] text-ink-2">Source: FINANCIAL_MODEL.md</p>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="ml-56 px-8 py-8 max-w-6xl">
+
+  <!-- Header -->
+  <header class="mb-10">
+    <div class="flex items-center gap-3 mb-2">
+      <img src="/assets/icon.png" alt="Luvian" class="w-8 h-8">
+      <img src="/assets/logo.png" alt="Luvian" class="h-6">
+    </div>
+    <h1 class="text-3xl font-extrabold text-ink-0">Cap Table</h1>
+    <p class="text-ink-2 mt-2 max-w-2xl">Capitalization table tracking equity ownership across founding, seed, Series A, Series B, ESOP, and advisor grants. All figures are illustrative projections based on the financial model.</p>
+    <div class="flex gap-3 mt-4 flex-wrap">
+      <span class="text-xs bg-luvian-100 text-luvian-800 px-2.5 py-1 rounded-full font-medium">10,000,000 authorized shares</span>
+      <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-medium">Delaware C-Corp</span>
+      <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full font-medium">Par value $0.0001</span>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 1. SUMMARY -->
+  <!-- ============================================================ -->
+  <section id="summary" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">01</span> Equity Summary
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <p class="text-xs text-ink-2 uppercase tracking-wider font-medium">Authorized Shares</p>
+        <p class="text-2xl font-extrabold text-ink-0 mt-1">10,000,000</p>
+        <p class="text-xs text-ink-2 mt-1">Common stock, par $0.0001</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <p class="text-xs text-ink-2 uppercase tracking-wider font-medium">Post-Seed Valuation</p>
+        <p class="text-2xl font-extrabold text-luvian-700 mt-1">$36M</p>
+        <p class="text-xs text-ink-2 mt-1">$28M pre + $8M raise</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <p class="text-xs text-ink-2 uppercase tracking-wider font-medium">Post-Series A</p>
+        <p class="text-2xl font-extrabold text-emerald-700 mt-1">$125M</p>
+        <p class="text-xs text-ink-2 mt-1">$100M pre + $25M raise</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <p class="text-xs text-ink-2 uppercase tracking-wider font-medium">Post-Series B</p>
+        <p class="text-2xl font-extrabold text-amber-700 mt-1">$360M</p>
+        <p class="text-xs text-ink-2 mt-1">$300M pre + $60M raise</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Ownership Evolution by Round</h3>
+        <div class="chart-container" style="height:300px"><canvas id="ownershipEvolution"></canvas></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Final Ownership (Post-Series B + ESOP)</h3>
+        <div class="chart-container" style="height:300px"><canvas id="finalPie"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. FOUNDING EQUITY -->
+  <!-- ============================================================ -->
+  <section id="founding" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">02</span> Founding Equity
+    </h2>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Shareholder</th><th class="py-2 pr-3">Role</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">Ownership</th><th class="py-2 pr-3">Type</th><th class="py-2">Vesting</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2">
+            <td class="py-2 pr-3 font-medium">Founder</td>
+            <td class="py-2 pr-3 text-ink-1">CEO / CTO</td>
+            <td class="py-2 pr-3 text-right font-mono">8,500,000</td>
+            <td class="py-2 pr-3 text-right"><span class="text-luvian-700 font-semibold">85.0%</span></td>
+            <td class="py-2 pr-3">Common</td>
+            <td class="py-2 text-ink-1">4yr / 1yr cliff, single trigger</td>
+          </tr>
+          <tr class="border-b border-surface-2">
+            <td class="py-2 pr-3 font-medium">ESOP Pool (reserved)</td>
+            <td class="py-2 pr-3 text-ink-1">Option pool</td>
+            <td class="py-2 pr-3 text-right font-mono">1,500,000</td>
+            <td class="py-2 pr-3 text-right"><span class="text-amber-700 font-semibold">15.0%</span></td>
+            <td class="py-2 pr-3">Reserved</td>
+            <td class="py-2 text-ink-1">Grants on 4yr / 1yr cliff</td>
+          </tr>
+          <tr class="font-semibold bg-surface-1">
+            <td class="py-2 pr-3" colspan="2">Total at Founding</td>
+            <td class="py-2 pr-3 text-right font-mono">10,000,000</td>
+            <td class="py-2 pr-3 text-right">100.0%</td>
+            <td class="py-2 pr-3" colspan="2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 bg-luvian-50 rounded-xl p-4 border border-luvian-200 text-sm text-luvian-800">
+      <strong>Note:</strong> 15% ESOP pool established at founding (pre-seed) to avoid additional dilution at the seed round. This is above typical (10-12%) to cover early hires, advisors, and the two existing team members (SW engineer + PM).
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. SEED ROUND -->
+  <!-- ============================================================ -->
+  <section id="seed" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">03</span> Seed Round
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Raise</p>
+        <p class="text-2xl font-extrabold text-luvian-700 mt-1">$8M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Pre-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$28M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Post-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$36M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Price/Share</p>
+        <p class="text-2xl font-extrabold mt-1">$2.80</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">Cap Table After Seed</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Holder</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">%</th><th class="py-2 text-right">Value</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Founder</td><td class="py-2 pr-3 text-right font-mono">8,500,000</td><td class="py-2 pr-3 text-right">66.1%</td><td class="py-2 text-right">$23.8M</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Seed Investors</td><td class="py-2 pr-3 text-right font-mono">2,857,143</td><td class="py-2 pr-3 text-right">22.2%</td><td class="py-2 text-right">$8.0M</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">ESOP Pool</td><td class="py-2 pr-3 text-right font-mono">1,500,000</td><td class="py-2 pr-3 text-right">11.7%</td><td class="py-2 text-right">$4.2M</td></tr>
+            <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3">Total</td><td class="py-2 pr-3 text-right font-mono">12,857,143</td><td class="py-2 pr-3 text-right">100.0%</td><td class="py-2 text-right">$36.0M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Post-Seed Ownership</h3>
+        <div class="chart-container" style="height:260px"><canvas id="seedPie"></canvas></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm mt-6 overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Seed Round Terms</h3>
+      <table class="w-full text-sm">
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2 w-48">Instrument</td><td class="py-2 font-medium">Priced equity (Series Seed Preferred)</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2">Liquidation preference</td><td class="py-2">1x non-participating</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2">Pro-rata rights</td><td class="py-2">Yes, for investors >$500K</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2">Board seat</td><td class="py-2">Lead investor gets 1 board seat (3-person board: 2 founder, 1 investor)</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2">Information rights</td><td class="py-2">Quarterly financials, annual audit</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-4 text-ink-2">Milestone gate</td><td class="py-2">3+ paying customers, NPS >40</td></tr>
+          <tr><td class="py-2 pr-4 text-ink-2">Use of funds</td><td class="py-2">Core team (8 hires), SOC 2, 5 design partners, first revenue</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm mt-4 overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Target Investor Profile</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-surface-3 text-ink-2"><th class="py-2 pr-3">Investor Type</th><th class="py-2 pr-3">Target Check</th><th class="py-2 pr-3">Why</th><th class="py-2">Examples</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Defense-tech VC</td><td class="py-2 pr-3">$2M-$5M</td><td class="py-2 pr-3">Domain expertise, defense network</td><td class="py-2 text-ink-1">Shield Capital, Lux, Decisive Point</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Enterprise SaaS VC</td><td class="py-2 pr-3">$1M-$3M</td><td class="py-2 pr-3">SaaS scaling playbook, pricing</td><td class="py-2 text-ink-1">Bessemer, Insight Partners</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Strategic / Corporate</td><td class="py-2 pr-3">$500K-$2M</td><td class="py-2 pr-3">Customer pipeline, industry access</td><td class="py-2 text-ink-1">RTX Ventures, Boeing HorizonX</td></tr>
+          <tr><td class="py-2 pr-3 font-medium">Angels / Operators</td><td class="py-2 pr-3">$50K-$250K</td><td class="py-2 pr-3">Fast decisions, operational advice</td><td class="py-2 text-ink-1">Former PLM/MBSE founders</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. SERIES A -->
+  <!-- ============================================================ -->
+  <section id="series-a" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">04</span> Series A
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Raise</p>
+        <p class="text-2xl font-extrabold text-emerald-700 mt-1">$25M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Pre-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$100M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Post-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$125M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Price/Share</p>
+        <p class="text-2xl font-extrabold mt-1">$7.78</p>
+        <p class="text-xs text-emerald-700 mt-1">2.8x from Seed</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">Cap Table After Series A</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Holder</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">%</th><th class="py-2 text-right">Value</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Founder</td><td class="py-2 pr-3 text-right font-mono">8,500,000</td><td class="py-2 pr-3 text-right">52.9%</td><td class="py-2 text-right">$66.1M</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Seed Investors</td><td class="py-2 pr-3 text-right font-mono">2,857,143</td><td class="py-2 pr-3 text-right">17.8%</td><td class="py-2 text-right">$22.3M</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Series A Investors</td><td class="py-2 pr-3 text-right font-mono">3,214,286</td><td class="py-2 pr-3 text-right">20.0%</td><td class="py-2 text-right">$25.0M</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">ESOP Pool</td><td class="py-2 pr-3 text-right font-mono">1,500,000</td><td class="py-2 pr-3 text-right">9.3%</td><td class="py-2 text-right">$11.6M</td></tr>
+            <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3">Total</td><td class="py-2 pr-3 text-right font-mono">16,071,429</td><td class="py-2 pr-3 text-right">100.0%</td><td class="py-2 text-right">$125.0M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Post-Series A Ownership</h3>
+        <div class="chart-container" style="height:260px"><canvas id="seriesAPie"></canvas></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm mt-6 overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Series A Milestone Gates</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-surface-3 text-ink-2"><th class="py-2 pr-3">Gate</th><th class="py-2 pr-3">Target</th><th class="py-2">Status</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3">ARR</td><td class="py-2 pr-3">$500K+</td><td class="py-2"><span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">Projected Y2</span></td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3">Net Revenue Retention</td><td class="py-2 pr-3">120%+</td><td class="py-2"><span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">Projected Y2</span></td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3">Enterprise Pipeline</td><td class="py-2 pr-3">Clear enterprise pipeline</td><td class="py-2"><span class="text-xs bg-surface-2 text-ink-2 px-2 py-0.5 rounded-full">Pending</span></td></tr>
+          <tr><td class="py-2 pr-3">Compliance</td><td class="py-2 pr-3">SOC 2 Type 1 complete, FedRAMP initiated</td><td class="py-2"><span class="text-xs bg-surface-2 text-ink-2 px-2 py-0.5 rounded-full">Pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. SERIES B -->
+  <!-- ============================================================ -->
+  <section id="series-b" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">05</span> Series B
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Raise</p>
+        <p class="text-2xl font-extrabold text-amber-700 mt-1">$60M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Pre-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$300M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Post-Money</p>
+        <p class="text-2xl font-extrabold mt-1">$360M</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm text-center">
+        <p class="text-xs text-ink-2 uppercase font-medium">Price/Share</p>
+        <p class="text-2xl font-extrabold mt-1">$18.67</p>
+        <p class="text-xs text-emerald-700 mt-1">6.7x from Seed</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Final Cap Table (Post-Series B + ESOP)</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Holder</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">%</th><th class="py-2 pr-3 text-right">Value</th><th class="py-2 text-right">Invested</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Founder</td><td class="py-2 pr-3 text-right font-mono">8,500,000</td><td class="py-2 pr-3 text-right"><span class="text-luvian-700 font-bold">44.1%</span></td><td class="py-2 pr-3 text-right">$158.8M</td><td class="py-2 text-right text-ink-2">Sweat equity</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Seed Investors</td><td class="py-2 pr-3 text-right font-mono">2,857,143</td><td class="py-2 pr-3 text-right">14.8%</td><td class="py-2 pr-3 text-right">$53.3M</td><td class="py-2 text-right">$8.0M</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Series A Investors</td><td class="py-2 pr-3 text-right font-mono">3,214,286</td><td class="py-2 pr-3 text-right">16.7%</td><td class="py-2 pr-3 text-right">$60.1M</td><td class="py-2 text-right">$25.0M</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Series B Investors</td><td class="py-2 pr-3 text-right font-mono">3,214,286</td><td class="py-2 pr-3 text-right">16.7%</td><td class="py-2 pr-3 text-right">$60.1M</td><td class="py-2 text-right">$60.0M</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">ESOP Pool</td><td class="py-2 pr-3 text-right font-mono">1,500,000</td><td class="py-2 pr-3 text-right">7.8%</td><td class="py-2 pr-3 text-right">$28.1M</td><td class="py-2 text-right text-ink-2">Reserved</td></tr>
+          <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3">Total</td><td class="py-2 pr-3 text-right font-mono">19,285,715</td><td class="py-2 pr-3 text-right">100.0%</td><td class="py-2 pr-3 text-right">$360.0M</td><td class="py-2 text-right">$93.0M</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 6. ESOP -->
+  <!-- ============================================================ -->
+  <section id="esop" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">06</span> ESOP Allocation Plan
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">ESOP Pool Breakdown (1,500,000 shares)</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Category</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">% of Pool</th><th class="py-2 text-right">% of Company</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Early employees (first 8 hires)</td><td class="py-2 pr-3 text-right font-mono">750,000</td><td class="py-2 pr-3 text-right">50%</td><td class="py-2 text-right">3.9%</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">VP / Director hires</td><td class="py-2 pr-3 text-right font-mono">375,000</td><td class="py-2 pr-3 text-right">25%</td><td class="py-2 text-right">1.9%</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Advisors</td><td class="py-2 pr-3 text-right font-mono">225,000</td><td class="py-2 pr-3 text-right">15%</td><td class="py-2 text-right">1.2%</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Unallocated reserve</td><td class="py-2 pr-3 text-right font-mono">150,000</td><td class="py-2 pr-3 text-right">10%</td><td class="py-2 text-right">0.8%</td></tr>
+            <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3">Total Pool</td><td class="py-2 pr-3 text-right font-mono">1,500,000</td><td class="py-2 pr-3 text-right">100%</td><td class="py-2 text-right">7.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">ESOP Pool Usage</h3>
+        <div class="chart-container" style="height:260px"><canvas id="esopPie"></canvas></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm mt-6 overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Proposed Individual Grants</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Role</th><th class="py-2 pr-3">Timing</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">% of Company</th><th class="py-2 pr-3 text-right">Seed Value</th><th class="py-2">Vesting</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">SW Engineer (current)</td><td class="py-2 pr-3">Already onboard</td><td class="py-2 pr-3 text-right font-mono">150,000</td><td class="py-2 pr-3 text-right">0.71%</td><td class="py-2 pr-3 text-right">$120K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Product Manager (current)</td><td class="py-2 pr-3">Already onboard</td><td class="py-2 pr-3 text-right font-mono">120,000</td><td class="py-2 pr-3 text-right">0.57%</td><td class="py-2 pr-3 text-right">$96K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Head of Sales</td><td class="py-2 pr-3">Post-seed Month 1</td><td class="py-2 pr-3 text-right font-mono">120,000</td><td class="py-2 pr-3 text-right">0.57%</td><td class="py-2 pr-3 text-right">$96K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Solutions Engineer</td><td class="py-2 pr-3">Post-seed Month 2</td><td class="py-2 pr-3 text-right font-mono">75,000</td><td class="py-2 pr-3 text-right">0.36%</td><td class="py-2 pr-3 text-right">$60K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Sr. Frontend Engineer</td><td class="py-2 pr-3">Post-seed Month 3</td><td class="py-2 pr-3 text-right font-mono">75,000</td><td class="py-2 pr-3 text-right">0.36%</td><td class="py-2 pr-3 text-right">$60K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Customer Success Mgr</td><td class="py-2 pr-3">Post-seed Month 3</td><td class="py-2 pr-3 text-right font-mono">60,000</td><td class="py-2 pr-3 text-right">0.28%</td><td class="py-2 pr-3 text-right">$48K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">DevOps Engineer</td><td class="py-2 pr-3">Post-seed Month 4</td><td class="py-2 pr-3 text-right font-mono">60,000</td><td class="py-2 pr-3 text-right">0.28%</td><td class="py-2 pr-3 text-right">$48K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Marketing Manager</td><td class="py-2 pr-3">Post-seed Month 5</td><td class="py-2 pr-3 text-right font-mono">45,000</td><td class="py-2 pr-3 text-right">0.21%</td><td class="py-2 pr-3 text-right">$36K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Backend / ML Engineer</td><td class="py-2 pr-3">Post-seed Month 6</td><td class="py-2 pr-3 text-right font-mono">45,000</td><td class="py-2 pr-3 text-right">0.21%</td><td class="py-2 pr-3 text-right">$36K</td><td class="py-2">4yr / 1yr cliff</td></tr>
+          <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3" colspan="2">Total Early Grants</td><td class="py-2 pr-3 text-right font-mono">750,000</td><td class="py-2 pr-3 text-right">3.56%</td><td class="py-2 pr-3 text-right">$600K</td><td class="py-2"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 7. ADVISORS -->
+  <!-- ============================================================ -->
+  <section id="advisors" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">07</span> Advisory Equity Grants
+    </h2>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Advisor Seat</th><th class="py-2 pr-3">Profile</th><th class="py-2 pr-3 text-right">Shares</th><th class="py-2 pr-3 text-right">% of Company</th><th class="py-2 pr-3">Commitment</th><th class="py-2">Vesting</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Defense Procurement</td><td class="py-2 pr-3 text-ink-1">Former DoD program executive</td><td class="py-2 pr-3 text-right font-mono">63,000</td><td class="py-2 pr-3 text-right">0.30%</td><td class="py-2 pr-3">4 hrs/month</td><td class="py-2">2yr / quarterly</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Enterprise SaaS</td><td class="py-2 pr-3 text-ink-1">Former VP Sales at $10M+ ARR SaaS</td><td class="py-2 pr-3 text-right font-mono">53,000</td><td class="py-2 pr-3 text-right">0.25%</td><td class="py-2 pr-3">4 hrs/month</td><td class="py-2">2yr / quarterly</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Systems Engineering</td><td class="py-2 pr-3 text-ink-1">INCOSE Fellow or retired chief SE</td><td class="py-2 pr-3 text-right font-mono">42,000</td><td class="py-2 pr-3 text-right">0.20%</td><td class="py-2 pr-3">2 hrs/month</td><td class="py-2">2yr / quarterly</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Venture Capital</td><td class="py-2 pr-3 text-ink-1">Operating partner at defense-tech VC</td><td class="py-2 pr-3 text-right font-mono">32,000</td><td class="py-2 pr-3 text-right">0.15%</td><td class="py-2 pr-3">2 hrs/month</td><td class="py-2">2yr / quarterly</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">AI / ML</td><td class="py-2 pr-3 text-ink-1">ML leader at AI company</td><td class="py-2 pr-3 text-right font-mono">35,000</td><td class="py-2 pr-3 text-right">0.17%</td><td class="py-2 pr-3">2 hrs/month</td><td class="py-2">2yr / quarterly</td></tr>
+          <tr class="font-semibold bg-surface-1"><td class="py-2 pr-3" colspan="2">Total Advisory</td><td class="py-2 pr-3 text-right font-mono">225,000</td><td class="py-2 pr-3 text-right">1.07%</td><td class="py-2 pr-3"></td><td class="py-2"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 8. DILUTION WATERFALL -->
+  <!-- ============================================================ -->
+  <section id="waterfall" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">08</span> Dilution Waterfall
+    </h2>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+      <h3 class="text-sm font-semibold mb-3">Founder Ownership Through Each Round</h3>
+      <div class="chart-container" style="height:320px"><canvas id="dilutionWaterfall"></canvas></div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm mt-6 overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Round-by-Round Dilution Detail</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Round</th><th class="py-2 pr-3 text-right">Pre-Money</th><th class="py-2 pr-3 text-right">Raise</th><th class="py-2 pr-3 text-right">Post-Money</th><th class="py-2 pr-3 text-right">Dilution</th><th class="py-2 pr-3 text-right">Founder %</th><th class="py-2 text-right">Founder Value</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Founding</td><td class="py-2 pr-3 text-right">-</td><td class="py-2 pr-3 text-right">-</td><td class="py-2 pr-3 text-right">-</td><td class="py-2 pr-3 text-right">-</td><td class="py-2 pr-3 text-right font-semibold">85.0%</td><td class="py-2 text-right">-</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Seed</td><td class="py-2 pr-3 text-right">$28.0M</td><td class="py-2 pr-3 text-right">$8.0M</td><td class="py-2 pr-3 text-right">$36.0M</td><td class="py-2 pr-3 text-right text-red-600">-22.2%</td><td class="py-2 pr-3 text-right font-semibold">66.1%</td><td class="py-2 text-right">$23.8M</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">Series A</td><td class="py-2 pr-3 text-right">$100.0M</td><td class="py-2 pr-3 text-right">$25.0M</td><td class="py-2 pr-3 text-right">$125.0M</td><td class="py-2 pr-3 text-right text-red-600">-20.0%</td><td class="py-2 pr-3 text-right font-semibold">52.9%</td><td class="py-2 text-right">$66.1M</td></tr>
+          <tr><td class="py-2 pr-3 font-medium">Series B</td><td class="py-2 pr-3 text-right">$300.0M</td><td class="py-2 pr-3 text-right">$60.0M</td><td class="py-2 pr-3 text-right">$360.0M</td><td class="py-2 pr-3 text-right text-red-600">-16.7%</td><td class="py-2 pr-3 text-right font-semibold">44.1%</td><td class="py-2 text-right">$158.8M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 bg-emerald-50 rounded-xl p-4 border border-emerald-200 text-sm text-emerald-800">
+      <strong>Key insight:</strong> Founder retains >44% through Series B, well above the 20-30% typical for sole founders at this stage. This reflects disciplined dilution at each round and the ESOP being carved from the founder's allocation at founding rather than at each subsequent round.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 9. EXIT SCENARIOS -->
+  <!-- ============================================================ -->
+  <section id="scenarios" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">09</span> Exit Scenarios
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Founder Proceeds by Exit Valuation</h3>
+        <div class="chart-container" style="height:300px"><canvas id="exitChart"></canvas></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Investor Returns by Exit Valuation</h3>
+        <div class="chart-container" style="height:300px"><canvas id="investorReturns"></canvas></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+      <h3 class="text-sm font-semibold mb-3">Payout Waterfall (1x non-participating preferred)</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-surface-3 text-ink-2"><th class="py-2 pr-3">Exit Valuation</th><th class="py-2 pr-3 text-right">Founder</th><th class="py-2 pr-3 text-right">Seed</th><th class="py-2 pr-3 text-right">Series A</th><th class="py-2 pr-3 text-right">Series B</th><th class="py-2 pr-3 text-right">ESOP</th><th class="py-2 text-right">Total</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">$250M</td><td class="py-2 pr-3 text-right">$110.0M</td><td class="py-2 pr-3 text-right">$37.0M</td><td class="py-2 pr-3 text-right">$41.5M</td><td class="py-2 pr-3 text-right">$41.5M</td><td class="py-2 pr-3 text-right">$20.0M</td><td class="py-2 text-right">$250M</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">$500M</td><td class="py-2 pr-3 text-right">$220.5M</td><td class="py-2 pr-3 text-right">$74.0M</td><td class="py-2 pr-3 text-right">$83.5M</td><td class="py-2 pr-3 text-right">$83.5M</td><td class="py-2 pr-3 text-right">$38.5M</td><td class="py-2 text-right">$500M</td></tr>
+          <tr class="border-b border-surface-2 bg-luvian-50"><td class="py-2 pr-3 font-bold">$1B</td><td class="py-2 pr-3 text-right font-bold">$441.0M</td><td class="py-2 pr-3 text-right">$148.0M</td><td class="py-2 pr-3 text-right">$167.0M</td><td class="py-2 pr-3 text-right">$167.0M</td><td class="py-2 pr-3 text-right">$77.0M</td><td class="py-2 text-right font-bold">$1B</td></tr>
+          <tr class="border-b border-surface-2"><td class="py-2 pr-3 font-medium">$2B</td><td class="py-2 pr-3 text-right">$882.0M</td><td class="py-2 pr-3 text-right">$296.0M</td><td class="py-2 pr-3 text-right">$334.0M</td><td class="py-2 pr-3 text-right">$334.0M</td><td class="py-2 pr-3 text-right">$154.0M</td><td class="py-2 text-right">$2B</td></tr>
+          <tr><td class="py-2 pr-3 font-medium">$5B</td><td class="py-2 pr-3 text-right">$2,205M</td><td class="py-2 pr-3 text-right">$740.0M</td><td class="py-2 pr-3 text-right">$835.0M</td><td class="py-2 pr-3 text-right">$835.0M</td><td class="py-2 pr-3 text-right">$385.0M</td><td class="py-2 text-right">$5B</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-ink-2 mt-3">1x non-participating: preferred investors take the greater of their liquidation preference or their pro-rata share of proceeds. At valuations above $360M, all investors convert to common. Total invested capital: $93M.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 10. SIMULATOR -->
+  <!-- ============================================================ -->
+  <section id="simulator" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">10</span> Dilution Simulator
+    </h2>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+      <p class="text-sm text-ink-1 mb-4">Adjust the sliders to model different round sizes and valuations. The chart updates in real-time.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <label class="text-xs text-ink-2 font-medium block mb-2">Seed Raise: <span id="seedRaiseVal" class="text-luvian-700 font-bold">$8M</span></label>
+          <input type="range" id="seedRaise" min="3" max="15" step="0.5" value="8" class="w-full accent-luvian-600">
+          <label class="text-xs text-ink-2 font-medium block mt-3 mb-2">Seed Pre-Money: <span id="seedPreVal" class="text-luvian-700 font-bold">$28M</span></label>
+          <input type="range" id="seedPre" min="15" max="50" step="1" value="28" class="w-full accent-luvian-600">
+        </div>
+        <div>
+          <label class="text-xs text-ink-2 font-medium block mb-2">Series A Raise: <span id="aRaiseVal" class="text-emerald-700 font-bold">$25M</span></label>
+          <input type="range" id="aRaise" min="10" max="40" step="1" value="25" class="w-full accent-emerald-600">
+          <label class="text-xs text-ink-2 font-medium block mt-3 mb-2">Series A Pre-Money: <span id="aPreVal" class="text-emerald-700 font-bold">$100M</span></label>
+          <input type="range" id="aPre" min="50" max="200" step="5" value="100" class="w-full accent-emerald-600">
+        </div>
+        <div>
+          <label class="text-xs text-ink-2 font-medium block mb-2">Series B Raise: <span id="bRaiseVal" class="text-amber-700 font-bold">$60M</span></label>
+          <input type="range" id="bRaise" min="30" max="100" step="5" value="60" class="w-full accent-amber-600">
+          <label class="text-xs text-ink-2 font-medium block mt-3 mb-2">Series B Pre-Money: <span id="bPreVal" class="text-amber-700 font-bold">$300M</span></label>
+          <input type="range" id="bPre" min="150" max="500" step="10" value="300" class="w-full accent-amber-600">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-semibold mb-3">Simulated Ownership</h3>
+          <div class="chart-container" style="height:280px"><canvas id="simPie"></canvas></div>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold mb-3">Simulated Results</h3>
+          <div id="simResults" class="space-y-2 text-sm"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 11. VESTING SCHEDULE -->
+  <!-- ============================================================ -->
+  <section id="vesting" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">11</span> Vesting Schedule
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+        <h3 class="text-sm font-semibold mb-3">Founder Vesting (Illustrative)</h3>
+        <div class="chart-container" style="height:280px"><canvas id="vestingChart"></canvas></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">Standard Vesting Terms</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-surface-3 text-ink-2"><th class="py-2 pr-3">Parameter</th><th class="py-2">Founder</th><th class="py-2">Employees</th><th class="py-2">Advisors</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 text-ink-2">Duration</td><td class="py-2">4 years</td><td class="py-2">4 years</td><td class="py-2">2 years</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 text-ink-2">Cliff</td><td class="py-2">1 year (25%)</td><td class="py-2">1 year (25%)</td><td class="py-2">None (quarterly)</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 text-ink-2">Post-cliff</td><td class="py-2">Monthly (1/48)</td><td class="py-2">Monthly (1/48)</td><td class="py-2">Quarterly (1/8)</td></tr>
+            <tr class="border-b border-surface-2"><td class="py-2 pr-3 text-ink-2">Acceleration</td><td class="py-2">Single trigger</td><td class="py-2">Double trigger</td><td class="py-2">Single trigger</td></tr>
+            <tr><td class="py-2 pr-3 text-ink-2">Early exercise</td><td class="py-2">N/A (restricted)</td><td class="py-2">Available (83b)</td><td class="py-2">N/A</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 12. CLEANUP CHECKLIST -->
+  <!-- ============================================================ -->
+  <section id="checklist" class="mb-16 fade-in">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="text-luvian-600 text-lg font-mono">12</span> Cap Table Cleanup Checklist
+    </h2>
+    <div class="bg-white rounded-xl p-5 border border-surface-3 shadow-sm">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-semibold mb-3 text-red-700">P0 - Before Fundraising</h3>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Verify entity structure (Delaware C-Corp preferred for VC)</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Confirm all equity allocations in Carta / Pulley / spreadsheet</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Ensure IP assignment agreements signed by all contributors</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Verify founder vesting schedule and cliff status</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> ESOP pool established and 409A valuation obtained</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Operating agreement / bylaws current</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Board of directors established (even if 1 person)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold mb-3 text-amber-700">P1 - Before Closing</h3>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> 409A valuation report (for option strike price)</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Equity incentive plan (EIP) approved by board</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> SAFE / convertible note cleanup (if any)</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Advisory agreements drafted with equity terms</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Employee offer letters include equity grant language</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> State franchise taxes current</li>
+            <li class="flex items-start gap-2"><span class="text-ink-2 mt-0.5">&#9744;</span> Cap table management tool selected (Carta, Pulley, AngelList)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-surface-3 pt-6 pb-12 text-xs text-ink-2">
+    <p>Luvian Confidential - NDA Restrictions. Illustrative cap table for planning purposes. Consult legal counsel before issuing equity.</p>
+    <p class="mt-1">Source: <code class="bg-surface-2 px-1 py-0.5 rounded">docs/private/FINANCIAL_MODEL.md</code>, <code class="bg-surface-2 px-1 py-0.5 rounded">docs/private/HERO_PROJECT_FOUNDER_COMPANY_BUILDING.md</code> - Last updated 2026-04-08</p>
+  </footer>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- CHART INITIALIZATION -->
+<!-- ============================================================ -->
+<script>
+const CC = (id, cfg) => new Chart(document.getElementById(id), cfg);
+const COLORS = { luvian:'#4c6ef5', emerald:'#059669', amber:'#d97706', red:'#dc2626', slate:'#64748b', purple:'#7c3aed', pink:'#db2777', sky:'#0284c7' };
+const alpha = (hex,a) => { const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${a})`; };
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
+
+// 1. Ownership Evolution
+CC('ownershipEvolution', { type:'bar', data:{ labels:['Founding','Post-Seed','Post-A','Post-B'], datasets:[
+  { label:'Founder', data:[85.0,66.1,52.9,44.1], backgroundColor:COLORS.luvian },
+  { label:'Seed', data:[0,22.2,17.8,14.8], backgroundColor:'#91a7ff' },
+  { label:'Series A', data:[0,0,20.0,16.7], backgroundColor:COLORS.emerald },
+  { label:'Series B', data:[0,0,0,16.7], backgroundColor:COLORS.amber },
+  { label:'ESOP', data:[15.0,11.7,9.3,7.8], backgroundColor:COLORS.slate }
+] }, options:{ responsive:true, maintainAspectRatio:false, scales:{ x:{stacked:true}, y:{stacked:true, max:100, title:{display:true,text:'%'}} } } });
+
+// 2. Final Pie
+CC('finalPie', { type:'doughnut', data:{ labels:['Founder (44.1%)','Seed (14.8%)','Series A (16.7%)','Series B (16.7%)','ESOP (7.8%)'], datasets:[{ data:[44.1,14.8,16.7,16.7,7.8], backgroundColor:[COLORS.luvian,'#91a7ff',COLORS.emerald,COLORS.amber,COLORS.slate] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{font:{size:11}} } } } });
+
+// 3. Seed Pie
+CC('seedPie', { type:'doughnut', data:{ labels:['Founder (66.1%)','Seed (22.2%)','ESOP (11.7%)'], datasets:[{ data:[66.1,22.2,11.7], backgroundColor:[COLORS.luvian,'#91a7ff',COLORS.slate] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{font:{size:11}} } } } });
+
+// 4. Series A Pie
+CC('seriesAPie', { type:'doughnut', data:{ labels:['Founder (52.9%)','Seed (17.8%)','Series A (20.0%)','ESOP (9.3%)'], datasets:[{ data:[52.9,17.8,20.0,9.3], backgroundColor:[COLORS.luvian,'#91a7ff',COLORS.emerald,COLORS.slate] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{font:{size:11}} } } } });
+
+// 5. ESOP Pie
+CC('esopPie', { type:'doughnut', data:{ labels:['Early Employees (50%)','VP/Directors (25%)','Advisors (15%)','Unallocated (10%)'], datasets:[{ data:[50,25,15,10], backgroundColor:[COLORS.luvian,COLORS.emerald,COLORS.amber,COLORS.slate] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{font:{size:11}} } } } });
+
+// 6. Dilution Waterfall (line)
+CC('dilutionWaterfall', { type:'line', data:{ labels:['Founding','Post-Seed','Post-Series A','Post-Series B'], datasets:[
+  { label:'Founder %', data:[85,66.1,52.9,44.1], borderColor:COLORS.luvian, backgroundColor:alpha(COLORS.luvian,0.1), fill:true, tension:0.3, pointRadius:6 },
+  { label:'Founder Value ($M)', data:[0,23.8,66.1,158.8], borderColor:COLORS.emerald, borderDash:[6,3], tension:0.3, pointRadius:6, yAxisID:'y1' }
+] }, options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{position:'left',min:0,max:100,title:{display:true,text:'Ownership %'}}, y1:{position:'right',min:0,title:{display:true,text:'Value ($M)'},grid:{drawOnChartArea:false}} } } });
+
+// 7. Exit Chart
+CC('exitChart', { type:'bar', data:{ labels:['$250M','$500M','$1B','$2B','$5B'], datasets:[{ label:'Founder Proceeds ($M)', data:[110,220.5,441,882,2205], backgroundColor:[alpha(COLORS.luvian,0.5),alpha(COLORS.luvian,0.6),alpha(COLORS.luvian,0.7),alpha(COLORS.luvian,0.85),COLORS.luvian] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ y:{title:{display:true,text:'$M'}} } } });
+
+// 8. Investor Returns
+CC('investorReturns', { type:'bar', data:{ labels:['$250M','$500M','$1B','$2B','$5B'], datasets:[
+  { label:'Seed ROI', data:[4.6,9.3,18.5,37.0,92.5], backgroundColor:alpha('#91a7ff',0.7) },
+  { label:'Series A ROI', data:[1.7,3.3,6.7,13.4,33.4], backgroundColor:alpha(COLORS.emerald,0.7) },
+  { label:'Series B ROI', data:[0.7,1.4,2.8,5.6,13.9], backgroundColor:alpha(COLORS.amber,0.7) }
+] }, options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{title:{display:true,text:'Return multiple (x)'}} } } });
+
+// 9. Vesting Chart
+CC('vestingChart', { type:'line', data:{ labels:['M0','M6','M12','M18','M24','M30','M36','M42','M48'], datasets:[{ label:'% Vested', data:[0,0,25,37.5,50,62.5,75,87.5,100], borderColor:COLORS.luvian, backgroundColor:alpha(COLORS.luvian,0.1), fill:true, tension:0, pointRadius:4 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, annotation:{ annotations:{ cliff:{ type:'line', xMin:2, xMax:2, borderColor:COLORS.red, borderDash:[6,3], label:{display:true,content:'1yr cliff',position:'start'} } } } }, scales:{ y:{min:0,max:100,title:{display:true,text:'% Vested'}} } } });
+
+// 10. Simulator
+const sliders = ['seedRaise','seedPre','aRaise','aPre','bRaise','bPre'];
+const valEls = ['seedRaiseVal','seedPreVal','aRaiseVal','aPreVal','bRaiseVal','bPreVal'];
+const prefixes = ['$','$','$','$','$','$'];
+const suffixes = ['M','M','M','M','M','M'];
+
+let simChart = null;
+function updateSim() {
+  const sr = parseFloat(document.getElementById('seedRaise').value);
+  const sp = parseFloat(document.getElementById('seedPre').value);
+  const ar = parseFloat(document.getElementById('aRaise').value);
+  const ap = parseFloat(document.getElementById('aPre').value);
+  const br = parseFloat(document.getElementById('bRaise').value);
+  const bp = parseFloat(document.getElementById('bPre').value);
+  document.getElementById('seedRaiseVal').textContent = `$${sr}M`;
+  document.getElementById('seedPreVal').textContent = `$${sp}M`;
+  document.getElementById('aRaiseVal').textContent = `$${ar}M`;
+  document.getElementById('aPreVal').textContent = `$${ap}M`;
+  document.getElementById('bRaiseVal').textContent = `$${br}M`;
+  document.getElementById('bPreVal').textContent = `$${bp}M`;
+
+  const founderShares = 8500000;
+  const esopShares = 1500000;
+  const preTotal = founderShares + esopShares;
+
+  const seedShares = preTotal * sr / sp;
+  const postSeed = preTotal + seedShares;
+
+  const aShares = postSeed * ar / ap;
+  const postA = postSeed + aShares;
+
+  const bShares = postA * br / bp;
+  const postB = postA + bShares;
+
+  const fPct = (founderShares / postB * 100).toFixed(1);
+  const sPct = (seedShares / postB * 100).toFixed(1);
+  const aPct = (aShares / postB * 100).toFixed(1);
+  const bPct = (bShares / postB * 100).toFixed(1);
+  const ePct = (esopShares / postB * 100).toFixed(1);
+
+  const postBVal = bp + br;
+  const fVal = (founderShares / postB * postBVal).toFixed(1);
+
+  if (simChart) simChart.destroy();
+  simChart = CC('simPie', { type:'doughnut', data:{ labels:[`Founder (${fPct}%)`,`Seed (${sPct}%)`,`Series A (${aPct}%)`,`Series B (${bPct}%)`,`ESOP (${ePct}%)`], datasets:[{ data:[fPct,sPct,aPct,bPct,ePct], backgroundColor:[COLORS.luvian,'#91a7ff',COLORS.emerald,COLORS.amber,COLORS.slate] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{font:{size:11}} } } } });
+
+  const resultsDiv = document.getElementById('simResults');
+  resultsDiv.innerHTML = `
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Founder ownership:</span> <span class="font-bold text-luvian-700">${fPct}%</span></div>
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Founder value (post-B):</span> <span class="font-bold text-emerald-700">$${fVal}M</span></div>
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Total raised:</span> <span class="font-bold">$${(sr+ar+br).toFixed(1)}M</span></div>
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Post-B valuation:</span> <span class="font-bold">$${postBVal}M</span></div>
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Seed investor ROI (at Series B):</span> <span class="font-bold text-emerald-700">${(seedShares/postB*postBVal/sr).toFixed(1)}x</span></div>
+    <div class="bg-surface-1 rounded-lg p-3 border border-surface-3"><span class="text-ink-2">Price/share (Seed vs B):</span> <span class="font-bold">$${(sp/preTotal*1e6).toFixed(2)} -> $${(postBVal/postB*1e6).toFixed(2)}</span></div>
+  `;
+}
+sliders.forEach(id => document.getElementById(id).addEventListener('input', updateSim));
+updateSim();
+
+// Nav highlighting
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active','text-luvian-600','border-l-luvian-500','font-semibold'));
+      const active = document.querySelector(`#nav-links a[href="#${e.target.id}"]`);
+      if (active) { active.classList.add('active','text-luvian-600','border-l-luvian-500','font-semibold'); }
+    }
+  });
+}, { rootMargin:'-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+
+function toggleSidebar() {
+  const nav = document.getElementById('sidebar');
+  const main = document.querySelector('main');
+  const iconOpen = document.getElementById('toggle-open');
+  const iconClose = document.getElementById('toggle-close');
+  const collapsed = nav.classList.toggle('collapsed');
+  main.classList.toggle('full-width', collapsed);
+  iconOpen.classList.toggle('hidden', !collapsed);
+  iconClose.classList.toggle('hidden', collapsed);
+}
+</script>
+
+</body>
+</html>

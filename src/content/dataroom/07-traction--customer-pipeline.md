@@ -1,14 +1,14 @@
 ---
 section: "07-traction"
 slug: "customer-pipeline"
-title: "Customer Pipeline — Sanitized"
+title: "Customer Pipeline. Sanitized"
 ---
 
 > **Sanitized version.** Real account names, contacts, and dollar amounts
 > live in `_private/Investor_Pipeline_2026_05.md` (gitignored). This file
 > describes pipeline _structure_ and shape, not specific names.
 
-**Pipeline framework:** light-touch CRM modeled in `presentations/investor-pipeline/index.html`.
+**Pipeline framework:** light-touch CRM modeled .
 Stages are framed against the design-partner motion (not classic sales).
 
 ---
@@ -24,7 +24,7 @@ Stages are framed against the design-partner motion (not classic sales).
 | 5. Active pilot | Live deployment in customer environment | Pilot success metrics met → conversion |
 | 6. Paid customer | Commercial contract signed | n/a |
 
-## Pipeline Snapshot (counts only — names in `_private/`)
+## Pipeline Snapshot (counts only, names in `_private/`)
 
 | Stage | Automotive ASIL | Aerospace / Defense | Industrial / Robotics | Total |
 |---|---:|---:|---:|---:|
@@ -51,7 +51,7 @@ We are explicitly _not_ chasing every MBSE shop. The TAP for design partners:
   migration mandate.
 - **Champion identified:** a staff or principal systems engineer who has
   publicly criticized current tooling (LinkedIn posts, conference talks,
-  forum threads) — easy to source.
+  forum threads), easy to source.
 - **Procurement:** willing to do a 90-day pilot with a $25K–$50K paid
   engagement, convertible to annual contract.
 
@@ -65,13 +65,6 @@ We do not believe pre-seed companies should sell broadly. Our motion:
 2. **Use those pilots to harden on-prem packaging, ASIL workflow polish,
    and the multi-persona surface.** Colin owns the deployment side.
 3. **Convert at least 2 of 3 to annual contracts in Q1 2027** ($100K+ ACV
-   each) — that's the Series A milestone.
+   each), that's the Series A milestone.
 4. **Scale outbound only after one named reference customer is live and
    willing to be quoted.**
-
-## Open Items
-
-- [ ] Stand up a real CRM (Attio or Notion DB) — owner Stephan — 2026-06-30.
-- [ ] Get the first 3 LOIs signed — owner Stephan — 2026-07-01.
-- [ ] First paid pilot signed — owner Stephan + Jarred — 2026-09-30.
-- [ ] First reference-able customer (case-study eligible) — 2026-Q4.

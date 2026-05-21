@@ -31,7 +31,7 @@ title: "Fundraising Memo"
 
 Four forcing functions converged in 2024–2026: 95% of enterprise GenAI pilots returned zero ROI on $30–40B invested (MIT NANDA, Jul 2025), $13.8B flowed into robotics in 2025 vs $7.8B in 2024, the DoD MOSA mandate (Dec 2024) put open architectures on the critical path of $384.3B in MDAP spend, and IL5/IL6 air-gap stopped being a feature request and became an architectural requirement that locks SaaS context AI out structurally. The window to define the *engineering intelligence layer* category is roughly 18–24 months before incumbents and horizontal-AI players catch up.
 
-The full reasoning is in [05_Market_Thesis/Why_Now_Memo.md](../05_Market_Thesis/Why_Now_Memo.md). The architecture thesis is in [04_Technical_Architecture/Architecture_Vision_Memo.md](../04_Technical_Architecture/Architecture_Vision_Memo.md).
+The full reasoning is in *05 Market Thesis/Why Now Memo*. The architecture thesis is in *04 Technical Architecture/Architecture Vision Memo*.
 
 We are raising the minimum capital required to (a) complete the founding team with three named full-time hires, (b) put the architecture into production at 2–3 design partners with provenance and suspect-link propagation visible end-to-end, and (c) reach a Series-A-credible reference story.
 
@@ -113,12 +113,12 @@ Summary:
 2. Technical deep-dive (60–90 min)
 3. Reference calls (founder-market-fit + architectural seriousness)
 4. Design-partner reference (when available)
-5. Term sheet — Convertible Note in `10_Appendix/`
+5. Term sheet. Convertible Note in `10_Appendix/`
 
 ---
 
 ## Contact
 
-**Stephan Claxton** — Founder & CEO, Luvian Labs LLC ·
+**Stephan Claxton**. Founder & CEO, Luvian Labs LLC ·
 [luvsupport@luvian.io](mailto:luvsupport@luvian.io) ·
 [data-room.luvian.info](https://data-room.luvian.info) · 2026-05-21

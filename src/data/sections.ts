@@ -3,6 +3,7 @@ export interface DataRoomFile {
   title: string;
   blurb?: string;
   download?: { label: string; href: string }[];
+  embedHtml?: string;
   emphasis?: 'primary' | 'secondary';
 }
 
@@ -35,7 +36,7 @@ export const SECTIONS: DataRoomSection[] = [
       {
         slug: 'company-overview',
         title: 'Company Overview',
-        blurb: 'Long-form description, structured Q&A, status, ask.',
+        blurb: 'Long-form description, structured Q and A, status, ask.',
       },
       {
         slug: 'executive-one-pager',
@@ -49,14 +50,16 @@ export const SECTIONS: DataRoomSection[] = [
     number: '02',
     title: 'Pitch Deck',
     short: 'Deck',
-    description: 'The 15-slide narrative arc with speaker notes.',
+    description: 'The 15-slide narrative arc, embedded inline with speaker notes.',
     href: '/02-pitch-deck',
     files: [
       {
         slug: 'pitch-deck',
-        title: 'Pitch Deck (15-slide outline)',
-        blurb: 'Slide-by-slide narrative with speaker notes.',
-        download: [{ label: 'Download PDF (15 slides, 124 KB)', href: '/pdf/Pitch_Deck_2026_05.pdf' }],
+        title: 'Pitch Deck',
+        blurb: 'Live 15-slide deck with speaker notes. PDF download below as a fallback.',
+        embedHtml: '/decks/pitch-deck/',
+        emphasis: 'primary',
+        download: [{ label: 'Download PDF (15 slides)', href: '/pdf/Pitch_Deck_2026_05.pdf' }],
       },
     ],
   },
@@ -66,20 +69,14 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Product Demo',
     short: 'Demo',
     description:
-      'The most important asset in this room. Confidential walkthrough video plus a "what to look for" annotation.',
+      'The most important asset in this room. Confidential watermarked walkthrough video.',
     href: '/03-product-demo',
     files: [
       {
         slug: 'demo-walkthrough',
-        title: 'Demo Walkthrough — Watch the Confidential Video',
-        blurb:
-          'Embedded watermarked walkthrough of the Luvian alpha. The single most important asset in this room.',
+        title: 'Demo Walkthrough',
+        blurb: 'Embedded confidential walkthrough of the Luvian alpha.',
         emphasis: 'primary',
-      },
-      {
-        slug: 'product-demo-links',
-        title: 'Product Demo — Supplementary Links',
-        blurb: 'Screenshots, sandbox access, scheduling a private live walkthrough.',
       },
     ],
   },
@@ -94,7 +91,7 @@ export const SECTIONS: DataRoomSection[] = [
     files: [
       {
         slug: 'architecture-vision-memo',
-        title: 'Architecture Vision Memo — The Centrepiece',
+        title: 'Architecture Vision Memo',
         blurb:
           'The thesis: operational context layer, why-not-RAG, why-ontology, why-provenance, expansion path.',
         emphasis: 'primary',
@@ -106,13 +103,13 @@ export const SECTIONS: DataRoomSection[] = [
       },
       {
         slug: 'ontology-and-reasoning',
-        title: 'Ontology & AI Reasoning',
-        blurb: 'SysML v2 / KerML grounding, domain bundles, AI reasoning pipeline, eval discipline.',
+        title: 'Ontology and AI Reasoning',
+        blurb: 'SysML v2 and KerML grounding, domain bundles, AI reasoning pipeline, eval discipline.',
       },
       {
         slug: 'provenance-and-trust',
-        title: 'Provenance & Trust',
-        blurb: 'Provenance, suspect-link propagation, confidence, governed context, HITL gates, audit.',
+        title: 'Provenance and Trust',
+        blurb: 'Provenance, suspect-link propagation, confidence, governed context, audit.',
       },
     ],
   },
@@ -122,24 +119,24 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Market Thesis',
     short: 'Market',
     description:
-      'Why now, the 18-24 month window, and how Luvian sits relative to PLM, MBSE tools, copilots, and generic context platforms.',
+      'Why now, the 18 to 24 month window, and how Luvian sits relative to incumbents and adjacent context platforms.',
     href: '/05-market-thesis',
     files: [
       {
         slug: 'why-now-memo',
-        title: 'Why Now — Macro Narrative',
-        blurb: 'Five forcing functions converging in 2024–2026. The window, who else sees it, why we are not afraid.',
+        title: 'Why Now',
+        blurb: 'The four canonical drivers converging in 2024 to 2026.',
         emphasis: 'primary',
       },
       {
         slug: 'market-thesis',
         title: 'Market Thesis',
-        blurb: 'TAM / SAM math, category framing, ICP profiles.',
+        blurb: 'TAM, SAM, SOM math, category framing, ICP profiles.',
       },
       {
         slug: 'competitive-landscape',
         title: 'Competitive Landscape',
-        blurb: 'Position vs. PLM, MBSE tools, requirements managers, copilots, generic context platforms.',
+        blurb: 'Position vs. AI-native context platforms, deep-domain incumbents, and named threats.',
       },
     ],
   },
@@ -149,7 +146,7 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Team',
     short: 'Team',
     description:
-      'Founder bio, hiring plan, references. At pre-seed the founder is roughly half the investment decision.',
+      'Founding team and hiring plan. At pre-seed the founding team is roughly half the investment decision.',
     href: '/06-team',
     files: [
       {
@@ -160,8 +157,8 @@ export const SECTIONS: DataRoomSection[] = [
       },
       {
         slug: 'hiring-plan',
-        title: 'Hiring Plan — 18-Month Pre-Seed Cycle',
-        blurb: 'Five hires over 18 months. Each justified against a specific de-risk.',
+        title: 'Hiring Plan',
+        blurb: 'Three priority hires over the 18-month pre-seed cycle, each justified against a specific de-risk.',
       },
     ],
   },
@@ -171,34 +168,34 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Traction',
     short: 'Traction',
     description:
-      'Pre-seed traction = velocity, insight, sophistication, market pull — not revenue. The honest picture.',
+      'Pre-seed traction means velocity, insight, sophistication, and market pull, not revenue. The honest picture.',
     href: '/07-traction',
     files: [
       {
         slug: 'execution-velocity',
         title: 'Execution Velocity',
-        blurb: 'What has been shipped solo, conversations with engineering leaders, investor pipeline counts.',
+        blurb: 'What has been shipped, conversations with engineering leaders, investor pipeline counts.',
         emphasis: 'primary',
       },
       {
         slug: 'metrics-dashboard',
         title: 'Metrics Dashboard',
-        blurb: 'Engineering-velocity-style metrics. Pre-seed-shaped, not SaaS-shaped.',
+        blurb: 'Engineering-velocity-style metrics, sized to the pre-seed stage.',
       },
       {
         slug: 'customer-pipeline',
-        title: 'Customer Pipeline (sanitised)',
+        title: 'Customer Pipeline',
         blurb: 'Pipeline by stage, target-account profiles. Names redacted.',
       },
       {
         slug: 'user-growth-status',
-        title: 'User-Growth Status',
+        title: 'User Growth Status',
         blurb: 'Honest pre-launch position; metric definitions for Series A.',
       },
       {
         slug: 'design-partner-loi-template',
-        title: 'Design-Partner LOI (template)',
-        blurb: 'Non-binding LOI template for paid pilot scoping.',
+        title: 'Design Partner LOI',
+        blurb: 'Non-binding letter of intent template for paid pilot scoping.',
       },
     ],
   },
@@ -208,74 +205,57 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Legal',
     short: 'Legal',
     description:
-      'Lightweight by design. Single-member LLC governance now, C-corp templates ready for the planned Delaware Flip.',
+      'Executed corporate documents for Luvian Labs LLC, plus the Delaware Flip Plan that takes us to a Delaware C-corp ahead of Series A.',
     href: '/08-legal',
     files: [
       {
-        slug: 'legal-disclaimer',
-        title: '⚠️ Legal Disclaimer — Read First',
+        slug: 'operating-agreement',
+        title: 'LLC Operating Agreement',
+        blurb: 'Executed single-member operating agreement of Luvian Labs LLC.',
+        download: [{ label: 'Download PDF', href: '/pdf/legal/Luvian_Operating_Agreement.pdf' }],
+        emphasis: 'primary',
       },
       {
-        slug: 'operating-agreement-template',
-        title: 'LLC Operating Agreement (active)',
-        blurb: 'Single-member operating agreement for Luvian Labs LLC.',
+        slug: 'articles-of-organization',
+        title: 'Articles of Organization',
+        blurb: 'State-filed articles for Luvian Labs LLC (CA Secretary of State, B20260127642).',
+        download: [{ label: 'Download PDF', href: '/pdf/legal/Articles_of_Organization.pdf' }],
       },
       {
-        slug: 'cap-table-summary',
-        title: 'Cap Table — Summary',
-        blurb: 'Pre-flip 100% Stephan; post-flip pro-forma after notes convert.',
-        download: [
-          { label: 'Download cap table (CSV)', href: '/csv/Capitalization_Table_2026_05.csv' },
-        ],
+        slug: 'ip-assignment-agreement',
+        title: 'IP Assignment Agreement',
+        blurb: 'Executed IP assignment from founder to the company.',
+        download: [{ label: 'Download PDF', href: '/pdf/legal/Luvian_IP_Assignment_Agreement.pdf' }],
+      },
+      {
+        slug: 'initial-written-consent',
+        title: 'Initial Written Consent',
+        blurb: 'Founder action authorising formation, banking, IP assignment, and Convertible Notes.',
+        download: [{ label: 'Download PDF', href: '/pdf/legal/Initial_Written_Consent.pdf' }],
       },
       {
         slug: 'llc-to-ccorp-conversion-plan',
-        title: 'LLC → Delaware C-Corp Conversion Plan',
-        blurb: 'Step-by-step playbook for the planned Delaware Flip.',
+        title: 'Delaware Flip Plan',
+        blurb: 'LLC to Delaware C-corp conversion playbook, triggered on lead investor commitment.',
       },
       {
         slug: 'corporate-documents-index',
-        title: 'Corporate Documents (index)',
-      },
-      {
-        slug: 'employment-agreements-index',
-        title: 'Employment Agreements (index)',
+        title: 'Corporate Documents Index',
+        blurb: 'Inventory of executed corporate documents. EIN PDF available for download.',
+        download: [{ label: 'Download EIN PDF', href: '/pdf/legal/Luvian_EIN.pdf' }],
       },
       {
         slug: 'ip-assignment-index',
-        title: 'IP Assignment (index)',
+        title: 'IP Assignment Index',
+        blurb: 'Status of all founder and contributor IP assignments to the company.',
       },
       {
-        slug: 'ciia-template',
-        title: '⏳ CIIA — Confidential Information & Invention Assignment',
-      },
-      {
-        slug: 'certificate-of-incorporation-template',
-        title: '⏳ Certificate of Incorporation (post-flip)',
-      },
-      {
-        slug: 'bylaws-template',
-        title: '⏳ Bylaws (post-flip)',
-      },
-      {
-        slug: 'initial-board-consent-template',
-        title: '⏳ Initial Board Consent (post-flip)',
-      },
-      {
-        slug: 'founder-rspa-template',
-        title: '⏳ Founder RSPA (post-flip)',
-      },
-      {
-        slug: '83b-election-template',
-        title: '⏳ 83(b) Election (post-flip; deadline-critical)',
-      },
-      {
-        slug: 'equity-incentive-plan-template',
-        title: '⏳ Equity Incentive Plan (post-flip)',
-      },
-      {
-        slug: 'founder-offer-letter-template',
-        title: '⏳ Founder Offer Letter (post-flip)',
+        slug: 'cap-table-summary',
+        title: 'Cap Table Summary',
+        blurb: 'Pre-flip 100% Stephan; post-flip pro-forma after Notes convert.',
+        download: [
+          { label: 'Download cap table CSV', href: '/csv/Capitalization_Table_2026_05.csv' },
+        ],
       },
     ],
   },
@@ -285,33 +265,33 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Financials',
     short: 'Financials',
     description:
-      'Lean by design. Burn-driven, milestone-anchored, pre-revenue. No fake five-year projections.',
+      'Lean by design. Burn-driven, milestone-anchored, pre-revenue.',
     href: '/09-financials',
     files: [
       {
         slug: 'use-of-funds',
-        title: 'Use of Funds — Pre-Seed Round',
-        blurb: 'Bucket allocation, quarterly spend ramp, salary policy, what we are *not* funding.',
+        title: 'Use of Funds',
+        blurb: 'Bucket allocation, quarterly spend ramp, salary policy.',
         emphasis: 'primary',
       },
       {
         slug: 'financial-forecast',
-        title: 'Financial Forecast — 24-Month Lean View',
-        blurb: 'Burn shape by quarter, sensitivity, Series A bridge planning.',
+        title: 'Financial Forecast',
+        blurb: '24-month lean view: burn shape by quarter, sensitivity, Series A bridge.',
       },
       {
         slug: 'financial-model-summary',
-        title: 'Financial Model — Summary',
-        blurb: 'P&L, unit economics, funding scenarios, use of funds (markdown).',
+        title: 'Financial Model Summary',
+        blurb: 'P and L, unit economics, funding scenarios, use of funds.',
         download: [
           { label: 'Download editable model (CSV)', href: '/csv/Financial_Model_2026_05.csv' },
-          { label: 'Download model PDF (18 pages, 1.7 MB)', href: '/pdf/Financial_Model_2026_05.pdf' },
+          { label: 'Download model PDF', href: '/pdf/Financial_Model_2026_05.pdf' },
         ],
       },
       {
         slug: 'historical-financials',
         title: 'Historical Financials',
-        blurb: 'Pre-revenue placeholder; YTD expenses, runway calc.',
+        blurb: 'Pre-revenue position, expense run-rate, runway calculation.',
       },
     ],
   },
@@ -321,24 +301,20 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Appendix',
     short: 'Appendix',
     description:
-      'Investor Q&A, funding-instrument templates, NDA, post-flip materials. Reference layer.',
+      'Investor Q and A, the active funding instrument, NDA, and the standard contracts library.',
     href: '/10-appendix',
     files: [
       {
         slug: 'investor-qa',
-        title: 'Investor Q&A — Sophisticated Probe Answers',
+        title: 'Investor Q and A',
         blurb:
           '18 questions sophisticated investors ask, with crisp 60-second answers. Read before the first call.',
         emphasis: 'primary',
       },
       {
         slug: 'convertible-note-template',
-        title: 'Convertible Promissory Note (active — LLC stage)',
-        blurb: 'Pre-flip fundraising instrument. Auto-converts on Qualified Financing or the Delaware Flip.',
-      },
-      {
-        slug: 'safe-post-money-cap-template',
-        title: '⏳ YC SAFE — Post-Money Cap (post-flip)',
+        title: 'Convertible Promissory Note',
+        blurb: 'Active pre-flip funding instrument. Auto-converts on Qualified Financing or the Delaware Flip.',
       },
       {
         slug: 'mutual-nda-template',

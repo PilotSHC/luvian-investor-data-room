@@ -1,19 +1,19 @@
 ---
 section: "01-company-overview"
 slug: "company-overview"
-title: "Luvian — Company Overview"
+title: "Luvian. Company Overview"
 ---
 
 **Last updated:** 2026-05-21
 **Legal entity:** Luvian Labs LLC (single-member LLC; sole member: Stephan Claxton)
-**Stage:** Pre-seed — open for investment via Convertible Promissory Note
-**Status:** Confidential — shared under click-through-gated NDA-equivalent
+**Stage:** Pre-seed, open for investment via Convertible Promissory Note
+**Status:** Confidential, shared under click-through-gated NDA-equivalent
 
 ---
 
 ## What Luvian Is
 
-Luvian is the context layer for engineering intelligence: a typed, versioned, permission-aware knowledge graph that connects requirements, designs, safety analysis, tests, and telemetry — and gives AI a substrate it can actually reason on. Browser-native, real-time collaborative, SysML v2 conformant, single codebase deployable in cloud or fully air-gapped IL5/IL6 environments.
+Luvian is the context layer for engineering intelligence: a typed, versioned, permission-aware knowledge graph that connects requirements, designs, safety analysis, tests, and telemetry, and gives AI a substrate it can actually reason on. Browser-native, real-time collaborative, SysML v2 conformant, single codebase deployable in cloud or fully air-gapped IL5/IL6 environments.
 
 We are the substrate enterprise AI needs in regulated engineering, not another LLM-wrapper "co-pilot." The wedge is the Engineering Intelligence Layer category. The first surface is a SysML v2 modeler with integrated safety methods. The five-year product is the connected graph that makes every AI reasoning loop in an autonomous-systems program trustworthy.
 
@@ -23,7 +23,7 @@ We are the substrate enterprise AI needs in regulated engineering, not another L
 
 ## Why Now
 
-Four forcing functions converge for the first time. See [Why_Now_Memo.md](../05_Market_Thesis/Why_Now_Memo.md) for the full case.
+Four forcing functions converge for the first time. See *Why Now Memo* for the full case.
 
 1. **95% of enterprise GenAI pilots return zero ROI** on $30–40B invested (MIT NANDA, *State of AI in Business*, Jul 2025). The substrate is the bottleneck. Models are not.
 2. **$13.8B in 2025 robotics funding** vs. $7.8B in 2024. Each marquee round (Figure $39B, Skild $14B, Physical Intelligence $5.6B, Saronic $4B, Shield AI $5.3B, Anduril $61B) is a buyer or partner for an engineering intelligence layer.
@@ -32,9 +32,9 @@ Four forcing functions converge for the first time. See [Why_Now_Memo.md](../05_
 
 ## The Problem
 
-Enterprise AI in regulated engineering does not fail because models are bad. It fails because engineering context is fragmented across PLM, ALM, simulation, code, requirements, and tribal knowledge — stale by lunchtime, permission-locked across teams, and structurally invisible to retrieval pipelines built for chunked text. *State of AI in Business* (MIT NANDA, Jul 2025) attributes the 95% failure rate to context, not models. Gartner forecasts 40%+ of agentic AI projects will be cancelled by end of 2027 for the same reason.
+Enterprise AI in regulated engineering does not fail because models are bad. It fails because engineering context is fragmented across PLM, ALM, simulation, code, requirements, and tribal knowledge, stale by lunchtime, permission-locked across teams, and structurally invisible to retrieval pipelines built for chunked text. *State of AI in Business* (MIT NANDA, Jul 2025) attributes the 95% failure rate to context, not models. Gartner forecasts 40%+ of agentic AI projects will be cancelled by end of 2027 for the same reason.
 
-Underneath that meta-failure, we observe five concrete pain points in the systems-engineering surface ([Market_Research_2026_05.md](../05_Market_Thesis/Market_Research_2026_05.md), 18+ practitioner sources):
+Underneath that meta-failure, we observe five concrete pain points in the systems-engineering surface (*Market Research*, 18+ practitioner sources):
 
 | # | Gripe | One-line summary |
 |---|---|---|
@@ -44,7 +44,7 @@ Underneath that meta-failure, we observe five concrete pain points in the system
 | 4 | SE / SW language gap | Systems engineers and software developers cannot read each other's artifacts. |
 | 5 | Stakeholders cannot see status | Non-modelers cannot consume the model. |
 
-Quote from the field: *"Organizations buy the best MBSE tool, but after three months no one was using it."* — one-sys.eu
+Quote from the field: *"Organizations buy the best MBSE tool, but after three months no one was using it."*, one-sys.eu
 
 These five gripes are the wedge entry points. The category we ultimately build is the engineering intelligence layer that makes the gripes irrelevant.
 
@@ -54,8 +54,8 @@ Four pillars of the context layer:
 
 1. **Context Acquisition.** Connectors into PLM, ALM, simulation, code, requirements, tests, and telemetry. Bidirectional where source-of-truth allows; read-only with provenance otherwise.
 2. **Semantic Normalization.** Typed engineering ontology with stable IDs, versioning, and permission boundaries. Patent-pending. Replaces the "pile of disconnected strings" that defeats every chunked-RAG pipeline.
-3. **Context Orchestration.** Graph traversal, contradiction detection, suspect-link propagation. Beyond-RAG by design — structured reasoning over typed nodes, not vector similarity over text.
-4. **AI Reasoning.** Local-first inference. Gap detection, not suggestion generation. AI answers *what's missing, what changed, and what's at risk*, with provenance — not "here's a paragraph that sounds plausible."
+3. **Context Orchestration.** Graph traversal, contradiction detection, suspect-link propagation. Beyond-RAG by design, structured reasoning over typed nodes, not vector similarity over text.
+4. **AI Reasoning.** Local-first inference. Gap detection, not suggestion generation. AI answers *what's missing, what changed, and what's at risk*, with provenance, not "here's a paragraph that sounds plausible."
 
 The first surface that ships today addresses all five practitioner gripes in one product:
 
@@ -74,11 +74,11 @@ The first surface that ships today addresses all five practitioner gripes in one
 
 ## Team
 
-Two co-founders plus our first software engineer. Full bios in [06_Team/Founder_Bio_Stephan_Claxton.md](../06_Team/Founder_Bio_Stephan_Claxton.md).
+Two co-founders plus our first software engineer. Full bios in *06 Team/Founder Bio Stephan Claxton*.
 
-* **Stephan Claxton** — Founder & CEO. Systems engineer and autonomy architect; previously at Applied Intuition.
-* **Jarred Gou** — Chief Product Officer. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan.
-* **Colin Zhang** — Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
+* **Stephan Claxton**. Founder & CEO. Systems engineer and autonomy architect; previously at Applied Intuition.
+* **Jarred Gou**. Chief Product Officer. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan.
+* **Colin Zhang**. Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
 
 This round funds the Delaware Flip and three additional hires: GTM lead, founding ML/AI engineer, and a second software engineer.
 
@@ -90,7 +90,7 @@ This round funds the Delaware Flip and three additional hires: GTM lead, foundin
 * Roughly 40% of feature surface gated behind flags (built, not yet shipped). Core thesis is now to *ship* the existing capabilities to design partners.
 * Single-codebase, dual-profile deployment: cloud (Vercel + Supabase) and on-prem (`docker compose up` on macOS, Linux, Windows; air-gap-ready).
 
-See [Product_Demo_Links_2026_05.md](../03_Product_Demo/Product_Demo_Links_2026_05.md) for live walkthroughs and [04_Technical_Architecture/](../04_Technical_Architecture/) for the architecture corpus.
+See *Product Demo Links* for live walkthroughs and [04_Technical_Architecture/](../04_Technical_Architecture/) for the architecture corpus.
 
 ## The Round
 
@@ -98,9 +98,9 @@ See [Product_Demo_Links_2026_05.md](../03_Product_Demo/Product_Demo_Links_2026_0
 * **Instrument:** Convertible Promissory Note (LLC-stage; auto-converts on Qualified Financing or on conversion of Luvian Labs LLC to Delaware C-corp, whichever is first; valuation cap TBD with lead; 5% simple interest; 24-month maturity).
 * **Target:** $1.5M – $2.0M.
 * **Use of funds:**
-  * **Delaware Flip** — counsel, filings, re-papering of equity. Roughly $5K all-in.
+  * **Delaware Flip**, counsel, filings, re-papering of equity. Roughly $5K all-in.
   * **First three full-time hires:** GTM lead, founding ML/AI engineer, second software engineer. W-2 founding employees with founder-grade equity.
   * 3+ design-partner pilots, on-prem packaging hardening, AI cost runway.
 * **Series A milestones:** Delaware Flip complete, 2–3 strategic accounts in production, reference architecture publicly documented, cross-artifact unification demonstrated at one partner, IL5/IL6-adjacent customer environment battle-tested, 6-person team operating without the founder as a bottleneck.
 
-Detailed financial model: [09_Financials/Financial_Model_Summary_2026_05.md](../09_Financials/Financial_Model_Summary_2026_05.md). Cap table: [08_Legal/Capitalization_Table_2026_05.md](../08_Legal/Capitalization_Table_2026_05.md). Convertible Note template: [10_Appendix/Convertible_Note_TEMPLATE.md](../10_Appendix/Convertible_Note_TEMPLATE.md). LLC-to-C-corp conversion plan: [08_Legal/LLC_to_Ccorp_Conversion_Plan.md](../08_Legal/LLC_to_Ccorp_Conversion_Plan.md).
+Detailed financial model: *09 Financials/Financial Model Summary*. Cap table: *08 Legal/Capitalization Table*. Convertible Note template: *10 Appendix/Convertible Note*. LLC-to-C-corp conversion plan: *08 Legal/LLC to Ccorp Conversion Plan*.

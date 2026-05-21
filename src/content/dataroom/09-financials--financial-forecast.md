@@ -1,20 +1,20 @@
 ---
 section: "09-financials"
 slug: "financial-forecast"
-title: "Financial Forecast — 24-Month Lean View"
+title: "Financial Forecast, 24-Month Lean View"
 ---
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
 > Lean by design. Pre-revenue. Burn-driven. Milestone-anchored. We
 > deliberately do **not** ship a 5-year line-itemised "enterprise"
-> projection model with fake precision — at pre-seed it is theatre.
+> projection model with fake precision, at pre-seed it is theatre.
 > Investors evaluate *capital awareness*, not *spreadsheet artistry*.
 
 > **Category framing:** Luvian is sized as the **context layer for engineering
 > intelligence**, not as another MBSE tool. The TAM / SAM / SOM, ACV
 > ladder, and comparable cohort are anchored to *Market Eval v2*
-> (`internal-comms/market-eval-v2/`). See
+> (). See
 > `Financial_Model_Summary_2026_05.md` for the full pivot.
 
 The companion document is `Use_of_Funds_2026_05.md` (the round-shape
@@ -35,7 +35,7 @@ view). This document is the *runway* view.
 
 We do not budget revenue from design partners as runway. Design-partner
 revenue is treated as bonus runway, not as a planned line in the
-forecast — pre-seed customers convert irregularly and tying runway to
+forecast, pre-seed customers convert irregularly and tying runway to
 that conversion produces planning errors. The Series A premise (below)
 *does* assume conversion of 2–3 strategic accounts into paid deployments
 in the $750K–$1.5M ACV band, anchored to the Market Eval v2 SOM
@@ -72,24 +72,24 @@ End of Q6 cumulative: **~$1.86M**, within the $1.5–$2.0M range
 | Buffer / contingency | ~3% |
 
 > Once the team is fully assembled (~month 6), salaries dominate. This
-> is normal for pre-seed infra and is the right shape — pre-seed
+> is normal for pre-seed infra and is the right shape, pre-seed
 > dollars convert primarily into team.
 
 ---
 
-## 4. Sensitivity — what changes the picture
+## 4. Sensitivity, what changes the picture
 
 ### Faster co-founder hires (months 1–2)
 
 If both co-founders close in the first 60 days, Q2 burn picks up
-earlier, but milestone ramp also accelerates by ~1 quarter — Series A
+earlier, but milestone ramp also accelerates by ~1 quarter. Series A
 prep starts in month 14 rather than month 16. Net runway impact:
 neutral; net Series A timing: positive.
 
 ### Slower co-founder hires (months 4–6)
 
 If co-founder hires slip by 2–3 months, Q2 burn is lower than planned
-(extending runway by ~1.5 months) but **milestone risk increases** —
+(extending runway by ~1.5 months) but **milestone risk increases**.
 the architecture-doc and design-partner-deployment milestones depend
 on the co-founder team. Net runway impact: positive; net milestone
 risk: meaningful.
@@ -100,9 +100,9 @@ recruiting help directly de-risks it.
 ### One design partner converts to paid before Series A
 
 At pre-seed it is plausible that one of the 2–3 design partners signs a
-paid deployment ($500K–$1.5M range — strategic-account ACV under the
+paid deployment ($500K–$1.5M range, strategic-account ACV under the
 new category framing) before the Series A closes. We do **not** budget
-this. If it lands, it is bonus runway and stronger Series-A material —
+this. If it lands, it is bonus runway and stronger Series-A material.
 neither the round size nor the milestone plan depend on it.
 
 ### Faster compute/model price decline
@@ -122,7 +122,7 @@ over the round, contributing 1–2 months of additional runway.
   `Use_of_Funds_2026_05.md`.
 - **Hiring commits** are made only after the first design-partner
   technical commitment (gate at month 6).
-- **No raise above $2.0M at this stage** — see `Use_of_Funds_2026_05.md`,
+- **No raise above $2.0M at this stage**, see `Use_of_Funds_2026_05.md`,
   §"Bridge / runway scenarios," for why.
 
 ---
@@ -140,14 +140,14 @@ The key Series-A trigger is **typed-context-graph reference deployments
 - Reference architecture publicly documented and battle-tested in at
   least one IL5/IL6-adjacent customer environment.
 - Cross-artifact unification across requirements, models, simulation,
-  and test data demonstrated at one partner — the moat under the new
+  and test data demonstrated at one partner, the moat under the new
   category.
 - 6-person team operating without the founder as the bottleneck on any
   workstream.
 - Clean post-Flip cap table.
 
 Pre-seed investors' pro-rata participation in the Series A is a
-contemplated and capital-planned outcome — see Investor Q&A, Q15.
+contemplated and capital-planned outcome, see Investor Q&A, Q15.
 
 ---
 
@@ -164,4 +164,4 @@ contemplated and capital-planned outcome — see Investor Q&A, Q15.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

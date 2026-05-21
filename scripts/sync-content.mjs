@@ -29,7 +29,6 @@ const MAP = {
 
   // 03 — Product Demo
   '03_Product_Demo/Demo_Walkthrough_2026_05.md':             { section: '03-product-demo', slug: 'demo-walkthrough' },
-  '03_Product_Demo/Product_Demo_Links_2026_05.md':           { section: '03-product-demo', slug: 'product-demo-links' },
 
   // 04 — Technical Architecture
   '04_Technical_Architecture/Architecture_Vision_Memo.md':   { section: '04-technical-architecture', slug: 'architecture-vision-memo' },
@@ -53,22 +52,18 @@ const MAP = {
   '07_Traction/User_Growth_Status_2026_05.md':               { section: '07-traction', slug: 'user-growth-status' },
   '07_Traction/Design_Partner_LOI_TEMPLATE.md':              { section: '07-traction', slug: 'design-partner-loi-template' },
 
-  // 08 — Legal
-  '08_Legal/_LEGAL_DISCLAIMER.md':                           { section: '08-legal', slug: 'legal-disclaimer' },
-  '08_Legal/Operating_Agreement_TEMPLATE.md':                { section: '08-legal', slug: 'operating-agreement-template' },
-  '08_Legal/Cap_Table_Summary_2026_05.md':                   { section: '08-legal', slug: 'cap-table-summary' },
+  // 08 — Legal — executed corporate set + Delaware Flip plan + indexes.
+  // Templates and post-flip drafts intentionally not exposed to the
+  // investor view at this stage; the source files are retained in the
+  // monorepo for counsel to pull at the time of the Reorganization.
+  '08_Legal/Operating_Agreement.md':                         { section: '08-legal', slug: 'operating-agreement' },
+  '08_Legal/Articles_of_Organization.md':                    { section: '08-legal', slug: 'articles-of-organization' },
+  '08_Legal/IP_Assignment_Agreement.md':                     { section: '08-legal', slug: 'ip-assignment-agreement' },
+  '08_Legal/Initial_Written_Consent.md':                     { section: '08-legal', slug: 'initial-written-consent' },
   '08_Legal/LLC_to_Ccorp_Conversion_Plan.md':                { section: '08-legal', slug: 'llc-to-ccorp-conversion-plan' },
   '08_Legal/Corporate_Documents_INDEX.md':                   { section: '08-legal', slug: 'corporate-documents-index' },
-  '08_Legal/Employment_Agreements_INDEX.md':                 { section: '08-legal', slug: 'employment-agreements-index' },
   '08_Legal/IP_Assignment_INDEX.md':                         { section: '08-legal', slug: 'ip-assignment-index' },
-  '08_Legal/CIIA_TEMPLATE.md':                               { section: '08-legal', slug: 'ciia-template' },
-  '08_Legal/Certificate_of_Incorporation_TEMPLATE.md':       { section: '08-legal', slug: 'certificate-of-incorporation-template' },
-  '08_Legal/Bylaws_TEMPLATE.md':                             { section: '08-legal', slug: 'bylaws-template' },
-  '08_Legal/Initial_Board_Consent_TEMPLATE.md':              { section: '08-legal', slug: 'initial-board-consent-template' },
-  '08_Legal/Founder_RSPA_TEMPLATE.md':                       { section: '08-legal', slug: 'founder-rspa-template' },
-  '08_Legal/83b_Election_TEMPLATE.md':                       { section: '08-legal', slug: '83b-election-template' },
-  '08_Legal/Equity_Incentive_Plan_TEMPLATE.md':              { section: '08-legal', slug: 'equity-incentive-plan-template' },
-  '08_Legal/Founder_Offer_Letter_TEMPLATE.md':               { section: '08-legal', slug: 'founder-offer-letter-template' },
+  '08_Legal/Cap_Table_Summary_2026_05.md':                   { section: '08-legal', slug: 'cap-table-summary' },
 
   // 09 — Financials
   '09_Financials/Use_of_Funds_2026_05.md':                   { section: '09-financials', slug: 'use-of-funds' },
@@ -76,10 +71,9 @@ const MAP = {
   '09_Financials/Financial_Model_Summary_2026_05.md':        { section: '09-financials', slug: 'financial-model-summary' },
   '09_Financials/Historical_Financials_2026_05.md':          { section: '09-financials', slug: 'historical-financials' },
 
-  // 10 — Appendix
+  // 10 — Appendix — active funding instrument and standard contracts only.
   '10_Appendix/Investor_QA_2026_05.md':                      { section: '10-appendix', slug: 'investor-qa' },
   '10_Appendix/Convertible_Note_TEMPLATE.md':                { section: '10-appendix', slug: 'convertible-note-template' },
-  '10_Appendix/SAFE_Post_Money_Cap_TEMPLATE.md':             { section: '10-appendix', slug: 'safe-post-money-cap-template' },
   '10_Appendix/Mutual_NDA_TEMPLATE.md':                      { section: '10-appendix', slug: 'mutual-nda-template' },
   '10_Appendix/Pro_Rata_Side_Letter_TEMPLATE.md':            { section: '10-appendix', slug: 'pro-rata-side-letter-template' },
   '10_Appendix/Customer_Pilot_MSA_TEMPLATE.md':              { section: '10-appendix', slug: 'customer-pilot-msa-template' },
@@ -157,35 +151,125 @@ if (mirrored > 0) {
 
 // PDF mirror: every PDF that the export-to-pdf.sh script regenerates in
 // _pdf_exports/ should land in public/pdf/. Without this, a regen in the
-// source repo never reaches data-room.luvian.info — investors download
+// source repo never reaches data-room.luvian.info; investors download
 // the previous version of the deck while the markdown summary already
 // reflects the new one. The directory mirror is folder-level so adding a
 // new deck to the export script auto-surfaces it on the next sync.
-const pdfSrcDir = path.join(sourceRoot, '_pdf_exports');
-const pdfDstDir = path.resolve(projectRoot, 'public', 'pdf');
-let pdfsMirrored = 0;
-let pdfsSkipped = 0;
-if (fs.existsSync(pdfSrcDir)) {
-  fs.mkdirSync(pdfDstDir, { recursive: true });
-  for (const file of fs.readdirSync(pdfSrcDir)) {
+function mirrorPdfDir(srcDir, dstDir, label) {
+  if (!fs.existsSync(srcDir)) {
+    console.warn(`[sync-content] no source directory at ${srcDir}; skipping ${label}`);
+    return;
+  }
+  fs.mkdirSync(dstDir, { recursive: true });
+  let mirroredLocal = 0;
+  let skippedLocal = 0;
+  for (const file of fs.readdirSync(srcDir)) {
     if (!file.toLowerCase().endsWith('.pdf')) continue;
-    const from = path.join(pdfSrcDir, file);
-    const to = path.join(pdfDstDir, file);
-    // Skip identical bytes so git doesn't show a touch-only diff.
+    const from = path.join(srcDir, file);
+    const to = path.join(dstDir, file);
     if (fs.existsSync(to) && fs.statSync(from).size === fs.statSync(to).size) {
       const a = fs.readFileSync(from);
       const b = fs.readFileSync(to);
       if (a.equals(b)) {
-        pdfsSkipped += 1;
+        skippedLocal += 1;
         continue;
       }
     }
     fs.copyFileSync(from, to);
-    pdfsMirrored += 1;
+    mirroredLocal += 1;
   }
-  if (pdfsMirrored > 0 || pdfsSkipped > 0) {
-    console.log(`[sync-content] mirrored ${pdfsMirrored} PDF(s) into public/pdf/ (${pdfsSkipped} unchanged)`);
+  if (mirroredLocal > 0 || skippedLocal > 0) {
+    console.log(`[sync-content] mirrored ${mirroredLocal} PDF(s) into ${label} (${skippedLocal} unchanged)`);
+  }
+}
+
+mirrorPdfDir(
+  path.join(sourceRoot, '_pdf_exports'),
+  path.resolve(projectRoot, 'public', 'pdf'),
+  'public/pdf/'
+);
+
+// Mirror the executed legal PDFs sourced from the founder's secure
+// archive. EXPLICIT WHITELIST ONLY: the source folder also contains
+// contributor NDAs, internal app screenshots, and other items that
+// must NOT be exposed to investors. Adding a new investor-facing legal
+// PDF requires adding a row to this list AND wiring it into sections.ts.
+const oneDriveLegalRoot =
+  '/Users/annalieseparker/Library/CloudStorage/OneDrive-Personal/AMP and SHC Documents/Luvian/Luvian Labs LLC';
+const LEGAL_PDF_WHITELIST = [
+  { src: 'Luvian_Operating_Agreement.pdf',     dst: 'Luvian_Operating_Agreement.pdf' },
+  { src: 'Luvian_IP_Assignment_Agreement.pdf', dst: 'Luvian_IP_Assignment_Agreement.pdf' },
+  { src: 'INITIAL WRITTEN CONSENT.pdf',        dst: 'Initial_Written_Consent.pdf' },
+  { src: 'ARTICLES OF ORGANIZATION.pdf',       dst: 'Articles_of_Organization.pdf' },
+  { src: 'Luvian EIN.pdf',                     dst: 'Luvian_EIN.pdf' },
+];
+const legalDstRoot = path.resolve(projectRoot, 'public', 'pdf', 'legal');
+fs.mkdirSync(legalDstRoot, { recursive: true });
+let legalMirrored = 0;
+let legalSkipped = 0;
+const wantedDst = new Set(LEGAL_PDF_WHITELIST.map((m) => m.dst));
+for (const { src, dst } of LEGAL_PDF_WHITELIST) {
+  const from = path.join(oneDriveLegalRoot, src);
+  const to = path.join(legalDstRoot, dst);
+  if (!fs.existsSync(from)) {
+    console.warn(`[sync-content] missing legal PDF in OneDrive: ${src}`);
+    continue;
+  }
+  if (fs.existsSync(to) && fs.statSync(from).size === fs.statSync(to).size) {
+    const a = fs.readFileSync(from);
+    const b = fs.readFileSync(to);
+    if (a.equals(b)) {
+      legalSkipped += 1;
+      continue;
+    }
+  }
+  fs.copyFileSync(from, to);
+  legalMirrored += 1;
+}
+// Remove any non-whitelisted PDFs from the destination so an earlier
+// over-broad mirror cannot leak into the live deploy.
+for (const file of fs.readdirSync(legalDstRoot)) {
+  if (!file.toLowerCase().endsWith('.pdf')) continue;
+  if (!wantedDst.has(file)) {
+    fs.rmSync(path.join(legalDstRoot, file));
+    console.log(`[sync-content] removed non-whitelisted legal PDF: ${file}`);
+  }
+}
+if (legalMirrored > 0 || legalSkipped > 0) {
+  console.log(`[sync-content] mirrored ${legalMirrored} legal PDF(s) into public/pdf/legal/ (${legalSkipped} unchanged)`);
+}
+
+// Deck embed mirror: copy whitelisted presentations/<name>/ trees into
+// public/decks/<name>/ so the data room can iframe them inline. This is
+// what makes the pitch deck render as a live deck in the data room
+// rather than only a PDF download. The whitelist intentionally excludes
+// internal-only material (worktree-workflow, blog drafts, etc.).
+const DECK_WHITELIST = new Set([
+  'pitch-deck',
+  '60-second-pitch',
+  'company-strategy',
+  'team-plan',
+  'fundraising',
+  'financial-model',
+  'cap-table',
+]);
+const presentationsRoot = path.resolve(sourceRoot, '..', 'presentations');
+const decksDstRoot = path.resolve(projectRoot, 'public', 'decks');
+let decksMirrored = 0;
+if (fs.existsSync(presentationsRoot)) {
+  fs.mkdirSync(decksDstRoot, { recursive: true });
+  for (const name of fs.readdirSync(presentationsRoot)) {
+    if (!DECK_WHITELIST.has(name)) continue;
+    const src = path.join(presentationsRoot, name);
+    if (!fs.statSync(src).isDirectory()) continue;
+    const dst = path.join(decksDstRoot, name);
+    fs.rmSync(dst, { recursive: true, force: true });
+    fs.cpSync(src, dst, { recursive: true });
+    decksMirrored += 1;
+  }
+  if (decksMirrored > 0) {
+    console.log(`[sync-content] mirrored ${decksMirrored} deck(s) into public/decks/`);
   }
 } else {
-  console.warn(`[sync-content] no _pdf_exports/ directory at ${pdfSrcDir} — skipping PDF mirror`);
+  console.warn(`[sync-content] no presentations/ directory at ${presentationsRoot}; skipping deck mirror`);
 }

@@ -4,7 +4,7 @@ slug: "mutual-nda-template"
 title: "Mutual Non-Disclosure Agreement"
 ---
 
-> **DRAFT TEMPLATE.** Standard-form mutual NDA — used for design-partner conversations, vendor diligence, and any other situation where both parties exchange confidential information. Investors usually do **not** sign NDAs (see `Investor_NDA_TEMPLATE.md` only for cases where they will). Based on YC starter pack + CommonPaper. **Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
+> **DRAFT.** Standard-form mutual NDA, used for design-partner conversations, vendor diligence, and any other situation where both parties exchange confidential information. Investors usually do **not**sign NDAs (see `Investor_NDA_TEMPLATE.md` only for cases where they will). Based on YC starter pack + CommonPaper.**Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
 
 ---
 
@@ -80,7 +80,7 @@ Each Party acknowledges that a breach of this Agreement may cause irreparable ha
 
 (e) **Counterparts; Electronic Signature.** This Agreement may be executed in counterparts and by electronic signature.
 
-(f) **No Solicit.** *(Optional — strike for California.)* For the Term and 12 months thereafter, neither Party will, directly or indirectly, solicit for hire any employee of the other Party with whom such Party first had contact in connection with the Purpose, provided that general advertisements not targeted at such individuals are not a breach.
+(f) **No Solicit.** *(Optional, strike for California.)* For the Term and 12 months thereafter, neither Party will, directly or indirectly, solicit for hire any employee of the other Party with whom such Party first had contact in connection with the Purpose, provided that general advertisements not targeted at such individuals are not a breach.
 
 ---
 
@@ -104,7 +104,7 @@ Date: ____________________
 
 ## Drafting Notes (delete before sending)
 
-- Most US institutional investors **will not** sign an NDA at the pre-seed pitch stage; do not insist. Use this NDA for design partners, vendors, customers, and strategic partners — not for VCs.
+- Most US institutional investors **will not** sign an NDA at the pre-seed pitch stage; do not insist. Use this NDA for design partners, vendors, customers, and strategic partners, not for VCs.
 - For European counterparties, add GDPR data-controller / data-processor language and confirm whether SCCs are needed.
 - For government counterparties, the no-solicit clause may need to be removed.
 - File executed copies in `_private/Contracts/NDAs/` (gitignored) and update the relevant index file.

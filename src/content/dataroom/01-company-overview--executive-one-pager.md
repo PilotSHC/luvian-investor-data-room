@@ -11,9 +11,9 @@ Luvian is the context layer for engineering intelligence. We connect requirement
 
 ## The Problem
 
-Enterprise AI in regulated engineering does not fail because models are bad. It fails because engineering context is fragmented across PLM, ALM, simulation, code, requirements, and tribal knowledge — stale by lunchtime, permission-locked across teams, and structurally invisible to retrieval pipelines built for chunked text.
+Enterprise AI in regulated engineering does not fail because models are bad. It fails because engineering context is fragmented across PLM, ALM, simulation, code, requirements, and tribal knowledge, stale by lunchtime, permission-locked across teams, and structurally invisible to retrieval pipelines built for chunked text.
 
-> *"95% of enterprise GenAI pilots produce zero measurable ROI."* — MIT NANDA, *State of AI in Business* (Jul 2025)
+> *"95% of enterprise GenAI pilots produce zero measurable ROI."*. MIT NANDA, *State of AI in Business* (Jul 2025)
 
 Gartner forecasts 40%+ of agentic AI projects will be cancelled by end of 2027. The failure mode is upstream of the model: AI cannot reason without typed context.
 
@@ -43,9 +43,9 @@ Today Luvian ships a SysML v2 conformant modeler with real-time collaboration, r
 
 * **TAM** (engineering intelligence layer): $58–95B, mid-case ~$70B. Composite of PLM ($26–37B), Industrial AI ($6–25B), A&D Digital Engineering ($6.3B), ALM ($3.5–5.6B), Knowledge-Graph platforms ($2.9B).
 * **SAM** (2027): $6–12B. Defense-tech, A&D primes, tier-1 automotive, robotics platforms running concurrent MBSE + safety + V&V workflows.
-* **SOM** (3 years post-Seed): $20–80M ARR via 15–40 strategic accounts at $1–2M ACV — the Glean / Cognite / Applied Intuition strategic-deal cohort.
+* **SOM** (3 years post-Seed): $20–80M ARR via 15–40 strategic accounts at $1–2M ACV, the Glean / Cognite / Applied Intuition strategic-deal cohort.
 
-See [Market_Thesis_2026_05.md](../05_Market_Thesis/Market_Thesis_2026_05.md) for sourcing.
+See *Market Thesis* for sourcing.
 
 ## Competition
 
@@ -57,7 +57,7 @@ The peer set is the typed-AI-infrastructure cohort, not the legacy MBSE incumben
 | Vertical industrial / autonomous AI | Cognite, Applied Intuition, Anduril | None carries a typed engineering ontology with cross-artifact unification across requirements, models, and safety. |
 | MBSE / ALM incumbents | Cameo, Rhapsody, DOORS, Capella, Aras | Wedge displacement targets. Cameo shipped SysML v2 in Dec 2025; the "first SysML v2 modeler" moat is gone. Cross-artifact unification + AI-native architecture + air-gap is not. |
 
-Three contestants meaningfully affect the SOM build: Flow Engineering ($23M Sequoia A, Oct 2025), Trace.Space (verbatim positioning match), and Aras + InnovatorEdge AI. See [Competitive_Landscape.md](../05_Market_Thesis/Competitive_Landscape.md).
+Three contestants meaningfully affect the SOM build: Flow Engineering ($23M Sequoia A, Oct 2025), Trace.Space (verbatim positioning match), and Aras + InnovatorEdge AI. See *Competitive Landscape*.
 
 **Counter-positioning.** Browser-native + real-time collaboration + true on-prem air-gap is strictly worse for incumbents' installed base. They cannot copy without cannibalising seat revenue or losing their cloud-only AI bet.
 

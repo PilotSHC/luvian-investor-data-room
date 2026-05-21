@@ -1,14 +1,14 @@
 ---
 section: "07-traction"
 slug: "metrics-dashboard"
-title: "Metrics Dashboard — Engineering Platform"
+title: "Metrics Dashboard. Engineering Platform"
 ---
 
 > **Pre-revenue, pre-launch.** Standard SaaS metrics (MRR, churn, NPS) do not
-> yet apply. This dashboard tracks **engineering-platform readiness** — the
+> yet apply. This dashboard tracks **engineering-platform readiness**, the
 > leading indicator of our ability to land design partners.
 
-**Source:** snapshot from the internal data room (`presentations/data-room/index.html`)
+**Source:** snapshot from the internal data room ()
 and the live codebase as of 2026-05-21.
 
 ---
@@ -38,11 +38,11 @@ and the live codebase as of 2026-05-21.
 
 | Gripe | Capability | Status |
 |---|---|---|
-| 1 — Hostile tools | Browser SPA, real-time collab, progressive disclosure | ✅ Solved |
-| 2 — Silo effect | Internal traceability engine, MCP tools, SysML v2 import | 🟦 Architecture ready, needs production polish |
-| 3 — No maturity path | IRR gates, progressive unshelving, readiness checks | 🟦 Internal only — not yet shipped to users |
-| 4 — SE ↔ developer language gap | SysML v2 text generation, AI agents, terminology bridge | 🟨 Early stage |
-| 5 — Stakeholders can't see status | KPI / safety / stakeholder pages | 🟪 Built, gated behind flags — shipping is part of the round |
+| 1. Hostile tools | Browser SPA, real-time collab, progressive disclosure | ✅ Solved |
+| 2. Silo effect | Internal traceability engine, MCP tools, SysML v2 import | 🟦 Architecture ready, needs production polish |
+| 3. No maturity path | IRR gates, progressive unshelving, readiness checks | 🟦 Internal only, not yet shipped to users |
+| 4. SE ↔ developer language gap | SysML v2 text generation, AI agents, terminology bridge | 🟨 Early stage |
+| 5. Stakeholders can't see status | KPI / safety / stakeholder pages | 🟪 Built, gated behind flags, shipping is part of the round |
 
 ## Key Performance Targets
 

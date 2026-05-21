@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luvian — 60-Second Elevator Pitch</title>
+<link rel="icon" type="image/png" href="/assets/icon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        luvian: { 50:'#f0f4ff', 100:'#dbe4ff', 200:'#bac8ff', 300:'#91a7ff', 400:'#748ffc', 500:'#5c7cfa', 600:'#4c6ef5', 700:'#4263eb', 800:'#3b5bdb', 900:'#364fc7' },
+        surface: { 0:'#ffffff', 1:'#f8f9fa', 2:'#f1f3f5', 3:'#e9ecef' },
+        ink: { 0:'#212529', 1:'#495057', 2:'#868e96', 3:'#adb5bd' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+  .slide { display: none; height: 100vh; overflow-y: auto; padding-bottom: 80px; justify-content: flex-start !important; }
+  .slide.active { display: flex; }
+  .slide::before, .slide::after { content: ''; flex: 1 0 0px; }
+  .slide-number { font-variant-numeric: tabular-nums; }
+  .progress-bar { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .fade-in { animation: fadeIn 0.5s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .stagger-1 { animation-delay: 0.1s; animation-fill-mode: backwards; }
+  .stagger-2 { animation-delay: 0.2s; animation-fill-mode: backwards; }
+  .stagger-3 { animation-delay: 0.3s; animation-fill-mode: backwards; }
+  .stagger-4 { animation-delay: 0.4s; animation-fill-mode: backwards; }
+  .stagger-5 { animation-delay: 0.5s; animation-fill-mode: backwards; }
+  .gradient-text { background: linear-gradient(135deg, #4c6ef5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .nda-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; padding: 8px 24px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+  .nda-footer .nda-logo { position: absolute; right: 24px; height: 18px; transition: filter 0.3s; }
+
+  .beat-card { transition: all 0.3s ease; }
+  .beat-card.active-beat { transform: scale(1.03); box-shadow: 0 0 0 2px #4c6ef5, 0 8px 25px rgba(76, 110, 245, 0.2); }
+
+  .timer-ring { transition: stroke-dashoffset 0.1s linear; }
+
+  .teleprompter-section { transition: all 0.4s ease; }
+  .teleprompter-section.past { opacity: 0.25; }
+  .teleprompter-section.current { opacity: 1; }
+  .teleprompter-section.future { opacity: 0.4; }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(76, 110, 245, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(76, 110, 245, 0); }
+  }
+  .pulse-glow { animation: pulse-glow 2s infinite; }
+
+  @keyframes countdown-tick {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  @media print {
+    body { overflow: auto; }
+    .slide { display: flex !important; page-break-after: always; }
+    .controls, .progress-bar-container { display: none !important; }
+    .nda-footer { position: fixed; bottom: 0; }
+    /* Disable entrance animations during print export. */
+    .fade-in,
+    [class*="stagger-"] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body class="bg-ink-0">
+
+<!-- Progress Bar -->
+<div class="progress-bar-container fixed top-0 left-0 right-0 z-50 h-1 bg-ink-0/20">
+  <div id="progress" class="progress-bar h-full bg-luvian-500"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls fixed bottom-6 right-6 z-50 flex items-center gap-3">
+  <span id="slide-counter" class="slide-number text-xs text-white/40 font-medium"></span>
+  <button onclick="prevSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button onclick="nextSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<!-- Slide Navigation (bottom left) -->
+<div class="controls fixed bottom-6 left-6 z-50 flex items-center gap-4">
+  <a href="/" class="flex items-center gap-1 text-xs text-white/30 hover:text-white/60 transition group">
+    <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Library
+  </a>
+  <button onclick="toggleNav()" class="text-xs text-white/30 hover:text-white/60 transition font-medium">Menu</button>
+  <div id="slide-nav" class="hidden absolute bottom-8 left-0 bg-gray-900/95 backdrop-blur border border-white/10 rounded-xl p-3 w-56 max-h-[70vh] overflow-y-auto">
+    <div id="nav-list" class="space-y-0.5 text-xs"></div>
+  </div>
+</div>
+
+<!-- NDA Footer -->
+<div id="nda-footer" class="nda-footer" style="color: rgba(255,255,255,0.2);"><span>Confidential &nbsp;/&nbsp; Shared under NDA &nbsp;/&nbsp; No Screenshots &nbsp;/&nbsp; No Recordings</span><img id="nda-logo" class="nda-logo" src="/assets/logo.png" alt="Luvian" style="filter: brightness(0) invert(1);"></div>
+
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<section class="slide active flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Cover">
+  <div class="text-center max-w-3xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-20 h-20 rounded-2xl mx-auto mb-8 shadow-lg shadow-luvian-600/30 bg-white p-3">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-widest mb-4">Elevator Pitch</p>
+    <h1 class="text-5xl lg:text-6xl font-black mb-4 leading-tight">60 Seconds to<br><span class="gradient-text">Intelligent Design</span></h1>
+    <p class="text-lg text-white/50 max-w-xl mx-auto mb-2">The pitch. The practice tool. The cue cards.</p>
+    <div class="mt-12 flex items-center justify-center gap-6 text-sm text-white/30">
+      <span>~145 words</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>6 beats</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>Confidential</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 2: THE SCRIPT ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Full Script">
+  <div class="max-w-4xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">The Pitch — Full Script</p>
+    <h2 class="text-3xl lg:text-4xl font-extrabold mb-8 fade-in stagger-1 leading-tight">Read it. Learn it. Own it.</h2>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 lg:p-10 fade-in stagger-2">
+      <div class="space-y-6 text-lg lg:text-xl leading-relaxed text-ink-0">
+        <p>
+          <span class="inline-block bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">HOOK</span>
+          Every autonomous system — from self-driving cars to military robots — must be architected, safety-analyzed, and verified before it ships. Today, engineers use tools built twenty years ago: fifteen-thousand-dollar-per-seat desktop software with zero AI, zero collaboration, and no integration across disciplines.
+        </p>
+        <p>
+          <span class="inline-block bg-luvian-100 text-luvian-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">SOLUTION</span>
+          Luvian is the context layer for engineering intelligence. We connect requirements, designs, safety analysis, tests, and telemetry into one continuously evolving knowledge graph — with local-first reasoning that runs entirely on-device for air-gapped defense deployments.
+        </p>
+        <p>
+          <span class="inline-block bg-violet-100 text-violet-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">WHY US</span>
+          We're three to ten times cheaper than incumbents like Cameo and DOORS. We're the only platform that gives AI a typed engineering graph to reason over — not a pile of disconnected strings. And our reasoning never leaves the customer's network.
+        </p>
+        <p>
+          <span class="inline-block bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">MARKET</span>
+          The MBSE market is four-and-a-half billion dollars, growing fifteen percent annually to ten billion by 2031. We're targeting the fastest-growing slice: autonomous systems programs in defense, automotive, and aerospace.
+        </p>
+        <p>
+          <span class="inline-block bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">TRACTION</span>
+          We've built the foundation — the structured-artifact layer of the graph, with AI copilots, real-time collaboration, and four industry demo verticals. We're now entering design partner conversations with robotics, mechatronics, and defense programs.
+        </p>
+        <p>
+          <span class="inline-block bg-pink-100 text-pink-700 text-xs font-bold px-2 py-0.5 rounded-full mr-2 align-middle">THE ASK</span>
+          We're raising two-and-a-half million dollars to land our first ten design partners and build the sales engine for the engineering intelligence layer.
+        </p>
+      </div>
+    </div>
+    <p class="text-sm text-ink-2 mt-4 text-center fade-in stagger-3">~145 words &middot; Conversational pace: 55–65 seconds</p>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 3: BEAT 1 — HOOK ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-red-950 via-gray-950 to-gray-950 text-white px-8 lg:px-20" data-title="Beat 1: Hook">
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-red-500/20 border border-red-500/30 rounded-full flex items-center justify-center text-red-400 font-black text-sm">1</span>
+      <div>
+        <p class="text-xs text-red-400 font-semibold uppercase tracking-wider">Beat 1 &middot; 0–10 seconds</p>
+        <p class="text-sm text-white/40">Paint the pain</p>
+      </div>
+    </div>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-8 fade-in stagger-1 leading-tight">The tools are<br>twenty years old.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+        <p class="text-4xl font-black text-red-400">$15K</p>
+        <p class="text-sm text-white/50 mt-2">Per seat, per year</p>
+        <p class="text-xs text-white/30 mt-1">Incumbent MBSE pricing</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+        <p class="text-4xl font-black text-red-400">0</p>
+        <p class="text-sm text-white/50 mt-2">AI capabilities</p>
+        <p class="text-xs text-white/30 mt-1">In legacy tools</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+        <p class="text-4xl font-black text-red-400">4+</p>
+        <p class="text-sm text-white/50 mt-2">Disconnected tools</p>
+        <p class="text-xs text-white/30 mt-1">Per engineering program</p>
+      </div>
+    </div>
+    <div class="mt-8 bg-white/5 border border-white/10 rounded-xl p-6 fade-in stagger-3">
+      <p class="text-xs text-red-400 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-white/80 italic leading-relaxed">"Every autonomous system — from self-driving cars to military robots — must be architected, safety-analyzed, and verified before it ships. Today, engineers use tools built twenty years ago: fifteen-thousand-dollar-per-seat desktop software with zero AI, zero collaboration, and no integration across disciplines."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 4: BEAT 2 — SOLUTION ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Beat 2: Solution">
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-luvian-100 border border-luvian-200 rounded-full flex items-center justify-center text-luvian-700 font-black text-sm">2</span>
+      <div>
+        <p class="text-xs text-luvian-600 font-semibold uppercase tracking-wider">Beat 2 &middot; 10–20 seconds</p>
+        <p class="text-sm text-ink-2">Introduce Luvian</p>
+      </div>
+    </div>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-8 fade-in stagger-1 leading-tight">One platform.<br>Four disciplines.</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 fade-in stagger-2">
+      <div class="bg-luvian-50 border border-luvian-100 rounded-xl p-5 text-center">
+        <div class="w-12 h-12 bg-luvian-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-luvian-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        </div>
+        <p class="text-sm font-bold text-ink-0">Architecture</p>
+        <p class="text-xs text-ink-2 mt-1">SysML v2 native</p>
+      </div>
+      <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <p class="text-sm font-bold text-ink-0">Requirements</p>
+        <p class="text-xs text-ink-2 mt-1">INCOSE quality</p>
+      </div>
+      <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <p class="text-sm font-bold text-ink-0">Safety</p>
+        <p class="text-xs text-ink-2 mt-1">HARA / FMEA / STPA</p>
+      </div>
+      <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <p class="text-sm font-bold text-ink-0">Verification</p>
+        <p class="text-xs text-ink-2 mt-1">Full traceability</p>
+      </div>
+    </div>
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 fade-in stagger-3">
+      <p class="text-xs text-luvian-600 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-ink-1 italic leading-relaxed">"Luvian is the context layer for engineering intelligence. We connect requirements, designs, safety analysis, tests, and telemetry into one continuously evolving knowledge graph — with local-first reasoning that runs entirely on-device for air-gapped defense deployments."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 5: BEAT 3 — WHY US ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-violet-950 via-gray-950 to-gray-950 text-white px-8 lg:px-20" data-title="Beat 3: Why Us">
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-violet-500/20 border border-violet-500/30 rounded-full flex items-center justify-center text-violet-400 font-black text-sm">3</span>
+      <div>
+        <p class="text-xs text-violet-400 font-semibold uppercase tracking-wider">Beat 3 &middot; 20–30 seconds</p>
+        <p class="text-sm text-white/40">Three defensible differentiators</p>
+      </div>
+    </div>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1 leading-tight">Why Luvian wins.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-5xl font-black gradient-text mb-3">3–10x</p>
+        <p class="text-lg font-bold text-white mb-2">Cheaper</p>
+        <p class="text-sm text-white/50">$100–$450/seat/mo vs. $5K–$15K/seat/year for Cameo, DOORS, Jama</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-5xl font-black gradient-text mb-3">1st</p>
+        <p class="text-lg font-bold text-white mb-2">SysML v2 + Safety</p>
+        <p class="text-sm text-white/50">The only platform with native SysML v2 modeling and integrated safety analysis</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-5xl font-black gradient-text mb-3">0</p>
+        <p class="text-lg font-bold text-white mb-2">Data Egress</p>
+        <p class="text-sm text-white/50">AI runs entirely on-device. Your data never leaves your network. Air-gap ready.</p>
+      </div>
+    </div>
+    <div class="mt-8 bg-white/5 border border-white/10 rounded-xl p-6 fade-in stagger-3">
+      <p class="text-xs text-violet-400 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-white/80 italic leading-relaxed">"We're three to ten times cheaper than incumbents like Cameo and DOORS. We're the only platform that gives AI a typed engineering graph to reason over — not a pile of disconnected strings. And our reasoning never leaves the customer's network."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 6: BEAT 4 — MARKET ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Beat 4: Market">
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-emerald-100 border border-emerald-200 rounded-full flex items-center justify-center text-emerald-700 font-black text-sm">4</span>
+      <div>
+        <p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">Beat 4 &middot; 30–40 seconds</p>
+        <p class="text-sm text-ink-2">Show the market opportunity</p>
+      </div>
+    </div>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1 leading-tight">A $4.5B market<br>being rebuilt.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in stagger-2">
+      <div>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-black text-emerald-600">$4.5B</p>
+            <p class="text-sm text-ink-1 mt-1">TAM (2026)</p>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-black text-emerald-600">$10B</p>
+            <p class="text-sm text-ink-1 mt-1">TAM (2031)</p>
+          </div>
+          <div class="bg-luvian-50 border border-luvian-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-black text-luvian-600">15%</p>
+            <p class="text-sm text-ink-1 mt-1">Annual growth</p>
+          </div>
+          <div class="bg-luvian-50 border border-luvian-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-black text-luvian-600">$1.8B</p>
+            <p class="text-sm text-ink-1 mt-1">SAM</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-ink-0 mb-3">Target Verticals</p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-lg p-4">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Defense & Gov Robotics</p>
+              <p class="text-xs text-ink-2">$0.8B emerging, 25%+ CAGR</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-lg p-4">
+            <div class="w-10 h-10 bg-violet-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Software-Defined Vehicles</p>
+              <p class="text-xs text-ink-2">$1.2B emerging, 30%+ CAGR</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-lg p-4">
+            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Hardware T&V Platforms</p>
+              <p class="text-xs text-ink-2">$0.5B, growing with HIL/SIL</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-6 fade-in stagger-3">
+      <p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-ink-1 italic leading-relaxed">"The MBSE market is four-and-a-half billion dollars, growing fifteen percent annually to ten billion by 2031. We're targeting the fastest-growing slice: autonomous systems programs in defense, automotive, and aerospace."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 7: BEAT 5 — TRACTION ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-amber-950 via-gray-950 to-gray-950 text-white px-8 lg:px-20" data-title="Beat 5: Traction">
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-amber-500/20 border border-amber-500/30 rounded-full flex items-center justify-center text-amber-400 font-black text-sm">5</span>
+      <div>
+        <p class="text-xs text-amber-400 font-semibold uppercase tracking-wider">Beat 5 &middot; 40–50 seconds</p>
+        <p class="text-sm text-white/40">Show momentum</p>
+      </div>
+    </div>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-10 fade-in stagger-1 leading-tight">Built. Not just<br>an idea.</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+        <p class="text-3xl font-black text-amber-400">4</p>
+        <p class="text-sm text-white/50 mt-2">Industry verticals</p>
+        <p class="text-xs text-white/30 mt-1">Seeded & functional</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+        <p class="text-3xl font-black text-amber-400">6</p>
+        <p class="text-sm text-white/50 mt-2">ML pipeline stages</p>
+        <p class="text-xs text-white/30 mt-1">Local-first AI</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+        <p class="text-3xl font-black text-amber-400">5</p>
+        <p class="text-sm text-white/50 mt-2">Safety methods</p>
+        <p class="text-xs text-white/30 mt-1">HARA / FMEA / STPA / TARA / SOTIF</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+        <p class="text-3xl font-black text-amber-400">3</p>
+        <p class="text-sm text-white/50 mt-2">Deploy targets</p>
+        <p class="text-xs text-white/30 mt-1">Cloud / On-prem / Air-gap</p>
+      </div>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-xl p-6 fade-in stagger-3">
+      <p class="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-white/80 italic leading-relaxed">"We've built the foundation — the structured-artifact layer of the graph, with AI copilots, real-time collaboration, and four industry demo verticals. We're now entering design partner conversations with robotics, mechatronics, and defense programs."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 8: BEAT 6 — THE ASK ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-luvian-900 via-gray-950 to-gray-950 text-white px-8 lg:px-20" data-title="Beat 6: The Ask">
+  <div class="max-w-4xl mx-auto w-full text-center">
+    <div class="flex items-center justify-center gap-3 mb-6 fade-in">
+      <span class="w-10 h-10 bg-pink-500/20 border border-pink-500/30 rounded-full flex items-center justify-center text-pink-400 font-black text-sm">6</span>
+      <div class="text-left">
+        <p class="text-xs text-pink-400 font-semibold uppercase tracking-wider">Beat 6 &middot; 50–60 seconds</p>
+        <p class="text-sm text-white/40">Close strong</p>
+      </div>
+    </div>
+    <h2 class="text-5xl lg:text-6xl font-black mb-6 fade-in stagger-1 leading-tight"><span class="gradient-text">$7–10M Seed</span></h2>
+    <p class="text-xl text-white/60 mb-12 fade-in stagger-2 max-w-2xl mx-auto">To land 10 design partners and build the sales engine for the engineering intelligence layer.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-3xl mx-auto mb-12 fade-in stagger-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-2xl font-black text-luvian-400">10</p>
+        <p class="text-sm text-white/60 mt-2">Design partners</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-2xl font-black text-luvian-400">18 mo</p>
+        <p class="text-sm text-white/60 mt-2">Runway</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-2xl font-black text-luvian-400">$28–35M</p>
+        <p class="text-sm text-white/60 mt-2">Pre-money valuation</p>
+      </div>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-left max-w-2xl mx-auto fade-in stagger-4">
+      <p class="text-xs text-pink-400 font-semibold uppercase tracking-wider mb-2">Say this</p>
+      <p class="text-lg text-white/80 italic leading-relaxed">"We're raising seven to ten million dollars to land our first ten design partners and build the sales engine for the engineering intelligence layer."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 9: TELEPROMPTER ==================== -->
+<section class="slide flex-col justify-center bg-gray-950 text-white px-8" data-title="Practice Mode">
+  <div class="max-w-3xl mx-auto w-full">
+    <div class="flex items-center justify-between mb-8 fade-in">
+      <div>
+        <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider">Practice Mode</p>
+        <p class="text-2xl font-bold mt-1">Teleprompter</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="text-center">
+          <svg id="timer-svg" width="72" height="72" viewBox="0 0 72 72" class="transform -rotate-90">
+            <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <circle id="timer-ring" cx="36" cy="36" r="32" fill="none" stroke="#4c6ef5" stroke-width="4" stroke-dasharray="201" stroke-dashoffset="0" stroke-linecap="round" class="timer-ring"/>
+          </svg>
+          <p id="timer-display" class="text-2xl font-black text-white mt-1 tabular-nums" style="font-variant-numeric: tabular-nums;">60</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <button id="start-btn" onclick="toggleTimer()" class="px-4 py-2 bg-luvian-600 hover:bg-luvian-700 text-white text-sm font-semibold rounded-lg transition">
+            Start
+          </button>
+          <button onclick="resetTimer()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white/60 text-sm font-medium rounded-lg transition">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="teleprompter" class="space-y-6 fade-in stagger-1">
+      <div class="teleprompter-section current rounded-xl p-5 bg-white/5 border border-white/10" data-start="0" data-end="10">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-red-500/20 rounded-full flex items-center justify-center text-red-400 font-bold text-xs">1</span>
+          <span class="text-xs text-red-400 font-semibold uppercase">Hook &middot; 0–10s</span>
+        </div>
+        <p class="text-lg leading-relaxed">Every autonomous system — from self-driving cars to military robots — must be architected, safety-analyzed, and verified before it ships. Today, engineers use tools built twenty years ago: fifteen-thousand-dollar-per-seat desktop software with zero AI, zero collaboration, and no integration across disciplines.</p>
+      </div>
+
+      <div class="teleprompter-section future rounded-xl p-5 bg-white/5 border border-white/10" data-start="10" data-end="20">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-luvian-500/30 rounded-full flex items-center justify-center text-luvian-400 font-bold text-xs">2</span>
+          <span class="text-xs text-luvian-400 font-semibold uppercase">Solution &middot; 10–20s</span>
+        </div>
+        <p class="text-lg leading-relaxed">Luvian is the context layer for engineering intelligence. We connect requirements, designs, safety analysis, tests, and telemetry into one continuously evolving knowledge graph — with local-first reasoning that runs entirely on-device for air-gapped defense deployments.</p>
+      </div>
+
+      <div class="teleprompter-section future rounded-xl p-5 bg-white/5 border border-white/10" data-start="20" data-end="30">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-violet-500/30 rounded-full flex items-center justify-center text-violet-400 font-bold text-xs">3</span>
+          <span class="text-xs text-violet-400 font-semibold uppercase">Why Us &middot; 20–30s</span>
+        </div>
+        <p class="text-lg leading-relaxed">We're three to ten times cheaper than incumbents like Cameo and DOORS. We're the only platform that gives AI a typed engineering graph to reason over — not a pile of disconnected strings. And our reasoning never leaves the customer's network.</p>
+      </div>
+
+      <div class="teleprompter-section future rounded-xl p-5 bg-white/5 border border-white/10" data-start="30" data-end="40">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-emerald-500/30 rounded-full flex items-center justify-center text-emerald-400 font-bold text-xs">4</span>
+          <span class="text-xs text-emerald-400 font-semibold uppercase">Market &middot; 30–40s</span>
+        </div>
+        <p class="text-lg leading-relaxed">The MBSE market is four-and-a-half billion dollars, growing fifteen percent annually to ten billion by 2031. We're targeting the fastest-growing slice: autonomous systems programs in defense, automotive, and aerospace.</p>
+      </div>
+
+      <div class="teleprompter-section future rounded-xl p-5 bg-white/5 border border-white/10" data-start="40" data-end="50">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-amber-500/30 rounded-full flex items-center justify-center text-amber-400 font-bold text-xs">5</span>
+          <span class="text-xs text-amber-400 font-semibold uppercase">Traction &middot; 40–50s</span>
+        </div>
+        <p class="text-lg leading-relaxed">We've built the foundation — the structured-artifact layer of the graph, with AI copilots, real-time collaboration, and four industry demo verticals. We're now entering design partner conversations with robotics, mechatronics, and defense programs.</p>
+      </div>
+
+      <div class="teleprompter-section future rounded-xl p-5 bg-white/5 border border-white/10" data-start="50" data-end="60">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 bg-pink-500/30 rounded-full flex items-center justify-center text-pink-400 font-bold text-xs">6</span>
+          <span class="text-xs text-pink-400 font-semibold uppercase">The Ask &middot; 50–60s</span>
+        </div>
+        <p class="text-lg leading-relaxed">We're raising two-and-a-half million dollars to land our first ten design partners and build the sales engine for the engineering intelligence layer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 10: CHEAT SHEET ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Cheat Sheet">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Quick Reference</p>
+    <h2 class="text-3xl lg:text-4xl font-extrabold mb-8 fade-in stagger-1 leading-tight">Back-pocket numbers</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 fade-in stagger-2">
+      <div class="border border-gray-200 rounded-xl p-5 text-center">
+        <p class="text-2xl font-black text-luvian-600">$4.5B</p>
+        <p class="text-xs text-ink-2 mt-1">TAM (2026)</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 text-center">
+        <p class="text-2xl font-black text-luvian-600">$10B</p>
+        <p class="text-xs text-ink-2 mt-1">TAM (2031)</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 text-center">
+        <p class="text-2xl font-black text-luvian-600">15%</p>
+        <p class="text-xs text-ink-2 mt-1">CAGR</p>
+      </div>
+      <div class="border border-gray-200 rounded-xl p-5 text-center">
+        <p class="text-2xl font-black text-luvian-600">$1.8B</p>
+        <p class="text-xs text-ink-2 mt-1">SAM</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in stagger-3">
+      <div>
+        <p class="text-sm font-semibold text-ink-0 mb-3">Competitors to name-drop</p>
+        <table class="text-sm w-full">
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-4 font-medium">Cameo / MagicDraw</td><td class="py-2 text-ink-2">$5K–$15K/seat/yr, desktop, SysML v1</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-4 font-medium">IBM DOORS</td><td class="py-2 text-ink-2">$5K–$20K/seat/yr, complex, legacy</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-4 font-medium">Jama Connect</td><td class="py-2 text-ink-2">$5K–$12K/seat/yr, req mgmt only</td></tr>
+            <tr><td class="py-2 pr-4 font-medium">Capella</td><td class="py-2 text-ink-2">Free/open-source, no AI, no safety</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-ink-0 mb-3">Common follow-up Q&A</p>
+        <div class="space-y-3 text-sm">
+          <div>
+            <p class="font-medium text-ink-0">How is AI different from ChatGPT wrappers?</p>
+            <p class="text-ink-2">6-stage ambient pipeline, runs locally, trained on engineering domain. Not a chatbot — proactive suggestions.</p>
+          </div>
+          <div>
+            <p class="font-medium text-ink-0">Who's the team?</p>
+            <p class="text-ink-2">Solo technical founder + 20-year veteran SW engineer + PM. Hiring with seed funding.</p>
+          </div>
+          <div>
+            <p class="font-medium text-ink-0">When do you expect revenue?</p>
+            <p class="text-ink-2">Design partner revenue in Y1 ($0.5–1.5M). $2–5M Y2 target.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SLIDE 11: CLOSE ==================== -->
+<section class="slide flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Thank You">
+  <div class="text-center max-w-2xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-16 h-16 rounded-2xl mx-auto mb-6 shadow-lg shadow-luvian-600/20 bg-white p-2.5">
+    <h2 class="text-4xl lg:text-5xl font-black mb-4"><span class="gradient-text">Intelligent Engineering Design</span></h2>
+    <p class="text-lg text-white/50 mb-8">The platform where autonomous systems are architected, analyzed, and verified.</p>
+    <div class="flex items-center justify-center gap-6 text-sm text-white/30">
+      <span>luvian.ai</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>Seed Round — $7–10M</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>Confidential</span>
+    </div>
+  </div>
+</section>
+
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current / (slides.length - 1)) * 100) + '%';
+  document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + slides.length;
+  updateNDA();
+  updateNav();
+}
+
+function nextSlide() { showSlide(current + 1); }
+function prevSlide() { showSlide(current - 1); }
+
+function updateNDA() {
+  const slide = slides[current];
+  const isDark = slide.classList.contains('bg-gradient-to-br') || slide.classList.contains('bg-gray-950');
+  const footer = document.getElementById('nda-footer');
+  const logo = document.getElementById('nda-logo');
+  footer.style.color = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)';
+  footer.style.background = isDark ? 'linear-gradient(transparent, rgba(3,7,18,0.8))' : 'linear-gradient(transparent, rgba(249,250,251,0.9))';
+  logo.style.filter = isDark ? 'brightness(0) invert(1)' : 'none';
+  logo.style.opacity = isDark ? '0.3' : '0.5';
+}
+
+function toggleNav() {
+  document.getElementById('slide-nav').classList.toggle('hidden');
+}
+
+function updateNav() {
+  const navList = document.getElementById('nav-list');
+  navList.innerHTML = '';
+  slides.forEach((s, i) => {
+    const title = s.getAttribute('data-title') || ('Slide ' + (i + 1));
+    const btn = document.createElement('button');
+    btn.className = 'block w-full text-left px-3 py-1.5 rounded-lg transition ' +
+      (i === current ? 'bg-luvian-600 text-white' : 'text-white/50 hover:text-white hover:bg-white/10');
+    btn.textContent = (i + 1) + '. ' + title;
+    btn.onclick = () => { showSlide(i); document.getElementById('slide-nav').classList.add('hidden'); };
+    navList.appendChild(btn);
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  if (e.key === 'Escape') { document.getElementById('slide-nav').classList.add('hidden'); }
+});
+
+let timerInterval = null;
+let timerRunning = false;
+let timeLeft = 60;
+const TOTAL_TIME = 60;
+const CIRCUMFERENCE = 2 * Math.PI * 32;
+
+function updateTimerDisplay() {
+  document.getElementById('timer-display').textContent = Math.ceil(timeLeft);
+  const offset = ((TOTAL_TIME - timeLeft) / TOTAL_TIME) * CIRCUMFERENCE;
+  document.getElementById('timer-ring').style.strokeDashoffset = -offset;
+
+  const sections = document.querySelectorAll('.teleprompter-section');
+  const elapsed = TOTAL_TIME - timeLeft;
+  sections.forEach(s => {
+    const start = parseInt(s.dataset.start);
+    const end = parseInt(s.dataset.end);
+    s.classList.remove('past', 'current', 'future');
+    if (elapsed >= end) s.classList.add('past');
+    else if (elapsed >= start) s.classList.add('current');
+    else s.classList.add('future');
+  });
+
+  if (timeLeft <= 10) {
+    document.getElementById('timer-ring').style.stroke = '#e03131';
+    document.getElementById('timer-display').style.color = '#e03131';
+  } else if (timeLeft <= 20) {
+    document.getElementById('timer-ring').style.stroke = '#f59f00';
+    document.getElementById('timer-display').style.color = '#f59f00';
+  } else {
+    document.getElementById('timer-ring').style.stroke = '#4c6ef5';
+    document.getElementById('timer-display').style.color = '#ffffff';
+  }
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('start-btn').textContent = 'Resume';
+  } else {
+    timerRunning = true;
+    document.getElementById('start-btn').textContent = 'Pause';
+    timerInterval = setInterval(() => {
+      timeLeft = Math.max(0, timeLeft - 0.1);
+      updateTimerDisplay();
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('start-btn').textContent = 'Done!';
+        document.getElementById('start-btn').disabled = true;
+      }
+    }, 100);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timeLeft = TOTAL_TIME;
+  document.getElementById('start-btn').textContent = 'Start';
+  document.getElementById('start-btn').disabled = false;
+  updateTimerDisplay();
+}
+
+updateTimerDisplay();
+updateNDA();
+updateNav();
+document.getElementById('slide-counter').textContent = '1 / ' + slides.length;
+</script>
+
+</body>
+</html>

@@ -19,7 +19,7 @@ if (entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 } else {
-  fallback = `<p><em>Content not yet synced — run <code>node scripts/sync-content.mjs</code> from the project root.</em></p>`;
+  fallback = `<p><em>Content not yet synced.</em></p>`;
 }
 ---
 
@@ -35,11 +35,38 @@ if (entry) {
     <a href={section.href} class="hover:text-ink-900">{section.number} · {section.short}</a>
   </nav>
 
+  <header class="mb-6">
+    <p class="text-xs uppercase tracking-widest text-ink-500">Section {section.number}</p>
+    <h1 class="mt-1 text-2xl font-bold text-ink-900 sm:text-3xl">{file.title}</h1>
+    {file.blurb && <p class="mt-2 max-w-3xl text-ink-700">{file.blurb}</p>}
+  </header>
+
   {file.download && file.download.length > 0 && (
     <div class="mb-6 flex flex-wrap gap-2">
       {file.download.map((dl) => (
         <a class="btn-ghost" href={dl.href}>↓ {dl.label}</a>
       ))}
+    </div>
+  )}
+
+  {file.embedHtml && (
+    <div class="mb-8">
+      <div
+        class="overflow-hidden rounded-lg ring-1 ring-ink-200 bg-white shadow-sm"
+        style="aspect-ratio: 16 / 10;"
+      >
+        <iframe
+          src={file.embedHtml}
+          title={file.title}
+          class="h-full w-full"
+          loading="lazy"
+          allow="fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p class="mt-2 text-xs text-ink-500">
+        Live deck. Use the deck's own arrow keys or on-screen controls to advance slides. On mobile, tap to focus the deck before swiping.
+      </p>
     </div>
   )}
 

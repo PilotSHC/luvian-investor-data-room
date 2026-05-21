@@ -24,19 +24,19 @@ Four independent macro shifts have converged in the 2024–2026 window. Any two 
 
 The failure mode is upstream of the model. AI suggestions are plausible but the organisation cannot prove they are correct. Outputs are non-traceable to authoritative source artefacts. Suggestions silently violate organisational invariants (safety constraints, regulatory requirements, interface contracts). There is no revocation pathway when an upstream fact changes and invalidates a downstream AI-generated artefact. The pattern is consistent across every regulated-industry deployment: generic RAG + chatbot is not a regulated-industry primitive.
 
-That is the wedge. The next 18 months are when those organisations stop trying to retrofit horizontal tooling and start buying purpose-built substrate. Frontier reasoning capability has commoditised; the durable margin has shifted to the operational substrate the model reasons over — proprietary context, governed retrieval, provenance, permissioning. Customers are no longer asking "which LLM?" They are asking "which substrate?"
+That is the wedge. The next 18 months are when those organisations stop trying to retrofit horizontal tooling and start buying purpose-built substrate. Frontier reasoning capability has commoditised; the durable margin has shifted to the operational substrate the model reasons over, proprietary context, governed retrieval, provenance, permissioning. Customers are no longer asking "which LLM?" They are asking "which substrate?"
 
 ### 1.2 $13.8B in robotics funding flowed in 2025 (vs. $7.8B in 2024)
 
-The marquee 2024–2026 robotics rounds — Figure ($39B post), Skild ($14B post), Physical Intelligence ($5.6B post), Saronic ($4B post), Shield AI ($5.3B post), Anduril ($61B post, Mar 2026) — are each a buyer or a partner for an engineering intelligence layer. The robotics renaissance is the single largest concentration of new engineering complexity in a generation, and every team in it is running concurrent MBSE + safety + V&V + telemetry workflows on tooling built for the era of single-product OEMs.
+The marquee 2024–2026 robotics rounds. Figure ($39B post), Skild ($14B post), Physical Intelligence ($5.6B post), Saronic ($4B post), Shield AI ($5.3B post), Anduril ($61B post, Mar 2026), are each a buyer or a partner for an engineering intelligence layer. The robotics renaissance is the single largest concentration of new engineering complexity in a generation, and every team in it is running concurrent MBSE + safety + V&V + telemetry workflows on tooling built for the era of single-product OEMs.
 
-Each of those companies has the cost structure ($1B+ programs), the regulatory pressure (FAA, NHTSA, DoD), and the AI-native instinct (founders who came from frontier labs) to be a strategic-ACV customer for a typed, AI-native engineering substrate. None of them is building it themselves at the platform level — they are buying.
+Each of those companies has the cost structure ($1B+ programs), the regulatory pressure (FAA, NHTSA, DoD), and the AI-native instinct (founders who came from frontier labs) to be a strategic-ACV customer for a typed, AI-native engineering substrate. None of them is building it themselves at the platform level, they are buying.
 
 ### 1.3 DoD MOSA mandate, December 2024
 
-The December 2024 DoD memo directs **MOSA (Modular Open Systems Approach) compliance at every SETR, Gate Review, and Program Review for MDAPs**. The FY2026 weapons portfolio is $384.3B. MOSA is not a documentation requirement; it is a structural one — it requires a typed, AI-readable model spine that connects requirements, designs, safety analysis, verification evidence, and configuration baselines across the program lifecycle.
+The December 2024 DoD memo directs **MOSA (Modular Open Systems Approach) compliance at every SETR, Gate Review, and Program Review for MDAPs**. The FY2026 weapons portfolio is $384.3B. MOSA is not a documentation requirement; it is a structural one, it requires a typed, AI-readable model spine that connects requirements, designs, safety analysis, verification evidence, and configuration baselines across the program lifecycle.
 
-In parallel: the EU AI Act (in force 2024, enforcement 2026–2027) requires documentation, traceability, human oversight, and audit trails for high-risk AI systems. NIST AI RMF and ISO/IEC 42001 are becoming procurement prerequisites. Every one of these regulatory threads converges on the same set of primitives Luvian is building. Not by accident — the regulators read the same engineering literature.
+In parallel: the EU AI Act (in force 2024, enforcement 2026–2027) requires documentation, traceability, human oversight, and audit trails for high-risk AI systems. NIST AI RMF and ISO/IEC 42001 are becoming procurement prerequisites. Every one of these regulatory threads converges on the same set of primitives Luvian is building. Not by accident, the regulators read the same engineering literature.
 
 ### 1.4 IL5/IL6 air-gap as architecture, not afterthought
 
@@ -46,7 +46,7 @@ SaaS context AI (Notion AI, Hebbia, most Glean tenancies) is structurally locked
 
 ### A note on SysML v2
 
-SysML v2 ratification (OMG, 2023) and reference-implementation hardening (2024–2025) are *enabling preconditions* for the wedge surface — they make the typed engineering ontology buildable and the textual notation usable for diff, review, and AI consumption. They are not, on their own, a forcing function. Cameo shipped SysML v2 conformance in December 2025; the "first SysML v2 modeler" race is over. The four forcing functions above are what makes the *engineering intelligence layer* category investable now.
+SysML v2 ratification (OMG, 2023) and reference-implementation hardening (2024–2025) are *enabling preconditions* for the wedge surface, they make the typed engineering ontology buildable and the textual notation usable for diff, review, and AI consumption. They are not, on their own, a forcing function. Cameo shipped SysML v2 conformance in December 2025; the "first SysML v2 modeler" race is over. The four forcing functions above are what makes the *engineering intelligence layer* category investable now.
 
 ---
 
@@ -69,7 +69,7 @@ We are entering the third row of that table. The window is roughly
 
 ## 3. Who else sees this and why we are not afraid of them
 
-Four classes of competitor see this same opportunity. Each has a structural reason it will be slow. The detailed competitive matrix and the named threat list (Flow Engineering, Trace.Space, Aras + InnovatorEdge AI) live in [Competitive_Landscape.md](./Competitive_Landscape.md). The high-level classes:
+Four classes of competitor see this same opportunity. Each has a structural reason it will be slow. The detailed competitive matrix and the named threat list (Flow Engineering, Trace.Space, Aras + InnovatorEdge AI) live in *Competitive Landscape*. The high-level classes:
 
 ### 3.1 Horizontal context AI (Glean, Hebbia)
 
@@ -89,7 +89,7 @@ Gen-AI bolt-on shipped in the last 18 months.
 
 - **Architecture lock-in.** Their substrates are 20-year-old
   document-and-workflow systems. AI-native reasoning over them is a
-  retrofit, not a redesign — and the retrofit always loses to the
+  retrofit, not a redesign, and the retrofit always loses to the
   greenfield.
 - **Cross-tool blindness.** They cannot reason across each other's
   systems by definition. The customer's engineering organisation runs
@@ -118,7 +118,7 @@ sentence about engineering.
   has no opinion about engineering meaning. Without that opinion the
   substrate cannot enforce correctness.
 - **No regulated-industry deployment posture.** On-prem, air-gapped,
-  ITAR, FIPS, customer-managed-keys — these are not feature flags. They
+  ITAR, FIPS, customer-managed-keys, these are not feature flags. They
   are how the entire system is built.
 - **Wrong customer.** Their default customer is a SaaS marketing org or
   a customer-success team. The cost of plausible-nonsense in those
@@ -140,7 +140,7 @@ articulating versions of this category.
   skill. (See `06_Team/Founder_Bio_Stephan_Claxton.md`.)
 - **Architecture seriousness.** Most of the new entrants are starting
   from a chatbot UI and reasoning backwards. We are starting from the
-  substrate — the operational context layer — and reasoning forwards
+  substrate, the operational context layer, and reasoning forwards
   to the consumption surface. That order matters.
 - **Speed.** A small team that knows the domain and has the
   architectural plan converges faster than a larger team that doesn't.
@@ -151,10 +151,10 @@ articulating versions of this category.
 
 A pre-seed bet on Luvian is not a bet on:
 
-- *"Will the founder ship a product?"* — Yes, the alpha is shipping.
-- *"Will the model improve enough to make this work?"* — That has
+- *"Will the founder ship a product?"*. Yes, the alpha is shipping.
+- *"Will the model improve enough to make this work?"*. That has
   already happened.
-- *"Will customers want this?"* — They are already telling us they do.
+- *"Will customers want this?"*. They are already telling us they do.
 
 It is a bet on:
 
@@ -168,4 +168,4 @@ This is what pre-seed conviction looks like.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

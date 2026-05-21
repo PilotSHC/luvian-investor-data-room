@@ -8,18 +8,18 @@ title: "Context Graph Design"
 
 > Companion document to the **Architecture Vision Memo**. Where the
 > Vision Memo argues *why* a typed substrate matters, this document
-> describes *what the substrate looks like* — the graph model, the
+> describes *what the substrate looks like*, the graph model, the
 > primary node and edge types, the persistence layer, and the
 > retrieval pipeline.
 
 This is not a final reference architecture. It is the architectural
-**commitment** at pre-seed — the shape of the substrate the team is
+**commitment** at pre-seed, the shape of the substrate the team is
 building. It is documented to the level where a Series-A-stage technical
 investor can pressure-test it without an NDA.
 
 ---
 
-## 1. Substrate model — types first
+## 1. Substrate model, types first
 
 The substrate is a **typed property graph** with a small, fixed set of
 node and edge meta-types and a much larger, extensible set of
@@ -51,7 +51,7 @@ provenance subgraph.
 
 This is **deliberately not** a free-form graph. The constraint
 solver runs over node and edge type signatures the same way a
-type-checker runs over function signatures — that is what allows the
+type-checker runs over function signatures, that is what allows the
 substrate to *reject* nonsense at substrate level instead of at
 prompt level.
 
@@ -95,7 +95,7 @@ Key opinion: **the substrate does not own master data for the
 authoritative file blobs**. The authoritative copy of a Cameo model
 file lives in Cameo's repository; the authoritative copy of a Polarion
 requirement lives in Polarion. The substrate is the *operational
-context layer* — it ingests, projects, and reasons over those artefacts,
+context layer*, it ingests, projects, and reasons over those artefacts,
 but it does not become the system of record. That decision is what
 makes the substrate **buyable** by enterprises that already have systems
 of record they cannot replace.
@@ -161,19 +161,19 @@ open-weights frontier.
 The substrate enforces a small set of **first-class invariants** that
 no AI suggestion can violate:
 
-- **Type compatibility** — an edge of type `verifies` requires a
+- **Type compatibility**, an edge of type `verifies` requires a
   `Verification`-typed node on one end and a `Requirement`-typed (or
   satisfaction-chain) node on the other.
-- **Authority constraints** — a suggestion to modify a node owned by a
+- **Authority constraints**, a suggestion to modify a node owned by a
   configuration-frozen baseline requires explicit baseline-unfreeze
   authority.
-- **Provenance integrity** — every derived claim must point back to at
+- **Provenance integrity**, every derived claim must point back to at
   least one authoritative source; orphan claims are rejected at
   substrate level.
-- **Suspect-link propagation** — when an upstream artefact changes,
+- **Suspect-link propagation**, when an upstream artefact changes,
   downstream AI-generated claims are *automatically* marked stale and
   re-evaluated.
-- **Permission boundaries** — role-, project-, and jurisdiction-level
+- **Permission boundaries**, role-, project-, and jurisdiction-level
   permissions are enforced at the substrate level, not at the
   application layer.
 
@@ -193,10 +193,10 @@ relationships (multi-hop dependencies, time-windowed validity).
 | Suspect-link propagation | partial | ✅ | ✅ |
 | Hybrid retrieval (vec + graph) | ✅ | ✅ | ✅ |
 | Constraint solving (full) | partial | ✅ | ✅ |
-| Multi-tenant deployment | — | designed | ✅ |
-| On-prem / air-gap deployment | — | ✅ (packaging) | ✅ (FedRAMP) |
+| Multi-tenant deployment |, | designed | ✅ |
+| On-prem / air-gap deployment |, | ✅ (packaging) | ✅ (FedRAMP) |
 | Ingestion connectors (PLM, ALM, etc.) | partial | first 3–4 | full set |
-| Ontology authoring UI (governance) | — | ✅ | ✅ |
+| Ontology authoring UI (governance) |, | ✅ | ✅ |
 | Eval pipeline | partial | ✅ | regression-tier |
 
 Pre-seed dollars convert primarily into the rows above currently marked
@@ -220,4 +220,4 @@ To stay precise:
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

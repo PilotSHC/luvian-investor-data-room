@@ -1,10 +1,10 @@
 ---
 section: "10-appendix"
 slug: "convertible-note-template"
-title: "Convertible Promissory Note — Luvian Labs LLC"
+title: "Convertible Promissory Note. Luvian Labs LLC"
 ---
 
-> **DRAFT TEMPLATE.** Standard pre-seed convertible promissory note for an **LLC issuer that intends to convert to a Delaware C-corp**. This is the **right instrument for Luvian's current stage** (LLC pre-flip) — SAFEs do not work for LLCs because LLCs do not have preferred stock to convert into. After the Delaware Flip, all subsequent investors will use the YC SAFE in `SAFE_Post_Money_Cap_TEMPLATE.md`. Modeled on Cooley GO + Wilson Sonsini standard pre-money convertible-note forms. **Review with counsel before signing.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
+> **DRAFT.** Standard pre-seed convertible promissory note for an **LLC issuer that intends to convert to a Delaware C-corp**. This is the **right instrument for Luvian's current stage**(LLC pre-flip). SAFEs do not work for LLCs because LLCs do not have preferred stock to convert into. After the Delaware Flip, all subsequent investors will use the YC SAFE in `SAFE_Post_Money_Cap_TEMPLATE.md`. Modeled on Cooley GO + Wilson Sonsini standard pre-money convertible-note forms.**Review with counsel before signing.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
 
 ---
 
@@ -14,7 +14,7 @@ title: "Convertible Promissory Note — Luvian Labs LLC"
 
 ---
 
-**Issuer:** Luvian Labs LLC, a **[STATE — confirm DE / WY / CA / etc.]** limited liability company (the "**Company**")
+**Issuer:** Luvian Labs LLC, a **[STATE, confirm DE / WY / CA / etc.]** limited liability company (the "**Company**")
 **Note No.:** **[CN-001]**
 **Issue Date:** **[YYYY-MM-DD]**
 **Holder:** **[INVESTOR_LEGAL_NAME]** ("**Holder**")
@@ -95,7 +95,7 @@ The parties agree to treat this Note as **debt** for U.S. federal and state inco
 
 ### 10. General Provisions
 
-(a) **Governing Law.** This Note is governed by the laws of the State of **[Delaware / California — confirm with counsel]**, excluding conflict-of-laws rules.
+(a) **Governing Law.** This Note is governed by the laws of the State of **[Delaware / California, confirm with counsel]**, excluding conflict-of-laws rules.
 
 (b) **Notices.** Notices must be in writing and delivered by email (with confirmation) or overnight courier to the address listed below. Notices are effective upon receipt.
 
@@ -113,7 +113,7 @@ The parties agree to treat this Note as **debt** for U.S. federal and state inco
 
 ## Signatures
 
-**Issuer — LUVIAN LABS LLC**
+**Issuer. LUVIAN LABS LLC**
 
 By: _______________________________
 Name: Stephan Claxton
@@ -135,11 +135,11 @@ Date: ____________________
 
 ## Drafting Notes (delete before signing)
 
-- **The Reorganization (Delaware Flip) is part of the use-of-funds and is contractually anticipated by the conversion mechanics in Section 3(b).** This is what makes the note investable — investors know the LLC structure is temporary.
+- **The Reorganization (Delaware Flip) is part of the use-of-funds and is contractually anticipated by the conversion mechanics in Section 3(b).** This is what makes the note investable, investors know the LLC structure is temporary.
 - **Valuation Cap.** Standard pre-seed range for a software company is **$8M–$20M**. Lock with the lead investor first; angels follow at the same cap.
 - **Discount.** If the cap is set, most lead investors are willing to drop the discount to 0% (the cap does the work). Alternative: a 20% discount with a higher cap.
 - **Confirm the LLC's state of formation.** This drives governing-law choice and any state-securities filings.
-- **Form D filing.** Reg D Rule 506(b) is the typical exemption — file Form D within 15 days of the first sale. Confirm with counsel; § 4(a)(2) is also available for small friends-and-family rounds.
+- **Form D filing.** Reg D Rule 506(b) is the typical exemption, file Form D within 15 days of the first sale. Confirm with counsel; § 4(a)(2) is also available for small friends-and-family rounds.
 - **Maintenance during the LLC stage:** issue an Operating Agreement before the first close (`../04_Legal_and_Corporate/Operating_Agreement_TEMPLATE.md`).
 - **Maintenance through the Flip:** track the conversion in `../04_Legal_and_Corporate/LLC_to_Ccorp_Conversion_Plan.md`.
 - After execution: deposit funds, update the cap-table tooling (Pulley supports LLCs; Carta is C-corp-only), file the executed Note in `../_private/Contracts/Funding/CN_<investor>_<date>_EXECUTED.pdf`, update `Funding_Documents_INDEX.md`.

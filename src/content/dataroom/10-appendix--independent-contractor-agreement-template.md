@@ -4,7 +4,7 @@ slug: "independent-contractor-agreement-template"
 title: "Independent Contractor Agreement"
 ---
 
-> **DRAFT TEMPLATE.** Standard-form contractor agreement for engaging engineers, designers, advisors, and other independent contractors. Pairs with the **CIIA** (`../04_Legal_and_Corporate/CIIA_TEMPLATE.md`) — never engage a contractor on the agreement alone without the CIIA. Based on Cooley GO + YC starter pack. **Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
+> **DRAFT.** Standard-form contractor agreement for engaging engineers, designers, advisors, and other independent contractors. Pairs with the **CIIA**(`../04_Legal_and_Corporate/CIIA_TEMPLATE.md`), never engage a contractor on the agreement alone without the CIIA. Based on Cooley GO + YC starter pack.**Review with counsel.** See `../04_Legal_and_Corporate/_LEGAL_DISCLAIMER.md`.
 
 ---
 
@@ -22,7 +22,7 @@ This **Independent Contractor Agreement** (this "**Agreement**") is entered into
 
 ### 2. Compensation
 
-(a) **Fees.** The Company will pay Contractor as set forth in the Statement of Work — typically an hourly rate, a fixed-fee deliverable, or a monthly retainer.
+(a) **Fees.** The Company will pay Contractor as set forth in the Statement of Work, typically an hourly rate, a fixed-fee deliverable, or a monthly retainer.
 
 (b) **Invoicing.** Contractor will invoice monthly. Undisputed invoices are payable **Net-30** by ACH or wire.
 
@@ -74,7 +74,7 @@ EXCEPT FOR CONTRACTOR'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 7 AND BREACHES
 
 (a) **Governing Law.** Delaware law (or California, by negotiation), excluding conflict-of-laws rules.
 
-(b) **Dispute Resolution.** *(Optional — strike if not desired.)* Disputes will be resolved by binding arbitration administered by JAMS in **[San Francisco, California]**, except either party may seek injunctive relief in court.
+(b) **Dispute Resolution.** *(Optional, strike if not desired.)* Disputes will be resolved by binding arbitration administered by JAMS in **[San Francisco, California]**, except either party may seek injunctive relief in court.
 
 (c) **Entire Agreement; Amendment.** This Agreement, together with the CIIA and any Statement of Work, constitutes the entire agreement between the parties on this subject matter.
 
@@ -101,7 +101,7 @@ Date: ____________________
 
 ---
 
-## Exhibit A — Statement of Work
+## Exhibit A. Statement of Work
 
 **Effective Date:** [YYYY-MM-DD]
 **Contractor:** [NAME]
@@ -122,7 +122,7 @@ Begins **[YYYY-MM-DD]**; estimated duration **[N weeks / months]**.
 
 ### Acceptance Criteria
 
-[Define what "done" looks like — e.g. PR merged, design files delivered, advisory hours logged.]
+[Define what "done" looks like, e.g. PR merged, design files delivered, advisory hours logged.]
 
 ---
 
@@ -130,7 +130,7 @@ Begins **[YYYY-MM-DD]**; estimated duration **[N weeks / months]**.
 
 - **Misclassification risk.** Treating a worker as a contractor when they should be a W-2 employee is a major US tax/labor liability. Apply the IRS 20-factor test (or California ABC test) before defaulting to "contractor." If the worker (i) works set hours, (ii) takes day-to-day direction, (iii) cannot work for other clients, and (iv) uses Company equipment, they are likely an employee.
 - **California AB-5.** California has very strict contractor rules. For California-resident contractors, document independent business operation (LLC, multiple clients, set rates, independent equipment).
-- **Always pair with the CIIA** — without it, the Company does not own the IP the contractor produces.
+- **Always pair with the CIIA**, without it, the Company does not own the IP the contractor produces.
 - For non-US contractors, confirm tax-treaty status, withholding requirements, and local labor law (especially in the EU and UK).
 - For advisors who are not delivering code, a simpler "Advisor Agreement" is more appropriate (typically equity-only, capped at 0.1–0.5% over 2 years).
 - File executed copies in `_private/Legal/Employment/` (gitignored). Update `../04_Legal_and_Corporate/Employment_Agreements_INDEX.md`.

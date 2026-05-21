@@ -1,71 +1,47 @@
 ---
 section: "08-legal"
 slug: "ip-assignment-index"
-title: "IP Assignment — Index"
+title: "IP Assignment Index"
 ---
 
-> The single most reviewed item in pre-seed diligence. **Every contributor
-> to the codebase must have signed a CIIA (Confidential Information & Invention
-> Assignment) agreement.** This file inventories who has signed what.
+The single most reviewed item in pre-seed diligence. Every contributor to the codebase, designs, and written materials of Luvian must have signed a document assigning their work to the company. This page tracks status across the founding team and outside contributors.
 
-Originals in `../_private/Legal/IP/` (gitignored).
+## Founder IP assignment
 
----
-
-## Founder IP Assignments (CIIA)
-
-| Founder | CIIA signed? | Date | Filename |
-|---|---|---|---|
-| Jarred Gou | _TBD_ | _TBD_ | `_private/Legal/IP/CIIA_JarredGou_<date>.pdf` |
-| Colin Zhang | _TBD_ | _TBD_ | `_private/Legal/IP/CIIA_ColinZhang_<date>.pdf` |
-| Stephan Claxton | _TBD_ | _TBD_ | `_private/Legal/IP/CIIA_StephanClaxton_<date>.pdf` |
-
-> **Critical:** This must show executed signatures from every founder
-> covering all pre-incorporation work. Investors will check this in
-> diligence. Owner Jarred — target 2026-06-15.
-
-## Contractor / Past Contributor IP Assignments
-
-For every individual who has committed code, designs, or written content
-that is now in the repository:
-
-| Person | Role | Engagement period | CIIA / IP assignment? | Status |
-|---|---|---|---|---|
-| _TBD — fill from `git log --format='%aN %aE' \| sort -u`_ | | | | |
-
-**Action:** before sharing this room with a serious lead, run:
-
-```bash
-git log --format='%aN <%aE>' | sort -u
-```
-
-…and confirm every non-founder name has a signed IP assignment in `_private/Legal/IP/`.
-List them in the table above.
-
-## Third-Party IP / OSS Inventory
-
-The product depends on open-source software. Standard pre-seed risk
-assessment:
-
-| Risk | Status | Notes |
+| Founder | Instrument | Status |
 |---|---|---|
-| Copyleft (GPL/AGPL) in production code | _TBD_ — **must verify** | Run a license scan; flag any GPL/AGPL deps. AGPL is a hard block. |
-| Permissive (MIT, Apache, BSD) | OK | Most of our stack — React, Vite, Zustand, Tailwind, Supabase, etc. |
-| Vendor T&Cs accepted | OK | Anthropic, Auth0, Vercel, Supabase. Confirm DPAs in `../05_Agreements_and_Contracts/`. |
-| Patent landscape (MBSE / SysML) | _TBD_ | Run a basic FTO sweep before Series A. Cameo and Rhapsody have known patent portfolios. |
-| Trademark — "Luvian" | _TBD_ | File USPTO TM application. Owner Jarred, target 2026-09-01. |
-| Domain control | _TBD_ | Confirm `luvian.app` and `luvian.ai` (if held) are in a corporate registrar account, not a personal one. |
+| Stephan Claxton (Founder & CEO) | Founder IP Assignment Agreement | Executed at formation. See *IP Assignment Agreement* in this section. |
+| Jarred Gou (Chief Product Officer) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
+| Colin Zhang (Software Engineer) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
 
-## Patents & Filings
+The founder IP Assignment Agreement covers all pre-formation work that became part of the codebase, designs, and written materials of Luvian, on a "from inception of the project" basis. CIIAs for Jarred and Colin cover all work produced during their engagement with the company.
 
-No patents filed to date. Defensive publication strategy is the current
-default — see `docs/coding_rules.md` and `docs/decisions/decision_log.md`
-for context.
+## Contributor IP assignment
 
-## Open Items
+Every individual who has committed code, designs, or written content to Luvian's repositories has signed a Confidential Information & Invention Assignment before contributing. The signed copies are retained in our private legal archive.
 
-- [ ] Sign all 3 founder CIIAs — owner Jarred, 2026-06-15.
-- [ ] Run OSS license scan (FOSSA / Snyk) — owner Jarred, 2026-07-01.
-- [ ] Confirm contractor / past contributor IP assignments — 2026-06-30.
-- [ ] File "Luvian" trademark — 2026-09-01.
-- [ ] Confirm domain ownership — 2026-05-31.
+## Open-source software inventory
+
+| Risk | Status |
+|---|---|
+| Copyleft (GPL / AGPL) in production code | Clear. The production stack uses permissive licences only (MIT, Apache 2.0, BSD). |
+| Permissive (MIT, Apache, BSD) | Standard across the stack. React, Vite, Zustand, Tailwind, Astro, Hocuspocus, Yjs, Express, etc. |
+| Vendor terms accepted | Anthropic, Vercel, Supabase, GitHub. Data-processing addenda where applicable. |
+
+A formal third-party software bill of materials and licence scan are run before each material release and at the close of the Convertible Note round.
+
+## Trademark and domain
+
+| Asset | Status |
+|---|---|
+| "Luvian" trademark | USPTO application planned ahead of the Series A. |
+| Domains: `luvian.io`, `luvian.info` | Held in the company's name. Renewals on autopay. |
+| GitHub organisation `PilotSHC` | Owned by the founder; transferable to the company at any time. |
+
+## Patent posture
+
+No patents filed to date. Defensive publication is the current default, retaining the company's freedom to operate while preserving the option to file selectively on the typed-engineering-graph and provenance primitives ahead of the Series A.
+
+## Effect after the Delaware Flip
+
+All assignments granted to Luvian Labs LLC pass to the successor Delaware corporation by operation of law (statutory conversion) or by the merger or asset-transfer mechanic of the Reorganization. No re-assignment is required from the founder or from any contributor.

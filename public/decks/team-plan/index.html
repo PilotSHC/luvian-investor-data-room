@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luvian - 1-Year Team Plan</title>
+<link rel="icon" type="image/png" href="/assets/icon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        luvian: { 50:'#f0f4ff', 100:'#dbe4ff', 200:'#bac8ff', 300:'#91a7ff', 400:'#748ffc', 500:'#5c7cfa', 600:'#4c6ef5', 700:'#4263eb', 800:'#3b5bdb', 900:'#364fc7' },
+        surface: { 0:'#ffffff', 1:'#f8f9fa', 2:'#f1f3f5', 3:'#e9ecef' },
+        ink: { 0:'#212529', 1:'#495057', 2:'#868e96', 3:'#adb5bd' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+  .slide { display: none; height: 100vh; overflow-y: auto; padding-bottom: 80px; justify-content: flex-start !important; }
+  .slide.active { display: flex; }
+  .slide::before, .slide::after { content: ''; flex: 1 0 0px; }
+  .slide-number { font-variant-numeric: tabular-nums; }
+  .progress-bar { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .fade-in { animation: fadeIn 0.5s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .stagger-1 { animation-delay: 0.1s; animation-fill-mode: backwards; }
+  .stagger-2 { animation-delay: 0.2s; animation-fill-mode: backwards; }
+  .stagger-3 { animation-delay: 0.3s; animation-fill-mode: backwards; }
+  .stagger-4 { animation-delay: 0.4s; animation-fill-mode: backwards; }
+  .stagger-5 { animation-delay: 0.5s; animation-fill-mode: backwards; }
+  .chart-container { position: relative; }
+  .gradient-text { background: linear-gradient(135deg, #4c6ef5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .gradient-text-fire { background: linear-gradient(135deg, #f76707, #e03131); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .gradient-text-emerald { background: linear-gradient(135deg, #2f9e44, #0ca678); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .nda-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; padding: 8px 24px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+  .nda-footer .nda-logo { position: absolute; right: 24px; height: 18px; transition: filter 0.3s; }
+  .hire-card { transition: all 0.2s; }
+  .hire-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0,0,0,0.1); }
+  .timeline-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid; flex-shrink: 0; }
+  @media print {
+    body { overflow: auto; }
+    .slide { display: flex !important; page-break-after: always; }
+    .controls, .progress-bar-container { display: none !important; }
+    .nda-footer { position: fixed; bottom: 0; }
+    /* Disable entrance animations during print export. */
+    .fade-in,
+    [class*="stagger-"] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body class="bg-ink-0">
+
+<!-- NDA Footer -->
+<div id="nda-footer" class="nda-footer" style="color: rgba(255,255,255,0.2);"><span>Confidential &nbsp;/&nbsp; Shared under NDA &nbsp;/&nbsp; No Screenshots &nbsp;/&nbsp; No Recordings</span><img id="nda-logo" class="nda-logo" src="/assets/logo.png" alt="Luvian" style="filter: brightness(0) invert(1);"></div>
+
+<!-- Progress Bar -->
+<div class="progress-bar-container fixed top-0 left-0 right-0 z-50 h-1 bg-ink-0/20">
+  <div id="progress" class="progress-bar h-full bg-luvian-500"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls fixed bottom-6 right-6 z-50 flex items-center gap-3">
+  <span id="slide-counter" class="slide-number text-xs text-white/40 font-medium"></span>
+  <button onclick="prevSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button onclick="nextSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/60 flex items-center justify-center transition">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<!-- Slide Navigation -->
+<div class="controls fixed bottom-6 left-6 z-50 flex items-center gap-4">
+  <a href="/" class="flex items-center gap-1 text-xs text-white/30 hover:text-white/60 transition group">
+    <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Library
+  </a>
+  <button onclick="toggleNav()" class="text-xs text-white/30 hover:text-white/60 transition font-medium">Menu</button>
+  <div id="slide-nav" class="hidden absolute bottom-8 left-0 bg-gray-900/95 backdrop-blur border border-white/10 rounded-xl p-3 w-64 max-h-[70vh] overflow-y-auto">
+    <div id="nav-list" class="space-y-0.5 text-xs"></div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<section class="slide active flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Cover">
+  <div class="text-center max-w-3xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-20 h-20 rounded-2xl mx-auto mb-8 shadow-lg shadow-luvian-600/30 bg-white p-3">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-widest mb-4">1-Year Team Plan</p>
+    <h1 class="text-5xl lg:text-6xl font-black mb-4 leading-tight">3 &rarr; 11 people.<br><span class="gradient-text-fire">Go HAM.</span></h1>
+    <p class="text-lg text-white/50 max-w-xl mx-auto mb-2">The hiring plan that gets us from SAFE to Seed with first revenue, 5 design partners, SOC 2, and patents filed.</p>
+    <div class="mt-12 flex items-center justify-center gap-6 text-sm text-white/30">
+      <span>Internal Planning</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>Confidential</span>
+      <span class="w-1 h-1 rounded-full bg-white/20"></span>
+      <span>April 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 2: CURRENT STATE ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Where We Are">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Starting Position</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1 leading-tight">Three people.<br>Full product. <span class="gradient-text">Zero revenue.</span></h2>
+    <p class="text-base text-ink-2 mb-8 fade-in stagger-2">We built the hardest thing first &mdash; the platform. Now we need the team to sell it, support it, and scale it.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 fade-in stagger-3">
+      <div class="bg-luvian-50 border-2 border-luvian-300 rounded-xl p-5">
+        <div class="text-2xl mb-2">&#128119;</div>
+        <h3 class="font-bold text-lg mb-1">Annaliese Parker</h3>
+        <p class="text-xs text-luvian-700 font-semibold uppercase mb-2">Founder / CEO</p>
+        <p class="text-sm text-ink-1">Product vision, architecture, fundraising, investor relationships, everything else.</p>
+        <div class="mt-3 flex flex-wrap gap-1">
+          <span class="text-[10px] bg-luvian-100 text-luvian-700 px-1.5 py-0.5 rounded">Product</span>
+          <span class="text-[10px] bg-luvian-100 text-luvian-700 px-1.5 py-0.5 rounded">Architecture</span>
+          <span class="text-[10px] bg-luvian-100 text-luvian-700 px-1.5 py-0.5 rounded">Fundraising</span>
+          <span class="text-[10px] bg-luvian-100 text-luvian-700 px-1.5 py-0.5 rounded">Strategy</span>
+        </div>
+      </div>
+      <div class="bg-surface-1 border border-gray-200 rounded-xl p-5">
+        <div class="text-2xl mb-2">&#128187;</div>
+        <h3 class="font-bold text-lg mb-1">Software Engineer</h3>
+        <p class="text-xs text-ink-2 font-semibold uppercase mb-2">Engineering</p>
+        <p class="text-sm text-ink-1">Core product development. Canvas, React Flow, SysML parser, data model.</p>
+        <div class="mt-3 flex flex-wrap gap-1">
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">Frontend</span>
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">Backend</span>
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">SysML</span>
+        </div>
+      </div>
+      <div class="bg-surface-1 border border-gray-200 rounded-xl p-5">
+        <div class="text-2xl mb-2">&#128203;</div>
+        <h3 class="font-bold text-lg mb-1">Product Manager</h3>
+        <p class="text-xs text-ink-2 font-semibold uppercase mb-2">Product</p>
+        <p class="text-sm text-ink-1">Requirements, prioritization, customer research, feature specs, roadmap.</p>
+        <div class="mt-3 flex flex-wrap gap-1">
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">Roadmap</span>
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">Research</span>
+          <span class="text-[10px] bg-gray-100 text-ink-1 px-1.5 py-0.5 rounded">Specs</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 fade-in stagger-4">
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-red-700 font-bold uppercase">Missing</p>
+        <p class="text-sm text-red-900 font-semibold mt-1">Sales / BD</p>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-red-700 font-bold uppercase">Missing</p>
+        <p class="text-sm text-red-900 font-semibold mt-1">Solutions Eng</p>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-red-700 font-bold uppercase">Missing</p>
+        <p class="text-sm text-red-900 font-semibold mt-1">ML / AI Eng</p>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-red-700 font-bold uppercase">Missing</p>
+        <p class="text-sm text-red-900 font-semibold mt-1">Security / Compliance</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 3: THE MISSION ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="12-Month Mission">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">The 12-Month Mission</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1">Hit these gates or<br>the seed doesn't happen.</h2>
+    <p class="text-base text-white/50 mb-8 fade-in stagger-2">Every hire maps directly to one of these milestones. No vanity hires. No nice-to-haves.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 fade-in stagger-3">
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-black text-sm">1</div>
+          <h3 class="font-bold text-emerald-300">5 Design Partners</h3>
+        </div>
+        <p class="text-sm text-white/60">Active, deploying, providing feedback. LOIs signed. At least 2 in regulated industries.</p>
+        <p class="text-xs text-emerald-400 mt-2 font-semibold">Gate: Month 6</p>
+      </div>
+      <div class="bg-luvian-500/10 border border-luvian-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-luvian-500/20 rounded-lg flex items-center justify-center text-luvian-400 font-black text-sm">2</div>
+          <h3 class="font-bold text-luvian-300">$100K+ ARR</h3>
+        </div>
+        <p class="text-sm text-white/60">First paying customers converted from design partners. Real revenue, not LOIs.</p>
+        <p class="text-xs text-luvian-400 mt-2 font-semibold">Gate: Month 10</p>
+      </div>
+      <div class="bg-violet-500/10 border border-violet-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-violet-500/20 rounded-lg flex items-center justify-center text-violet-400 font-black text-sm">3</div>
+          <h3 class="font-bold text-violet-300">SOC 2 Type 1</h3>
+        </div>
+        <p class="text-sm text-white/60">Audit passed. Unblocks enterprise pipeline and defense prospects.</p>
+        <p class="text-xs text-violet-400 mt-2 font-semibold">Gate: Month 9</p>
+      </div>
+      <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center text-amber-400 font-black text-sm">4</div>
+          <h3 class="font-bold text-amber-300">2 Patents Filed</h3>
+        </div>
+        <p class="text-sm text-white/60">Provisional applications for decision graph and ambient ML architecture.</p>
+        <p class="text-xs text-amber-400 mt-2 font-semibold">Gate: Month 4</p>
+      </div>
+      <div class="bg-rose-500/10 border border-rose-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-rose-500/20 rounded-lg flex items-center justify-center text-rose-400 font-black text-sm">5</div>
+          <h3 class="font-bold text-rose-300">Jarvis Phase 2</h3>
+        </div>
+        <p class="text-sm text-white/60">Gap detection shipping to design partners. The AI moat is real, not a slide.</p>
+        <p class="text-xs text-rose-400 mt-2 font-semibold">Gate: Month 8</p>
+      </div>
+      <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center text-cyan-400 font-black text-sm">6</div>
+          <h3 class="font-bold text-cyan-300">Seed-Ready Metrics</h3>
+        </div>
+        <p class="text-sm text-white/60">Pipeline of 20+ prospects. NRR &gt;100%. Usage data proving retention.</p>
+        <p class="text-xs text-cyan-400 mt-2 font-semibold">Gate: Month 12</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 4: HIRING TIMELINE ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Hiring Timeline">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">The Plan</p>
+    <h2 class="text-4xl font-extrabold mb-4 fade-in stagger-1 leading-tight">8 hires in 12 months.<br>Every one maps to a gate.</h2>
+    <p class="text-base text-ink-2 mb-8 fade-in stagger-2">Staggered hiring to ramp burn gradually. Front-load engineering and domain expertise, then layer on sales and compliance.</p>
+    <div class="fade-in stagger-3 space-y-3">
+      <!-- Q1 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-20 text-right">
+          <p class="text-xs font-bold text-luvian-600 uppercase">Q1</p>
+          <p class="text-[10px] text-ink-2">Month 1&ndash;3</p>
+        </div>
+        <div class="flex-shrink-0 flex flex-col items-center">
+          <div class="timeline-dot bg-luvian-100 border-luvian-500"></div>
+          <div class="w-0.5 h-full bg-luvian-200 min-h-[60px]"></div>
+        </div>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="hire-card bg-luvian-50 border border-luvian-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-luvian-600 text-white px-1.5 py-0.5 rounded font-bold">#4</span>
+              <h4 class="font-bold text-sm">Solutions Architect</h4>
+            </div>
+            <p class="text-xs text-ink-2">Speaks SysML fluently. Runs design partner onboarding. Does demos that close deals.</p>
+            <p class="text-[10px] text-luvian-600 mt-2 font-semibold">Unlocks: Design partner LOIs</p>
+          </div>
+          <div class="hire-card bg-luvian-50 border border-luvian-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-luvian-600 text-white px-1.5 py-0.5 rounded font-bold">#5</span>
+              <h4 class="font-bold text-sm">Senior Full-Stack Engineer</h4>
+            </div>
+            <p class="text-xs text-ink-2">Collaboration, server infra, deployment pipeline. Doubles eng velocity.</p>
+            <p class="text-[10px] text-luvian-600 mt-2 font-semibold">Unlocks: Enterprise-ready product</p>
+          </div>
+        </div>
+      </div>
+      <!-- Q2 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-20 text-right">
+          <p class="text-xs font-bold text-emerald-600 uppercase">Q2</p>
+          <p class="text-[10px] text-ink-2">Month 4&ndash;6</p>
+        </div>
+        <div class="flex-shrink-0 flex flex-col items-center">
+          <div class="timeline-dot bg-emerald-100 border-emerald-500"></div>
+          <div class="w-0.5 h-full bg-emerald-200 min-h-[60px]"></div>
+        </div>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="hire-card bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-emerald-600 text-white px-1.5 py-0.5 rounded font-bold">#6</span>
+              <h4 class="font-bold text-sm">Head of GTM / BD</h4>
+            </div>
+            <p class="text-xs text-ink-2">Works the pipeline. Converts intros into design partners. Builds the outbound engine.</p>
+            <p class="text-[10px] text-emerald-600 mt-2 font-semibold">Unlocks: 5 design partners by M6</p>
+          </div>
+          <div class="hire-card bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-emerald-600 text-white px-1.5 py-0.5 rounded font-bold">#7</span>
+              <h4 class="font-bold text-sm">ML / AI Engineer</h4>
+            </div>
+            <p class="text-xs text-ink-2">Jarvis pipeline: context extraction, gap detection, suggestion ranking. The moat builder.</p>
+            <p class="text-[10px] text-emerald-600 mt-2 font-semibold">Unlocks: Jarvis Phase 2 by M8</p>
+          </div>
+        </div>
+      </div>
+      <!-- Q3 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-20 text-right">
+          <p class="text-xs font-bold text-violet-600 uppercase">Q3</p>
+          <p class="text-[10px] text-ink-2">Month 7&ndash;9</p>
+        </div>
+        <div class="flex-shrink-0 flex flex-col items-center">
+          <div class="timeline-dot bg-violet-100 border-violet-500"></div>
+          <div class="w-0.5 h-full bg-violet-200 min-h-[60px]"></div>
+        </div>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="hire-card bg-violet-50 border border-violet-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-violet-600 text-white px-1.5 py-0.5 rounded font-bold">#8</span>
+              <h4 class="font-bold text-sm">Security & Compliance Lead</h4>
+            </div>
+            <p class="text-xs text-ink-2">Owns SOC 2 audit, security posture, and compliance documentation. FedRAMP prep.</p>
+            <p class="text-[10px] text-violet-600 mt-2 font-semibold">Unlocks: SOC 2 Type 1 by M9</p>
+          </div>
+          <div class="hire-card bg-violet-50 border border-violet-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-violet-600 text-white px-1.5 py-0.5 rounded font-bold">#9</span>
+              <h4 class="font-bold text-sm">Customer Success Engineer</h4>
+            </div>
+            <p class="text-xs text-ink-2">Onboards design partners, collects feedback, drives adoption metrics, runs training.</p>
+            <p class="text-[10px] text-violet-600 mt-2 font-semibold">Unlocks: 90%+ DP retention</p>
+          </div>
+        </div>
+      </div>
+      <!-- Q4 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-20 text-right">
+          <p class="text-xs font-bold text-amber-600 uppercase">Q4</p>
+          <p class="text-[10px] text-ink-2">Month 10&ndash;12</p>
+        </div>
+        <div class="flex-shrink-0 flex flex-col items-center">
+          <div class="timeline-dot bg-amber-100 border-amber-500"></div>
+        </div>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="hire-card bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-amber-600 text-white px-1.5 py-0.5 rounded font-bold">#10</span>
+              <h4 class="font-bold text-sm">Account Executive</h4>
+            </div>
+            <p class="text-xs text-ink-2">Converts design partners to paid. Builds pipeline for seed-stage growth. Commission-heavy.</p>
+            <p class="text-[10px] text-amber-600 mt-2 font-semibold">Unlocks: $100K+ ARR by M10</p>
+          </div>
+          <div class="hire-card bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-amber-600 text-white px-1.5 py-0.5 rounded font-bold">#11</span>
+              <h4 class="font-bold text-sm">Senior Engineer #2</h4>
+            </div>
+            <p class="text-xs text-ink-2">On-prem deployment, enterprise features, API hardening. Prepares for scale.</p>
+            <p class="text-[10px] text-amber-600 mt-2 font-semibold">Unlocks: Enterprise pilot-ready</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 5: Q1 DEEP DIVE ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Q1: Foundation">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Q1: Month 1&ndash;3</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1">Foundation.<br>3 &rarr; 5 people.</h2>
+    <p class="text-base text-white/50 mb-8 fade-in stagger-2">Two hires that unlock everything downstream. Without domain credibility and eng velocity, nothing else works.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128736;</span>
+          <div>
+            <h3 class="font-bold text-lg text-luvian-300">Solutions Architect</h3>
+            <p class="text-xs text-white/40">Hire #4 &bull; Month 1&ndash;2</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-white/70">10+ years in MBSE / systems engineering. Has used Cameo, DOORS, or Jama. Can speak ISO 26262 or DO-178C. Has sold or pre-sold enterprise tools before.</p>
+          </div>
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-white/70">Runs design partner onboarding. Builds demo environments. Creates migration playbooks. Does technical deep-dives with prospects.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Cash</p>
+              <p class="text-sm font-bold text-white/80">$130K</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Equity</p>
+              <p class="text-sm font-bold text-luvian-300">1.50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#9881;</span>
+          <div>
+            <h3 class="font-bold text-lg text-luvian-300">Senior Full-Stack Engineer</h3>
+            <p class="text-xs text-white/40">Hire #5 &bull; Month 2&ndash;3</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-white/70">5+ years TypeScript/React. Experience with real-time systems (WebSockets, CRDTs). Has shipped enterprise SaaS. Can own a vertical slice.</p>
+          </div>
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-white/70">Owns server infra, collaboration layer, and deployment pipeline. Pairs with existing eng on canvas performance. On-call for design partner issues.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Cash</p>
+              <p class="text-sm font-bold text-white/80">$145K</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Equity</p>
+              <p class="text-sm font-bold text-luvian-300">1.25%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-luvian-600/20 border border-luvian-500/30 rounded-xl p-4 text-center fade-in stagger-4">
+      <p class="text-sm text-luvian-300 font-bold">Q1 Exit Criteria: 2 design partner LOIs signed. Product deployed to first partner. Patents filed.</p>
+      <p class="text-xs text-white/40 mt-1">Monthly burn: $35K &rarr; $60K | Headcount: 3 &rarr; 5</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 6: Q2 DEEP DIVE ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Q2: Acceleration">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-3 fade-in">Q2: Month 4&ndash;6</p>
+    <h2 class="text-4xl font-extrabold mb-4 fade-in stagger-1 leading-tight">Acceleration.<br>5 &rarr; 7 people.</h2>
+    <p class="text-base text-ink-2 mb-8 fade-in stagger-2">This is where we go from "interesting product" to "pipeline machine." Sales engine starts. AI moat gets real.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-3">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128200;</span>
+          <div>
+            <h3 class="font-bold text-lg text-emerald-800">Head of GTM / Business Development</h3>
+            <p class="text-xs text-emerald-600 font-semibold">Hire #6 &bull; Month 4</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-ink-1">B2B enterprise sales background, ideally in dev tools, PLM, or defense tech. Has sold $100K+ ACV deals. Comfortable with long sales cycles and technical buyers.</p>
+          </div>
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-ink-1">Converts warm intros (Cameron, Krish network) into design partners. Builds outbound playbook. Qualifies enterprise prospects. Owns pipeline CRM.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-emerald-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-emerald-600">Cash</p>
+              <p class="text-sm font-bold">$120K</p>
+            </div>
+            <div class="bg-emerald-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-emerald-600">OTE</p>
+              <p class="text-sm font-bold">$180K</p>
+            </div>
+            <div class="bg-emerald-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-emerald-600">Equity</p>
+              <p class="text-sm font-bold">1.50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#129504;</span>
+          <div>
+            <h3 class="font-bold text-lg text-emerald-800">ML / AI Engineer</h3>
+            <p class="text-xs text-emerald-600 font-semibold">Hire #7 &bull; Month 5</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-ink-1">3+ years applied ML. Experience with embeddings, retrieval, and ranking systems. Comfortable with local-first inference (ONNX, WASM). Bonus: NLP or knowledge graph background.</p>
+          </div>
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-ink-1">Builds Jarvis Phase 1&ndash;2: context pipeline, gap detection engine, suggestion ranking. Works with the semantic context contract. Ships ML features to design partners.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-emerald-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-emerald-600">Cash</p>
+              <p class="text-sm font-bold">$155K</p>
+            </div>
+            <div class="bg-emerald-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-emerald-600">Equity</p>
+              <p class="text-sm font-bold">1.25%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center fade-in stagger-4">
+      <p class="text-sm text-emerald-800 font-bold">Q2 Exit Criteria: 5 design partners active. Jarvis Phase 1 shipping. Pipeline of 10+ qualified prospects.</p>
+      <p class="text-xs text-ink-2 mt-1">Monthly burn: $60K &rarr; $90K | Headcount: 5 &rarr; 7</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 7: Q3 DEEP DIVE ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Q3: Compliance & Retention">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-violet-400 uppercase tracking-wider mb-3 fade-in">Q3: Month 7&ndash;9</p>
+    <h2 class="text-4xl lg:text-5xl font-extrabold mb-4 fade-in stagger-1">Compliance &amp; Retention.<br>7 &rarr; 9 people.</h2>
+    <p class="text-base text-white/50 mb-8 fade-in stagger-2">Enterprise buyers won't sign without SOC 2. Design partners won't stay without support. This quarter unblocks both.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128274;</span>
+          <div>
+            <h3 class="font-bold text-lg text-violet-300">Security & Compliance Lead</h3>
+            <p class="text-xs text-white/40">Hire #8 &bull; Month 7</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-white/70">SOC 2 implementation experience (has done it at least once before). Security engineering chops &mdash; can write code, not just policies. Bonus: FedRAMP awareness.</p>
+          </div>
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Why now, not earlier</p>
+            <p class="text-sm text-white/70">SOC 2 prep takes 3-4 months of focused work. Hiring at M7 means audit-ready by M9-10. Earlier would waste cycles on a product still changing rapidly.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Cash</p>
+              <p class="text-sm font-bold text-white/80">$150K</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Equity</p>
+              <p class="text-sm font-bold text-violet-300">0.75%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128588;</span>
+          <div>
+            <h3 class="font-bold text-lg text-violet-300">Customer Success Engineer</h3>
+            <p class="text-xs text-white/40">Hire #9 &bull; Month 8</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-white/70">Technical CS background &mdash; can debug product issues and write small scripts. Systems engineering familiarity preferred. Empathetic, organized, metrics-driven.</p>
+          </div>
+          <div>
+            <p class="text-xs text-white/40 uppercase font-bold mb-1">Why now</p>
+            <p class="text-sm text-white/70">By M8, 5 design partners are active. Without dedicated CS, the founder and solutions architect become the bottleneck. This hire frees them to sell.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Cash</p>
+              <p class="text-sm font-bold text-white/80">$110K</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-white/40">Equity</p>
+              <p class="text-sm font-bold text-violet-300">0.75%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-violet-600/20 border border-violet-500/30 rounded-xl p-4 text-center fade-in stagger-4">
+      <p class="text-sm text-violet-300 font-bold">Q3 Exit Criteria: SOC 2 Type 1 audit passed. Jarvis Phase 2 shipping. Design partner NPS &gt; 50. First paid conversion in progress.</p>
+      <p class="text-xs text-white/40 mt-1">Monthly burn: $90K &rarr; $115K | Headcount: 7 &rarr; 9</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 8: Q4 DEEP DIVE ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Q4: Revenue & Scale">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-amber-600 uppercase tracking-wider mb-3 fade-in">Q4: Month 10&ndash;12</p>
+    <h2 class="text-4xl font-extrabold mb-4 fade-in stagger-1 leading-tight">Revenue &amp; Scale.<br>9 &rarr; 11 people.</h2>
+    <p class="text-base text-ink-2 mb-8 fade-in stagger-2">Convert design partners to paying customers. Build the pipeline that makes the seed deck write itself.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-3">
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128176;</span>
+          <div>
+            <h3 class="font-bold text-lg text-amber-800">Account Executive</h3>
+            <p class="text-xs text-amber-600 font-semibold">Hire #10 &bull; Month 10</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-ink-1">Quota-carrying AE with enterprise B2B experience. $100K&ndash;$500K ACV range. Hungry, early-stage mentality. Can navigate procurement in regulated industries.</p>
+          </div>
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-ink-1">Converts warm pipeline (design partners + inbound from SOC 2 / conference exposure). Runs demos with solutions architect. Owns CRM and forecast.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-amber-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-amber-600">Base</p>
+              <p class="text-sm font-bold">$100K</p>
+            </div>
+            <div class="bg-amber-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-amber-600">OTE</p>
+              <p class="text-sm font-bold">$200K</p>
+            </div>
+            <div class="bg-amber-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-amber-600">Equity</p>
+              <p class="text-sm font-bold">0.50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">&#128295;</span>
+          <div>
+            <h3 class="font-bold text-lg text-amber-800">Senior Engineer #2</h3>
+            <p class="text-xs text-amber-600 font-semibold">Hire #11 &bull; Month 11</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Profile</p>
+            <p class="text-sm text-ink-1">Infrastructure + platform focus. Experience with Docker, on-prem deployment, enterprise auth (SAML/OIDC). Has dealt with air-gapped environments.</p>
+          </div>
+          <div>
+            <p class="text-xs text-ink-2 uppercase font-bold mb-1">Day-to-day</p>
+            <p class="text-sm text-ink-1">On-prem deployment package. Enterprise SSO integration. API hardening and rate limiting. Prepares the platform for defense/gov customers post-seed.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-amber-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-amber-600">Cash</p>
+              <p class="text-sm font-bold">$150K</p>
+            </div>
+            <div class="bg-amber-100 rounded-lg p-2.5 text-center">
+              <p class="text-xs text-amber-600">Equity</p>
+              <p class="text-sm font-bold">0.50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4 text-center fade-in stagger-4">
+      <p class="text-sm text-amber-800 font-bold">Q4 Exit Criteria: $100K+ ARR. 20+ prospect pipeline. On-prem pilot deployed. Seed deck ready.</p>
+      <p class="text-xs text-ink-2 mt-1">Monthly burn: $115K &rarr; $140K | Headcount: 9 &rarr; 11</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 9: ORG CHART EVOLUTION ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Org Evolution">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Org Shape</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">From founder-does-everything<br>to functional leads.</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <h3 class="font-bold text-sm text-white/40 uppercase tracking-wider mb-4">Engineering (4 people by M12)</h3>
+        <div class="space-y-2">
+          <div class="bg-luvian-500/10 border border-luvian-500/20 rounded-lg p-3 flex items-center gap-3">
+            <span class="text-xs bg-luvian-500/30 text-luvian-300 px-1.5 py-0.5 rounded font-bold">Lead</span>
+            <span class="text-sm text-white/80">Founder (architecture + product)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-white/40">IC</span>
+            <span class="text-sm text-white/60">SW Engineer (existing &mdash; canvas, SysML)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-luvian-400">Q1</span>
+            <span class="text-sm text-white/60">Sr. Full-Stack Engineer (server, collab)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-emerald-400">Q2</span>
+            <span class="text-sm text-white/60">ML/AI Engineer (Jarvis pipeline)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-amber-400">Q4</span>
+            <span class="text-sm text-white/60">Sr. Engineer #2 (infra, on-prem)</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <h3 class="font-bold text-sm text-white/40 uppercase tracking-wider mb-4">Go-to-Market (4 people by M12)</h3>
+        <div class="space-y-2">
+          <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 flex items-center gap-3">
+            <span class="text-xs bg-emerald-500/30 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Lead</span>
+            <span class="text-sm text-white/80">Head of GTM (pipeline, strategy)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-luvian-400">Q1</span>
+            <span class="text-sm text-white/60">Solutions Architect (demos, onboarding)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-violet-400">Q3</span>
+            <span class="text-sm text-white/60">Customer Success Eng (retention)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3 ml-4">
+            <span class="text-xs text-amber-400">Q4</span>
+            <span class="text-sm text-white/60">Account Executive (quota-carrying)</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-white/40 uppercase tracking-wider mt-6 mb-4">Product & Compliance (3 people by M12)</h3>
+        <div class="space-y-2">
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3">
+            <span class="text-xs text-white/40">IC</span>
+            <span class="text-sm text-white/60">Product Manager (existing)</span>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 flex items-center gap-3">
+            <span class="text-xs text-violet-400">Q3</span>
+            <span class="text-sm text-white/60">Security & Compliance Lead</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 grid grid-cols-4 gap-3 fade-in stagger-3">
+      <div class="bg-white/5 rounded-lg p-3 text-center">
+        <p class="text-xs text-white/40">End Q1</p>
+        <p class="text-2xl font-black text-white/80">5</p>
+        <p class="text-[10px] text-white/30">3 eng &bull; 1 SA &bull; 1 PM</p>
+      </div>
+      <div class="bg-white/5 rounded-lg p-3 text-center">
+        <p class="text-xs text-white/40">End Q2</p>
+        <p class="text-2xl font-black text-white/80">7</p>
+        <p class="text-[10px] text-white/30">4 eng &bull; 1 SA &bull; 1 GTM &bull; 1 PM</p>
+      </div>
+      <div class="bg-white/5 rounded-lg p-3 text-center">
+        <p class="text-xs text-white/40">End Q3</p>
+        <p class="text-2xl font-black text-white/80">9</p>
+        <p class="text-[10px] text-white/30">4 eng &bull; 1 SA &bull; 1 GTM &bull; 1 CS &bull; 1 Sec &bull; 1 PM</p>
+      </div>
+      <div class="bg-luvian-500/20 border border-luvian-500/30 rounded-lg p-3 text-center">
+        <p class="text-xs text-luvian-400">End Q4</p>
+        <p class="text-2xl font-black text-luvian-300">11</p>
+        <p class="text-[10px] text-white/30">5 eng &bull; 1 SA &bull; 1 GTM &bull; 1 AE &bull; 1 CS &bull; 1 Sec &bull; 1 PM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 10: BUDGET & BURN ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Budget & Burn">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">The Numbers</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">$1.7M all-in.<br>$1.5&ndash;2M SAFE required.</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-2">
+      <div class="bg-surface-1 border border-gray-200 rounded-xl p-5 overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">Monthly Burn Ramp</h3>
+        <div class="chart-container" style="height:280px"><canvas id="burnChart"></canvas></div>
+      </div>
+      <div class="bg-surface-1 border border-gray-200 rounded-xl p-5 overflow-x-auto">
+        <h3 class="text-sm font-semibold mb-3">12-Month Budget</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b-2 border-gray-200 text-ink-2"><th class="py-2 pr-3">Category</th><th class="py-2 text-right">Annual</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">People (salaries + taxes)</td><td class="py-2 text-right font-semibold">$1,100K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">SOC 2 audit + tooling</td><td class="py-2 text-right">$50K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">Legal (IP, entity, contracts)</td><td class="py-2 text-right">$80K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">Infrastructure + tooling</td><td class="py-2 text-right">$60K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">Patent filings (2 provisionals)</td><td class="py-2 text-right">$25K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">Travel, conferences, events</td><td class="py-2 text-right">$40K</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-medium">AI compute (LLM APIs, GPU)</td><td class="py-2 text-right">$30K</td></tr>
+            <tr class="border-b border-gray-200"><td class="py-2 pr-3 font-medium">Buffer (contingency)</td><td class="py-2 text-right">$135K</td></tr>
+            <tr class="bg-luvian-50 font-bold"><td class="py-2 pr-3">Total</td><td class="py-2 text-right text-luvian-700">$1,520K</td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-ink-2 mt-3">Conservative: assumes full cash comp. Equity-heavy packages could reduce to ~$1.3M.</p>
+      </div>
+    </div>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 fade-in stagger-3">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-emerald-700 font-semibold uppercase">Raise $1.5M</p>
+        <p class="text-2xl font-extrabold text-emerald-700">12 mo</p>
+        <p class="text-xs text-ink-2">Tight but doable with revenue</p>
+      </div>
+      <div class="bg-luvian-50 border-2 border-luvian-300 rounded-xl p-4 text-center">
+        <p class="text-xs text-luvian-700 font-bold uppercase">Raise $1.75M (target)</p>
+        <p class="text-2xl font-extrabold text-luvian-700">14 mo</p>
+        <p class="text-xs text-ink-2">Comfortable with Q4 revenue</p>
+      </div>
+      <div class="bg-surface-1 border border-gray-200 rounded-xl p-4 text-center">
+        <p class="text-xs text-ink-2 font-semibold uppercase">Raise $2M</p>
+        <p class="text-2xl font-extrabold text-ink-0">16 mo</p>
+        <p class="text-xs text-ink-2">Full buffer for slower ramp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 11: EQUITY ALLOCATION ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Equity Map">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Comp Philosophy</p>
+    <h2 class="text-4xl font-extrabold mb-4 fade-in stagger-1">Below-market cash.<br>Above-market equity.</h2>
+    <p class="text-base text-white/50 mb-8 fade-in stagger-2">Total Y1 equity grants: 8.0% from the ESOP pool. Enough to recruit A-players who believe in the graph.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in stagger-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 overflow-x-auto">
+        <h3 class="text-sm font-bold text-white/60 mb-4">Y1 Equity Budget (from 15% ESOP)</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-white/10 text-white/40"><th class="py-2 pr-3 text-left">Hire</th><th class="py-2 pr-3 text-right">Cash</th><th class="py-2 pr-3 text-right">Equity</th><th class="py-2 text-right">Vesting</th></tr></thead>
+          <tbody class="text-white/60">
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Solutions Architect</td><td class="py-2 pr-3 text-right">$130K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">1.50%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Sr. Full-Stack Engineer</td><td class="py-2 pr-3 text-right">$145K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">1.25%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Head of GTM</td><td class="py-2 pr-3 text-right">$120K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">1.50%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">ML/AI Engineer</td><td class="py-2 pr-3 text-right">$155K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">1.25%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Security & Compliance</td><td class="py-2 pr-3 text-right">$150K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">0.75%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Customer Success Eng</td><td class="py-2 pr-3 text-right">$110K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">0.75%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/5"><td class="py-2 pr-3">Account Executive</td><td class="py-2 pr-3 text-right">$100K+</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">0.50%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="border-b border-white/10"><td class="py-2 pr-3">Sr. Engineer #2</td><td class="py-2 pr-3 text-right">$150K</td><td class="py-2 pr-3 text-right text-luvian-300 font-semibold">0.50%</td><td class="py-2 text-right text-white/40">4yr / 1yr cliff</td></tr>
+            <tr class="font-bold"><td class="py-2 pr-3">Total Y1 Grants</td><td class="py-2 pr-3 text-right"></td><td class="py-2 pr-3 text-right text-luvian-400">8.00%</td><td class="py-2 text-right text-white/40">7.00% remaining</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-4">
+          <h3 class="text-sm font-bold text-white/60 mb-3">Comp Philosophy</h3>
+          <div class="space-y-3">
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 bg-luvian-500/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5 text-luvian-300 text-xs font-bold">1</div>
+              <p class="text-sm text-white/70"><strong class="text-white/80">Cash: 75&ndash;85% of market.</strong> We're upfront about this. Below-market cash is the cost of admission to an early-stage rocket ship.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 bg-luvian-500/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5 text-luvian-300 text-xs font-bold">2</div>
+              <p class="text-sm text-white/70"><strong class="text-white/80">Equity: 2&ndash;3x market.</strong> At a $8M cap, 1% = $80K paper value. At a $28M seed, 1% = $280K. The upside is real.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 bg-luvian-500/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5 text-luvian-300 text-xs font-bold">3</div>
+              <p class="text-sm text-white/70"><strong class="text-white/80">Vesting: standard 4/1.</strong> No games. One-year cliff, then monthly. Acceleration on change of control.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 bg-luvian-500/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5 text-luvian-300 text-xs font-bold">4</div>
+              <p class="text-sm text-white/70"><strong class="text-white/80">Revisit at seed.</strong> Cash bumps to market rate when seed closes. Early team is rewarded, not punished.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <h3 class="text-sm font-bold text-white/60 mb-3">ESOP Usage</h3>
+          <div class="chart-container" style="height:140px"><canvas id="esopChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 12: RISK MATRIX ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Hiring Risks">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-red-600 uppercase tracking-wider mb-3 fade-in">Risk Matrix</p>
+    <h2 class="text-4xl font-extrabold mb-4 fade-in stagger-1 leading-tight">What breaks if<br>we don't hire?</h2>
+    <p class="text-base text-ink-2 mb-8 fade-in stagger-2">Each hire de-risks a specific failure mode. Missing any one doesn't kill us, but missing two or more compounds fast.</p>
+    <div class="fade-in stagger-3 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-gray-200 text-ink-2"><th class="py-3 pr-3 text-left">If we don't hire...</th><th class="py-3 pr-3 text-left">What breaks</th><th class="py-3 pr-3 text-left">Severity</th><th class="py-3 text-left">Mitigation</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Solutions Architect</td><td class="py-3 pr-3 text-ink-1">Design partners can't onboard. Founder burns 60%+ of time on demos instead of product/fundraising.</td><td class="py-3 pr-3"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">Critical</span></td><td class="py-3 text-ink-2">Contractor SE as bridge, but won't close deals</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Sr. Full-Stack Engineer</td><td class="py-3 pr-3 text-ink-1">Eng velocity stays at 1x. Collaboration features delayed. Design partners hit bugs with no one to fix them fast.</td><td class="py-3 pr-3"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">Critical</span></td><td class="py-3 text-ink-2">Founder codes more, but fundraising suffers</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Head of GTM</td><td class="py-3 pr-3 text-ink-1">Pipeline stays warm-intro-only. No outbound engine. Design partner target at risk.</td><td class="py-3 pr-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">High</span></td><td class="py-3 text-ink-2">Founder sells, but at the cost of product focus</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">ML/AI Engineer</td><td class="py-3 pr-3 text-ink-1">Jarvis stays at Phase 0. The "AI moat" is a pitch slide, not a product. Investors see through it.</td><td class="py-3 pr-3"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">Critical</span></td><td class="py-3 text-ink-2">Use off-the-shelf LLM wrapper (but no moat)</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Security & Compliance</td><td class="py-3 pr-3 text-ink-1">SOC 2 delayed. Enterprise deals stall. Defense pipeline frozen.</td><td class="py-3 pr-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">High</span></td><td class="py-3 text-ink-2">Vanta + consultant, slower but viable</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Customer Success</td><td class="py-3 pr-3 text-ink-1">Design partners churn or go silent. No usage data for seed deck. SA becomes full-time support.</td><td class="py-3 pr-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">High</span></td><td class="py-3 text-ink-2">SA absorbs, but onboarding new DPs slows</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-3 pr-3 font-medium">Account Executive</td><td class="py-3 pr-3 text-ink-1">Design partners stay free. Revenue gate ($100K ARR) missed. Seed narrative weakens.</td><td class="py-3 pr-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">High</span></td><td class="py-3 text-ink-2">GTM lead converts first deals (slower ramp)</td></tr>
+          <tr><td class="py-3 pr-3 font-medium">Sr. Engineer #2</td><td class="py-3 pr-3 text-ink-1">On-prem delayed. Enterprise pilot not ready. Post-seed velocity is lower.</td><td class="py-3 pr-3"><span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">Medium</span></td><td class="py-3 text-ink-2">Defer to post-seed; manageable</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6 bg-red-50 border border-red-200 rounded-xl p-4 fade-in stagger-4">
+      <p class="text-sm text-red-800"><strong>Non-negotiable hires:</strong> Solutions Architect, Sr. Engineer, and ML/AI Engineer. Without these three, the product, the moat, and the design partner motion all fail. Everything else can be delayed or contracted.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 13: RECRUITING STRATEGY ==================== -->
+<section class="slide flex-col justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8 lg:px-20" data-title="Recruiting Playbook">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-400 uppercase tracking-wider mb-3 fade-in">Recruiting Playbook</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">How we find these people<br>without a recruiter budget.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 fade-in stagger-2">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#128101;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">Network-First Hiring</h3>
+        <p class="text-xs text-white/50">Every team member and advisor sends 10 targeted LinkedIn messages. Referral bonus: $5K equity top-up per successful hire.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#127891;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">INCOSE / MBSE Community</h3>
+        <p class="text-xs text-white/50">The solutions architect lives in this world. Post in INCOSE chapters, MBSE forums, LinkedIn SE groups. These people want to build the future of their field.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#128293;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">Counter-Positioning Pitch</h3>
+        <p class="text-xs text-white/50">"Big tool vendor innovation is dead. We're building what they can't copy. Join now, own 1%+ of the category winner." This pitch resonates with frustrated domain experts.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#127760;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">Remote-First</h3>
+        <p class="text-xs text-white/50">No geographic constraints. US time zones preferred but not required. Access the entire talent pool, not just SF/NYC/Austin.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#128640;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">Speed Kills</h3>
+        <p class="text-xs text-white/50">Offer within 48hrs of final interview. Skip the multi-week process. Send the SAFE deck to candidates &mdash; transparency builds trust.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+        <div class="text-2xl mb-3">&#128296;</div>
+        <h3 class="font-bold text-sm text-white/80 mb-2">Contract-to-Hire</h3>
+        <p class="text-xs text-white/50">For risky positions (solutions architect, ML eng), start with a 4-week paid project. Reduces bad-hire risk when every dollar counts.</p>
+      </div>
+    </div>
+    <div class="mt-6 bg-luvian-600/20 border border-luvian-500/30 rounded-xl p-4 text-center fade-in stagger-3">
+      <p class="text-sm text-luvian-300 font-bold">Total recruiting budget: $0. Time investment: 8&ndash;10 hrs/week for the founder in Q1&ndash;Q2, then delegated to Head of GTM.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 14: MILESTONES MATRIX ==================== -->
+<section class="slide flex-col justify-center bg-white text-ink-0 px-8 lg:px-20" data-title="Milestone Map">
+  <div class="max-w-5xl mx-auto w-full">
+    <p class="text-sm font-semibold text-luvian-600 uppercase tracking-wider mb-3 fade-in">Hire &rarr; Milestone Map</p>
+    <h2 class="text-4xl font-extrabold mb-8 fade-in stagger-1">Every hire has a job:<br>hit a seed gate.</h2>
+    <div class="fade-in stagger-2 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b-2 border-gray-200 text-ink-2">
+          <th class="py-3 pr-3 text-left w-36">Month</th>
+          <th class="py-3 pr-3 text-left">Headcount</th>
+          <th class="py-3 pr-3 text-left">Hire</th>
+          <th class="py-3 pr-3 text-left">Milestone Unlocked</th>
+          <th class="py-3 text-right">Burn</th>
+        </tr></thead>
+        <tbody>
+          <tr class="border-b border-gray-100 bg-luvian-50"><td class="py-2 pr-3 font-semibold text-luvian-700">M1</td><td class="py-2 pr-3">3 &rarr; 4</td><td class="py-2 pr-3 font-medium">Solutions Architect</td><td class="py-2 pr-3 text-ink-1">First design partner demo delivered</td><td class="py-2 text-right">$45K</td></tr>
+          <tr class="border-b border-gray-100 bg-luvian-50"><td class="py-2 pr-3 font-semibold text-luvian-700">M2&ndash;3</td><td class="py-2 pr-3">4 &rarr; 5</td><td class="py-2 pr-3 font-medium">Sr. Full-Stack Engineer</td><td class="py-2 pr-3 text-ink-1">Product deployed to first partner. 2 LOIs signed.</td><td class="py-2 text-right">$58K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-emerald-700">M4</td><td class="py-2 pr-3">5 &rarr; 6</td><td class="py-2 pr-3 font-medium">Head of GTM</td><td class="py-2 pr-3 text-ink-1">Pipeline of 10+ prospects. 2 patents filed.</td><td class="py-2 text-right">$72K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-emerald-700">M5</td><td class="py-2 pr-3">6 &rarr; 7</td><td class="py-2 pr-3 font-medium">ML/AI Engineer</td><td class="py-2 pr-3 text-ink-1">Jarvis Phase 1 (context pipeline) live</td><td class="py-2 text-right">$85K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-emerald-700">M6</td><td class="py-2 pr-3">7</td><td class="py-2 pr-3 text-ink-2">&mdash;</td><td class="py-2 pr-3 text-ink-1 font-bold">5 design partners active &#10003;</td><td class="py-2 text-right">$88K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-violet-700">M7</td><td class="py-2 pr-3">7 &rarr; 8</td><td class="py-2 pr-3 font-medium">Security & Compliance</td><td class="py-2 pr-3 text-ink-1">SOC 2 prep started. Security posture hardened.</td><td class="py-2 text-right">$100K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-violet-700">M8</td><td class="py-2 pr-3">8 &rarr; 9</td><td class="py-2 pr-3 font-medium">Customer Success Eng</td><td class="py-2 pr-3 text-ink-1 font-bold">Jarvis Phase 2 (gap detection) shipping &#10003;</td><td class="py-2 text-right">$110K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-violet-700">M9</td><td class="py-2 pr-3">9</td><td class="py-2 pr-3 text-ink-2">&mdash;</td><td class="py-2 pr-3 text-ink-1 font-bold">SOC 2 Type 1 passed &#10003;</td><td class="py-2 text-right">$112K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-amber-700">M10</td><td class="py-2 pr-3">9 &rarr; 10</td><td class="py-2 pr-3 font-medium">Account Executive</td><td class="py-2 pr-3 text-ink-1 font-bold">$100K+ ARR &#10003; (first paid conversions)</td><td class="py-2 text-right">$125K</td></tr>
+          <tr class="border-b border-gray-100"><td class="py-2 pr-3 font-semibold text-amber-700">M11</td><td class="py-2 pr-3">10 &rarr; 11</td><td class="py-2 pr-3 font-medium">Sr. Engineer #2</td><td class="py-2 pr-3 text-ink-1">On-prem deployment working. Enterprise pilot.</td><td class="py-2 text-right">$138K</td></tr>
+          <tr class="bg-luvian-50"><td class="py-2 pr-3 font-black text-luvian-700">M12</td><td class="py-2 pr-3 font-bold">11</td><td class="py-2 pr-3 font-bold text-luvian-700">SEED READY</td><td class="py-2 pr-3 font-bold text-luvian-700">$100K+ ARR &bull; 5 DPs &bull; SOC 2 &bull; 20+ pipeline &bull; Jarvis live</td><td class="py-2 text-right font-bold">$140K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 15: CLOSING ==================== -->
+<section class="slide flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white px-8" data-title="Let's Go">
+  <div class="text-center max-w-3xl fade-in">
+    <img src="/assets/icon.png" alt="Luvian" class="w-20 h-20 rounded-2xl mx-auto mb-8 shadow-lg shadow-luvian-600/30 bg-white p-3">
+    <h2 class="text-4xl lg:text-5xl font-black mb-4">Raise the SAFE.<br>Hire the team.<br><span class="gradient-text-fire">Go HAM.</span></h2>
+    <p class="text-xl text-luvian-300 mb-2">12 months. 8 hires. 6 gates.</p>
+    <p class="text-lg text-white/40 mb-10">From pre-revenue to seed-ready.</p>
+    <div class="bg-white/5 border border-white/10 rounded-xl p-6 inline-block text-left">
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-28">SAFE Target</span>
+          <span class="text-white/80 font-bold">$1.5&ndash;2M</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-28">Team at M12</span>
+          <span class="text-white/80 font-bold">11 people (5 eng / 4 GTM / 1 sec / 1 PM)</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-28">Revenue Gate</span>
+          <span class="text-white/80 font-bold">$100K+ ARR by month 10</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-28">ESOP Used</span>
+          <span class="text-white/80 font-bold">8.0% of 15% pool &rarr; 7% remaining for seed hires</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-white/40 w-28">Seed Position</span>
+          <span class="text-emerald-400 font-bold">Revenue + SOC 2 + AI moat + 20 prospects = strong hand</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10 text-sm text-white/30">
+      <p>Luvian Confidential. Internal Planning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, total - 1));
+  slides[current].classList.add('active');
+  updateUI();
+}
+
+function nextSlide() { showSlide(current + 1); }
+function prevSlide() { showSlide(current - 1); }
+
+function updateUI() {
+  document.getElementById('slide-counter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progress').style.width = `${((current + 1) / total) * 100}%`;
+  const isDark = slides[current].classList.contains('text-white');
+  document.getElementById('nda-footer').style.color = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.3)';
+  document.getElementById('nda-logo').style.filter = isDark ? 'brightness(0) invert(1)' : 'none';
+  document.getElementById('nda-logo').style.opacity = isDark ? '0.4' : '0.6';
+  const navList = document.getElementById('nav-list');
+  navList.innerHTML = slides.length ? Array.from(slides).map((s, i) =>
+    `<a href="#" onclick="showSlide(${i});toggleNav();return false;" class="block px-2 py-1.5 rounded transition ${i === current ? 'bg-luvian-600/20 text-luvian-400 font-medium' : 'text-white/50 hover:text-white/80 hover:bg-white/5'}">${i + 1}. ${s.dataset.title}</a>`
+  ).join('') : '';
+}
+
+function toggleNav() {
+  document.getElementById('slide-nav').classList.toggle('hidden');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  if (e.key === 'Escape') { document.getElementById('slide-nav').classList.add('hidden'); }
+});
+
+// ==================== CHARTS ====================
+
+// Burn Ramp Chart
+const burnCtx = document.getElementById('burnChart');
+if (burnCtx) {
+  new Chart(burnCtx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'],
+      datasets: [{
+        label: 'Monthly Burn ($K)',
+        data: [35, 45, 58, 72, 85, 88, 100, 110, 112, 125, 138, 140],
+        backgroundColor: [
+          '#bac8ff','#bac8ff','#bac8ff',
+          '#b2f2bb','#b2f2bb','#b2f2bb',
+          '#d0bfff','#d0bfff','#d0bfff',
+          '#ffe066','#ffe066','#ffe066'
+        ],
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: v => `$${v}K` }, grid: { color: '#e9ecef' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ESOP Chart
+const esopCtx = document.getElementById('esopChart');
+if (esopCtx) {
+  new Chart(esopCtx.getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Y1 Grants (8.0%)', 'Remaining (7.0%)'],
+      datasets: [{
+        data: [8.0, 7.0],
+        backgroundColor: ['#4c6ef5', '#e9ecef'],
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '70%',
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+updateUI();
+</script>
+
+</body>
+</html>

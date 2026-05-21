@@ -1,10 +1,10 @@
 ---
 section: "07-traction"
 slug: "design-partner-loi-template"
-title: "Letter of Intent — Design Partner Pilot"
+title: "Letter of Intent. Design Partner Pilot"
 ---
 
-**TEMPLATE — DRAFT.** Standard-form non-binding LOI for design-partner pilots. Review with counsel before execution. Modeled on industry-standard pre-seed pilot LOIs (e.g. CommonPaper LOI, Cooley GO templates).
+**TEMPLATE. DRAFT.** Standard-form non-binding LOI for design-partner pilots. Review with counsel before execution. Modeled on industry-standard pre-seed pilot LOIs (e.g. CommonPaper LOI, Cooley GO templates).
 
 ---
 
@@ -133,5 +133,5 @@ Date: ____________________
 - Confirm with counsel whether your jurisdiction prefers DE or CA governing law.
 - If Customer is in EU/UK, add GDPR/UK GDPR addendum and SCCs.
 - If Customer is government / federal, add FAR / DFARS clauses and confirm pricing reflects GSA-equivalent rates.
-- Pilot fee can be waived for the right strategic logo — confirm with Stephan before discounting.
+- Pilot fee can be waived for the right strategic logo, confirm with Stephan before discounting.
 - For on-premises deployments, add a separate Schedule A with deployment specifics (hardware, network, identity provider).

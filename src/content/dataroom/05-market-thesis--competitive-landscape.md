@@ -6,7 +6,7 @@ title: "Competitive Landscape"
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
-> Where Luvian sits relative to horizontal context AI, vertical industrial AI, MBSE / ALM incumbents, engineering copilots, and generic AI context platforms — and why none of them is structurally able to do what we are doing.
+> Where Luvian sits relative to horizontal context AI, vertical industrial AI, MBSE / ALM incumbents, engineering copilots, and generic AI context platforms, and why none of them is structurally able to do what we are doing.
 
 ---
 
@@ -42,7 +42,7 @@ That positioning is deliberately **horizontal across tools, vertical within doma
                        NOT AI-NATIVE
 ```
 
-The upper-right quadrant — **AI-native + domain-deep + air-gap deployable** — is the empty corner. Each adjacent quadrant has a structural reason it cannot move into ours.
+The upper-right quadrant, **AI-native + domain-deep + air-gap deployable**, is the empty corner. Each adjacent quadrant has a structural reason it cannot move into ours.
 
 ---
 
@@ -100,15 +100,15 @@ Outcome math: in a market where 15–40 strategic accounts at $1–2M ACV define
 
 **Players:** Cognite (industrial process), Applied Intuition (AV simulation and validation), Anduril (defense autonomy stack), Foretellix (scenario-based verification).
 
-**Why they are partners or buyers, not competitors:** each owns an adjacent slice — operational data, simulation execution, lethal autonomy, scenario coverage. None owns the design-intent context graph that connects requirements, models, safety analysis, and verification on the upstream side. Applied Intuition's test execution sits downstream of design; Anduril's Lattice is a tasking bus, not a context graph; Cognite is OT-data; Foretellix is sim-side.
+**Why they are partners or buyers, not competitors:** each owns an adjacent slice, operational data, simulation execution, lethal autonomy, scenario coverage. None owns the design-intent context graph that connects requirements, models, safety analysis, and verification on the upstream side. Applied Intuition's test execution sits downstream of design; Anduril's Lattice is a tasking bus, not a context graph; Cognite is OT-data; Foretellix is sim-side.
 
-**How we win:** be the upstream design-intent layer their downstream products consume. The integration relationship is more compelling than the competitive one — and it's the path to Series A enterprise pilots.
+**How we win:** be the upstream design-intent layer their downstream products consume. The integration relationship is more compelling than the competitive one, and it's the path to Series A enterprise pilots.
 
 ### 5.3 MBSE / ALM incumbents (Cameo, Rhapsody, DOORS, Capella, Aras)
 
-**Players:** Dassault (MagicDraw / Cameo, 3DEXPERIENCE), IBM (Engineering Lifecycle Management — DOORS, Rhapsody), Siemens (Teamcenter, Polarion), PTC (Windchill, Codebeamer), Aras (Innovator + InnovatorEdge AI), Eclipse (Capella), Vitech (Genesys).
+**Players:** Dassault (MagicDraw / Cameo, 3DEXPERIENCE), IBM (Engineering Lifecycle Management. DOORS, Rhapsody), Siemens (Teamcenter, Polarion), PTC (Windchill, Codebeamer), Aras (Innovator + InnovatorEdge AI), Eclipse (Capella), Vitech (Genesys).
 
-**Move:** every one has shipped a Gen-AI bolt-on in 2024–2025. Cameo shipped SysML v2 in December 2025 — closing the "first SysML v2 modeler" gap that defined the prior wedge.
+**Move:** every one has shipped a Gen-AI bolt-on in 2024–2025. Cameo shipped SysML v2 in December 2025, closing the "first SysML v2 modeler" gap that defined the prior wedge.
 
 **Structural disadvantages:**
 
@@ -128,7 +128,7 @@ Outcome math: in a market where 15–40 strategic accounts at $1–2M ACV define
 
 **Why they are not competitors:** they own code completion, a feature, not a category. They are concentrated in the IDE consumption surface and have neither the engineering-organisation data model nor the regulated-industry deployment posture.
 
-**Adjacency:** any copilot that wants to reason about a *system*, not just a function — *"this requirement is satisfied by which subsystem and what is the verification status of that allocation?"* — needs a substrate underneath. That substrate is Luvian.
+**Adjacency:** any copilot that wants to reason about a *system*, not just a function, *"this requirement is satisfied by which subsystem and what is the verification status of that allocation?"*, needs a substrate underneath. That substrate is Luvian.
 
 **How we win:** by being a layer the copilots can call into via MCP and structured APIs, not by fighting them in the IDE.
 
@@ -155,8 +155,8 @@ The category is defined by whoever has 2–4 production references in the wedge 
 - Vertical industrial AI is not in the design-intent business and would have to acquire to enter.
 - New entrants cannot compress a 5–10 year domain-literacy gap (autonomy, MBSE, safety, defense delivery).
 
-The pre-seed round funds reaching that reference position before the window closes. The 18-month milestone bundle in [01_Company_Overview/Fundraising_Memo_2026_05.md](../01_Company_Overview/Fundraising_Memo_2026_05.md) is the schedule against which this competitive timing is measured.
+The pre-seed round funds reaching that reference position before the window closes. The 18-month milestone bundle in *01 Company Overview/Fundraising Memo* is the schedule against which this competitive timing is measured.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

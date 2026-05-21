@@ -1,13 +1,13 @@
 ---
 section: "09-financials"
 slug: "use-of-funds"
-title: "Use of Funds — Pre-Seed Round"
+title: "Use of Funds. Pre-Seed Round"
 ---
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
 > Lean by design. At pre-seed, what investors evaluate is not the
-> precision of the numbers — it is whether the founder is **capital-aware,
+> precision of the numbers, it is whether the founder is **capital-aware,
 > milestone-driven, and clear-eyed about where the dollars convert into
 > de-risk.** This memo answers exactly that.
 
@@ -26,7 +26,7 @@ title: "Use of Funds — Pre-Seed Round"
 
 We will close on $1.5M minimum; we will accept up to $2.0M if the right
 lead wants more allocation. We will not raise more than $2.0M at this
-stage — that is a deliberate ceiling to keep the next round's valuation
+stage, that is a deliberate ceiling to keep the next round's valuation
 math clean.
 
 ---
@@ -46,14 +46,14 @@ Three principles drove the line-item decisions below:
 
 ---
 
-## Use of funds — by bucket
+## Use of funds, by bucket
 
 Total raise: **$1.5M – $2.0M.** Below is the planned allocation at the
 midpoint (**$1.75M**); the percentages hold across the range.
 
 | Bucket | % | $ at $1.75M | What it buys |
 |---|---:|---:|---|
-| **1. Team — co-founders + early hires** | 55% | $963K | 2 co-founders (eng + GTM) + 2–3 senior engineers + founding designer over 18 months. Mix of cash + equity, weighted to cash for senior engineers and to equity for co-founders. |
+| **1. Team, co-founders + early hires** | 55% | $963K | 2 co-founders (eng + GTM) + 2–3 senior engineers + founding designer over 18 months. Mix of cash + equity, weighted to cash for senior engineers and to equity for co-founders. |
 | **2. Ingestion + ontology infrastructure** | 20% | $350K | Connector engineering (PLM, ALM, simulation, code, requirements), ontology authoring + governance tooling, hybrid retrieval pipeline, eval infrastructure. Includes both internal engineering time *and* paid external dependencies (graph DB, vector DB, ontology authoring). |
 | **3. Design-partner deployment + on-prem packaging** | 15% | $263K | Customer-success engineering, regulated-industry deployment posture (FIPS, ITAR, customer-managed-keys, FedRAMP-prep), reference architecture documentation, deployment-tooling, SOC 2 Type 1 lite. |
 | **4. Compute, infra, model spend** | 5% | $88K | Foundation-model API spend (multi-provider via Vercel AI Gateway or equivalent), vector + graph infrastructure hosting, eval pipeline compute. |
@@ -63,7 +63,7 @@ midpoint (**$1.75M**); the percentages hold across the range.
 
 ---
 
-## Spend ramp — quarterly
+## Spend ramp, quarterly
 
 Spend ramps with milestones. The first quarter is intentionally low
 (close + co-founder hire negotiations); peak burn is months 9–18 once
@@ -119,7 +119,7 @@ spending pre-seed capital on:
   in production," not "GA launch." We do not over-engineer for users we
   do not yet have.
 - **Speculative R&D outside the architecture.** No "what if we extended
-  to compliance ops in pre-seed" — we know the substrate generalises;
+  to compliance ops in pre-seed", we know the substrate generalises;
   we do not productise that until post-seed.
 
 These are the budget temptations that fail pre-seed companies. Saying
@@ -171,4 +171,4 @@ is signed revenue to project from.
 
 ---
 
-— *Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21
+*Stephan Claxton, Founder, Luvian Labs LLC* · 2026-05-21

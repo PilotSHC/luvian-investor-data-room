@@ -1,11 +1,11 @@
 ---
 section: "08-legal"
 slug: "cap-table-summary"
-title: "Cap Table — Summary"
+title: "Cap Table. Summary"
 ---
 
 **Entity:** Luvian Labs LLC (single-member LLC; jurisdiction TBD-confirm)
-**Sole member:** Stephan Claxton — 100% membership interest
+**Sole member:** Stephan Claxton, 100% membership interest
 **Round in progress:** Convertible Promissory Note(s); auto-convert at LLC → Inc Flip (the "Delaware Flip") or on a Qualified Financing.
 
 > **Why a convertible note (and not a SAFE)?** SAFEs are designed to convert into preferred stock, which LLCs do not have. Most institutional investors will not invest into an LLC via SAFE. The standard pre-seed instrument for an LLC is a **Convertible Promissory Note** with an automatic conversion trigger on the planned LLC → Inc reorganization. Once Luvian Labs LLC reorganizes as **Luvian, Inc.** (Delaware C-corp), all future investors will use the YC Post-Money Cap SAFE (already templated in `../05_Agreements_and_Contracts/SAFE_Post_Money_Cap_TEMPLATE.md`).
@@ -25,7 +25,7 @@ title: "Cap Table — Summary"
 No outside money. No convertible notes outstanding. No issued profits-interest grants.
 No Operating Agreement signed yet (default state-law rules apply until the Operating Agreement is executed). Operating Agreement template is at `Operating_Agreement_TEMPLATE.md`.
 
-## Round In Progress — Convertible Notes (Base Case $1.75M)
+## Round In Progress. Convertible Notes (Base Case $1.75M)
 
 | Holder | Instrument | Amount | Valuation Cap | Status |
 |---|---|---:|---:|---|
@@ -43,7 +43,7 @@ Standard note terms (negotiable with lead):
 - **Pro-rata participation rights:** offered to ≥ $250K checks via separate side letter
 - **No voting / no membership rights at LLC level**
 
-## Post-Flip Pro Forma (illustrative — $1.75M total, $14M cap)
+## Post-Flip Pro Forma (illustrative, $1.75M total, $14M cap)
 
 The Delaware Flip is a structured action: LLC → Delaware C-corp via tax-free reorganization (IRC § 351). On flip:
 
@@ -60,18 +60,3 @@ The Delaware Flip is a structured action: LLC → Delaware C-corp via tax-free r
 | ESOP / Equity Incentive Plan | ~12.5% |
 | Note holders → Series Seed Preferred | ~12.1% |
 | **Total** | **100%** |
-
-## Open Items
-
-- [ ] Lock the **valuation cap** with the lead — 2026-06-15.
-- [ ] Confirm **state of LLC formation** and update this room (DE / WY / CA / etc.) — 2026-05-31.
-- [ ] Confirm whether Operating Agreement has been signed (single-member LLCs are typical to skip but it is best practice) — 2026-05-31.
-- [ ] Engage **outside counsel of record** for the Flip — 2026-06-15.
-- [ ] Stand up cap-table tooling (Pulley supports LLCs; Carta is C-corp-only until the Flip) — 2026-06-30.
-- [ ] First note close — target 2026-Q3.
-
-## Versioning
-
-| Version | Date | Notes |
-|---|---|---|
-| `2026_05` | 2026-05-21 | Initial sanitized summary; reflects pre-flip LLC stage with sole member Stephan Claxton. |
