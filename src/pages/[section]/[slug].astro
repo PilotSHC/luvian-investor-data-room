@@ -43,7 +43,7 @@ if (entry) {
     </div>
   )}
 
-  <article class="prose max-w-none">
+  <article class="prose max-w-4xl">
     {Content ? <Content /> : <Fragment set:html={fallback ?? ''} />}
   </article>
 </DataRoomLayout>

@@ -154,8 +154,8 @@ export const SECTIONS: DataRoomSection[] = [
     files: [
       {
         slug: 'founder-bio-stephan-claxton',
-        title: 'Founder Bio — Stephan Claxton',
-        blurb: 'Background, domain depth, why-this-founder-for-this-category.',
+        title: 'Founding Team',
+        blurb: 'Three co-founders: Stephan Claxton (CEO), Jarred Gou (CPO), Colin Zhang (Founding Engineer).',
         emphasis: 'primary',
       },
       {
