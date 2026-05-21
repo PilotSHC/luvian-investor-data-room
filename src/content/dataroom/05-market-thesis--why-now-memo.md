@@ -14,95 +14,39 @@ This memo answers that question.
 
 ---
 
-## 1. The five forcing functions
+## 1. The four forcing functions
 
-Five independent macro shifts have converged in the 2024–2026 window. Any
-two of them would produce an interesting investment. All five together
-produce a category-defining one.
+Four independent macro shifts have converged in the 2024–2026 window. Any two of them would produce an interesting investment. All four together produce a category-defining one.
 
-### 1.1 Foundation models commoditised
+### 1.1 95% of enterprise GenAI pilots are failing
 
-Frontier reasoning capability is now a commodity input. Three labs and a
-half-dozen open-weights families produce roughly equivalent reasoning at
-roughly converging price points, and the convergence is accelerating.
+> **MIT NANDA, *State of AI in Business* (Jul 2025): roughly 95% of enterprise GenAI pilots produce zero measurable ROI on $30–40B already invested.** Gartner forecasts 40%+ of agentic AI projects will be cancelled by end of 2027.
 
-**Implication:** model choice is becoming a routing decision. The
-durable enterprise margin shifts to the **operational substrate** the
-model reasons over — proprietary context, governed retrieval, provenance,
-permissioning. Customers have already internalised this; they are no
-longer asking "which LLM?" They are asking "which substrate?"
+The failure mode is upstream of the model. AI suggestions are plausible but the organisation cannot prove they are correct. Outputs are non-traceable to authoritative source artefacts. Suggestions silently violate organisational invariants (safety constraints, regulatory requirements, interface contracts). There is no revocation pathway when an upstream fact changes and invalidates a downstream AI-generated artefact. The pattern is consistent across every regulated-industry deployment: generic RAG + chatbot is not a regulated-industry primitive.
 
-### 1.2 Enterprise AI is hitting the trust ceiling
+That is the wedge. The next 18 months are when those organisations stop trying to retrofit horizontal tooling and start buying purpose-built substrate. Frontier reasoning capability has commoditised; the durable margin has shifted to the operational substrate the model reasons over — proprietary context, governed retrieval, provenance, permissioning. Customers are no longer asking "which LLM?" They are asking "which substrate?"
 
-Every Fortune-500 with a regulated-industry exposure has spent 2024–2025
-building **horizontal** AI assistants on top of generic RAG. Most of them
-are now hitting the same wall:
+### 1.2 $13.8B in robotics funding flowed in 2025 (vs. $7.8B in 2024)
 
-- AI suggestions are **plausible** but the organisation cannot prove they
-  are **correct**.
-- Outputs are **non-traceable** to authoritative source artefacts.
-- Suggestions **silently violate** organisational invariants (safety
-  constraints, regulatory requirements, interface contracts).
-- There is no **revocation pathway** when an upstream fact changes and
-  invalidates a downstream AI-generated artefact.
+The marquee 2024–2026 robotics rounds — Figure ($39B post), Skild ($14B post), Physical Intelligence ($5.6B post), Saronic ($4B post), Shield AI ($5.3B post), Anduril ($61B post, Mar 2026) — are each a buyer or a partner for an engineering intelligence layer. The robotics renaissance is the single largest concentration of new engineering complexity in a generation, and every team in it is running concurrent MBSE + safety + V&V + telemetry workflows on tooling built for the era of single-product OEMs.
 
-The pattern is consistent: deployments that work for marketing copy do
-not survive contact with engineering, safety, or compliance review. The
-organisations have run the experiment, and the conclusion is converging:
-**generic RAG + chatbot is not a regulated-industry primitive.**
+Each of those companies has the cost structure ($1B+ programs), the regulatory pressure (FAA, NHTSA, DoD), and the AI-native instinct (founders who came from frontier labs) to be a strategic-ACV customer for a typed, AI-native engineering substrate. None of them is building it themselves at the platform level — they are buying.
 
-That is the wedge. The next 18 months are when those organisations stop
-trying to retrofit horizontal tooling and start buying purpose-built
-substrate.
+### 1.3 DoD MOSA mandate, December 2024
 
-### 1.3 SysML v2 / KerML stabilised
+The December 2024 DoD memo directs **MOSA (Modular Open Systems Approach) compliance at every SETR, Gate Review, and Program Review for MDAPs**. The FY2026 weapons portfolio is $384.3B. MOSA is not a documentation requirement; it is a structural one — it requires a typed, AI-readable model spine that connects requirements, designs, safety analysis, verification evidence, and configuration baselines across the program lifecycle.
 
-SysML 1.x — a UML profile from 2007 — was not a foundation a startup
-could reasonably bet on. Its semantics were under-specified, its tool
-ecosystem was vendor-locked, and the metamodel was too loose to ground
-machine reasoning.
+In parallel: the EU AI Act (in force 2024, enforcement 2026–2027) requires documentation, traceability, human oversight, and audit trails for high-risk AI systems. NIST AI RMF and ISO/IEC 42001 are becoming procurement prerequisites. Every one of these regulatory threads converges on the same set of primitives Luvian is building. Not by accident — the regulators read the same engineering literature.
 
-**SysML v2** (and its underlying KerML metamodel) is the first version
-with a clean, executable metamodel, a real reference implementation, an
-adoption commitment from every serious incumbent (Cameo / CATIA Magic,
-Capella, Polarion, IBM ELM, JetBrains MPS communities), and a textual
-notation that is finally *usable for diff, review, and AI consumption.*
+### 1.4 IL5/IL6 air-gap as architecture, not afterthought
 
-OMG ratified KerML and SysML v2 in late 2023; reference implementations
-hardened through 2024–2025; the first wave of serious enterprise
-adoption is the 2026–2028 window. That is **exactly** the window where the
-operational context layer is buildable and the customers are receptive.
+The highest-value buyers in defense, A&D, and government will not deploy any architecture with outbound network calls. **No NAT, no DNS to external, no outbound.** This is not a feature flag. It is how the system is built end-to-end: local-first AI inference, on-prem persistence, customer-managed keys, FIPS-validated cryptography, ITAR-aware packaging.
 
-### 1.4 The graph + retrieval primitives are production-grade
+SaaS context AI (Notion AI, Hebbia, most Glean tenancies) is structurally locked out. Glean closed half of this gap in 2025 with the Dell AI Factory partnership but coverage of IL5/IL6 environments remains incomplete. The architectural commitment to single-codebase cloud-and-air-gap deployment that Luvian made on day one is the structural lane no horizontal context AI player can enter without re-architecting.
 
-The supporting infrastructure — vector indexes, property graphs,
-constraint solvers, embedding pipelines, hybrid retrieval — are now
-boring. None of them require research. All of them have at least two
-credible open-source implementations and one or two managed-service
-vendors. The startup cost of composing them is finally tractable.
+### A note on SysML v2
 
-This was not true in 2020. Anyone who tried to build this category before
-2023 had to build the substrate primitives themselves.
-
-### 1.5 Regulation is forcing the architecture
-
-Concurrently with the technology shifts, the regulatory environment is
-hardening **toward** the architecture we are describing:
-
-- **EU AI Act** (in force 2024, enforcement 2026–2027): high-risk AI
-  systems must have documentation, traceability, human oversight, and
-  audit trails.
-- **NIST AI Risk Management Framework** + **executive orders on safe AI**
-  in defence/aerospace contexts.
-- **ISO/IEC 42001** (AI management systems) becoming a procurement
-  prerequisite.
-- **Sector regulators** in autonomy, medical, energy, defence
-  increasingly explicit that AI in safety-relevant workflows must be
-  **traceable, revocable, and auditable.**
-
-Every one of these regulatory threads converges on the same set of
-primitives Luvian is building. Not by accident — the regulators have
-read the same engineering literature.
+SysML v2 ratification (OMG, 2023) and reference-implementation hardening (2024–2025) are *enabling preconditions* for the wedge surface — they make the typed engineering ontology buildable and the textual notation usable for diff, review, and AI consumption. They are not, on their own, a forcing function. Cameo shipped SysML v2 conformance in December 2025; the "first SysML v2 modeler" race is over. The four forcing functions above are what makes the *engineering intelligence layer* category investable now.
 
 ---
 
@@ -125,10 +69,15 @@ We are entering the third row of that table. The window is roughly
 
 ## 3. Who else sees this and why we are not afraid of them
 
-Three classes of competitor see this same opportunity. Each has a
-structural reason it will be slow.
+Four classes of competitor see this same opportunity. Each has a structural reason it will be slow. The detailed competitive matrix and the named threat list (Flow Engineering, Trace.Space, Aras + InnovatorEdge AI) live in [Competitive_Landscape.md](./Competitive_Landscape.md). The high-level classes:
 
-### 3.1 Incumbent PLM / ALM vendors
+### 3.1 Horizontal context AI (Glean, Hebbia)
+
+**They see it.** Glean ($7.2B post, Sep 2025) and Hebbia ($130M Series B, Mar 2025) define the horizontal substrate category and command strategic ACVs.
+
+**Why we are not afraid:** no engineering ontology, no safety methodology engines, and no air-gap deployment posture. Glean's Dell AI Factory partnership closes part of the on-prem gap but does not solve IL5/IL6 environments or typed engineering semantics. The lane is structurally open.
+
+### 3.2 Incumbent PLM / ALM vendors
 
 (Siemens / Teamcenter, Dassault / 3DEXPERIENCE, PTC / Windchill, IBM /
 ELM, Atlassian / Jira+Polarion, Aras Innovator.)
@@ -155,7 +104,7 @@ Gen-AI bolt-on shipped in the last 18 months.
   and ship hallucinations into safety-relevant workflows. That is the
   oxygen for a purpose-built substrate.
 
-### 3.2 Generic AI tooling (LangChain-class, vector-DB-class, "context
+### 3.3 Generic AI tooling (LangChain-class, vector-DB-class, "context
 platforms")
 
 **They see it horizontally.** Every "context platform" deck has a
@@ -176,7 +125,7 @@ sentence about engineering.
   workflows is meeting-shaped, not crash-shaped. They will not pay the
   cost of building for engineering reality.
 
-### 3.3 New entrants in the same wedge
+### 3.4 New entrants in the same wedge (Flow Engineering, Trace.Space)
 
 **They see it.** A handful of pre-seed and seed-stage teams are
 articulating versions of this category.

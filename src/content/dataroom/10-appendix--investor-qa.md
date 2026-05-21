@@ -14,32 +14,23 @@ title: "Investor Q&A"
 
 ## Architecture & technical
 
-### Q1. Why won't existing PLM/ALM vendors do this?
+### Q1. Why won't existing PLM/ALM vendors or horizontal context AI do this?
 
-Three reasons.
+Three reasons each, on each side.
 
-**Architecture lock-in.** Their substrates are 20-year-old
-document-and-workflow systems with data models predating AI reasoning.
-Retrofitting AI-native reasoning onto them is not a feature — it is a
-re-architecture. They will not do that re-architecture quickly because
-their existing customers depend on the current data model.
+**PLM / ALM incumbents** (Siemens, Dassault, IBM, PTC, Aras, Eclipse, Vitech):
 
-**Cross-tool blindness.** Engineering organisations run 4–8 of these
-tools simultaneously (PLM + ALM + requirements + simulation + code +
-test). No single vendor can be the neutral substrate across the others'
-data without commercial conflict. The substrate has to be **vendor-neutral
-by construction.**
+* **Architecture lock-in.** Their substrates are 20-year-old document-and-workflow systems with data models predating AI reasoning. Retrofitting AI-native reasoning onto them is not a feature — it is a re-architecture. Their existing customers depend on the current data model.
+* **Cross-tool blindness.** Engineering organisations run 4–8 of these tools simultaneously (PLM + ALM + requirements + simulation + code + test). No single vendor can be the neutral substrate across the others' data without commercial conflict.
+* **Cultural mismatch.** Their go-to-market is multi-year RFPs negotiated with procurement. The teams that actually feel the AI-trust pain do not buy that way.
 
-**Cultural mismatch.** Their go-to-market is multi-year RFPs negotiated
-with procurement. The teams that actually feel the AI-trust pain do not
-buy that way. They buy the way modern infra customers buy — design
-partner first, hands-on, then expand.
+**Horizontal context AI** (Glean, Hebbia, generic context platforms):
 
-**Caveat:** the incumbents are not stupid. They will ship Gen-AI
-bolt-ons. Those bolt-ons will produce plausible nonsense in
-safety-relevant workflows because the substrate underneath wasn't
-designed for AI reasoning. That failure is the oxygen for a
-purpose-built substrate.
+* **No engineering ontology.** Their substrate is ontology-agnostic by design. Cannot encode SysML v2 semantics, ASIL derivation, suspect-link propagation.
+* **No safety methodology engines.** HARA / TARA / STPA / SOTIF / FMEA require typed inputs and standards-conformant derivation tables. Out of scope for horizontal context AI.
+* **No IL5/IL6 air-gap deployment.** Glean closed half the gap with the Dell AI Factory partnership in 2025; coverage of IL5/IL6 environments remains incomplete. SaaS-first architectures cannot reach the highest-value buyers.
+
+**Caveat:** none of these players is stupid. The incumbents will ship Gen-AI bolt-ons; the horizontal context AI players will keep filing partner relationships into regulated industries. Those moves will produce plausible nonsense in safety-relevant workflows because the substrate underneath wasn't designed for AI reasoning. That failure is the oxygen for a purpose-built engineering intelligence layer.
 
 ---
 
@@ -117,22 +108,17 @@ Six concrete defences, all built into the substrate, not bolted on:
 
 ### Q5. What's the moat?
 
-Three reinforcing layers:
+Five reinforcing architectural layers, mapped onto the structural advantages from the deck. Detail in [`04_Technical_Architecture/Architecture_Vision_Memo.md`](../04_Technical_Architecture/Architecture_Vision_Memo.md), section 5b.
 
-1. **Ontology + integrations as compound debt.** Every ingestion
-   connector + every domain ontology extension is a one-time cost we
-   pay that competitors will have to pay later. Network effect within
-   the customer's tool stack.
-2. **Provenance graph density.** As a customer's substrate accumulates
-   provenance edges, switching cost rises non-linearly. The graph
-   *is* the customer's operational memory.
-3. **Founder + early-team domain depth.** The bottleneck for this
-   category is engineering-organisation literacy, not engineering
-   talent in the abstract. We are 5+ years ahead of a generic AI team
-   that has to learn the domain.
+1. **Typed engineering ontology** (SysML v2 / KerML grounded; patent-pending). Untyped substrates produce plausible nonsense; retyping after ship is a re-architecture, not a feature.
+2. **Provenance + suspect-link propagation.** Every claim carries source, evidence, confidence, authority, validity window. Provenance must be enforced at the substrate level — bolt-on metadata fields cannot do this.
+3. **Integrated safety methodology engines** (HARA, TARA, STPA, SOTIF, FMEA). Standards-conformant derivation from typed inputs; out of scope for both horizontal context AI and the legacy MBSE incumbents' AI bolt-ons.
+4. **Cross-artifact unification.** Requirements, models, simulation, tests, telemetry on one graph; traceability verified in CI, not hand-curated. Incumbents are vendor-conflicted; horizontal context AI is ontology-agnostic.
+5. **On-prem + IL5/IL6 air-gap from one codebase.** Air-gap is engineered in, not retrofitted. SaaS-first competitors face years of work to reach customer-managed-keys, FIPS, and ITAR posture.
 
-We do not claim a moat that comes from algorithms. The moat is
-architecture, integrations, accumulated provenance, and domain depth.
+These layers compound. Every ingestion connector and every domain ontology extension is a one-time cost that competitors pay later. Provenance graph density rises non-linearly per customer; the graph *is* the customer's operational memory. Founder and early-team domain depth in autonomy + MBSE + defense delivery is a 5–10-year skill that a generic AI team cannot compress.
+
+We do not claim a moat from algorithms. The moat is architecture, integrations, accumulated provenance, and domain depth.
 
 ---
 
@@ -157,11 +143,12 @@ the architecture.
 
 ### Q7. Why now?
 
-See `05_Market_Thesis/Why_Now_Memo.md` for the full memo. Five
-forcing functions converging in 2024–2026: foundation-model commoditisation,
-enterprise AI hitting the trust ceiling, SysML v2 stabilisation, graph +
-retrieval primitives reaching production-grade, and regulatory pressure
-(EU AI Act, ISO 42001) hardening *toward* the architecture we're building.
+See [`05_Market_Thesis/Why_Now_Memo.md`](../05_Market_Thesis/Why_Now_Memo.md) for the full memo. Four canonical forcing functions converging in 2024–2026:
+
+1. **95% of enterprise GenAI pilots produce zero ROI** on $30–40B invested (MIT NANDA, *State of AI in Business*, Jul 2025). The substrate is the bottleneck, not the model.
+2. **$13.8B in 2025 robotics funding** (vs. $7.8B in 2024). Every marquee round (Figure $39B, Skild $14B, Physical Intelligence $5.6B, Saronic $4B, Shield AI $5.3B, Anduril $61B) is a buyer or partner.
+3. **DoD MOSA mandate** (Dec 2024) directs MOSA compliance at every SETR / Gate Review / Program Review for MDAPs. FY2026 weapons portfolio: $384.3B.
+4. **IL5/IL6 air-gap as architecture, not afterthought.** No NAT, no DNS, no outbound. SaaS context AI is structurally locked out of the highest-value buyers.
 
 Window: 18–24 months before category-default is decided.
 
@@ -169,20 +156,15 @@ Window: 18–24 months before category-default is decided.
 
 ### Q8. Isn't this a small market? "Engineering tools" feels niche.
 
-The wedge looks small because the framing is wrong. We are **not**
-selling another engineering tool into the existing $20B PLM/ALM market.
-We are building the **operational context layer** that the next
-generation of engineering AI tooling will assume — every AI-native tool
-in autonomy, aerospace, automotive, defence, medical, energy, robotics
-becomes a downstream consumer.
+The wedge looks small because the framing is wrong. We are **not** selling another engineering tool into the existing $4.2B MBSE-tools market. We are building the **engineering intelligence layer** — the typed, AI-native context substrate that the next decade of regulated-industry AI tooling will assume.
 
-Adjacencies (manufacturing operations, regulated software development,
-compliance/assurance) extend the same architectural primitives without
-re-architecture. The TAM expands mechanically, not strategically.
+The bottom-up TAM math is in [`05_Market_Thesis/Market_Thesis_2026_05.md`](../05_Market_Thesis/Market_Thesis_2026_05.md).
 
-The bottom-up TAM math is in `05_Market_Thesis/Market_Thesis_2026_05.md`.
-The high-confidence number for the wedge alone is **$8–12B annually by
-2030**, with the substrate adjacencies plausibly 3–5× that.
+* **TAM** $58–95B, mid-case **~$70B**. Composite of PLM ($26–37B), Industrial AI ($6–25B), A&D Digital Engineering ($6.3B), ALM ($3.5–5.6B), Knowledge-Graph platforms ($2.9B), MBSE-tools spend ($4.2B).
+* **SAM (2027)** $6–12B. Defense-tech, A&D primes, tier-1 automotive, robotics platforms running concurrent MBSE + safety + V&V workflows.
+* **SOM (3 years post-Seed)** $20–80M ARR via 15–40 strategic accounts at $1–2M ACV — the Glean / Cognite / Applied Intuition strategic-deal cohort, not the per-seat MBSE incumbents.
+
+Adjacencies (manufacturing operations, regulated software development, compliance and assurance) extend the same architectural primitives without re-architecture. The TAM expands mechanically, not strategically.
 
 ---
 
@@ -216,60 +198,37 @@ allocation to a DOORS trace to a certification artefact. That is a 5–10
 year skill, *and* the depth has to span more than one domain or the
 substrate ends up over-fitted to a single customer profile.
 
-Stephan's career covers all three of Luvian's wedge domains:
+Stephan's career covers the three regulated-industry domains Luvian targets — autonomy, aerospace, and defense — and the contemporary AV verification frontier. Most recently at Applied Intuition on advanced autonomy and engineering infrastructure: connected artefacts, simulation + validation + verification workflows, the prototype for the engineering intelligence layer Luvian is now building. The full bio is in [06_Team/Founder_Bio_Stephan_Claxton.md](../06_Team/Founder_Bio_Stephan_Claxton.md). Public posture and writing at [stephanclaxton.com](https://www.stephanclaxton.com/).
 
-- **MBSE practice for space and defense at Lockheed Martin** — the
-  foundational layer. SysML modeling, requirements architecture, MBSE
-  practice as it is *actually* practised inside large engineering
-  organisations.
-- **Sr. Principal Systems Engineer / TPM at Strategic Technology
-  Consulting (Arcfield)** — defense-program reality. Regulatory and
-  security posture, on-prem / air-gapped deployment expectations,
-  multi-stakeholder TPM dynamics.
-- **Systems Engineer at Applied Intuition** — the contemporary AV
-  verification frontier. Connected artefacts, simulation + validation
-  + verification workflows, the prototype for the operational context
-  layer Luvian is now building.
+The team is not solo. Jarred Gou (CPO) owns the product surface — multi-persona UI, AI integration plan, SysML v2 conformance — and brings the conviction that the next generation of engineering tooling must be AI-native, browser-first, and collaborative by default. Colin Zhang (Software Engineer, ex-VMware) owns the cross-platform foundation, on-prem / air-gap deployment posture, and the enterprise authentication architecture (OIDC, SAML, LDAP) the regulated-industry buyer profile demands.
 
-He is not an "AI tourist." He has lived the operational pain on every
-side of the wedge — autonomy + space + defense — and from each domain
-saw the same architectural gap. The full bio with reference paths is
-in `06_Team/Founder_Bio_Stephan_Claxton.md`. Public posture and writing
-at [stephanclaxton.com](https://www.stephanclaxton.com/).
+The combination of MBSE depth (Stephan), the AI-native product instinct (Jarred), and enterprise infrastructure credibility (Colin) maps cleanly onto the three domains Luvian sells into and the technical risks Luvian carries.
 
 ---
 
-### Q11. Solo founder. Risk?
+### Q11. What's the founding-team composition?
 
-Yes. Solo-founder risk is real and we name it. Two mitigations:
+Two co-founders plus our first software engineer.
 
-1. **The first $1M of the round is allocated to two co-founder hires**
-   — engineering and GTM — explicitly named in `09_Financials/Use_of_Funds_2026_05.md`.
-   The pipeline is active; LOIs are in late-stage discussions with two
-   identified candidates.
-2. **The architecture is documented to the level where it does not
-   live in one head** (`Architecture_Vision_Memo.md`,
-   `Context_Graph_Design.md`, `Ontology_and_Reasoning.md`). That is
-   *deliberately* part of the pre-seed deliverable, not a
-   nice-to-have.
+* **Stephan Claxton** — Founder & CEO. Systems engineer and autonomy architect. Previously at Applied Intuition on advanced autonomy and engineering infrastructure.
+* **Jarred Gou** — Chief Product Officer. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan. Owns the multi-persona product surface for systems engineers, software developers, safety analysts, and program managers.
+* **Colin Zhang** — Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication. Previously at VMware on virtualization and cloud-native platform technology.
 
-We do not pretend solo-founder risk is zero. We do claim it is
-**addressable** in the first 90 days of the round.
+Full bios in [06_Team/Founder_Bio_Stephan_Claxton.md](../06_Team/Founder_Bio_Stephan_Claxton.md). The architecture is documented to a level where it does not live in any one head ([`Architecture_Vision_Memo.md`](../04_Technical_Architecture/Architecture_Vision_Memo.md), [`Context_Graph_Design.md`](../04_Technical_Architecture/Context_Graph_Design.md), [`Ontology_and_Reasoning.md`](../04_Technical_Architecture/Ontology_and_Reasoning.md)) — deliberately, as a pre-seed deliverable, not a nice-to-have.
 
 ---
 
 ### Q12. What does the team look like at end of pre-seed?
 
-| Role | Hire by | Profile |
-|---|---|---|
-| Co-founder, engineering | Month 1–3 | Graphs / ontology / regulated-industry deployment depth |
-| Co-founder, GTM | Month 2–4 | Sold infra into autonomy / aerospace / defence before |
-| Senior engineer, ingestion | Month 3–6 | PLM / ALM / SysML v2 connector experience |
-| Senior engineer, AI reasoning | Month 4–8 | Hybrid retrieval, constraint solving, eval discipline |
-| Founding designer | Month 6–9 | Information-dense, technical-user UX |
+Three additional full-time hires, funded by this round, sequenced to remove specific blockers in priority order.
 
-Total: 5–6 people end of pre-seed. Architecture is documented and
-distributed across the team, not concentrated.
+| Role | Hire by | Profile | Unblocks |
+|---|---|---|---|
+| GTM lead | Month 1–3 | Sold infra into autonomy / aerospace / defense before. Comfortable with multi-quarter sales cycles and IL5/IL6-grade procurement. | Design-partner conversion. Founder out of full-time selling. |
+| Founding ML/AI engineer | Month 2–5 | Retrieval, ranking, evaluation discipline; local-first inference (ONNX, WASM); strong typed-graph instincts. | Beyond-RAG context orchestration. Local-first reasoning shipping in production. |
+| Second software engineer | Month 4–8 | Context graph, ontology, provenance primitives. Pairs with Colin on platform foundation. | Suspect-link propagation at scale, multi-tenant isolation, ontology extension surface. |
+
+Total: 6 people end of pre-seed (3 founders + 3 hires). Architecture is documented and distributed across the team, not concentrated. Detail on scope, comp, and equity is in [`06_Team/Hiring_Plan_2026_05.md`](../06_Team/Hiring_Plan_2026_05.md).
 
 ---
 
@@ -316,23 +275,18 @@ believes the architecture thesis and is willing to underwrite that bet.
 
 ### Q16. What happens in the next 18 months that you want investors to underwrite?
 
-Concrete deliverables, all measurable:
+Concrete deliverables, all measurable.
 
-1. **Co-founder team complete** by month 4.
-2. **Reference architecture publicly documented** by month 6 — sufficient
-   that engineering leaders can independently evaluate without an NDA.
-3. **First design partner in production** — running Luvian against actual
-   engineering artefacts with provenance + suspect-link propagation —
-   by month 9.
-4. **Second + third design partners** by month 14.
-5. **Delaware Flip complete** before any Series A negotiations begin.
-6. **Series-A-credible architecture and reference story** end of month
-   18 — i.e., a partner who has spent two hours with the architecture
-   memo and one design partner walks away thinking *"this is the
-   default substrate."*
+1. **Founding team complete** by month 4 — three named full-time hires onboarded (GTM lead, founding ML/AI engineer, second software engineer).
+2. **Reference architecture publicly documented** by month 6 — sufficient that engineering leaders can independently evaluate without an NDA.
+3. **First design partner in production** by month 9 — running Luvian against actual engineering artefacts with provenance + suspect-link propagation visible end-to-end.
+4. **Second + third design partners** by month 14 — across the wedge phases (Evidence Layer, Requirements, Modeling).
+5. **Cross-artifact unification demonstrated** at one partner — requirements + models + simulation + test on the same typed graph.
+6. **IL5/IL6-adjacent customer environment battle-tested** — single-codebase deployment proved out in a regulated-industry context.
+7. **Delaware Flip complete** before any Series A negotiations begin; clean post-Flip cap table.
+8. **Series-A-credible architecture and reference story** by month 18 — a partner who spends two hours with the architecture memo and one design partner walks away thinking *"this is the default substrate for engineering intelligence."*
 
-That is the bet. Each milestone is a binary fail/no-fail outcome that
-is verifiable from the outside.
+That is the bet. Each milestone is a binary fail/no-fail outcome verifiable from the outside.
 
 ---
 
@@ -340,32 +294,16 @@ is verifiable from the outside.
 
 ### Q17. What could kill this?
 
-In rough order of probability:
+In rough order of probability.
 
-1. **Slow design-partner conversion.** Regulated industries move
-   slowly. *Mitigation:* AV / robotics design partners as the speed
-   path; aerospace / defence as the depth path.
-2. **Incumbent moves faster than expected.** Particularly Siemens or
-   Dassault shipping a credible AI-native architecture. *Mitigation:*
-   architectural moat (cross-tool neutrality), founder-market fit
-   asymmetry, design-partner lock-in via accumulated provenance.
-3. **Regulatory or geopolitical shift in defence/aerospace.** ITAR
-   tightening, export-control changes, FedRAMP timeline shifts.
-   *Mitigation:* on-prem-capable from day one; AV / robotics gives an
-   alternative wedge.
-4. **Co-founder hiring takes longer than 90 days.** *Mitigation:* active
-   pipeline with 2 named candidates already in late-stage discussions;
-   contractor + advisor coverage during the gap.
-5. **Solo-founder operational risk.** Burnout, illness, etc.
-   *Mitigation:* architecture documented and shared, not concentrated.
-6. **AI commoditisation moves faster than expected** — i.e., model
-   providers (OpenAI, Anthropic, Google) offer their own
-   "context substrate." *Mitigation:* they cannot offer a
-   *customer-specific* substrate that crosses their boundary;
-   integration with their models is the assumption, not a threat.
+1. **Slow design-partner conversion.** Regulated industries move slowly. *Mitigation:* robotics and defense-tech design partners as the speed path; aerospace and automotive ASIL programs as the depth path. The four-phase wedge (Evidence Layer → Requirements → Modeling → Safety + V&V) lands light, expands deep — partners can engage on Phase 1 in days, not quarters.
+2. **A funded contestant scales the GTM motion first.** Specifically Flow Engineering ($23M Sequoia A, Oct 2025) or Trace.Space ($11.5M Seed, verbatim positioning match). *Mitigation:* depth of typed engineering ontology + integrated safety methods + IL5/IL6 air-gap. Flow is requirements-only and cloud-only; Trace.Space differentiation collapses to ontology depth and air-gap deployment.
+3. **Aras + InnovatorEdge AI buys a SysML v2 modeler** to close the missing wedge. *Mitigation:* by the time a buy-build decision lands, two design partners running in production beats a 12-month integration timeline.
+4. **Regulatory or geopolitical shift in defense / aerospace.** ITAR tightening, export-control changes, FedRAMP timeline shifts. *Mitigation:* on-prem-capable from day one, AV and robotics give an alternative wedge.
+5. **Hiring takes longer than 90 days for the GTM lead.** *Mitigation:* active pipeline with named candidates; contractor and advisor coverage during the gap.
+6. **AI commoditisation moves faster than expected** — model providers (OpenAI, Anthropic, Google) offer their own "context substrate." *Mitigation:* they cannot offer a *customer-specific* substrate that crosses their boundary; integration with their models is the assumption, not a threat. Glean's Dell AI Factory partnership is the playbook to watch but does not solve typed engineering ontology or safety methodology coverage.
 
-We do not believe any of these is fatal at pre-seed. We believe each is
-**addressable** with capital, focus, and the right team.
+We do not believe any of these is fatal at pre-seed. Each is **addressable** with capital, focus, and the right team.
 
 ---
 

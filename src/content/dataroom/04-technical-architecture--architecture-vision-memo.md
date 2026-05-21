@@ -6,16 +6,11 @@ title: "Architecture Vision Memo"
 
 **Luvian Labs LLC · Pre-Seed · 2026-05 · Confidential**
 
-> The thesis in one sentence: **the next decade of enterprise AI value
-> accrues not to the model, but to the operational context layer the model
-> reasons over.** Luvian is building that layer for engineering
-> organisations, where the cost of hallucination is highest and the
-> structure of the work is richest.
+> The thesis in one sentence: **the next decade of enterprise AI value accrues not to the model, but to the context layer for engineering intelligence — the typed, versioned, permission-aware engineering graph plus beyond-RAG context orchestration plus local-first AI reasoning that the model reasons over.** Luvian is building that layer for engineering organisations, where the cost of hallucination is highest and the structure of the work is richest.
 
-This memo is the centrepiece of the data room. It is opinionated by design.
-It exists to tell you what we believe is true about where enterprise AI is
-going and why engineering is the wedge. Everything else in this room — deck,
-demo, financials — is downstream of these claims.
+This memo is the centrepiece of the data room. It is opinionated by design. It exists to tell you what we believe is true about where enterprise AI is going and why engineering is the wedge. Everything else in this room — deck, demo, financials — is downstream of these claims.
+
+**Why now, in one breath.** 95% of enterprise GenAI pilots returned zero ROI on $30–40B invested (MIT NANDA, *State of AI in Business*, Jul 2025). $13.8B flowed into robotics in 2025 (vs. $7.8B in 2024). The DoD MOSA mandate (Dec 2024) put open architectures on the critical path of $384.3B in MDAP spend. IL5/IL6 air-gap stopped being a feature request and became an architectural requirement that locks SaaS context AI out structurally. The full case is in [Why_Now_Memo.md](../05_Market_Thesis/Why_Now_Memo.md).
 
 ---
 
@@ -43,14 +38,17 @@ The shape of that substrate is:
                │  reasoning calls, tool calls, structured output
                ▼
 ┌────────────────────────────────────────────────────────────────────┐
-│ OPERATIONAL CONTEXT LAYER  ← Luvian sits here                      │
-│ • Connected artefacts: requirements, models, code, simulation,     │
-│   verification evidence, test results, defects, change history     │
-│ • Ontology: what kind of thing each artefact is, how it relates    │
-│ • Provenance: who/what produced this, when, on what evidence       │
-│ • Retrieval: structured + semantic, with confidence scoring        │
+│ ENGINEERING INTELLIGENCE LAYER  ← Luvian sits here                 │
+│ • Typed engineering ontology (SysML v2 / KerML grounded)           │
+│ • Cross-artifact unification: requirements, models, simulation,    │
+│   code, verification evidence, test results, telemetry             │
+│ • Provenance + suspect-link propagation: who/what produced this,   │
+│   when, on what evidence; downstream invalidation when upstream    │
+│   facts change                                                     │
+│ • Beyond-RAG context orchestration: graph traversal, contradiction │
+│   detection, confidence-weighted retrieval                         │
 │ • Permissioning: role-, project-, jurisdiction-, ITAR-aware        │
-│ • Workflow + intent: what is this team trying to do right now?     │
+│ • Local-first AI reasoning: inference on-device for IL5/IL6        │
 └──────────────┬─────────────────────────────────────────────────────┘
                │  signed, traceable, governed actions
                ▼
@@ -208,6 +206,22 @@ cannot enforce it. Typed, governed substrates can.
 
 ---
 
+## 5b. The five architectural moat layers
+
+The architecture commits to five differentiators no adjacent player carries together. This is the moat the round funds against, and the lens this memo's claims should be read through.
+
+| # | Moat layer | What Luvian commits to | Why it cannot be retrofitted |
+|---|---|---|---|
+| 1 | **Typed engineering ontology** | SysML v2 / KerML grounded; every block, port, connector, requirement, and trace link is type-checked. Patent-pending. | Untyped substrates produce plausible nonsense. Retyping a substrate after it ships is a re-architecture, not a feature. |
+| 2 | **Provenance + suspect-link propagation** | Every claim carries source, evidence, confidence, authority, validity window. Upstream changes invalidate downstream artefacts automatically. | Provenance must be enforced at the substrate level. Bolt-on metadata fields cannot do this. |
+| 3 | **Integrated safety methodology engines** | HARA / TARA / STPA / SOTIF / FMEA derive ASIL and risk levels from ISO 26262 / 21434 tables; hazard-to-requirement links surface coverage gaps before audit. | Safety methods require typed inputs and standards-conformant derivation. Generic context AI has neither. |
+| 4 | **Cross-artifact unification** | Requirements + models + simulation + tests + telemetry on one graph; traceability verified in CI, not hand-curated. | Cross-tool reasoning requires the neutral substrate. Incumbents are vendor-conflicted; horizontal context AI is ontology-agnostic. |
+| 5 | **On-prem + IL5/IL6 air-gap from one codebase** | Single-codebase deployment: cloud (Vercel + Supabase) and air-gap (`docker compose up`). No NAT, no DNS, no outbound calls. | Air-gap is engineered in, not retrofitted. SaaS-first competitors face years of work to reach customer-managed-keys, FIPS, ITAR posture. |
+
+These five together define the lane Luvian competes in. They map onto the patentable innovations the round funds and onto the differentiator slide of the deck.
+
+---
+
 ## 6. Why this is hard, and why timing matters
 
 The architecture we are describing — connected engineering artefacts,
@@ -340,20 +354,13 @@ maps directly to closing them.
 
 ## 11. What success looks like
 
-By end of the pre-seed runway:
+By end of the pre-seed runway (18 months):
 
-- **2–3 design partners** in the wedge domains (autonomy / aerospace /
-  defence / medical) running Luvian against their actual engineering
-  artefacts, with provenance + suspect-link propagation in production.
-- **Public reference architecture** documented to the level where
-  engineering leaders can independently evaluate it without an NDA.
-- **A team of 4–5** including the two co-founders and three engineers
-  with depth in graphs, ontology, regulated-industry deployment, and AI
-  reasoning systems.
-- **Series-A-credible architecture story** — i.e., a partner who has
-  spent two hours with this memo and the reference architecture should
-  walk away thinking *"this team is the default substrate for the next
-  generation of engineering AI tools."*
+- **2–3 design partners** in the wedge domains (defense, A&D, automotive ASIL programs, robotics) running Luvian against their actual engineering artefacts, with provenance + suspect-link propagation visible end-to-end and cross-artifact unification (requirements + models + simulation + test) demonstrated at one partner.
+- **Public reference architecture** documented to the level where engineering leaders can independently evaluate it without an NDA, battle-tested in at least one IL5/IL6-adjacent customer environment.
+- **A six-person team:** Stephan (CEO), Jarred (CPO), Colin (Software Engineer) plus three full-time hires funded by this round (GTM lead, founding ML/AI engineer, second software engineer).
+- **Delaware Flip complete** with a clean post-Flip cap table and a SAFE template operative for the Seed round.
+- **Series-A-credible architecture story** — a partner who spends two hours with this memo and the reference architecture walks away thinking *"this team is the default substrate for engineering intelligence."*
 
 That is the bet. The rest of this room is evidence.
 

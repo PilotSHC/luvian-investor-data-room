@@ -7,62 +7,74 @@ title: "Luvian Labs LLC"
 **Executive One-Pager · Pre-Seed · Confidential · 2026-05**
 *Single-member LLC. Sole member: Stephan Claxton. Open for Convertible Note.*
 
-Luvian is the MBSE platform that systems engineers and software developers can finally agree on. Browser-native, real-time collaborative, SysML v2-first, and AI-native from day one.
+Luvian is the context layer for engineering intelligence. We connect requirements, designs, safety analysis, tests, and telemetry into one continuously evolving knowledge graph: typed, versioned, permission-aware, and reasoning-ready. Browser-native, real-time collaborative, SysML v2 conformant, and air-gap deployable from day one.
 
 ## The Problem
 
-MBSE adoption is stuck at roughly 5% of engineering teams because the incumbent tools are 1990s-era Java desktop apps. Cameo alone needs 9 GB of RAM, locks customers to SysML v1, and ships a hostile UX. The industries that need MBSE most (automotive under ISO 26262, aerospace under DO-178C, defense under MIL-STD-882E) are the ones served the worst.
+Enterprise AI in regulated engineering does not fail because models are bad. It fails because engineering context is fragmented across PLM, ALM, simulation, code, requirements, and tribal knowledge — stale by lunchtime, permission-locked across teams, and structurally invisible to retrieval pipelines built for chunked text.
 
-> *"Organizations buy the best MBSE tool, but after three months no one was using it."* — one-sys.eu
+> *"95% of enterprise GenAI pilots produce zero measurable ROI."* — MIT NANDA, *State of AI in Business* (Jul 2025)
+
+Gartner forecasts 40%+ of agentic AI projects will be cancelled by end of 2027. The failure mode is upstream of the model: AI cannot reason without typed context.
 
 ## Why Now
 
-Three forces are converging for the first time in 30 years.
+Four forces converge for the first time.
 
-1. **SysML v2** (OMG, 2024) breaks every incumbent's data model and opens a multi-year migration window.
-2. **LLMs are production-ready for structured authoring**, which collapses the "modeling tax" that capped adoption.
-3. **Browser-first migration** is already complete in every adjacent engineering category (CAD, EDA, ALM). MBSE is the last holdout.
+1. **95% GenAI failure** (MIT NANDA, Jul 2025) on $30–40B invested. The substrate is the bottleneck.
+2. **$13.8B in 2025 robotics funding** (vs. $7.8B in 2024). Every marquee round (Figure, Skild, Physical Intelligence, Saronic, Shield AI, Anduril) is a buyer or partner for an engineering intelligence layer.
+3. **DoD MOSA mandate** (Dec 2024) directs MOSA compliance at every SETR, Gate Review, and Program Review for MDAPs. FY2026 weapons portfolio: $384.3B.
+4. **IL5/IL6 air-gap as architecture.** No NAT, no DNS, no outbound. SaaS context AI (Notion AI, Hebbia, most Glean tenancies) is structurally locked out.
 
 ## The Product
 
-* Browser-native, real-time collaborative canvas for SysML v2 (Yjs CRDT, no install).
-* AI-native authoring with ambient suggestions, domain agents, and RAG-grounded validation.
-* Progressive maturity gates (Integration Readiness Reviews, conformance scoring) that tell teams when a model is ready.
-* Bidirectional code-to-model so SE and SW engineers consume the same source of truth.
-* Multi-persona views: KPIs, safety dashboards (HARA, TARA, STPA, SOTIF, FMEA), validation reports.
+Four pillars of the context layer:
 
-**Status.** Roughly 780 source files, 42 components, 98 modules. Built on React 19 + Vite, React Flow v12, Yjs/Hocuspocus, Anthropic, Auth0, Supabase. About 40% of capability is live today; the rest is gated behind flags awaiting design-partner feedback.
+* **Context Acquisition.** Connectors into PLM, ALM, simulation, code, requirements, tests, telemetry.
+* **Semantic Normalization.** Typed engineering ontology with stable IDs, versioning, and permission boundaries. Patent-pending.
+* **Context Orchestration.** Graph traversal, contradiction detection, suspect-link propagation. Beyond-RAG by design.
+* **AI Reasoning.** Local-first inference. Gap detection, not suggestion generation. *What's missing, what changed, what's at risk.*
+
+Today Luvian ships a SysML v2 conformant modeler with real-time collaboration, requirements (INCOSE A–F grading), and the safety-method engines (HARA, TARA, STPA, SOTIF, FMEA). The next twelve months ship the connectors, the ontology layer, the domain agents, and the governance plane.
+
+**Status.** Roughly 780 source files, 42 components, 98 modules. Built on React 19 + Vite, React Flow v12, Yjs / Hocuspocus, Anthropic, Auth0, Supabase. About 40% of capability is live; the rest is feature-flagged awaiting design-partner feedback.
 
 ## Market
 
-* **TAM:** $4.2B (MBSE tools) expanding to $18B with adjacent structured-design tooling (DOORS, medini, simulation).
-* **Initial wedge (SAM):** roughly $650M, comprising automotive ASIL programs plus aerospace and defense MBSE in NA and EU.
-* **Y5 SOM:** roughly $60M ARR at 30 paying customers and $200K average ACV.
+* **TAM** (engineering intelligence layer): $58–95B, mid-case ~$70B. Composite of PLM ($26–37B), Industrial AI ($6–25B), A&D Digital Engineering ($6.3B), ALM ($3.5–5.6B), Knowledge-Graph platforms ($2.9B).
+* **SAM** (2027): $6–12B. Defense-tech, A&D primes, tier-1 automotive, robotics platforms running concurrent MBSE + safety + V&V workflows.
+* **SOM** (3 years post-Seed): $20–80M ARR via 15–40 strategic accounts at $1–2M ACV — the Glean / Cognite / Applied Intuition strategic-deal cohort.
 
-## Competition (7 Powers)
+See [Market_Thesis_2026_05.md](../05_Market_Thesis/Market_Thesis_2026_05.md) for sourcing.
 
-| Incumbent | Why we win |
-|---|---|
-| Cameo (Dassault) | Browser-native, AI-native, SysML v2-first. Their migration cost is greater than our greenfield cost. |
-| Rhapsody (IBM) | Same architectural vector at 10x the release cadence. |
-| Capella (Eclipse OSS) | Modern UX and AI with the same methodological rigor. |
+## Competition
 
-**Counter-positioning.** Real-time collaboration plus a browser-first product is strictly worse for incumbents' install base; they cannot copy without cannibalizing seat revenue.
+The peer set is the typed-AI-infrastructure cohort, not the legacy MBSE incumbents.
+
+| Cohort | Examples | Why Luvian wins |
+|---|---|---|
+| Horizontal context AI | Glean, Hebbia | Glean closed half the on-prem moat via Dell AI Factory. IL5/IL6 + typed engineering ontology remains an open lane. |
+| Vertical industrial / autonomous AI | Cognite, Applied Intuition, Anduril | None carries a typed engineering ontology with cross-artifact unification across requirements, models, and safety. |
+| MBSE / ALM incumbents | Cameo, Rhapsody, DOORS, Capella, Aras | Wedge displacement targets. Cameo shipped SysML v2 in Dec 2025; the "first SysML v2 modeler" moat is gone. Cross-artifact unification + AI-native architecture + air-gap is not. |
+
+Three contestants meaningfully affect the SOM build: Flow Engineering ($23M Sequoia A, Oct 2025), Trace.Space (verbatim positioning match), and Aras + InnovatorEdge AI. See [Competitive_Landscape.md](../05_Market_Thesis/Competitive_Landscape.md).
+
+**Counter-positioning.** Browser-native + real-time collaboration + true on-prem air-gap is strictly worse for incumbents' installed base. They cannot copy without cannibalising seat revenue or losing their cloud-only AI bet.
 
 ## Team
 
 Two co-founders plus our first software engineer.
 
-* **Stephan Claxton, Founder & CEO.** Systems engineer and autonomy architect. Previously worked on advanced autonomy and engineering infrastructure initiatives at Applied Intuition. Owns operational context, ontology, and the safety methods (HARA, TARA, STPA, SOTIF, FMEA) that the platform depends on.
-* **Jarred Gou, Chief Product Officer.** Product strategy, roadmap, and engineering architecture. Owns the AI integration roadmap and the SysML v2 conformance plan. The conviction that next-generation MBSE must be AI-native, browser-first, and collaborative by default is his.
-* **Colin Zhang, Software Engineer.** Previously at VMware, where he worked on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and authentication architecture (OIDC, SAML, LDAP) for the regulated-industry customer profile Luvian targets.
+* **Stephan Claxton, Founder & CEO.** Systems engineer and autonomy architect. Previously at Applied Intuition on advanced autonomy and engineering infrastructure. Owns the typed engineering ontology, the safety methods, and the founder-market-fit thesis.
+* **Jarred Gou, Chief Product Officer.** Product strategy, roadmap, engineering architecture. Owns the AI integration surface and the SysML v2 conformance plan. The conviction that the next generation of engineering tooling must be AI-native, browser-first, and collaborative by default is his.
+* **Colin Zhang, Software Engineer.** Previously at VMware on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and the enterprise authentication architecture (OIDC, SAML, LDAP).
 
-This round funds the conversion to a Delaware C-corp and the recruitment of three additional hires (GTM lead, founding ML/AI engineer, second software engineer).
+This round funds the Delaware Flip and three additional hires: GTM lead, founding ML/AI engineer, second software engineer.
 
 ## Traction
 
 * 0 paying customers (pre-launch, pre-seed honest).
-* Pipeline: 21 awareness, 10 discovery, 5 technical evaluation, 1 pilot scoping (sanitized counts).
+* Pipeline: 21 awareness, 10 discovery, 5 technical evaluation, 1 pilot scoping (sanitised counts).
 * Engineering platform: 6 subsystems shipping, full CI gates green, multi-persona surface built.
 * Target Q3 2026: 3 signed LOIs. Target Q4 2026: first paid pilot.
 
@@ -73,12 +85,12 @@ This round funds the conversion to a Delaware C-corp and the recruitment of thre
 * Convertible Promissory Note at the LLC stage, pre-Delaware-Flip.
 * Valuation cap: TBD with lead.
 * 5% simple interest. 24-month maturity.
-* Auto-converts on a Qualified Financing (at least $2M priced equity) or on the planned LLC to Delaware C-corp conversion, whichever is first, at the valuation cap or financing price, whichever is more favorable to the holder.
+* Auto-converts on a Qualified Financing ($2M+ priced equity) or on the planned LLC to Delaware C-corp conversion, whichever is first, at the cap or the financing price, whichever is more favorable to the holder.
 * No board seat at this stage. Pro-rata side letter offered for checks of $250K or more.
-* 18 months runway to Series A milestones: 3 paid pilots, $300K+ ARR-equivalent commitments, an ASIL-rated reference deployment, Delaware Flip complete, full executive team in place.
+* 18 months runway to a Series A milestone bundle: 2–3 strategic accounts in production, reference architecture publicly documented, cross-artifact unification demonstrated at one partner, IL5/IL6-adjacent customer environment battle-tested, Delaware Flip complete, six-person team.
 
-**Use of funds.** Approximately 5% Delaware Flip and counsel, 60% engineering and GTM hires (3 founding employees), 15% design-partner conversion, 10% AI and cloud, 8% on-prem hardening, 2% buffer.
+**Use of funds.** Approximately 55% engineering and GTM hires (3 founding employees), 15% design-partner conversion, 10% AI and cloud, 8% on-prem packaging, 5% Delaware Flip and counsel, 7% operations and buffer.
 
-**Contact.** Stephan Claxton, luvsupport@luvian.io.
+**Contact.** luvsupport@luvian.io.
 
-**Data room access.** NDA-gated. Full diligence room at data-room.luvian.info (password on NDA execution).
+**Data room access.** Click-through-gated. Full diligence room at [data-room.luvian.info](https://data-room.luvian.info) (password on first contact).

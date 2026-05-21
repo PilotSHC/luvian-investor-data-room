@@ -1,96 +1,92 @@
 ---
 section: "05-market-thesis"
 slug: "market-thesis"
-title: "Market Research"
+title: "Market Thesis"
 ---
 
-**Sources:** `docs/MBSE_USER_RESEARCH.md` (18+ practitioner sources),
-`docs/Competitor Analysis Reports/` (Edge + OEM reports),
-`docs/buyer-persona/`, `docs/sysml-v2-gap-analysis.md`,
-`docs/SOLUTION_ARCHITECTURE_NDA.md` (available on request).
+**Sources:** [internal-comms/market-eval-v2/_research/](https://github.com/PilotSHC/internal-comms/tree/main/market-eval-v2) (TAM build + comparable companies), [internal-comms/gripe-gap-analysis/](https://github.com/PilotSHC/internal-comms/tree/main/gripe-gap-analysis) (practitioner research), `docs/buyer-persona/`, `docs/sysml-v2-gap-analysis.md`.
 
 ---
+
+## The Category
+
+Luvian is building the **Engineering Intelligence Layer**: a typed, versioned, permission-aware engineering knowledge graph plus beyond-RAG context orchestration plus local-first AI reasoning. The category is the substrate enterprise AI needs in regulated engineering. It is not "a better MBSE tool." MBSE — and the SysML v2 conformant modeler we ship today — is the wedge surface, not the category.
+
+The category is defined by the integration of five capabilities no one else combines: (1) typed engineering ontology, (2) cross-artifact unification, (3) integrated safety methodologies, (4) provenance and suspect-link propagation, (5) air-gap deployment from a single codebase. Adjacent categories — horizontal context AI (Glean, Hebbia), vertical industrial AI (Cognite, Applied Intuition), MBSE / ALM incumbents (Cameo, DOORS, Aras) — each cover one or two. None covers all five.
 
 ## TAM / SAM / SOM
 
 | Market | Size | Definition |
 |---|---|---|
-| TAM (top-down) | ~$4.2B | Global MBSE tools spend (Cameo + Rhapsody + Capella + adjacencies). |
-| TAM (broader, "structured complex design") | ~$18B | MBSE + requirements (DOORS) + safety (Ansys medini) + simulation tooling. |
-| SAM (initial wedge) | ~$650M | Automotive ASIL programs + aerospace/defense MBSE in NA + EU. |
-| SOM (Year 5) | ~$60M ARR | Bottoms-up build assumes 30 paying customers @ $200K avg ACV. See `../03_Financials/Financial_Model_Summary_2026_05.md`. |
+| **TAM (engineering intelligence layer)** | **$58–95B**, mid-case ~$70B | Composite: PLM ($26–37B), Industrial AI ($6–25B), A&D Digital Engineering ($6.3B), ALM ($3.5–5.6B), Knowledge-Graph platforms ($2.9B), MBSE-tools spend ($4.2B). Triangulated against incumbent public revenue (Dassault, IBM Engineering, Ansys segments, Glean, Cognite). |
+| **SAM (2027)** | **$6–12B** | Defense-tech, A&D primes, tier-1 automotive, robotics platforms running concurrent MBSE + safety + V&V workflows with active AI procurement. |
+| **SOM (3 years post-Seed)** | **$20–80M ARR** | 15–40 strategic accounts at $1–2M ACV. The Glean / Cognite / Applied Intuition strategic-deal cohort, not the per-seat MBSE incumbents. |
 
-> **Caveat:** These are top-down estimates triangulated from incumbents'
-> public revenue (Dassault, IBM Engineering, Ansys segments) and analyst
-> reports. A bottoms-up build is on the gap list (target 2026-07-01).
+Bottoms-up SOM build is in [internal-comms/market-eval-v2/_research/01-market-sizing.md](https://github.com/PilotSHC/internal-comms/tree/main/market-eval-v2/_research). Sensitivity ranges flow into the financial model at [09_Financials/Financial_Model_2026_05.csv](../09_Financials/Financial_Model_2026_05.csv).
 
-## Practitioner Research — The 5 Gripes
+## Comparable Companies — Strategic-Deal Cohort
 
-From 18+ interviews and quoted public sources:
+The peer set under the new framing.
 
-| # | Gripe | Representative quote |
-|---|---|---|
-| 1 | Hostile tools | _"MBSE tools suck. If you compare them to tools in other industries, they would be ridiculed."_ — Pari Singh |
-| 2 | Silo effect | _"We have the model in Cameo, the requirements in DOORS, the tests in Polarion, and nothing talks to anything."_ — anonymous defense systems engineer |
-| 3 | No maturity path | _"How do I know my model is good enough to ship?"_ — recurring across 7 of 18 interviews |
-| 4 | SE ↔ developer language gap | _"My software team won't read the model. They want code."_ — automotive program manager |
-| 5 | Stakeholders can't see status | _"The PM looks at the model once and never opens it again."_ — aerospace systems engineer |
+| Company | Recent round / status | Why this is the right comp | Implication for Luvian |
+|---|---|---|---|
+| **Glean** | $7.2B post (Sept 2025) | Horizontal context layer for the enterprise. Validates buyer demand and strategic ACV. | Vertical engineering depth + IL5/IL6 air-gap is Luvian's structural lane Glean cannot enter. |
+| **Hebbia** | $130M Series B (Mar 2025) | Beyond-RAG context for high-stakes verticals. Strong narrative anchor. | Similar reasoning architecture goal; engineering ontology and safety methods are not in Hebbia's roadmap. |
+| **Cognite** | $1.6B post (2022) | Industrial knowledge graph, OT data context. | Adjacent vertical (industrial process). Engineering-design context and safety methods sit upstream. |
+| **Applied Intuition** | $15B post (Mar 2025) | Vertical AI for autonomous systems. Founder-market-fit anchor (Stephan ex-AI). | Test/sim execution sits downstream of design intent. We unify the design-side context layer Applied does not. |
+| **Anduril** | $61B post (Mar 2026) | Defense autonomy, IL5/IL6 customer profile. | Buyer + partner archetype, not category competitor. Lattice is a tasking bus, not a context graph. |
+| **Foretellix** | $85M Series C (Jul 2024) | Scenario-based verification for AV. | Sim-side execution. Engineering intent + cross-artifact unification is open lane. |
 
-**Implication for product:** Each gripe maps to a specific Luvian capability
-(see `Company_Overview_2026_05.md`). All five are addressed in our current
-codebase, though only Gripes 1 and 2 are at "ship-ready" maturity. Gripes 3–5
-are "built, gated behind feature flags" — the upcoming round funds shipping
-them.
+These are the comps an investor underwrites against — the cohort that anchors strategic ACVs of $1–2M, NRR > 120%, and category-defining outcomes. Pricing Luvian against per-seat MBSE incumbents underprices the category by an order of magnitude.
 
-## Competitive Landscape
+## The Threat List
 
-Detailed reports per competitor live in
-`docs/Competitor Analysis Reports/Edge Product Reports/` and
-`OEM Reports/`. Summary:
+Three contestants meaningfully affect the SOM build. Each is named and tracked.
 
-| Competitor | Type | Strength | Weakness | How we win |
-|---|---|---|---|---|
-| **Cameo Systems Modeler** (Dassault) | OEM (incumbent) | Market leader, ASIL workflow integrations | 9 GB Java desktop, dated UX, SysML v1 native (v2 migration painful) | Browser-native, AI-authoring, SysML v2-first |
-| **IBM Rhapsody** | OEM (incumbent) | Defense/aerospace install base, deep IBM integration | Even older UX, expensive, slow innovation cadence | Same vector as Cameo + faster cadence |
-| **Capella** (Eclipse) | Open-source | Free, Arcadia methodology adopted in EU | No SysML v2, no AI, weak collab | We give the same methodology rigor, modern UX, AI |
-| **SysModeler** | Edge (modern) | Browser, modern stack | Narrow feature set, no safety methods, weak SysML v2 conformance | Broader product surface, deeper safety methods |
-| **Trace-Space** | Edge (modern) | Lightweight, modern UX | Not MBSE — adjacent (requirements only) | We do MBSE _and_ requirements |
-| **Systellar Space** | Edge (modern) | Aerospace verticalization | Vertical-only, weaker enterprise IT story | Multi-vertical, on-prem ready (Colin's domain) |
-| **RoboFication** | Edge (modern) | Robotics niche | Narrow, no enterprise readiness | Cross-domain breadth + enterprise fit |
+| Threat | Stage | Why it matters | Differentiation |
+|---|---|---|---|
+| **Flow Engineering** | $23M Series A (Sequoia, Oct 2025) | Same buyer persona, same wedge entry (requirements + traceability), funded sales motion. | Luvian unifies modeling + safety + V&V on top. Flow is requirements-only and cloud-only; cannot reach IL5/IL6. |
+| **Trace.Space** | $11.5M Seed | Verbatim positioning match: agentic requirements + central knowledge graph. | Differentiation collapses to depth of typed ontology + air-gap deployment + safety methodology coverage. |
+| **Aras + InnovatorEdge AI** | $250M strategic (2024) | Graph-based PLM with enterprise distribution and an AI overlay. Could buy a SysML v2 modeler. | Missing SysML v2 native + integrated safety methods. Displacement target rather than head-to-head. |
 
-Detailed reports:
-- `docs/Competitor Analysis Reports/OEM Reports/` — Cameo, Rhapsody, etc.
-- `docs/Competitor Analysis Reports/Edge Product Reports/SysModeler_Rev1.0.md`
-- `docs/Competitor Analysis Reports/Edge Product Reports/Trace-Space_Rev1.0.md`
-- `docs/Competitor Analysis Reports/Edge Product Reports/Systellar-Space_Rev1.0.md`
-- `docs/Competitor Analysis Reports/Edge Product Reports/RoboFication_Rev1.0.md`
+The legacy MBSE incumbents (Cameo, Rhapsody, Capella, Modelio) are wedge displacement targets, not category competitors. Cameo shipped SysML v2 in December 2025 — the "first SysML v2 modeler" moat is gone, but cross-artifact unification + AI-native architecture + air-gap is not. See [Competitive_Landscape.md](./Competitive_Landscape.md) for the full matrix.
+
+## Practitioner Research — The 5 Gripes (Wedge Evidence)
+
+The five concrete pain points that lead practitioners to abandon their existing MBSE tools. They are the wedge entry points; the category we ultimately build is the engineering intelligence layer that makes the gripes irrelevant. Sourced from 18+ interviews in [internal-comms/gripe-gap-analysis/](https://github.com/PilotSHC/internal-comms/tree/main/gripe-gap-analysis).
+
+| # | Gripe | Representative quote | Luvian status |
+|---|---|---|---|
+| 1 | Hostile tools | *"MBSE tools suck. If you compare them to tools in other industries, they would be ridiculed."* — Pari Singh | Solved. Browser SPA, React Flow canvas, real-time collaboration. |
+| 2 | Silo effect | *"We have the model in Cameo, the requirements in DOORS, the tests in Polarion, and nothing talks to anything."* — anonymous defense systems engineer | Architecturally ready, integration-points wired, production connectors are the round's work. |
+| 3 | No maturity path | *"How do I know my model is good enough to ship?"* — recurring across 7 of 18 interviews | IRR gates and conformance scoring exist internally; not yet customer-facing. |
+| 4 | SE / SW language gap | *"My software team won't read the model. They want code."* — automotive program manager | Bidirectional code-to-model agent exists server-side; UI surface is the round's work. |
+| 5 | Stakeholders cannot see status | *"The PM looks at the model once and never opens it again."* — aerospace systems engineer | Multi-persona stakeholder views are built; behind feature flags awaiting design-partner feedback. |
+
+Implication for product: each gripe maps to a specific Luvian capability. All five are addressed in the current codebase. Gripes 1 and 2 are at ship-ready maturity. Gripes 3, 4, 5 are built and feature-flagged — the upcoming round funds shipping them.
 
 ## Buyer Personas
 
 Detailed dossiers in `docs/buyer-persona/`. Top three:
 
-1. **Economic decision-maker** — VP/Director of Systems Engineering at an
-   automotive OEM or Tier-1. Owns the tooling budget, signs the contract.
-   Priorities: ASIL compliance, audit trail, replacing Cameo without
-   re-training the team. See `docs/buyer-persona/Economic Decision-Maker/`.
-2. **Champion** — staff systems engineer who has felt the 5 gripes
-   personally. Will run the pilot, evangelize internally.
-3. **Gatekeeper** — IT / security architect. Cares about on-prem deployment,
-   SSO/SAML/OIDC, data residency. Colin Zhang's domain expertise.
+1. **Economic decision-maker.** VP / Director of Systems Engineering at a defense prime, A&D OEM, or tier-1 automotive supplier. Owns the tooling budget, signs the contract, has fielded both an MBSE migration and an enterprise AI pilot in the last 24 months and watched both fail to integrate. Priorities: cross-artifact unification, audit trail, IL5/IL6 deployment posture.
+2. **Champion.** Staff systems engineer or chief architect who has felt the 5 gripes personally. Will run the pilot, evangelise internally, draft the procurement justification.
+3. **Gatekeeper.** IT / security architect. Cares about on-prem deployment, SSO (SAML / OIDC / LDAP), FIPS validation, data residency, and the absence of outbound network calls from any AI inference path. Colin Zhang's domain.
 
 ## "Why Now" Catalysts
 
+The full case is in [Why_Now_Memo.md](./Why_Now_Memo.md). The four canonical drivers:
+
 | Catalyst | Status | Why it matters |
 |---|---|---|
-| SysML v2 (OMG standard) | Adopted 2024 | Forces every incumbent into a multi-year migration. Window of disruption ~18–36 months. |
-| LLMs production-ready for structured authoring | 2024–2026 | The "modeling tax" that limited MBSE adoption to ~5% can finally be collapsed. |
-| Regulatory tailwind | 2025+ | UN R155/R156 (cyber), updated ISO 21434, ASIL D requirements in EU CRA — all increase mandatory MBSE. |
-| Browser-first migration of engineering tools | Ongoing | CAD (Onshape), EDA (Altium 365), ALM (Codebeamer cloud) — MBSE is the last holdout. |
-| Defense AI mandates | 2025+ | DoD Software Modernization Strategy + EU AI Act — increase demand for traceable, auditable model-based development. |
+| 95% GenAI failure | MIT NANDA, *State of AI in Business*, Jul 2025 | $30–40B invested in enterprise GenAI; near-zero ROI. Failure mode is upstream of the model: context. |
+| Robotics funding surge | $13.8B in 2025 vs. $7.8B in 2024 | Every marquee round (Figure $39B, Skild $14B, Physical Intelligence $5.6B, Saronic $4B, Shield AI $5.3B, Anduril $61B) is a buyer or partner. |
+| DoD MOSA mandate | Dec 2024 memo | MOSA compliance at every SETR, Gate Review, Program Review for MDAPs. FY2026 weapons portfolio: $384.3B. Open architectures imply typed, AI-readable model spines. |
+| IL5/IL6 air-gap as architecture | 2024–2026, accelerating | No NAT, no DNS, no outbound. SaaS context AI (Notion AI, Hebbia, most Glean tenancies) is structurally locked out of the highest-value buyers. |
 
 ## Open Items
 
-- [ ] Bottoms-up TAM build with named accounts — target 2026-07-01.
-- [ ] Updated competitive matrix with Q2 2026 pricing data — target 2026-08-01.
-- [ ] Two named Tier-1 OEM design-partner conversations transcribed (NDA) — ongoing.
+- [ ] Two named tier-1 OEM design-partner conversations transcribed (NDA) — ongoing.
+- [ ] Updated competitive matrix with Q3 2026 pricing data — target 2026-08-01.
 - [ ] Public-friendly redacted version of `docs/SOLUTION_ARCHITECTURE_NDA.md` — target 2026-09-01.
+- [ ] Bottoms-up SOM refresh against named pipeline at end of pre-seed close — target 2026-12-31.

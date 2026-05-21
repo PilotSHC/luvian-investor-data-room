@@ -16,31 +16,24 @@ title: "Fundraising Memo"
 
 | Field | Value |
 |---|---|
-| **What** | The operational context layer for engineering organisations — typed, ontology-grounded, provenance-tracked substrate for trustworthy AI reasoning over connected engineering artefacts. |
-| **Stage** | Pre-seed. Product alpha. Founder-led. |
+| **What** | The context layer for engineering intelligence. A typed, versioned, permission-aware engineering graph plus beyond-RAG context orchestration plus local-first AI reasoning, deployable cloud or fully air-gapped from one codebase. |
+| **Stage** | Pre-seed. Product alpha live, ~40% of capability shipping today. |
 | **Round target** | **$1.5M – $2.0M** on a Convertible Promissory Note (LLC stage) or priced if the right lead prefers. |
 | **Lead** | Open. Lead investor preferred. |
 | **Target close** | Q3 2026 (with a flex window for the right lead). |
-| **Use of funds** | Co-founder hires (eng + GTM) → ingestion + ontology infrastructure → first design partners in production → on-prem packaging → Series-A-credible reference architecture. |
+| **Use of funds** | Three full-time hires (GTM lead, founding ML/AI engineer, second software engineer) → ingestion + ontology infrastructure → first design partners in production → on-prem packaging → Series-A-credible reference architecture. |
 | **Runway** | 18 months at the planned spend; ~22 months at lean. |
-| **Founder** | Stephan Claxton, sole member. Background: autonomy + simulation at Applied Intuition; deep MBSE / SysML domain depth. |
+| **Team** | Stephan Claxton (Founder & CEO, ex-Applied Intuition). Jarred Gou (CPO). Colin Zhang (Software Engineer, ex-VMware). |
 
 ---
 
 ## Why we are raising now
 
-Three macro forcing functions converged in 2024–2026: foundation models
-commoditised, enterprise AI hit the trust ceiling in regulated workflows,
-and SysML v2 / KerML stabilised. The window to define the operational
-context layer for engineering organisations is roughly **18–24 months**
-before category-default is decided.
+Four forcing functions converged in 2024–2026: 95% of enterprise GenAI pilots returned zero ROI on $30–40B invested (MIT NANDA, Jul 2025), $13.8B flowed into robotics in 2025 vs $7.8B in 2024, the DoD MOSA mandate (Dec 2024) put open architectures on the critical path of $384.3B in MDAP spend, and IL5/IL6 air-gap stopped being a feature request and became an architectural requirement that locks SaaS context AI out structurally. The window to define the *engineering intelligence layer* category is roughly 18–24 months before incumbents and horizontal-AI players catch up.
 
-The full reasoning is in `05_Market_Thesis/Why_Now_Memo.md`. The
-architecture thesis is in `04_Technical_Architecture/Architecture_Vision_Memo.md`.
+The full reasoning is in [05_Market_Thesis/Why_Now_Memo.md](../05_Market_Thesis/Why_Now_Memo.md). The architecture thesis is in [04_Technical_Architecture/Architecture_Vision_Memo.md](../04_Technical_Architecture/Architecture_Vision_Memo.md).
 
-We are raising the minimum capital required to (a) complete the
-co-founder team, (b) put the architecture into production at 2–3 design
-partners, and (c) reach a Series-A-credible reference story.
+We are raising the minimum capital required to (a) complete the founding team with three named full-time hires, (b) put the architecture into production at 2–3 design partners with provenance and suspect-link propagation visible end-to-end, and (c) reach a Series-A-credible reference story.
 
 ---
 
@@ -63,7 +56,7 @@ the architecture bet, not the GTM motion.
 
 | Bucket | % of raise | What it buys |
 |---|---:|---|
-| Co-founder + early team comp | ~55% | 2 co-founders + 2–3 senior engineers + founding designer over 18 months |
+| Founding-team comp (3 hires) | ~55% | GTM lead + founding ML/AI engineer + second software engineer over 18 months. Founder-grade equity, market-track cash. |
 | Ingestion + ontology infrastructure | ~20% | Connectors (PLM, ALM, simulation, code, requirements), ontology authoring + governance, retrieval pipeline |
 | Design-partner deployment + on-prem packaging | ~15% | Customer-success engineering, regulated-industry deployment posture (FIPS, ITAR, customer-managed keys), reference architecture documentation |
 | Compute, infra, model spend | ~5% | Foundation-model API spend, vector/graph infra, eval pipeline |
@@ -79,12 +72,12 @@ Each is binary and externally verifiable.
 
 | # | Milestone | Verification |
 |---|---|---|
-| 1 | Co-founder team complete | Two named full-time co-founders + 3 senior engineers + founding designer |
+| 1 | Founding team complete | Three named full-time hires onboarded: GTM lead, founding ML/AI engineer, second software engineer |
 | 2 | Reference architecture publicly documented | A technical leader can read it cold (no NDA) and articulate the thesis back |
-| 3 | First design partner in production | Substrate running against actual engineering artefacts; provenance + suspect-link propagation visible |
-| 4 | Second + third design partners | Two additional production deployments in wedge domains |
-| 5 | Delaware Flip complete | C-corp incorporated; SAFE template operative for next round |
-| 6 | Series-A-credible architecture story | A Series A partner spends 2 hours and walks away thinking *"this is the default substrate"* |
+| 3 | First design partner in production | Substrate running against actual engineering artefacts; provenance + suspect-link propagation visible end-to-end |
+| 4 | Second + third design partners | Two additional production deployments across the wedge phases (Evidence Layer, Requirements, Modeling) |
+| 5 | Delaware Flip complete | C-corp incorporated; SAFE template operative for the Seed |
+| 6 | Series-A-credible architecture story | A Series A partner spends 2 hours and walks away thinking *"this is the default substrate for engineering intelligence"* |
 
 If three of six land, the round was rational. If five of six land,
 Series A is a different conversation.
@@ -126,6 +119,6 @@ Summary:
 
 ## Contact
 
-**Stephan Claxton** — Founder & Sole Member, Luvian Labs LLC ·
+**Stephan Claxton** — Founder & CEO, Luvian Labs LLC ·
 [luvsupport@luvian.io](mailto:luvsupport@luvian.io) ·
 [data-room.luvian.info](https://data-room.luvian.info) · 2026-05-21
