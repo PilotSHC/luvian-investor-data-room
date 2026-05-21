@@ -32,17 +32,17 @@ const desc = description ?? 'Confidential investor data room for Luvian Labs LLC
     <slot />
     <Analytics />
     {showChrome && (
-      <footer class="mt-24 border-t border-ink-700 bg-ink-800/40 py-8">
-        <div class="container-tight flex flex-col gap-2 text-xs text-ink-300 sm:flex-row sm:items-center sm:justify-between">
+      <footer class="mt-24 border-t border-ink-200 bg-ink-50/50 py-8">
+        <div class="container-tight flex flex-col gap-2 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <strong class="text-ink-100">Confidential.</strong> Access subject to a
+            <strong class="text-ink-800">Confidential.</strong> Access subject to a
             click-through confidentiality &amp; privacy acknowledgment.
-            Do not redistribute. See <a class="underline" href="/privacy">privacy</a>.
+            Do not redistribute. See <a class="text-accent-dark underline" href="/privacy">privacy</a>.
           </div>
           <div class="flex items-center gap-4">
             <span>Luvian Labs LLC · Pre-seed · {new Date().getFullYear()}</span>
             <form method="POST" action="/api/logout">
-              <button class="text-ink-200 underline hover:text-white" type="submit">
+              <button class="text-ink-700 underline hover:text-ink-900" type="submit">
                 Lock data room
               </button>
             </form>

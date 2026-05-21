@@ -29,10 +29,10 @@ if (entry) {
   currentSection={section.id}
   currentSlug={file.slug}
 >
-  <nav class="mb-6 text-xs text-ink-300">
-    <a href="/" class="hover:text-white">Data Room</a>
-    <span class="mx-2 text-ink-500">/</span>
-    <a href={section.href} class="hover:text-white">{section.number} · {section.short}</a>
+  <nav class="mb-6 text-xs text-ink-500">
+    <a href="/" class="hover:text-ink-900">Data Room</a>
+    <span class="mx-2 text-ink-300">/</span>
+    <a href={section.href} class="hover:text-ink-900">{section.number} · {section.short}</a>
   </nav>
 
   {file.download && file.download.length > 0 && (
@@ -43,7 +43,7 @@ if (entry) {
     </div>
   )}
 
-  <article class="prose prose-invert max-w-none">
+  <article class="prose max-w-none">
     {Content ? <Content /> : <Fragment set:html={fallback ?? ''} />}
   </article>
 </DataRoomLayout>

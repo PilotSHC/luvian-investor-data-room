@@ -12,11 +12,11 @@ const { currentSection, currentSlug } = Astro.props;
 <nav class="space-y-6 text-sm">
   <a
     href="/"
-    class={`block rounded-md px-3 py-2 ring-1 ring-ink-700 transition hover:bg-ink-700 ${
-      !currentSection ? 'bg-ink-700 text-white ring-ink-500' : 'text-ink-100'
+    class={`block rounded-md px-3 py-2 ring-1 ring-ink-200 transition hover:bg-ink-50 ${
+      !currentSection ? 'bg-accent/10 text-accent-dark ring-accent/30' : 'bg-white text-ink-800'
     }`}
   >
-    <div class="text-xs uppercase tracking-wide text-ink-300">Home</div>
+    <div class="text-xs uppercase tracking-wide text-ink-500">Home</div>
     <div class="mt-1 font-medium">Data Room Index</div>
   </a>
 
@@ -24,8 +24,8 @@ const { currentSection, currentSlug } = Astro.props;
     <div>
       <a
         href={section.href}
-        class={`flex items-baseline gap-2 rounded-md px-3 py-1 transition hover:text-white ${
-          currentSection === section.id ? 'text-white font-semibold' : 'text-ink-100'
+        class={`flex items-baseline gap-2 rounded-md px-3 py-1 transition hover:text-ink-900 ${
+          currentSection === section.id ? 'text-accent-dark font-semibold' : 'text-ink-800'
         }`}
       >
         <span class="text-xs font-mono text-ink-400">{section.number}</span>
@@ -36,9 +36,9 @@ const { currentSection, currentSlug } = Astro.props;
           <li>
             <a
               href={`${section.href}/${file.slug}`}
-              class={`block rounded-md px-5 py-1 text-ink-200 transition hover:bg-ink-700 hover:text-white ${
+              class={`block rounded-md px-5 py-1 text-ink-700 transition hover:bg-ink-50 hover:text-ink-900 ${
                 currentSection === section.id && currentSlug === file.slug
-                  ? 'bg-ink-700 text-white ring-1 ring-ink-500'
+                  ? 'bg-accent/10 text-accent-dark ring-1 ring-accent/30'
                   : ''
               }`}
             >
