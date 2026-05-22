@@ -55,6 +55,54 @@ function clientIp(request: Request): string {
   return 'unknown';
 }
 
+type AgreementAuditEvent = {
+  event: 'AGREEMENT_ACCEPTED';
+  name: string;
+  firm: string | null;
+  email: string;
+  acceptedAt: string;
+  tier: 1 | 2;
+  ip: string;
+  userAgent: string;
+  referer: string | null;
+  nextPath: string;
+};
+
+function readEnv(name: string): string | undefined {
+  const fromVite = (import.meta.env as Record<string, string | undefined>)[name];
+  if (fromVite && fromVite.length > 0) return fromVite;
+  if (typeof process !== 'undefined' && process.env && process.env[name]) {
+    return process.env[name];
+  }
+  return undefined;
+}
+
+async function recordAgreementAcceptance(auditEvent: AgreementAuditEvent): Promise<void> {
+  const webhookUrl = readEnv('INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_URL');
+  if (!webhookUrl) return;
+
+  const secret = readEnv('INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_SECRET');
+  const body = secret ? { ...auditEvent, secret } : auditEvent;
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(4000),
+    });
+
+    if (!response.ok) {
+      console.error('[api/accept-agreement] Google Sheet webhook failed', {
+        status: response.status,
+        statusText: response.statusText,
+      });
+    }
+  } catch (err) {
+    console.error('[api/accept-agreement] Google Sheet webhook threw', err);
+  }
+}
+
 export const POST: APIRoute = async ({ request }) => {
   const authCookie = readAuthCookie(request);
   const authResult = verifyAuthToken(authCookie);
@@ -119,18 +167,20 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const auditEvent = {
+  const auditEvent: AgreementAuditEvent = {
     event: 'AGREEMENT_ACCEPTED',
     name: token.payload.name,
     firm: token.payload.firm || null,
     email: token.payload.email,
     acceptedAt: new Date(token.payload.acceptedAt * 1000).toISOString(),
+    tier: authResult.tier ?? 1,
     ip: clientIp(request),
     userAgent: request.headers.get('user-agent') ?? 'unknown',
     referer: request.headers.get('referer') ?? null,
     nextPath: next,
   };
   console.log('[AGREEMENT-ACCEPTED]', JSON.stringify(auditEvent));
+  await recordAgreementAcceptance(auditEvent);
 
   return new Response(null, {
     status: 303,
