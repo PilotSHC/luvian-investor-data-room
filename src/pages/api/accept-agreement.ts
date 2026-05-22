@@ -77,6 +77,22 @@ function readEnv(name: string): string | undefined {
   return undefined;
 }
 
+function isGoogleAppsScriptWebAppUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'https:' &&
+      url.hostname === 'script.google.com' &&
+      (
+        url.pathname.startsWith('/macros/s/') ||
+        /^\/a\/macros\/[^/]+\/s\//.test(url.pathname)
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
 async function recordAgreementAcceptance(auditEvent: AgreementAuditEvent): Promise<void> {
   const webhookUrl = readEnv('INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_URL');
   if (!webhookUrl) {
@@ -84,7 +100,7 @@ async function recordAgreementAcceptance(auditEvent: AgreementAuditEvent): Promi
     return;
   }
 
-  if (!webhookUrl.startsWith('https://script.google.com/macros/s/')) {
+  if (!isGoogleAppsScriptWebAppUrl(webhookUrl)) {
     console.error('[api/accept-agreement] Google Sheet webhook skipped: URL is not a Google Apps Script Web App URL');
     return;
   }
