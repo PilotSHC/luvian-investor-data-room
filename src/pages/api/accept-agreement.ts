@@ -79,7 +79,15 @@ function readEnv(name: string): string | undefined {
 
 async function recordAgreementAcceptance(auditEvent: AgreementAuditEvent): Promise<void> {
   const webhookUrl = readEnv('INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_URL');
-  if (!webhookUrl) return;
+  if (!webhookUrl) {
+    console.warn('[api/accept-agreement] Google Sheet webhook skipped: missing INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_URL');
+    return;
+  }
+
+  if (!webhookUrl.startsWith('https://script.google.com/macros/s/')) {
+    console.error('[api/accept-agreement] Google Sheet webhook skipped: URL is not a Google Apps Script Web App URL');
+    return;
+  }
 
   const secret = readEnv('INVESTOR_ROOM_GOOGLE_SHEET_WEBHOOK_SECRET');
   const body = secret ? { ...auditEvent, secret } : auditEvent;
@@ -92,12 +100,26 @@ async function recordAgreementAcceptance(auditEvent: AgreementAuditEvent): Promi
       signal: AbortSignal.timeout(4000),
     });
 
+    const responseText = (await response.text()).trim();
+
     if (!response.ok) {
       console.error('[api/accept-agreement] Google Sheet webhook failed', {
         status: response.status,
         statusText: response.statusText,
+        body: responseText.slice(0, 200),
       });
+      return;
     }
+
+    if (responseText !== 'ok') {
+      console.error('[api/accept-agreement] Google Sheet webhook returned unexpected body', {
+        status: response.status,
+        body: responseText.slice(0, 200),
+      });
+      return;
+    }
+
+    console.log('[api/accept-agreement] Google Sheet webhook appended row');
   } catch (err) {
     console.error('[api/accept-agreement] Google Sheet webhook threw', err);
   }
