@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+const profile = Astro.locals.investorProfile;
+const tier = Astro.locals.investorTier ?? 1;
+const introSeen = Astro.cookies.get('lvn_dr_intro_seen')?.value === '1';
+
+const url = new URL(Astro.request.url);
+const nextRaw = url.searchParams.get('next') ?? '/';
+const next = nextRaw.startsWith('/') && !nextRaw.startsWith('//') ? nextRaw : '/';
+---
+
+<BaseLayout title="Welcome to the Luvian Data Room" showChrome={false}>
+  <main class="min-h-screen bg-ink-950 text-white">
+    <div class="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10 sm:py-14">
+      <header class="flex items-center justify-between text-xs text-white/50">
+        <div>
+          <span class="font-mono uppercase tracking-widest text-white/60">Luvian Labs LLC</span>
+          <span class="ml-3">Pre-Seed · Confidential · {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}</span>
+        </div>
+        {profile && (
+          <div class="text-right">
+            Welcome, <span class="text-white/80">{profile.name}</span>
+            {profile.firm ? <span class="text-white/40"> · {profile.firm}</span> : null}
+          </div>
+        )}
+      </header>
+
+      <div class="mt-10 flex-1">
+        <p class="text-xs uppercase tracking-widest text-luvian-300">Start here</p>
+        <h1 class="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
+          A 5-minute introduction to Luvian.
+        </h1>
+        <p class="mt-3 max-w-2xl text-base text-white/70">
+          Watch this first. It is the fastest way to know whether you want a longer
+          conversation. Everything else in the data room is depth on what you'll see here.
+        </p>
+
+        <div class="mt-8 overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
+          <video
+            controls
+            controlsList="nodownload noremoteplayback"
+            disablePictureInPicture
+            preload="metadata"
+            playsinline
+            class="block h-auto w-full"
+            src="/api/asset/intro"
+            aria-label="Luvian, 5-minute investor introduction"
+          >
+            Your browser does not support inline video. The video is served from a
+            private store. Email <a class="underline" href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
+            for an alternative format.
+          </video>
+        </div>
+
+        <p class="mt-3 text-xs text-white/40">
+          Confidential. Do not screen-share, redistribute, or extract clips. Subject to the
+          confidentiality &amp; privacy acknowledgment you accepted at sign-in.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div class="text-sm text-white/60">
+          {introSeen
+            ? "You've already watched the intro. Enter the data room when you're ready."
+            : "Once you've watched (or skipped), continue into the data room."}
+          {tier >= 2 && (
+            <span class="ml-2 inline-flex items-center rounded-full bg-luvian-500/20 px-2 py-0.5 text-[10px] uppercase tracking-wider text-luvian-200">
+              Diligence access
+            </span>
+          )}
+        </div>
+        <form method="POST" action="/api/intro-seen" class="flex flex-wrap items-center gap-3">
+          <input type="hidden" name="next" value={next} />
+          <button
+            type="submit"
+            class="rounded-md bg-luvian-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-luvian-400"
+          >
+            Continue to the data room →
+          </button>
+        </form>
+      </div>
+
+      <footer class="mt-10 text-xs text-white/30">
+        <span>Luvian Labs LLC · luvsupport@luvian.io</span>
+        <span class="mx-2">·</span>
+        <a class="underline hover:text-white/60" href="/privacy">Privacy</a>
+        <span class="mx-2">·</span>
+        <form method="POST" action="/api/logout" class="inline">
+          <button type="submit" class="underline hover:text-white/60">Lock data room</button>
+        </form>
+      </footer>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Lock the dark theme on this page even if the rest of the site is light. */
+  :global(body) {
+    background: #0b1020;
+  }
+</style>

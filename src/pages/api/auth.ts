@@ -34,9 +34,9 @@ export const POST: APIRoute = async ({ request }) => {
     // not a form body — fall through with empty password (will fail check)
   }
 
-  let passwordOk = false;
+  let check: ReturnType<typeof verifyPassword>;
   try {
-    passwordOk = verifyPassword(password);
+    check = verifyPassword(password);
   } catch (err) {
     console.error('[api/auth] verifyPassword threw — env vars likely missing:', err);
     return new Response('Server is missing authentication configuration. Contact luvsupport@luvian.io.', {
@@ -45,14 +45,14 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  if (!passwordOk) {
+  if (!check.ok) {
     const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : '/';
     return redirectWithCookie(`/login?error=1&next=${encodeURIComponent(safeNext)}`);
   }
 
   let token: { value: string; maxAge: number };
   try {
-    token = issueAuthToken();
+    token = issueAuthToken(check.tier);
   } catch (err) {
     console.error('[api/auth] issueAuthToken threw — INVESTOR_ROOM_COOKIE_SECRET missing:', err);
     return new Response('Server is missing cookie-signing configuration. Contact luvsupport@luvian.io.', {

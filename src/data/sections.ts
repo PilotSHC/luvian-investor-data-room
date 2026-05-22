@@ -7,6 +7,8 @@ export interface DataRoomFile {
   emphasis?: 'primary' | 'secondary';
 }
 
+export type AccessTier = 1 | 2;
+
 export interface DataRoomSection {
   id: string;
   number: string;
@@ -14,6 +16,12 @@ export interface DataRoomSection {
   short: string;
   description: string;
   href: string;
+  /**
+   * Minimum access tier required to see this section. Tier 1 (intro) is
+   * the first-contact view; tier 2 (diligence) unlocks 07-10. Sections
+   * default to tier 1 if omitted.
+   */
+  tier?: AccessTier;
   files: DataRoomFile[];
 }
 
@@ -170,6 +178,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'Pre-seed traction means velocity, insight, sophistication, and market pull, not revenue. The honest picture.',
     href: '/07-traction',
+    tier: 2,
     files: [
       {
         slug: 'execution-velocity',
@@ -207,6 +216,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'Executed corporate documents for Luvian Labs LLC, plus the Delaware Flip Plan that takes us to a Delaware C-corp ahead of Series A.',
     href: '/08-legal',
+    tier: 2,
     files: [
       {
         slug: 'operating-agreement',
@@ -267,6 +277,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'Lean by design. Burn-driven, milestone-anchored, pre-revenue.',
     href: '/09-financials',
+    tier: 2,
     files: [
       {
         slug: 'use-of-funds',
@@ -303,6 +314,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'Investor Q and A, the active funding instrument, NDA, and the standard contracts library.',
     href: '/10-appendix',
+    tier: 2,
     files: [
       {
         slug: 'investor-qa',
@@ -346,4 +358,15 @@ export function findFile(sectionId: string, slug: string): { section: DataRoomSe
   const file = section.files.find((f) => f.slug === slug);
   if (!file) return undefined;
   return { section, file };
+}
+
+export function visibleSections(tier: AccessTier): DataRoomSection[] {
+  return SECTIONS.filter((s) => (s.tier ?? 1) <= tier);
+}
+
+export function isSectionVisibleToTier(
+  section: DataRoomSection,
+  tier: AccessTier,
+): boolean {
+  return (section.tier ?? 1) <= tier;
 }

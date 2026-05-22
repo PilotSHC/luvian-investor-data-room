@@ -3,6 +3,7 @@
 declare namespace App {
   interface Locals {
     investorAuthed?: boolean;
+    investorTier?: 1 | 2;
     investorProfile?: {
       name: string;
       firm: string;

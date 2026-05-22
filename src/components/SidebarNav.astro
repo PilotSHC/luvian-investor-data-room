@@ -1,5 +1,5 @@
 ---
-import { SECTIONS } from '@/data/sections';
+import { visibleSections } from '@/data/sections';
 
 interface Props {
   currentSection?: string;
@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { currentSection, currentSlug } = Astro.props;
+const tier = Astro.locals.investorTier ?? 1;
+const sectionsForTier = visibleSections(tier);
 ---
 
 <nav class="text-sm" data-sidebar-nav>
@@ -54,7 +56,7 @@ const { currentSection, currentSlug } = Astro.props;
     </summary>
     <div class="border-t border-ink-200 px-1 pb-2 pt-1">
       <ul class="space-y-1">
-        {SECTIONS.map((section) => {
+        {sectionsForTier.map((section) => {
           const isActive = currentSection === section.id;
           return (
             <li>
@@ -120,7 +122,7 @@ const { currentSection, currentSlug } = Astro.props;
   </details>
 
   <div class="mt-4 hidden space-y-3 lg:block">
-    {SECTIONS.map((section) => {
+    {sectionsForTier.map((section) => {
       const isActive = currentSection === section.id;
       return (
         <details class="group" open={isActive} data-toc-section>
