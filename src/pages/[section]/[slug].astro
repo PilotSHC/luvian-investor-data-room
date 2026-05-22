@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
 import DataRoomLayout from '@/layouts/DataRoomLayout.astro';
-import { findFile } from '@/data/sections';
+import { findFile, isFileVisibleToTier } from '@/data/sections';
 
 export const prerender = false;
 
@@ -11,6 +11,10 @@ if (!found) {
   return Astro.redirect('/', 302);
 }
 const { section, file } = found;
+const tier = Astro.locals.investorTier ?? 1;
+if (!isFileVisibleToTier(section, file, tier)) {
+  return Astro.redirect('/', 302);
+}
 const entryId = `${section.id}--${file.slug}`;
 const entry = await getEntry('dataroom', entryId);
 let Content: any = null;

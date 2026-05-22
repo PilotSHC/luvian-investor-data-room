@@ -11,26 +11,8 @@ const url = new URL(Astro.request.url);
 const nextRaw = url.searchParams.get('next') ?? '/';
 const next = nextRaw.startsWith('/') && !nextRaw.startsWith('//') ? nextRaw : '/';
 
-// Video source. Prefer the private Vercel Blob proxy when available; fall
-// back to a YouTube embed when INVESTOR_ROOM_INTRO_YOUTUBE_ID is set. The
-// YouTube path is an interim while the Blob store is suspended; switch
-// back by clearing the env var once the blob is uploaded.
-function envVar(name: string): string | undefined {
-  const v = (import.meta.env as Record<string, string | undefined>)[name];
-  if (v && v.length > 0) return v;
-  if (typeof process !== 'undefined' && typeof process.env?.[name] === 'string') {
-    return process.env[name];
-  }
-  return undefined;
-}
-const youtubeId = envVar('INVESTOR_ROOM_INTRO_YOUTUBE_ID');
-// Validate to avoid trivial XSS via env var. YouTube IDs are 11 chars,
-// alphanumeric plus '-' and '_'.
-const isValidYoutubeId = (id: string): boolean => /^[A-Za-z0-9_-]{11}$/.test(id);
-const useYoutube = Boolean(youtubeId && isValidYoutubeId(youtubeId));
-const youtubeEmbed = useYoutube
-  ? `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&autoplay=1&mute=1`
-  : null;
+const youtubeEmbed =
+  'https://www.youtube-nocookie.com/embed/2Vfzh1WIDQA?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1';
 ---
 
 <BaseLayout title="Welcome to the Luvian Data Room" showChrome={false}>
@@ -52,42 +34,25 @@ const youtubeEmbed = useYoutube
       <div class="mt-10 flex-1">
         <p class="text-xs uppercase tracking-widest text-luvian-300">Start here</p>
         <h1 class="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
-          A 5-minute introduction to Luvian.
+          A 55-second introduction to Luvian.
         </h1>
         <p class="mt-3 max-w-2xl text-base text-white/70">
-          Watch this first. It is the fastest way to know whether you want a longer
-          conversation. Everything else in the data room is depth on what you'll see here.
+          Watch this first. In under a minute, it should give you the shape of the company,
+          the round, and whether you want the next conversation.
         </p>
 
         <div class="mt-8 overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
-          {useYoutube ? (
-            <div class="relative w-full" style="aspect-ratio: 16 / 9;">
-              <iframe
-                src={youtubeEmbed!}
-                class="absolute inset-0 h-full w-full"
-                title="Luvian, 5-minute investor introduction"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen"
-                referrerpolicy="no-referrer"
-                allowfullscreen
-              ></iframe>
-            </div>
-          ) : (
-            <video
-              controls
-              controlsList="nodownload noremoteplayback"
-              disablePictureInPicture
-              preload="metadata"
-              playsinline
-              class="block h-auto w-full"
-              src="/api/asset/intro"
-              aria-label="Luvian, 5-minute investor introduction"
-            >
-              Your browser does not support inline video. The video is served from a
-              private store. Email <a class="underline" href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
-              for an alternative format.
-            </video>
-          )}
+          <div class="relative w-full" style="aspect-ratio: 16 / 9;">
+            <iframe
+              src={youtubeEmbed}
+              class="absolute inset-0 h-full w-full"
+              title="Luvian, 55-second investor introduction"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
 
         <p class="mt-3 text-xs text-white/40">

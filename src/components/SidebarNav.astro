@@ -1,5 +1,5 @@
 ---
-import { visibleSections } from '@/data/sections';
+import { visibleFiles, visibleSections } from '@/data/sections';
 
 interface Props {
   currentSection?: string;
@@ -98,7 +98,7 @@ const sectionsForTier = visibleSections(tier);
                       Section overview
                     </a>
                   </li>
-                  {section.files.map((file) => (
+                  {visibleFiles(section, tier).map((file) => (
                     <li>
                       <a
                         href={`${section.href}/${file.slug}`}
@@ -159,7 +159,7 @@ const sectionsForTier = visibleSections(tier);
                 Section overview
               </a>
             </li>
-            {section.files.map((file) => (
+            {visibleFiles(section, tier).map((file) => (
               <li>
                 <a
                   href={`${section.href}/${file.slug}`}
