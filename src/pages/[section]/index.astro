@@ -1,14 +1,16 @@
 ---
 import DataRoomLayout from '@/layouts/DataRoomLayout.astro';
-import { findSection } from '@/data/sections';
+import { findSection, isSectionVisibleToTier, visibleFiles } from '@/data/sections';
 
 export const prerender = false;
 
 const { section: sectionId } = Astro.params;
 const section = findSection(sectionId ?? '');
-if (!section) {
+const tier = Astro.locals.investorTier ?? 1;
+if (!section || !isSectionVisibleToTier(section, tier)) {
   return Astro.redirect('/', 302);
 }
+const filesForTier = visibleFiles(section, tier);
 ---
 
 <DataRoomLayout
@@ -27,7 +29,7 @@ if (!section) {
   <p class="mt-3 max-w-3xl text-ink-700">{section.description}</p>
 
   <ul class="mt-8 space-y-3">
-    {section.files.map((file) => {
+    {filesForTier.map((file) => {
       const isPrimary = file.emphasis === 'primary';
       return (
         <li>

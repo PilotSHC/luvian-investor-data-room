@@ -1,6 +1,6 @@
 ---
 import DataRoomLayout from '@/layouts/DataRoomLayout.astro';
-import { visibleSections } from '@/data/sections';
+import { visibleFiles, visibleSections } from '@/data/sections';
 
 const tier = Astro.locals.investorTier ?? 1;
 const sectionsForTier = visibleSections(tier);
@@ -123,16 +123,19 @@ const isDiligence = tier >= 2;
   <section>
     <h2 class="text-xs font-semibold uppercase tracking-widest text-ink-500">Sections</h2>
     <div class="mt-3 grid gap-4 sm:grid-cols-2">
-      {sectionsForTier.map((section) => (
-        <a href={section.href} class="card-hover group">
-          <div class="flex items-baseline gap-3">
-            <span class="font-mono text-sm text-ink-500">{section.number}</span>
-            <h3 class="text-lg font-semibold text-ink-900 group-hover:text-accent-dark">{section.title}</h3>
-          </div>
-          <p class="mt-2 text-sm text-ink-700">{section.description}</p>
-          <p class="mt-3 text-xs text-ink-500">{section.files.length} documents →</p>
-        </a>
-      ))}
+      {sectionsForTier.map((section) => {
+        const fileCount = visibleFiles(section, tier).length;
+        return (
+          <a href={section.href} class="card-hover group">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-sm text-ink-500">{section.number}</span>
+              <h3 class="text-lg font-semibold text-ink-900 group-hover:text-accent-dark">{section.title}</h3>
+            </div>
+            <p class="mt-2 text-sm text-ink-700">{section.description}</p>
+            <p class="mt-3 text-xs text-ink-500">{fileCount} {fileCount === 1 ? 'document' : 'documents'} →</p>
+          </a>
+        );
+      })}
     </div>
   </section>
 

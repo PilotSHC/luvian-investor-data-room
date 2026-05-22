@@ -5,6 +5,7 @@ export interface DataRoomFile {
   download?: { label: string; href: string }[];
   embedHtml?: string;
   emphasis?: 'primary' | 'secondary';
+  tier?: AccessTier;
 }
 
 export type AccessTier = 1 | 2;
@@ -18,8 +19,8 @@ export interface DataRoomSection {
   href: string;
   /**
    * Minimum access tier required to see this section. Tier 1 (intro) is
-   * the first-contact view; tier 2 (diligence) unlocks 07-10. Sections
-   * default to tier 1 if omitted.
+   * the first-contact view; tier 2 (diligence) unlocks deeper diligence.
+   * Sections default to tier 1 if omitted; files may set a higher tier.
    */
   tier?: AccessTier;
   files: DataRoomFile[];
@@ -275,34 +276,36 @@ export const SECTIONS: DataRoomSection[] = [
     title: 'Financials',
     short: 'Financials',
     description:
-      'Lean by design. Burn-driven, milestone-anchored, pre-revenue.',
+      'Lean by design. The forward pro forma is visible up front; detailed model materials are diligence-tier.',
     href: '/09-financials',
-    tier: 2,
     files: [
+      {
+        slug: 'historical-financials',
+        title: 'Forward Pro Forma',
+        blurb: 'Pre-revenue position and 24-month forward pro-forma trajectory.',
+        emphasis: 'primary',
+      },
       {
         slug: 'use-of-funds',
         title: 'Use of Funds',
         blurb: 'Bucket allocation, quarterly spend ramp, salary policy.',
-        emphasis: 'primary',
+        tier: 2,
       },
       {
         slug: 'financial-forecast',
         title: 'Financial Forecast',
         blurb: '24-month lean view: burn shape by quarter, sensitivity, Series A bridge.',
+        tier: 2,
       },
       {
         slug: 'financial-model-summary',
         title: 'Financial Model Summary',
         blurb: 'P and L, unit economics, funding scenarios, use of funds.',
+        tier: 2,
         download: [
           { label: 'Download editable model (CSV)', href: '/csv/Financial_Model_2026_05.csv' },
           { label: 'Download model PDF', href: '/pdf/Financial_Model_2026_05.pdf' },
         ],
-      },
-      {
-        slug: 'historical-financials',
-        title: 'Historical Financials',
-        blurb: 'Pre-revenue position, expense run-rate, runway calculation.',
       },
     ],
   },
@@ -361,12 +364,28 @@ export function findFile(sectionId: string, slug: string): { section: DataRoomSe
 }
 
 export function visibleSections(tier: AccessTier): DataRoomSection[] {
-  return SECTIONS.filter((s) => (s.tier ?? 1) <= tier);
+  return SECTIONS.filter((s) => (s.tier ?? 1) <= tier || visibleFiles(s, tier).length > 0);
 }
 
 export function isSectionVisibleToTier(
   section: DataRoomSection,
   tier: AccessTier,
 ): boolean {
-  return (section.tier ?? 1) <= tier;
+  return (section.tier ?? 1) <= tier || visibleFiles(section, tier).length > 0;
+}
+
+export function requiredTierForFile(section: DataRoomSection, file: DataRoomFile): AccessTier {
+  return file.tier ?? section.tier ?? 1;
+}
+
+export function isFileVisibleToTier(
+  section: DataRoomSection,
+  file: DataRoomFile,
+  tier: AccessTier,
+): boolean {
+  return requiredTierForFile(section, file) <= tier;
+}
+
+export function visibleFiles(section: DataRoomSection, tier: AccessTier): DataRoomFile[] {
+  return section.files.filter((file) => isFileVisibleToTier(section, file, tier));
 }

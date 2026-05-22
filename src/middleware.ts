@@ -1,6 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { AUTH_COOKIE_NAME, verifyAuthToken } from '@/lib/auth';
 import { AGREEMENT_COOKIE_NAME, verifyAgreementToken } from '@/lib/agreement';
+import { findFile, requiredTierForFile } from '@/data/sections';
 
 const PUBLIC_PATHS = new Set<string>([
   '/login',
@@ -21,13 +22,12 @@ const AUTH_ONLY_PATHS = new Set<string>([
   '/api/accept-agreement',
 ]);
 
-// Tier 2 (diligence) only — Traction, Legal, Financials, Appendix.
-// Tier 1 visitors hitting these are silently bounced home; nav also hides
-// them so the upgrade prompt is never shown.
+// Tier 2 (diligence) only — Traction, Legal, Appendix.
+// Financials is mixed access: the pro forma is tier 1, detailed model
+// materials are file-level tier 2.
 const DILIGENCE_TIER_PREFIXES = [
   '/07-traction',
   '/08-legal',
-  '/09-financials',
   '/10-appendix',
 ];
 
@@ -100,8 +100,16 @@ function isIntroAllowed(pathname: string): boolean {
   return false;
 }
 
+function diligenceFileForPath(pathname: string): ReturnType<typeof findFile> {
+  const [sectionId, slug] = pathname.split('/').filter(Boolean);
+  if (!sectionId || !slug) return undefined;
+  return findFile(sectionId, slug);
+}
+
 function requiresDiligenceTier(pathname: string): boolean {
   if (pathMatchesAnyPrefix(pathname, DILIGENCE_TIER_PREFIXES)) return true;
+  const found = diligenceFileForPath(pathname);
+  if (found && requiredTierForFile(found.section, found.file) > 1) return true;
   for (const prefix of TIER2_ASSET_PREFIXES) {
     if (pathname.startsWith(prefix)) return true;
   }
@@ -161,9 +169,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
-  // Tier enforcement. Sections 07–10 require tier 2; anyone else gets
-  // bounced silently to home. Nav hides these sections from tier-1 users
-  // so a manual URL is the only way to reach them.
+  // Tier enforcement. Diligence-only sections and files require tier 2;
+  // anyone else gets bounced silently to home. Nav hides these from tier-1
+  // users so a manual URL is the only way to reach them.
   if (requiresDiligenceTier(pathname) && tier < 2) {
     return context.redirect('/', 302);
   }

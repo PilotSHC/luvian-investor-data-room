@@ -19,7 +19,7 @@ identifier. By playing or downloading it you continue to be bound by the
 confidentiality and privacy acknowledgment you accepted at sign-in.
 
 - Do not screen-share the video on a recorded call.
-- Do not redistribute the URL, the URL is non-guessable but is shared
+- Do not redistribute the embed or underlying video URL; it is shared
   with you on the assumption you will not forward it.
 - Do not extract clips for use in your firm's internal materials
   without written permission.
@@ -32,25 +32,20 @@ will schedule a 30-minute Zoom.
 
 ## Watch the demo
 
-<div style="position:relative;width:100%;max-width:960px;margin:1rem 0;border-radius:0.5rem;overflow:hidden;background:#000;ring:1px solid #334155">
-  <video
-    controls
-    controlsList="nodownload noremoteplayback"
-    disablePictureInPicture
-    preload="metadata"
-    style="width:100%;height:auto;display:block;"
-    src="/api/asset/demo"
-    aria-label="Luvian alpha, confidential investor demo, watermarked"
-  >
-    Your browser does not support inline video. The video is served from a
-    private store and only available to authenticated, agreement-accepted
-    investors, email <a href="mailto:luvsupport@luvian.io">luvsupport@luvian.io</a>
-    if you need an alternative format.
-  </video>
+<div style="position:relative;width:100%;max-width:960px;margin:1rem 0;border-radius:0.5rem;overflow:hidden;background:#000;aspect-ratio:16/9;">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/2Vfzh1WIDQA?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1"
+    title="Luvian alpha, confidential investor demo"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen"
+    referrerpolicy="no-referrer"
+    allowfullscreen
+    style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+  ></iframe>
 </div>
 
 > **Trouble playing?** Some restrictive corporate networks block
-> non-standard MP4 hosts. Try a personal device, or email
+> embedded video players. Try a personal device, or email
 > [luvsupport@luvian.io](mailto:luvsupport@luvian.io) for a private live
 > walkthrough.
 
