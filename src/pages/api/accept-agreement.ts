@@ -32,6 +32,11 @@ function safeNextOrRoot(raw: string | null | undefined): string {
   return raw.startsWith('/') && !raw.startsWith('//') ? raw : '/';
 }
 
+function introLocationFor(next: string): string {
+  if (next === '/intro' || next.startsWith('/intro?')) return next;
+  return `/intro?next=${encodeURIComponent(next)}`;
+}
+
 function readAuthCookie(request: Request): string | undefined {
   const header = request.headers.get('cookie');
   if (!header) return undefined;
@@ -130,7 +135,7 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(null, {
     status: 303,
     headers: buildHeaders(
-      { Location: next },
+      { Location: introLocationFor(next) },
       [buildSetCookie(AGREEMENT_COOKIE_NAME, token.value, token.maxAge)],
     ),
   });
