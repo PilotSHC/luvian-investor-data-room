@@ -80,6 +80,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'The most important asset in this room. Confidential watermarked walkthrough video.',
     href: '/03-product-demo',
+    tier: 2,
     files: [
       {
         slug: 'demo-walkthrough',
@@ -97,6 +98,7 @@ export const SECTIONS: DataRoomSection[] = [
     description:
       'The depth-of-systems-thinking section. The Architecture Vision Memo is the centrepiece of the room.',
     href: '/04-technical-architecture',
+    tier: 2,
     files: [
       {
         slug: 'architecture-vision-memo',

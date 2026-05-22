@@ -22,10 +22,12 @@ const AUTH_ONLY_PATHS = new Set<string>([
   '/api/accept-agreement',
 ]);
 
-// Tier 2 (diligence) only — Traction, Legal, Appendix.
-// Financials is mixed access: the pro forma is tier 1, detailed model
-// materials are file-level tier 2.
+// Tier 2 (diligence) only — Product Demo, Architecture, Traction, Legal,
+// Appendix. Financials is mixed access: the pro forma is tier 1, detailed
+// model materials are file-level tier 2.
 const DILIGENCE_TIER_PREFIXES = [
+  '/03-product-demo',
+  '/04-technical-architecture',
   '/07-traction',
   '/08-legal',
   '/10-appendix',
