@@ -8,6 +8,8 @@ Two co-founders plus our first software engineer. Each owns a distinct surface o
 
 ## Stephan Claxton, Founder and CEO
 
+<img src="/team/stephan-claxton.jpg" alt="Stephan Claxton" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
+
 Systems engineer and autonomy architect focused on operational context, traceability, and AI-enabled engineering workflows across regulated industries.
 
 * Background in autonomy systems, model-based systems engineering, and systems architecture
@@ -21,6 +23,8 @@ The combination of systems engineering depth, defense-program delivery experienc
 [stephanclaxton.com](https://www.stephanclaxton.com/) · [luvsupport@luvian.io](mailto:luvsupport@luvian.io) · Sunnyvale, CA
 
 ## Jarred Gou, Chief Product Officer
+
+<img src="/team/jarred-gou.jpg" alt="Jarred Gou" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 
 Jarred Gou is Luvian's Chief Product Officer and the voice of the engineer inside the product organization. He combines nearly five years of frontline semiconductor engineering experience with formal graduate training in the discipline Luvian's platform serves: Systems Engineering.
 
