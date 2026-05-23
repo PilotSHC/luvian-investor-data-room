@@ -284,7 +284,7 @@ export const SECTIONS: DataRoomSection[] = [
       {
         slug: 'historical-financials',
         title: 'Forward Pro Forma',
-        blurb: 'Pre-revenue position and 24-month forward pro-forma trajectory.',
+        blurb: 'Three-year forward pro forma: P&L, headcount, cash, ARR ramp, sensitivity bands.',
         emphasis: 'primary',
       },
       {
