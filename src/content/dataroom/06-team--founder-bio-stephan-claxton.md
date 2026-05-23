@@ -8,6 +8,8 @@ Two co-founders plus our first software engineer. Each owns a distinct surface o
 
 ## Stephan Claxton, Founder and CEO
 
+<img src="/team/stephan-claxton.jpg" alt="Stephan Claxton" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
+
 Systems engineer and autonomy architect focused on operational context, traceability, and AI-enabled engineering workflows across regulated industries.
 
 * Background in autonomy systems, model-based systems engineering, and systems architecture
@@ -22,6 +24,8 @@ The combination of systems engineering depth, defense-program delivery experienc
 
 ## Jarred Gou, Chief Product Officer
 
+<img src="/team/jarred-gou.jpg" alt="Jarred Gou" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
+
 Jarred Gou is Luvian's Chief Product Officer and the voice of the engineer inside the product organization. He combines nearly five years of frontline semiconductor engineering experience with formal graduate training in the discipline Luvian's platform serves: Systems Engineering.
 
 Before joining Luvian, Jarred spent 2021 to 2025 in Broadcom's Wireless Semiconductor Division, where he sat at the intersection of software, hardware, and program execution. He developed internal test software relied on by RF design teams and architected production-scale hardware test systems. He also led a team of engineers responsible for qualifying prototype silicon SAW RF filters, guiding them from early development through to full production and commercial readiness. That work mirrors the same end-to-end engineering lifecycle Luvian's platform is built to support.
@@ -30,15 +34,17 @@ He joined Luvian in March 2026 to translate that lived engineering experience in
 
 Jarred holds a B.A. in Sociology from the University of Notre Dame's College of Arts and Letters (2020), concentrated in macro and microeconomics, and is an M.S. candidate in Systems Engineering at Johns Hopkins University's Whiting School of Engineering.
 
-## Colin Zhang, Software Engineer
+## Colin Zhang, Senior Software Engineer
 
-Enterprise-infrastructure engineer responsible for the platform's deployment posture in the customer environments Luvian sells into.
+<img src="/team/colin-zhang.jpg" alt="Colin Zhang" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 
-* Owns the platform's cross-platform foundation across macOS, Linux, and Windows, in cloud and on-premises profiles
-* Leads authentication and authorization architecture (OIDC, SAML, LDAP) for enterprise tenants
-* Brings hands-on experience from VMware, where he worked on virtualization and cloud-native platform technology at massive scale
-* Translates large-enterprise procurement, IT-governance, and security expectations into product requirements
-* Sets the operational rigor required to serve defense, aerospace, and automotive customers
+Staff engineer and software architect with 20+ years scaling cloud infrastructure, distributed backend systems, and enterprise APIs across Broadcom, VMware, Yahoo, and AOL.
+
+* Most recently Staff Engineer at Broadcom, architect of the global usage-metering system behind multi-billion-dollar VMware Cloud Foundation billing
+* Staff Engineer at VMware Cloud on AWS, leading the multi-cloud edge control plane for hybrid-cloud subscriptions and AWS Outposts
+* Core architect on vCloud Director and vAPI, the enterprise foundation of VMware's flagship private-cloud platform across more than a decade
+* Lead software design engineer at AOL on the original Instant Messenger massive-scale messaging platform
+* MS Computer Science, University of Maryland · BS Computer Science, Tsinghua University
 
 The credibility to walk into a defense prime's IT review and have the right conversation about on-premises, air-gapped, and FIPS-validated deployment lives with Colin.
 
