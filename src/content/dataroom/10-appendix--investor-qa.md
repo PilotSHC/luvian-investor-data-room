@@ -200,7 +200,7 @@ substrate ends up over-fitted to a single customer profile.
 
 Stephan's career covers the three regulated-industry domains Luvian targets, autonomy, aerospace, and defense, and the contemporary AV verification frontier. Most recently at Applied Intuition on advanced autonomy and engineering infrastructure: connected artefacts, simulation + validation + verification workflows, the prototype for the engineering intelligence layer Luvian is now building. The full bio is in *06 Team/Founder Bio Stephan Claxton*. Public posture and writing at [stephanclaxton.com](https://www.stephanclaxton.com/).
 
-The team is not solo. Jarred Gou (Head of Product) owns the product surface, multi-persona UI, AI integration plan, SysML v2 conformance, and brings the conviction that the next generation of engineering tooling must be AI-native, browser-first, and collaborative by default. Colin Zhang (Lead Software Engineer, ex-VMware) owns the cross-platform foundation, on-prem / air-gap deployment posture, and the enterprise authentication architecture (OIDC, SAML, LDAP) the regulated-industry buyer profile demands.
+The team is not solo. Jarred Gou (Head of Product) owns the product surface, multi-persona UI, AI integration plan, SysML v2 conformance, and brings the conviction that the next generation of engineering tooling must be AI-native, browser-first, and collaborative by default. Colin Zhang (Lead Backend Engineer, ex-VMware) owns the cross-platform foundation, on-prem / air-gap deployment posture, and the enterprise authentication architecture (OIDC, SAML, LDAP) the regulated-industry buyer profile demands.
 
 The combination of MBSE depth (Stephan), the AI-native product instinct (Jarred), and enterprise infrastructure credibility (Colin) maps cleanly onto the three domains Luvian sells into and the technical risks Luvian carries.
 
@@ -212,7 +212,7 @@ Two co-founders plus our first software engineer.
 
 * **Stephan Claxton**. Founder & CEO. Systems engineer and autonomy architect. Previously at Applied Intuition on advanced autonomy and engineering infrastructure.
 * **Jarred Gou**. Head of Product. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan. Owns the multi-persona product surface for systems engineers, software developers, safety analysts, and program managers.
-* **Colin Zhang**. Lead Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication. Previously at VMware on virtualization and cloud-native platform technology.
+* **Colin Zhang**. Lead Backend Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication. Previously at VMware on virtualization and cloud-native platform technology.
 
 Full bios in *06 Team/Founder Bio Stephan Claxton*. The architecture is documented to a level where it does not live in any one head ([`Architecture_Vision_Memo.md`](../04_Technical_Architecture/Architecture_Vision_Memo.md), [`Context_Graph_Design.md`](../04_Technical_Architecture/Context_Graph_Design.md), [`Ontology_and_Reasoning.md`](../04_Technical_Architecture/Ontology_and_Reasoning.md)), deliberately, as a pre-seed deliverable, not a nice-to-have.
 

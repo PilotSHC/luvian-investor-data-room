@@ -78,7 +78,7 @@ Two co-founders plus our first software engineer. Full bios in *06 Team/Founder 
 
 * **Stephan Claxton**. Founder & CEO. Systems engineer and autonomy architect; previously at Applied Intuition.
 * **Jarred Gou**. Head of Product. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan.
-* **Colin Zhang**. Lead Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
+* **Colin Zhang**. Lead Backend Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
 
 This round funds the Delaware Flip and three additional hires: GTM lead, founding ML/AI engineer, and a second software engineer.
 

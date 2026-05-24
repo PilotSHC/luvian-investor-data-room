@@ -163,7 +163,7 @@ export const SECTIONS: DataRoomSection[] = [
       {
         slug: 'founder-bio-stephan-claxton',
         title: 'Team',
-        blurb: 'Stephan Claxton (CEO), Jarred Gou (Head of Product), Colin Zhang (Lead Software Engineer).',
+        blurb: 'Stephan Claxton (CEO), Jarred Gou (Head of Product), Colin Zhang (Lead Backend Engineer).',
         emphasis: 'primary',
       },
       {

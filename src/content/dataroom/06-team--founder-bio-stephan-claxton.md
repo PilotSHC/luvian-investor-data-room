@@ -34,7 +34,7 @@ He joined Luvian in March 2026 to translate that lived engineering experience in
 
 Jarred holds a B.A. in Sociology from the University of Notre Dame's College of Arts and Letters (2020), concentrated in macro and microeconomics, and is an M.S. candidate in Systems Engineering at Johns Hopkins University's Whiting School of Engineering.
 
-## Colin Zhang, Lead Software Engineer
+## Colin Zhang, Lead Backend Engineer
 
 <img src="/team/colin-zhang.jpg" alt="Colin Zhang" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 
