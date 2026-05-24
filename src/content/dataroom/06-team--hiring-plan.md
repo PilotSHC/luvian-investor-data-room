@@ -46,7 +46,7 @@ To stay precise:
 
 - **Not a sales team.** No SDRs, no AEs, no enterprise sales lead. The GTM motion is founder-led plus the GTM Lead until Series A.
 - **Not a marketing team.** Demand generation is reputation-led, through architecture writing, conference presence, and the data room itself.
-- **Not a product manager.** The architecture and customer-conversation load is small enough at this stage that Stephan and Jarred are the PMs. A head of product comes post-Series A.
+- **Not a dedicated product manager beyond the existing Head of Product.** Stephan and Jarred (Head of Product) carry the architecture and customer-conversation load between them at this stage. A second product hire comes post-Series A.
 - **Not a CFO or head of operations.** Outsourced accounting and fractional ops support cover the gap until Series A.
 - **Not full-stack mid-level engineers.** At pre-seed every engineering hire is a senior IC who can lead a substrate area.
 

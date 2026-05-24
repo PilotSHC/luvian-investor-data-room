@@ -77,8 +77,8 @@ The first surface that ships today addresses all five practitioner gripes in one
 Two co-founders plus our first software engineer. Full bios in *06 Team/Founder Bio Stephan Claxton*.
 
 * **Stephan Claxton**. Founder & CEO. Systems engineer and autonomy architect; previously at Applied Intuition.
-* **Jarred Gou**. Chief Product Officer. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan.
-* **Colin Zhang**. Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
+* **Jarred Gou**. Head of Product. Product strategy, roadmap, AI integration surface, SysML v2 conformance plan.
+* **Colin Zhang**. Lead Software Engineer. Cross-platform foundation, on-premises and air-gapped deployment, enterprise authentication; previously at VMware.
 
 This round funds the Delaware Flip and three additional hires: GTM lead, founding ML/AI engineer, and a second software engineer.
 
