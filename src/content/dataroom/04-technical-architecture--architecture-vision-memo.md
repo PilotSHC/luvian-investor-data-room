@@ -358,7 +358,7 @@ By end of the pre-seed runway (18 months):
 
 - **2–3 design partners** in the wedge domains (defense, A&D, automotive ASIL programs, robotics) running Luvian against their actual engineering artefacts, with provenance + suspect-link propagation visible end-to-end and cross-artifact unification (requirements + models + simulation + test) demonstrated at one partner.
 - **Public reference architecture** documented to the level where engineering leaders can independently evaluate it without an NDA, battle-tested in at least one IL5/IL6-adjacent customer environment.
-- **A six-person team:** Stephan (CEO), Jarred (Head of Product), Colin (Lead Backend Engineer) plus three full-time hires funded by this round (GTM lead, founding ML/AI engineer, second software engineer).
+- **A six-person team:** Stephan (CEO), Jarred (Head of Product), Colin (Software Architect) plus three full-time hires funded by this round (GTM lead, founding ML/AI engineer, second software engineer).
 - **Delaware Flip complete** with a clean post-Flip cap table and a SAFE template operative for the Seed round.
 - **Series-A-credible architecture story**, a partner who spends two hours with this memo and the reference architecture walks away thinking *"this team is the default substrate for engineering intelligence."*
 

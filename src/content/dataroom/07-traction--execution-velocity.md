@@ -12,7 +12,7 @@ This document is the honest pre-seed traction picture: where we are, what we hav
 
 ## What "traction" means at this stage
 
-We are a three-person company (Stephan Claxton as Founder and CEO, Jarred Gou as Head of Product, and Colin Zhang as Lead Backend Engineer) with no outside capital, no signed revenue, and no design partners in production.
+We are a three-person company (Stephan Claxton as Founder and CEO, Jarred Gou as Head of Product, and Colin Zhang as Software Architect) with no outside capital, no signed revenue, and no design partners in production.
 
 By the late-stage-template definition of traction, we have **none**.
 
