@@ -11,8 +11,8 @@ The single most reviewed item in pre-seed diligence. Every contributor to the co
 | Founder | Instrument | Status |
 |---|---|---|
 | Stephan Claxton (Founder & CEO) | Founder IP Assignment Agreement | Executed at formation. See *IP Assignment Agreement* in this section. |
-| Jarred Gou (Chief Product Officer) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
-| Colin Zhang (Software Engineer) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
+| Jarred Gou (Head of Product) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
+| Colin Zhang (Lead Backend Engineer) | Confidential Information & Invention Assignment (CIIA) | Executed at engagement. NDA on file in the private legal archive. |
 
 The founder IP Assignment Agreement covers all pre-formation work that became part of the codebase, designs, and written materials of Luvian, on a "from inception of the project" basis. CIIAs for Jarred and Colin cover all work produced during their engagement with the company.
 

@@ -22,11 +22,11 @@ The combination of systems engineering depth, defense-program delivery experienc
 
 [stephanclaxton.com](https://www.stephanclaxton.com/) · [luvsupport@luvian.io](mailto:luvsupport@luvian.io) · Sunnyvale, CA
 
-## Jarred Gou, Chief Product Officer
+## Jarred Gou, Head of Product
 
 <img src="/team/jarred-gou.jpg" alt="Jarred Gou" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 
-Jarred Gou is Luvian's Chief Product Officer and the voice of the engineer inside the product organization. He combines nearly five years of frontline semiconductor engineering experience with formal graduate training in the discipline Luvian's platform serves: Systems Engineering.
+Jarred Gou is Luvian's Head of Product and the voice of the engineer inside the product organization. He combines nearly five years of frontline semiconductor engineering experience with formal graduate training in the discipline Luvian's platform serves: Systems Engineering.
 
 Before joining Luvian, Jarred spent 2021 to 2025 in Broadcom's Wireless Semiconductor Division, where he sat at the intersection of software, hardware, and program execution. He developed internal test software relied on by RF design teams and architected production-scale hardware test systems. He also led a team of engineers responsible for qualifying prototype silicon SAW RF filters, guiding them from early development through to full production and commercial readiness. That work mirrors the same end-to-end engineering lifecycle Luvian's platform is built to support.
 
@@ -34,7 +34,7 @@ He joined Luvian in March 2026 to translate that lived engineering experience in
 
 Jarred holds a B.A. in Sociology from the University of Notre Dame's College of Arts and Letters (2020), concentrated in macro and microeconomics, and is an M.S. candidate in Systems Engineering at Johns Hopkins University's Whiting School of Engineering.
 
-## Colin Zhang, Senior Software Engineer
+## Colin Zhang, Lead Backend Engineer
 
 <img src="/team/colin-zhang.jpg" alt="Colin Zhang" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 

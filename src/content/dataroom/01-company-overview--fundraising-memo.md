@@ -23,7 +23,7 @@ title: "Fundraising Memo"
 | **Target close** | Q3 2026 (with a flex window for the right lead). |
 | **Use of funds** | Three full-time hires (GTM lead, founding ML/AI engineer, second software engineer) → ingestion + ontology infrastructure → first design partners in production → on-prem packaging → Series-A-credible reference architecture. |
 | **Runway** | 18 months at the planned spend; ~22 months at lean. |
-| **Team** | Stephan Claxton (Founder & CEO, ex-Applied Intuition). Jarred Gou (CPO). Colin Zhang (Software Engineer, ex-VMware). |
+| **Team** | Stephan Claxton (Founder & CEO, ex-Applied Intuition). Jarred Gou (Head of Product). Colin Zhang (Lead Backend Engineer, ex-VMware). |
 
 ---
 
