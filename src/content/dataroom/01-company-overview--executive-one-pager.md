@@ -67,7 +67,7 @@ Two co-founders plus our first software engineer.
 
 * **Stephan Claxton, Founder & CEO.** Systems engineer and autonomy architect. Previously at Applied Intuition on advanced autonomy and engineering infrastructure. Owns the typed engineering ontology, the safety methods, and the founder-market-fit thesis.
 * **Jarred Gou, Head of Product.** Product strategy, roadmap, engineering architecture. Owns the AI integration surface and the SysML v2 conformance plan. The conviction that the next generation of engineering tooling must be AI-native, browser-first, and collaborative by default is his.
-* **Colin Zhang, Lead Backend Engineer.** Previously at VMware on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and the enterprise authentication architecture (OIDC, SAML, LDAP).
+* **Colin Zhang, Software Architect.** Previously at VMware on virtualization and cloud-native platform technology at massive scale. Owns the cross-platform foundation, on-premises and air-gapped deployment, and the enterprise authentication architecture (OIDC, SAML, LDAP).
 
 This round funds the Delaware Flip and three additional hires: GTM lead, founding ML/AI engineer, second software engineer.
 

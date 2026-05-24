@@ -34,7 +34,7 @@ He joined Luvian in March 2026 to translate that lived engineering experience in
 
 Jarred holds a B.A. in Sociology from the University of Notre Dame's College of Arts and Letters (2020), concentrated in macro and microeconomics, and is an M.S. candidate in Systems Engineering at Johns Hopkins University's Whiting School of Engineering.
 
-## Colin Zhang, Lead Backend Engineer
+## Colin Zhang, Software Architect
 
 <img src="/team/colin-zhang.jpg" alt="Colin Zhang" width="140" height="140" style="border-radius:9999px;float:right;margin:0 0 1rem 1.25rem;object-fit:cover;" />
 
@@ -42,8 +42,9 @@ Staff engineer and software architect with 20+ years scaling cloud infrastructur
 
 * Most recently Staff Engineer at Broadcom, architect of the global usage-metering system behind multi-billion-dollar VMware Cloud Foundation billing
 * Staff Engineer at VMware Cloud on AWS, leading the multi-cloud edge control plane for hybrid-cloud subscriptions and AWS Outposts
-* Core architect on vCloud Director and vAPI, the enterprise foundation of VMware's flagship private-cloud platform across more than a decade
-* Lead software design engineer at AOL on the original Instant Messenger massive-scale messaging platform
+* Senior Engineer on vCloud Director, the enterprise foundation of VMware's flagship private-cloud platform across more than a decade
+* Senior Technical Yahoo on the provisioning platform in the Premium Services Infrastructure group at Yahoo! Inc.
+* Lead Software Design Engineer at America Online on AOL Instant Messenger
 * MS Computer Science, University of Maryland · BS Computer Science, Tsinghua University
 
 The credibility to walk into a defense prime's IT review and have the right conversation about on-premises, air-gapped, and FIPS-validated deployment lives with Colin.
